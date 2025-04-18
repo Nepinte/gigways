@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="icon" href="assets/img/App.png" />
-
-    <!-- Box Icons -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-
-    <link rel="icon" href="assets/img/App.png" />
     <title>Privacy Policy - GigWays</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
@@ -40,7 +32,6 @@
         overflow-x: hidden;
       }
 
-      /* Header */
       .l-header {
         position: fixed;
         top: 0;
@@ -76,61 +67,6 @@
       .nav__link:hover,
       .nav__link.active {
         color: var(--third-color);
-      }
-
-      /* Background Animations */
-      .background-animation {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(270deg, #e0eafc, #cfdef3);
-        background-size: 400% 400%;
-        animation: gradientAnimation 15s ease infinite;
-        z-index: -3;
-      }
-      @keyframes gradientAnimation {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-      .bubble-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -2;
-        pointer-events: none;
-        overflow: hidden;
-      }
-      .bubble {
-        position: absolute;
-        background: rgba(84, 107, 171, 0.15);
-        border-radius: 50%;
-        opacity: 0.7;
-        animation: bubbleAnimation 10s infinite ease-in-out;
-      }
-      @keyframes bubbleAnimation {
-        0% {
-          transform: translateY(0) scale(0.5);
-          opacity: 0.7;
-        }
-        50% {
-          transform: translateY(-50vh) scale(1);
-          opacity: 0.3;
-        }
-        100% {
-          transform: translateY(-100vh) scale(0.5);
-          opacity: 0.7;
-        }
       }
 
       /* Main Content */
@@ -202,25 +138,17 @@
     </style>
   </head>
   <body>
-    <!-- Background Animations -->
-    <div class="background-animation"></div>
-    <div class="bubble-container"></div>
-
     <!-- Header -->
     <header class="l-header">
       <nav class="nav">
         <a href="index.html" class="nav__logo">GigWays</a>
         <ul class="nav__list">
           <li><a href="index.html" class="nav__link">Home</a></li>
-          <li><a href="#features" class="nav__link">Features</a></li>
-          <li><a href="#preview" class="nav__link">App Preview</a></li>
-          <li><a href="#about" class="nav__link">About</a></li>
-          <li><a href="#contact" class="nav__link">Contact</a></li>
-          <li>
-            <a href="privacy-policy.html" class="nav__link active"
-              >Privacy Policy</a
-            >
-          </li>
+          <li><a href="index.html#features" class="nav__link">Features</a></li>
+          <li><a href="index.html#preview" class="nav__link">App Preview</a></li>
+          <li><a href="index.html#about" class="nav__link">About</a></li>
+          <li><a href="index.html#contact" class="nav__link">Contact</a></li>
+          <li><a href="privacy-policy.html" class="nav__link active">Privacy Policy</a></li>
         </ul>
       </nav>
     </header>
@@ -229,151 +157,117 @@
     <main>
       <div class="policy-container">
         <h1>Privacy Policy - GigWays</h1>
-        <p>Effective Date: [03/11/2025]</p>
+        <p>Effective Date: March 11, 2025</p>
 
         <div class="section">
           <h2>1. Introduction</h2>
           <p>
-            Welcome to GigWays. Your privacy is of the utmost importance to us.
-            This Privacy Policy explains how we collect, use, and protect your
-            information when you use our application and services.
+            Welcome to GigWays. At GigWays LLC (“GigWays,” “we,” “our,” or “us”), your privacy is of utmost importance to us. This Privacy Policy outlines the manner in which we collect, use, store, and protect your personal and usage information when you interact with our services, including the GigWays mobile application (“the App”).
+          </p>
+          <p>
+            GigWays is specifically designed to provide valuable support to independent gig economy workers, including but not limited to rideshare drivers, delivery couriers, and other professionals. We offer tools for managing schedules, tracking earnings, and expenses, and staying connected with a community of like-minded individuals. Additionally, we provide services related to safety tools, driving activity detection, and voluntary strike coordination.
+          </p>
+          <p>
+            This Privacy Policy complies with applicable data protection laws, including the guidelines set forth by the Apple App Store. By downloading, accessing, or using the GigWays app, you agree to the collection and use of information as described in this policy. We recommend that you read this Privacy Policy thoroughly to understand how we collect, use, and safeguard your information.
           </p>
         </div>
 
         <div class="section">
           <h2>2. Information We Collect</h2>
+          <p>
+            We collect only the information necessary to provide our core services. The types of information we collect are listed below.
+          </p>
           <ul>
-            <li>
-              <strong>Personal Information:</strong> Name, email, phone number,
-              state location, and profile details.
-            </li>
-            <li>
-              <strong>Usage Data:</strong> Work schedules, community
-              interactions, and engagement within the app.
-            </li>
-            <li>
-              <strong>Device & Location Data:</strong> Driving activity
-              detection, GPS-based location for safety features, and
-              notification tracking.
-            </li>
-            <li>
-              <strong>Technical Data:</strong> IP address, browser type,
-              operating system, and app performance analytics.
-            </li>
+            <li><strong>a. Personal Information:</strong> This includes your full name, email address, phone number, and state of residence. We may also collect any user-generated profile details you provide, which helps us personalize your experience.</li>
+            <li><strong>b. Activity & Usage Data:</strong> We collect information regarding your work schedules, hours worked, earnings, expenses, and any interactions you make with the app. This data helps us deliver our services and improve the overall user experience.</li>
+            <li><strong>c. Location & Motion Data (Optional and Consent-Based):</strong> We may use location services (e.g., GPS) to provide certain features like rest alerts, route optimization, and optional strike zone tracking. Driving activity detection is used to monitor your driving behavior and send you reminders to take rest breaks. These features are optional and activated only with your explicit consent.</li>
+            <li><strong>d. Device & Technical Data:</strong> We collect technical information about your device, such as device type, operating system, IP address, and app usage logs. This information helps us resolve technical issues, enhance app performance, and ensure a smooth user experience.</li>
           </ul>
         </div>
 
         <div class="section">
-          <h2>3. How We Use Your Data</h2>
+          <h2>3. How We Use Your Information</h2>
+          <p>
+            The information we collect is used to provide you with a seamless, personalized experience within the GigWays app. Specifically, we use your data for the following purposes:
+          </p>
           <ul>
-            <li>
-              To provide and enhance our services, including scheduling,
-              notifications, and community engagement.
-            </li>
-            <li>
-              To detect driving activity and ensure safe usage of the
-              application.
-            </li>
-            <li>To analyze app performance and optimize user experience.</li>
-            <li>To comply with legal and regulatory obligations.</li>
+            <li>To provide and optimize features such as scheduling, notifications, and earnings tracking to assist you in managing your gig work more effectively.</li>
+            <li>To support optional safety features, including rest reminders and driving detection (only with your consent), ensuring you take appropriate breaks during driving or working.</li>
+            <li>To help you generate and manage work documentation, such as mileage summaries and time logs, for the purpose of assisting with tax filing and record keeping.</li>
+            <li>To analyze user activity and improve the design, functionality, and performance of our app based on usage patterns.</li>
+            <li>To provide you with community features, including job boards and optional participation in strike planning and awareness events. Participation in strike-related activities is voluntary and fully at your discretion.</li>
           </ul>
+          <p>
+            We do not use your data for marketing purposes or share it with third-party advertisers. Your participation in any voluntary community events, such as strikes, is entirely optional, and GigWays does not encourage, require, or incentivize strike participation.
+          </p>
         </div>
 
         <div class="section">
           <h2>4. Data Sharing & Security</h2>
+          <p>
+            At GigWays, we take your privacy seriously. We do not sell, rent, or share your personal information with any third-party advertisers. However, we may share anonymized, aggregated data with trusted partners for analytical and operational purposes to enhance app performance and functionality. This data cannot be used to personally identify you.
+          </p>
+          <p>
+            We employ state-of-the-art encryption to protect your personal data both during transmission and while stored. Your data is secure and only accessible to authorized personnel for the purpose of maintaining and improving our services.
+          </p>
+        </div>
+
+        <div class="section">
+          <h2>5. Location & Tracking (Apple-Compliant)</h2>
+          <p>
+            GigWays utilizes location and motion tracking features to enhance the app's functionality. These features are enabled only with your explicit consent and are used to provide:
+          </p>
           <ul>
-            <li>We do not sell or trade your personal information.</li>
-            <li>
-              We may share anonymized data for analytics and service
-              improvements.
-            </li>
-            <li>
-              We implement industry-standard encryption and security measures to
-              protect your data.
-            </li>
-            <li>
-              Your account data is accessible only by authorized personnel for
-              maintenance and support.
-            </li>
+            <li>Safety alerts and rest reminders while driving or working.</li>
+            <li>Work documentation features, such as mileage tracking and time logs.</li>
+            <li>Optional strike zone awareness features for users participating in voluntary strike activities.</li>
           </ul>
-        </div>
-
-        <div class="section">
-          <h2>5. Notifications & Tracking</h2>
-          <ul>
-            <li>
-              Users receive essential notifications regarding work schedules,
-              rest breaks, and safety alerts.
-            </li>
-            <li>
-              Driving detection is used solely for ensuring user safety and
-              improving app features.
-            </li>
-            <li>
-              Location tracking is optional and can be disabled by users within
-              settings.
-            </li>
-          </ul>
-        </div>
-
-        <div class="section">
-          <h2>6. Data Retention</h2>
           <p>
-            We retain your data for as long as necessary to provide services and
-            meet legal obligations. Users may request data deletion or
-            modification at any time.
+            These location and motion tracking features are entirely optional and disabled by default. You can enable them at any time in the app settings, and you retain the ability to disable them at your discretion. You may also revoke access to these features in your device's privacy settings at any time.
           </p>
         </div>
 
         <div class="section">
-          <h2>7. User Rights & Control</h2>
-          <ul>
-            <li>
-              Users can access, update, or delete their personal information
-              within their account settings.
-            </li>
-            <li>
-              Users have the right to opt out of certain data processing
-              activities.
-            </li>
-            <li>
-              Requests for data modification or removal can be sent to our
-              support team.
-            </li>
-          </ul>
-        </div>
-
-        <div class="section">
-          <h2>8. Third-Party Services</h2>
+          <h2>6. Notifications</h2>
           <p>
-            We may use third-party services (such as analytics providers and
-            payment processors) to enhance our platform. These services have
-            their own privacy policies governing data usage.
+            GigWays may send notifications to keep you informed about your work schedule, breaks, and earnings. We also send reminders for rest periods and driving activity alerts if these features are enabled.
+          </p>
+          <p>
+            You can manage or disable these notifications at any time through your device's notification settings. Notifications will not be sent without your explicit consent.
           </p>
         </div>
 
         <div class="section">
-          <h2>9. Children's Privacy</h2>
+          <h2>7. Data Retention</h2>
           <p>
-            Our services are not intended for individuals under the age of 18.
-            We do not knowingly collect personal information from minors.
+            We retain personal and usage data only for as long as necessary to provide our services, support user requests, and comply with applicable legal obligations. If you choose to delete your account or request data deletion, we will retain only the minimal data required to fulfill legal obligations, such as tax or regulatory purposes.
           </p>
         </div>
 
         <div class="section">
-          <h2>10. Changes to this Privacy Policy</h2>
+          <h2>8. Your Rights & Choices</h2>
           <p>
-            We may update this Privacy Policy periodically to reflect changes in
-            our practices. Users will be notified of significant changes via
-            email or app updates.
+            You have the right to access, update, or delete the personal data we hold about you. You may also withdraw your consent for data collection at any time, though this may limit your ability to use certain features of the app.
+          </p>
+          <p>
+            If you wish to exercise your rights, please contact us at <a href="mailto:gigwaysofficial@gmail.com">gigwaysofficial@gmail.com</a>.
           </p>
         </div>
 
         <div class="section">
-          <h2>11. Contact Us</h2>
+          <h2>9. Changes to This Policy</h2>
           <p>
-            If you have any questions or concerns regarding this Privacy Policy,
-            please contact us at <strong>Gigwaysofficial@gmail.com</strong>.
+            GigWays reserves the right to modify or update this Privacy Policy as necessary to reflect changes in our practices or legal obligations. We will notify users of significant changes through the app or via email. The most recent version of this policy will be available on our website and within the app.
+          </p>
+        </div>
+
+        <div class="section">
+          <h2>10. Contact Us</h2>
+          <p>
+            If you have any questions or concerns regarding this Privacy Policy or our data practices, please contact us at:
+          </p>
+          <p>
+            Email: <a href="mailto:gigwaysofficial@gmail.com">gigwaysofficial@gmail.com</a>
           </p>
         </div>
       </div>
@@ -381,16 +275,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-      <p>© GigWays LLC 2025. All rights reserved.</p>
+      <p>© 2025 GigWays LLC. All rights reserved.</p>
     </footer>
-
-    <!--===== SCROLL REVEAL =====-->
-    <script
-      src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js"
-      integrity="sha256-YHdamLXLIBEicRscu4gge3gdzJSWGvvWggYMiCYwCg0="
-      crossorigin="anonymous"
-    ></script>
-    <!--===== MAIN JS =====-->
-    <script src="assets/js/main.js"></script>
   </body>
 </html>
