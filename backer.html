@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="icon" href="assets/img/App.png" />
+    <title>Gigways Backers</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .section {
+        padding-top: 0px;
+        padding-bottom: 4px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: var(--body-font);
+        background-color: #f4f4f4;
+        color: #333;
+        line-height: 1.6;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      .l-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f4f4f4;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        max-width: 1024px;
+        margin: 0 auto;
+      }
+      .nav__logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #333;
+      }
+
+      /* Main Content */
+      main {
+        padding-top: 80px;
+        max-width: 1024px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+      .backer-container {
+        background: #fff;
+        border-radius: 8px;
+        padding: 40px;
+        margin: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 2.5rem;
+        color: #2ecc71;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      h2 {
+        font-size: 1.5rem;
+        color: #333;
+        margin: 20px 0 10px;
+      }
+      p {
+        margin-bottom: 15px;
+        font-size: 1rem;
+        text-align: center;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Card Design */
+      .tier-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        border-left: 6px solid transparent;
+        position: relative;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .tier-card .left-side {
+        width: 10px;
+        border-radius: 8px 0 0 8px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+      }
+
+      .tier-card .right-side {
+        width: 10px;
+        border-radius: 0 8px 8px 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+      }
+
+      .tier-card-content {
+        flex-grow: 1;
+        padding: 0 20px;
+      }
+      .tier-card h3 {
+        font-size: 1.5rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      .tier-card ul {
+        list-style: none;
+        padding: 0;
+      }
+      .tier-card li {
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 8px;
+      }
+
+      /* Softer Unique Colors for Each Tier */
+      /* Gold Tier */
+      .gold-tier .left-side,
+      .gold-tier .right-side {
+        background: linear-gradient(to right, #f1c40f, #f39c12); /* Soft Gold Gradient */
+      }
+
+      /* Platinum Tier */
+      .platinum-tier .left-side,
+      .platinum-tier .right-side {
+        background: linear-gradient(to right, #3498db, #2980b9); /* Soft Blue Gradient */
+      }
+
+      /* Diamond Tier */
+      .diamond-tier .left-side,
+      .diamond-tier .right-side {
+        background: linear-gradient(to right, #2ecc71, #27ae60); /* Soft Green Gradient */
+      }
+
+      /* VIP Gold Tier (Enhanced) */
+      .vip-gold-tier .left-side {
+        background: linear-gradient(to right, #8e44ad, #f39c12); /* Purple and Gold */
+      }
+      .vip-gold-tier .right-side {
+        background: linear-gradient(to left, #8e44ad, #f39c12); /* Purple and Gold */
+      }
+      .vip-gold-tier .tier-card {
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        border: 3px solid #f39c12;
+        background: #fff;
+        padding: 30px;
+      }
+
+      /* VIP Platinum Tier */
+      .vip-platinum-tier .left-side {
+        background: linear-gradient(to right, #8e44ad, #2980b9); /* Purple and Blue */
+      }
+      .vip-platinum-tier .right-side {
+        background: linear-gradient(to left, #8e44ad, #2980b9); /* Purple and Blue */
+      }
+
+      /* VIP Diamond Tier */
+      .vip-diamond-tier .left-side {
+        background: linear-gradient(to right, #8e44ad, #27ae60); /* Purple and Green */
+      }
+      .vip-diamond-tier .right-side {
+        background: linear-gradient(to left, #8e44ad, #27ae60); /* Purple and Green */
+      }
+
+      /* VIP Diamond Ultimate Tier */
+      .vip-diamond-ultimate-tier .left-side {
+        background: linear-gradient(to right, #8e44ad, #16a085); /* Purple and Teal */
+      }
+      .vip-diamond-ultimate-tier .right-side {
+        background: linear-gradient(to left, #8e44ad, #16a085); /* Purple and Teal */
+      }
+
+      /* Fancy Hover Effects */
+      .tier-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+      }
+
+      /* VIP Cards Styling */
+      .vip-gold-tier,
+      .vip-platinum-tier,
+      .vip-diamond-tier,
+      .vip-diamond-ultimate-tier {
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Fancy Borders for Higher Tiers */
+      .vip-gold-tier .tier-card-content,
+      .vip-platinum-tier .tier-card-content,
+      .vip-diamond-tier .tier-card-content,
+      .vip-diamond-ultimate-tier .tier-card-content {
+        border: 2px solid #333;
+        border-radius: 8px;
+      }
+
+      /* VIP Diamond Ultimate Tier - Most Stylish */
+      .vip-diamond-ultimate-tier {
+        background: #e74c3c;
+        color: white;
+        border: 4px solid #c0392b;
+        padding: 30px;
+        margin-top: 20px;
+        font-size: 1.2rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 600px) {
+        .backer-container {
+          padding: 20px;
+          margin: 10px;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+        h2 {
+          font-size: 1.25rem;
+        }
+        p {
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="l-header">
+      <nav class="nav">
+        <a href="index.html" class="nav__logo">GigWays</a>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <div class="backer-container">
+
+        <h1>GigWays Backer Names</h1>
+        <p>Thank you for supporting GigWays! Here are the names of our valued backers.</p>
+
+        <!-- Gold Tier -->
+        <div class="tier-card gold-tier">
+          <div class="left-side"></div>
+          <div class="tier-card-content">
+            <h3>Gold Tier</h3>
+            <ul>
+              <li>John Doe</li>
+              <li>Jane Smith</li>
+              <li>Michael Johnson</li>
+            </ul>
+          </div>
+          <div class="right-side"></div>
+        </div>
+
+        <!-- Platinum Tier -->
+        <div class="tier-card platinum-tier">
+          <div class="left-side"></div>
+          <div class="tier-card-content">
+            <h3>Platinum Tier</h3>
+            <ul>
+              <li>Amy Brown</li>
+              <li>David Wilson</li>
+            </ul>
+          </div>
+          <div class="right-side"></div>
+        </div>
+
+        <!-- Diamond Tier -->
+        <div class="tier-card diamond-tier">
+          <div class="left-side"></div>
+          <div class="tier-card-content">
+            <h3>Diamond Tier</h3>
+            <ul>
+              <li>Chris Green</li>
+              <li>Linda Adams</li>
+            </ul>
+          </div>
+          <div class="right-side"></div>
+        </div>
+
+        <!-- VIP Gold Tier -->
+        <div class="tier-card vip-gold-tier">
+          <div class="left-side"></div>
+          <div class="tier-card-content">
+            <h3>VIP Gold Tier</h3>
+            <ul>
+              <li>Elena White</li>
+              <li>James Lee</li>
+            </ul>
+          </div>
+          <div class="right-side"></div>
+        </div>
+
+        <!-- VIP Platinum Tier -->
+        <div class="tier-card vip-platinum-tier">
+          <div class="left-side"></div>
+          <div class="tier-card-content">
+            <h3>VIP Platinum Tier</h3>
+            <ul>
+              <li>Charles Harris</li>
+              <li>Patricia Clark</li>
+            </ul>
+          </div>
+          <div class="right-side"></div>
+        </div>
+
+        <!-- VIP Diamond Tier -->
+        <div class="tier-card vip-diamond-tier">
+          <div class="left-side"></div>
+          <div class="tier-card-content">
+            <h3>VIP Diamond Tier</h3>
+            <ul>
+              <li>William Moore</li>
+              <li>Sarah Walker</li>
+            </ul>
+          </div>
+          <div class="right-side"></div>
+        </div>
+
+        <!-- VIP Diamond Ultimate Tier -->
+        <div class="tier-card vip-diamond-ultimate-tier">
+          <div class="left-side"></div>
+          <div class="tier-card-content">
+            <h3>VIP Diamond Ultimate Tier</h3>
+            <ul>
+              <li>George King</li>
+              <li>Barbara Scott</li>
+            </ul>
+          </div>
+          <div class="right-side"></div>
+        </div>
+
+      </div>
+    </main>
+
+  </body>
+</html>
+
+
+
+
+
