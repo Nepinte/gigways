@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -218,19 +217,35 @@
       }
 
       /* Fancy Borders for Higher Tiers */
-      .vip-gold-tier .tier-card-content,
-      .vip-platinum-tier .tier-card-content,
-      .vip-diamond-tier .tier-card-content,
-      .vip-diamond-ultimate-tier .tier-card-content {
-        border: 2px solid #333;
-        border-radius: 8px;
-      }
+.vip-gold-tier .tier-card-content,
+.vip-platinum-tier .tier-card-content,
+.vip-diamond-tier .tier-card-content {
+  border: 2px solid #8e44ad; 
+  border-radius: 8px;
+}
+
+.platinum-tier .tier-card-content,
+.diamond-tier .tier-card-content {
+  border: 2px solid #8e44ad; 
+  border-radius: 8px;
+}
+
+.vip-diamond-ultimate-tier .tier-card-content {
+  border: 2px solid #8e44ad; /* Purple border */
+  border-radius: 8px;
+  background-color: #D5A6FF;
+}
+
+
+
 
       /* VIP Diamond Ultimate Tier - Most Stylish */
-      .vip-diamond-ultimate-tier {
-        background: #e74c3c;
+      .vip-diamond-ultimate-tier,
+      .vip-gold-tier,
+      .vip-platinum-tier,
+      .vip-diamond-tier {  
         color: white;
-        border: 4px solid #c0392b;
+        border: 4px solid #8e44ad;
         padding: 30px;
         margin-top: 20px;
         font-size: 1.2rem;
@@ -269,77 +284,26 @@
         <h1>GigWays Backer Names</h1>
         <p>Thank you for supporting GigWays! Here are the names of our valued backers.</p>
 
-        <!-- Gold Tier -->
-        <div class="tier-card gold-tier">
+                <!-- VIP Diamond Ultimate Tier -->
+        <div class="tier-card vip-diamond-ultimate-tier">
           <div class="left-side"></div>
           <div class="tier-card-content">
-            <h3>Gold Tier</h3>
+            <h3>VIP Diamond Ultimate Support</h3>
             <ul>
-              <li>John Doe</li>
-              <li>Jane Smith</li>
-              <li>Michael Johnson</li>
+              <li>Kasher Subba</li>
+              <li>Aayush Bhattarai</li>
+              <li>Dhan Subba</li>
+              <li>Rupesh Basnet</li>
             </ul>
           </div>
           <div class="right-side"></div>
         </div>
 
-        <!-- Platinum Tier -->
-        <div class="tier-card platinum-tier">
-          <div class="left-side"></div>
-          <div class="tier-card-content">
-            <h3>Platinum Tier</h3>
-            <ul>
-              <li>Amy Brown</li>
-              <li>David Wilson</li>
-            </ul>
-          </div>
-          <div class="right-side"></div>
-        </div>
-
-        <!-- Diamond Tier -->
-        <div class="tier-card diamond-tier">
-          <div class="left-side"></div>
-          <div class="tier-card-content">
-            <h3>Diamond Tier</h3>
-            <ul>
-              <li>Chris Green</li>
-              <li>Linda Adams</li>
-            </ul>
-          </div>
-          <div class="right-side"></div>
-        </div>
-
-        <!-- VIP Gold Tier -->
-        <div class="tier-card vip-gold-tier">
-          <div class="left-side"></div>
-          <div class="tier-card-content">
-            <h3>VIP Gold Tier</h3>
-            <ul>
-              <li>Elena White</li>
-              <li>James Lee</li>
-            </ul>
-          </div>
-          <div class="right-side"></div>
-        </div>
-
-        <!-- VIP Platinum Tier -->
-        <div class="tier-card vip-platinum-tier">
-          <div class="left-side"></div>
-          <div class="tier-card-content">
-            <h3>VIP Platinum Tier</h3>
-            <ul>
-              <li>Charles Harris</li>
-              <li>Patricia Clark</li>
-            </ul>
-          </div>
-          <div class="right-side"></div>
-        </div>
-
-        <!-- VIP Diamond Tier -->
+                <!-- VIP Diamond Tier -->
         <div class="tier-card vip-diamond-tier">
           <div class="left-side"></div>
           <div class="tier-card-content">
-            <h3>VIP Diamond Tier</h3>
+            <h3>VIP Diamond Support</h3>
             <ul>
               <li>William Moore</li>
               <li>Sarah Walker</li>
@@ -348,16 +312,65 @@
           <div class="right-side"></div>
         </div>
 
-        <!-- VIP Diamond Ultimate Tier -->
-        <div class="tier-card vip-diamond-ultimate-tier">
+                <!-- VIP Platinum Tier -->
+        <div class="tier-card vip-platinum-tier">
           <div class="left-side"></div>
           <div class="tier-card-content">
-            <h3>VIP Diamond Ultimate Tier</h3>
+            <h3>VIP Platinum Support</h3>
             <ul>
-              <li>Aayush Bhattarai</li>
-              <li>Dhan Subba</li>
-              <li>Rupesh Basnet</li>
-              <li>Kasher Subba</li>
+              <li>Charles Harris</li>
+              <li>Patricia Clark</li>
+            </ul>
+          </div>
+          <div class="right-side"></div>
+        </div>
+               <!-- VIP Gold Tier -->
+        <div class="tier-card vip-gold-tier">
+          <div class="left-side"></div>
+          <div class="tier-card-content">
+            <h3>VIP Gold Support</h3>
+            <ul>
+              <li>Elena White</li>
+              <li>James Lee</li>
+            </ul>
+          </div>
+          <div class="right-side"></div>
+        </div>
+                <!-- Diamond Tier -->
+        <div class="tier-card diamond-tier">
+          <div class="left-side"></div>
+          <div class="tier-card-content">
+            <h3>Diamond Support</h3>
+            <ul>
+              <li>Chris Green</li>
+              <li>Linda Adams</li>
+            </ul>
+          </div>
+          <div class="right-side"></div>
+        </div>
+
+                <!-- Platinum Tier -->
+        <div class="tier-card platinum-tier">
+          <div class="left-side"></div>
+          <div class="tier-card-content">
+            <h3>Platinum Support</h3>
+            <ul>
+              <li>Amy Brown</li>
+              <li>David Wilson</li>
+            </ul>
+          </div>
+          <div class="right-side"></div>
+        </div>
+
+        <!-- Gold Tier -->
+        <div class="tier-card gold-tier">
+          <div class="left-side"></div>
+          <div class="tier-card-content">
+            <h3>Gold Support</h3>
+            <ul>
+              <li>John Doe</li>
+              <li>Jane Smith</li>
+              <li>Michael Johnson</li>
             </ul>
           </div>
           <div class="right-side"></div>
