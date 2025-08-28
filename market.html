@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Gigways Marketplace | Driver Essentials & Gear</title>
+  <meta name="description" content="Shop the Gigways Marketplace — rooftop ad toppers, delivery bags, branded gear, and future tech like Gigways Glass. Everything drivers need in one place." />
+  <meta name="keywords" content="Gigways Marketplace, driver gear, gig driver essentials, rooftop ads, food bags, smart glasses, Gigways merch" />
+  <meta name="author" content="Gigways Team" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Gigways Marketplace | Driver Essentials & Gear" />
+  <meta property="og:description" content="Explore the Gigways Marketplace — shop driver essentials, branded gear, and future tech like Gigways Glass." />
+  <meta property="og:image" content="https://gigways.com/assets/img/App.png" />
+  <meta property="og:url" content="https://gigways.com/market" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Gigways Marketplace" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Gigways Marketplace | Driver Essentials & Gear" />
+  <meta name="twitter:description" content="Shop driver essentials and Gigways gear — from rooftop toppers to branded T-shirts and future Gigways Glass." />
+  <meta name="twitter:image" content="https://gigways.com/assets/img/App.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/img/App.png" />
+
+  <!-- Base Styles -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Box Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+
+  <!-- Marketplace Enhanced Styles (kept inline for this page only) -->
+  <style>
+    /* grid + hero */
+    .hero__grid{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:end}
+    .market .section-title{font-size:clamp(1.6rem,2.4vw,2.2rem)}
+    .market .section-subtitle{opacity:.9;margin-top:.35rem}
+    .market__actions{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+    .market__search{display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12)}
+    .market__search input{all:unset;width:min(56vw,360px)}
+    .market__sort select{appearance:none;-webkit-appearance:none;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.12);padding:.6rem .9rem;border-radius:14px}
+    .market__chips{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
+    .chip{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);padding:.45rem .8rem;border-radius:999px;cursor:pointer;transition:.2s; color: var(--second-color);}
+    .chip:hover{transform:translateY(-1px)}
+    .chip.active{background:linear-gradient(135deg,var(--first-color,#22d3ee),#7c3aed);color:#fff;border-color:transparent}
+
+    /* product grid */
+    .market__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2rem}
+    .product__card{position:relative;background:radial-gradient(120% 120% at 0% 0%, rgba(255,255,255,.06), rgba(255,255,255,.02) 60%),linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));padding:1.2rem;border-radius:1.25rem;text-align:left;box-shadow:0 10px 24px rgba(0,0,0,.28);transition:transform .2s, box-shadow .2s;border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(8px)}
+    .product__card:hover{transform:translateY(-5px);box-shadow:0 16px 32px rgba(0,0,0,.35)}
+    .product__media{position:relative}
+    .product__img{width:100%;height:200px;object-fit:contain;margin-bottom:.7rem;filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
+    .product__title{font-size:1.1rem;font-weight:700;margin-bottom:.15rem}
+    .product__desc{font-size:.92rem;opacity:.85;margin:0 0 .35rem}
+    .product__meta{display:flex;align-items:center;justify-content:space-between}
+    .price{display:flex;align-items:center;gap:.45rem}
+    .price__old{text-decoration:line-through;opacity:.55}
+    .price__badge{font-size:.7rem;padding:.12rem .45rem;border-radius:8px;background:rgba(34,211,238,.15);border:1px solid rgba(34,211,238,.35)}
+    .ribbon{position:absolute;top:10px;left:-8px;color:#0e0e0f;background:#ffd166;padding:.25rem .6rem;border-radius:0 10px 10px 0;font-size:.72rem;font-weight:800;letter-spacing:.3px}
+    .ribbon.new{background:#22c55e;color:#0b0b0b}
+    .ribbon.soon{background:#64748b;color:#fff}
+    .ribbon.hot{background:#ef4444;color:#fff}
+    .ribbon.best{background:#22d3ee;color:#0b0b0b}
+    .product__cta{display:flex;gap:.5rem;margin-top:.6rem}
+    .btn{background:var(--fourth-color,#22d3ee);color:#0b0b0b;padding:.6rem .9rem;border:none;border-radius:.8rem;cursor:pointer;transition:.16s;font-weight:700}
+    .btn:hover{filter:brightness(1.05);transform:translateY(-1px); }
+    .btn--ghost{background:white;border:1px solid rgb(232, 231, 231);color:#0b0b0b}
+    .product__badges{display:flex;gap:.5rem;flex-wrap:wrap;margin:.4rem 0 0;padding:0;list-style:none}
+    .product__badges li{font-size:.74rem;opacity:.75;border:1px dashed rgba(255,255,255,.2);padding:.18rem .5rem;border-radius:999px}
+
+    /* modal */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:grid;place-items:center;opacity:0;pointer-events:none;transition:.2s;z-index:1000}
+    .modal[aria-hidden="false"]{opacity:1;pointer-events:auto}
+    .modal__dialog{width:min(820px,92vw);background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.14);border-radius:22px;backdrop-filter:blur(12px);padding:1rem;box-shadow:0 18px 42px rgba(0,0,0,.45);position:relative}
+    .modal__close{position:absolute;right:14px;top:14px;border:none;background:transparent;font-size:1.6rem;color:inherit}
+
+    /* cart drawer (single) */
+    .cart{position:fixed;right:0;top:0;height:100%;width:min(380px,92vw);background:var(--body-color,#0e0e0f);border-left:1px solid rgba(255,255,255,.14);box-shadow:-8px 0 24px rgba(0,0,0,.35);transform:translateX(100%);transition:.28s ease;z-index:1100;display:flex;flex-direction:column}
+    .cart[aria-hidden="false"]{transform:translateX(0)}
+    .cart__header{display:flex;align-items:center;justify-content:space-between;padding:1rem;border-bottom:1px solid rgba(255,255,255,.1)}
+    .cart__items{flex:1;overflow:auto;padding:0 1rem}
+    .cart__row{display:grid;grid-template-columns:auto 72px;gap:.5rem;align-items:center;padding:.75rem 0;border-bottom:1px dashed rgba(255,255,255,.12)}
+    .cart__row-title{font-weight:700}
+    .cart__qty{display:flex;align-items:center;gap:.35rem;justify-content:flex-end}
+    .qtybtn{border:1px solid rgb(255, 255, 255);background:transparent;border-radius:8px;padding:.25rem .5rem;cursor:pointer}
+    .cart__footer{padding:1rem;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between}
+    .cart__floating{position:fixed;right:1rem;bottom:1rem;z-index:1090}
+    .badge{background:#e11d48;color:#fff;border-radius:999px;padding:.1rem .45rem;margin-left:.25rem;font-size:.75rem}
+
+    @media (max-width: 720px){.hero__grid{grid-template-columns:1fr}.market__actions{justify-content:space-between}}
+  </style>
+</head>
+<body>
+  <!-- Bubble Background Animation -->
+  <div class="bubble-container"></div>
+
+  <!--===== HEADER (kept as-is) =====-->
+  <header class="l-header">
+    <nav class="nav bd-grid">
+      <div>
+        <a href="#" class="nav__logo">Gigways</a>
+      </div>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="index.html#preview" class="nav__link">App Preview</a></li>
+          <li class="nav__item"><a href="market.html" class="nav__link active">Marketplace</a></li>
+          <li class="nav__item"><a href="Partners.html" class="nav__link">Partners</a></li>
+          <li class="nav__item"><a href="carrers.html" class="nav__link">Careers</a></li>
+        </ul>
+      </div>
+      <div class="theme">
+        <img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" />
+      </div>
+      <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
+    </nav>
+  </header>
+
+  <!--===== MAIN CONTENT =====-->
+  <main class="l-main">
+    <!-- ===== MARKETPLACE HERO ===== -->
+
+<!-- ===== Marketplace Hero Styles (inline only for this section) ===== -->
+<style>
+/* ===== Marketplace Hero — visual polish ===== */
+.market.hero .hero__grid{
+  display:flex;                 /* use flex to center content */
+  justify-content:center;       /* center horizontally */
+  align-items:center;           /* center vertically */
+  padding:1.5rem 0;
+  position:relative;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.market.hero .hero__grid::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:-6px; height:2px;
+  background:linear-gradient(90deg,
+    rgba(34,211,238,0),
+    rgba(34,211,238,.85) 24%,
+    rgba(124,58,237,.85) 76%,
+    rgba(124,58,237,0));
+  border-radius:999px; opacity:.55;
+}
+
+.market-hero__actions{
+  display:flex;
+  justify-content:center;  /* center actions */
+  width:100%;
+}
+
+/* Force the bx-search icon to black inside the hero search */
+.market.hero .market-hero__search > i.bx.bx-search{
+  color: #000 !important;
+  -webkit-text-fill-color: #000; /* Safari */
+  filter: none !important;       /* kill any glow/inversion */
+}
+
+
+
+.market-hero__search{
+  display:flex; align-items:center; gap:.6rem;
+  padding:.7rem 1rem;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(124,58,237,.14), rgba(255,255,255,0) 60%),
+    radial-gradient(120% 140% at 100% 0%, rgba(34,211,238,.14), rgba(255,255,255,0) 60%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  backdrop-filter:blur(8px);
+  transition:border-color .18s, box-shadow .18s, transform .18s;
+}
+.market-hero__search:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.25); }
+.market-hero__search:focus-within{ border-color:rgba(34,211,238,.6); box-shadow:0 0 0 3px rgba(34,211,238,.18); }
+.market-hero__search i{ font-size:1.15rem; color:var(--first-color,#22d3ee); filter:drop-shadow(0 2px 6px rgba(34,211,238,.35)); }
+.market-hero__search input{ all:unset; width:min(70vw,420px); font-size:1rem; line-height:1.3; }
+.market-hero__search input::placeholder{ opacity:.7 }
+
+@media (max-width:720px){
+  .market.hero .hero__grid{ padding:1rem 0; }
+  .market-hero__search{ width:90%; }
+  .market-hero__search input{ width:100%; }
+}
+
+.cart__close {
+  background: transparent !important; /* no bg */
+  border: none;
+  cursor: pointer;
+}
+.cart__close i {
+  color: #fff !important;  /* pure white icon */
+  font-size: 1.6rem;
+}
+
+</style>
+
+<!-- ===== Marketplace Hero Section ===== -->
+<section class="market hero section" id="market">
+  <div class="bd-grid hero__grid market-hero">
+    <div class="market__actions market-hero__actions">
+      <div class="market__search market-hero__search">
+        <i class="bx bx-search" aria-hidden="true" style="color:#000!important;filter:none!important;"></i>
+        <input
+          type="search"
+          id="marketSearch"
+          placeholder="Search gear (e.g. rooftop, bag, mount)"
+          aria-label="Search products"
+        />
+      </div>
+    </div>
+  </div>
+
+
+
+      <!-- ===== CATEGORY CHIPS ===== -->
+      <div class="market__chips bd-grid">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="ads">Ads & Accessories</button>
+        <button class="chip" data-filter="essentials">Driver Essentials</button>
+        <button class="chip" data-filter="tech">Tech Gear</button>
+        <button class="chip" data-filter="merch">Merch</button>
+      </div>
+
+      <!-- ===== PRODUCT GRID (6 items) ===== -->
+      <div class="market__grid bd-grid" id="productGrid">
+        <!-- 1 Rooftop Topper -->
+        <article class="product__card" data-id="roof-01" data-name="Rooftop Ad Topper" data-price="99.99" data-category="ads">
+          <div class="product__media">
+            <span class="ribbon hot">HOT</span>
+            <img loading="lazy" src="assets/img/sale.png" alt="Rooftop Ad Topper with strong magnets" class="product__img" />
+          </div>
+          <div class="product__body">
+            <h3 class="product__title">Rooftop Ad Topper</h3>
+            <p class="product__desc">Strong magnets · Vinyl-ready surface · DIY install</p>
+            <div class="product__meta">
+              <div class="price">
+                <span class="price__current">$99.99</span>
+                <!-- <span class="price__old">$129.99</span>
+                <span class="price__badge">Save $30</span> -->
+              </div>
+              <div class="rating" aria-label="Rated 5 out of 5">
+                <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
+              </div>
+            </div>
+          </div>
+          <div class="product__cta">
+            <button class="btn add-to-cart" data-id="roof-01" data-name="Rooftop Ad Topper" data-price="99.99"><i class='bx bx-cart'></i> Add to Cart</button>
+            <button class="btn btn--ghost quick-view" data-modal="roof-01">Quick View</button>
+          </div>
+          <ul class="product__badges"><li>Free shipping over $75</li><li>2-min install</li></ul>
+        </article>
+
+        <!-- 2 Insulated Food Bag -->
+        <article class="product__card" data-id="bag-01" data-name="Insulated Food Bag (LED)" data-price="59.99" data-category="essentials">
+          <div class="product__media">
+            <span class="ribbon new">NEW</span>
+            <img loading="lazy" src="assets/img/sale.png" alt="Insulated delivery bag with interior LED" class="product__img" />
+          </div>
+          <div class="product__body">
+            <h3 class="product__title">Insulated Food Bag</h3>
+            <p class="product__desc">Keeps food hot and fresh — perfect for pizza delivery.</p>
+            <div class="product__meta">
+              <div class="price"><span class="price__current">$29.99</span></div>
+              <div class="rating" aria-label="Rated 5 out of 5">
+                <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
+              </div>
+            </div>
+          </div>
+          <div class="product__cta">
+            <button class="btn add-to-cart" data-id="bag-01" data-name="Insulated Food Bag (LED)" data-price="29.99"><i class='bx bx-cart'></i> Add to Cart</button>
+            <button class="btn btn--ghost quick-view" data-modal="bag-01">Quick View</button>
+          </div>
+          <ul class="product__badges"><li>Water-resistant</li><li>1-year warranty</li></ul>
+        </article>
+
+        <!-- 3 Gigways Glass -->
+        <article class="product__card" data-id="glass-01" data-name="Gigways Glass" data-price="0" data-category="tech">
+          <div class="product__media">
+            <span class="ribbon soon">COMING SOON</span>
+            <img loading="lazy" src="assets/img/sale.png" alt="Gigways smart glasses render" class="product__img" />
+          </div>
+          <div class="product__body">
+            <h3 class="product__title">Gigways Glass</h3>
+            <p class="product__desc">Smart assist for orders · On-device privacy</p>
+            <div class="product__meta">
+              <div class="price"><span class="price__current">Waitlist</span></div>
+              <div class="rating" aria-label="No rating yet">
+                <i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i>
+              </div>
+            </div>
+          </div>
+          <div class="product__cta">
+            <button class="btn notify-btn" data-product="Gigways Glass"><i class='bx bx-bell'></i> Notify Me</button>
+            <button class="btn btn--ghost quick-view" data-modal="glass-01">Details</button>
+          </div>
+          <ul class="product__badges"><li>Join early testers</li></ul>
+        </article>
+
+        <!-- 4 Gigways T-Shirt -->
+        <article class="product__card" data-id="tee-01" data-name="Gigways T-Shirt" data-price="25.00" data-category="merch">
+          <div class="product__media">
+            <img loading="lazy" src="assets/img/sale.png" alt="Black Gigways T-shirt" class="product__img" />
+          </div>
+          <div class="product__body">
+            <h3 class="product__title">Gigways T-Shirt</h3>
+            <p class="product__desc">Premium cotton · Classic fit · Black</p>
+            <div class="product__meta">
+              <div class="price"><span class="price__current">$25.00</span></div>
+              <div class="rating" aria-label="Rated 4.9 out of 5">
+                <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
+              </div>
+            </div>
+          </div>
+          <div class="product__cta">
+            <button class="btn add-to-cart" data-id="tee-01" data-name="Gigways T-Shirt" data-price="25.00"><i class='bx bx-cart'></i> Add to Cart</button>
+            <button class="btn btn--ghost quick-view" data-modal="tee-01">Quick View</button>
+          </div>
+          <ul class="product__badges"><li>Fast ship</li></ul>
+        </article>
+
+        <!-- 5 Magnetic Phone Mount -->
+        <article class="product__card" data-id="mount-01" data-name="Magnetic Phone Mount" data-price="19.99" data-category="essentials">
+          <div class="product__media">
+            <span class="ribbon best">BEST VALUE</span>
+            <img loading="lazy" src="assets/img/sale.png" alt="Magnetic car phone mount for dashboards and vents" class="product__img" />
+          </div>
+          <div class="product__body">
+            <h3 class="product__title">Magnetic Phone Mount</h3>
+            <p class="product__desc">Strong hold · 360° swivel · Vent/Dash clip</p>
+            <div class="product__meta">
+              <div class="price"><span class="price__current">$19.99</span></div>
+              <div class="rating" aria-label="Rated 4.6 out of 5">
+                <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bx-star'></i>
+              </div>
+            </div>
+          </div>
+          <div class="product__cta">
+            <button class="btn add-to-cart" data-id="mount-01" data-name="Magnetic Phone Mount" data-price="19.99"><i class='bx bx-cart'></i> Add to Cart</button>
+            <button class="btn btn--ghost quick-view" data-modal="mount-01">Quick View</button>
+          </div>
+          <ul class="product__badges"><li>Universal fit</li></ul>
+        </article>
+
+        <!-- 6 Dual USB Fast Charger -->
+        <article class="product__card" data-id="charger-01" data-name="Dual USB Fast Charger" data-price="14.99" data-category="essentials">
+          <div class="product__media">
+            <img loading="lazy" src="assets/img/sale.png" alt="Dual USB fast car charger 12V" class="product__img" />
+          </div>
+          <div class="product__body">
+            <h3 class="product__title">Dual USB Fast Charger</h3>
+            <p class="product__desc">36W total · Smart IC · Night-glow ring</p>
+            <div class="product__meta">
+              <div class="price"><span class="price__current">$14.99</span></div>
+              <div class="rating" aria-label="Rated 4.5 out of 5">
+                <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bx-star'></i>
+              </div>
+            </div>
+          </div>
+          <div class="product__cta">
+            <button class="btn add-to-cart" data-id="charger-01" data-name="Dual USB Fast Charger" data-price="14.99"><i class='bx bx-cart'></i> Add to Cart</button>
+            <button class="btn btn--ghost quick-view" data-modal="charger-01">Quick View</button>
+          </div>
+          <ul class="product__badges"><li>12-24V compatible</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== QUICK VIEW MODAL ===== -->
+    <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="false">
+      <div class="modal__dialog" role="document">
+        <button class="modal__close" id="modalClose" aria-label="Close"><i class='bx bx-x'></i></button>
+        <div class="modal__content" id="modalContent"></div>
+      </div>
+    </div>
+  </main>
+
+<!-- ===== CART DRAWER (single) ===== -->
+<style>
+/* === Cart Drawer Checkout Button Override === */
+/* === Cart Drawer Styles === */
+.cart {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: min(380px,92vw);
+  background: var(--body-color,#0e0e0f);
+  border-left: 1px solid rgba(255,255,255,.14);
+  box-shadow: -8px 0 24px rgba(0,0,0,.35);
+  transform: translateX(100%);
+  transition: .28s ease;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+}
+.cart[aria-hidden="false"]{ transform:translateX(0) }
+
+.cart__header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:1rem;
+  border-bottom:1px solid rgba(255,255,255,.1);
+  color:#fff; /* header text white */
+}
+.cart__header h3 { color:#fff; }
+
+.cart__items {
+  flex:1;
+  overflow:auto;
+  padding:0 1rem;
+  color:#fff; /* all item text white */
+}
+.cart__row {
+  display:grid;
+  grid-template-columns:auto 72px;
+  gap:.5rem;
+  align-items:center;
+  padding:.75rem 0;
+  border-bottom:1px dashed rgba(255,255,255,.12);
+  color:#fff;
+}
+.cart__row-title { font-weight:700; color:#fff; }
+
+.cart__qty {
+  display:flex;
+  align-items:center;
+  gap:.35rem;
+  justify-content:flex-end;
+}
+.qtybtn {
+  border:1px solid rgba(255,255,255,.4);
+  background:transparent;
+  border-radius:8px;
+  padding:.25rem .5rem;
+  cursor:pointer;
+  color:#fff;
+}
+.qtybtn i { color:#fff; }
+
+.cart__footer {
+  padding:1rem;
+  border-top:1px solid rgba(255,255,255,.1);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  color:#fff;
+}
+.cart__totals { color:#fff; }
+.cart__totals strong { color:#fff; }
+
+.cart__close i { color:#fff; }
+
+.cart__floating {
+  position:fixed;
+  right:1rem;
+  bottom:1rem;
+  z-index:1090;
+}
+.badge {
+  background:#e11d48;
+  color:#fff;
+  border-radius:999px;
+  padding:.1rem .45rem;
+  margin-left:.25rem;
+  font-size:.75rem;
+}
+
+/* === Checkout Button Override === */
+#checkoutBtn {
+  background:#000 !important;  /* solid black */
+  color:#fff !important;       /* white text */
+  border:1px solid #444;       /* subtle border */
+}
+#checkoutBtn i { color:#fff !important; }
+
+  
+</style>
+
+<aside class="cart" id="cart" aria-hidden="true">
+  <div class="cart__header">
+    <h3>Cart</h3>
+    <button class="cart__close" id="cartClose" aria-label="Close cart"><i class='bx bx-x'></i></button>
+  </div>
+  <div class="cart__items" id="cartItems"></div>
+  <div class="cart__footer">
+    <div class="cart__totals">
+      <div>Items: <strong id="cartCount">0</strong></div>
+      <div>Total: $<strong id="cartTotal">0.00</strong></div>
+    </div>
+    <button class="btn" id="checkoutBtn"><i class='bx bx-lock'></i> Checkout</button>
+  </div>
+</aside>
+<button class="cart__floating btn" id="cartFloating" aria-label="Open cart">
+  <i class='bx bx-cart'></i><span id="cartBadge" class="badge">0</span>
+</button>
+
+  <!--===== FOOTER (kept as-is) =====-->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__content">
+        <h2 class="footer__title">Gigways Marketplace</h2>
+        <p class="footer__description">Everything drivers need — tools, gear, and exclusive Gigways products</p>
+      </div>
+      <div class="footer__content">
+        <h3 class="footer__subtitle">Quick Links</h3>
+          <ul class="footer__links">
+            <li><a href="#home" class="footer__link">Home</a></li>
+            <li><a href="market.html" class="footer__link">Marketplace</a></li>
+            <li><a href="partners.html#forms" class="footer__link">Partners</a></li>
+            <li><a href="carrers.html" class="footer__link">Carrers</a></li>
+            <li>
+              <a href="privacy-policy.html" class="footer__link"
+                >Privacy Policy</a
+              >
+            </li>
+             <li><a href="backer.html" class="footer__link">Early Backer</a></li>
+          </ul>
+      </div>
+      <div class="footer__content">
+        <h3 class="footer__subtitle">Connect With Us</h3>
+        <div class="footer__social">
+          <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon"><i class="bx bxl-facebook"></i></a>
+          <a href="https://x.com/i/flow/single_sign_on" class="footer__icon"><i class="bx bxl-twitter"></i></a>
+          <a href="https://www.instagram.com/" class="footer__icon"><i class="bx bxl-instagram"></i></a>
+          <a href="mailto:Support@gigways.com" class="footer__icon"><i class="bx bxs-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">© Gigways Marketplace 2025. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!--===== LIBS =====-->
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
+
+  <!--===== MARKETPLACE JS (search/filter/modal/cart) =====-->
+  <script>
+  (function(){
+    // Search / filter / sort
+    const grid = document.getElementById('productGrid');
+    const cards = Array.from(grid.querySelectorAll('.product__card'));
+    const chips = Array.from(document.querySelectorAll('.chip'));
+    const search = document.getElementById('marketSearch');
+    const sortSel = document.getElementById('marketSort');
+    let state = {q:'', cat:'all', sort:'featured'};
+
+    function apply(){
+      const q = state.q.toLowerCase();
+      cards.forEach(c=>{
+        const name = (c.dataset.name||'').toLowerCase();
+        const cat = c.dataset.category||'all';
+        const okQ = !q || name.includes(q);
+        const okC = state.cat==='all' || cat===state.cat;
+        c.style.display = (okQ && okC) ? '' : 'none';
+      });
+      const visible = cards.filter(c=>c.style.display!=='none');
+      const getPrice = c=> parseFloat(c.dataset.price||0);
+      const getName  = c=> (c.dataset.name||'');
+      let cmp = ()=>0;
+      if(state.sort==='priceAsc') cmp = (a,b)=> getPrice(a)-getPrice(b);
+      if(state.sort==='priceDesc') cmp = (a,b)=> getPrice(b)-getPrice(a);
+      if(state.sort==='nameAsc') cmp = (a,b)=> getName(a).localeCompare(getName(b));
+      visible.sort(cmp).forEach(c=> grid.appendChild(c));
+    }
+    chips.forEach(ch=> ch.addEventListener('click',()=>{
+      chips.forEach(x=>x.classList.remove('active'));
+      ch.classList.add('active'); state.cat = ch.dataset.filter; apply();
+    }));
+    if(search) search.addEventListener('input', e=>{state.q = e.target.value; apply();});
+    if(sortSel) sortSel.addEventListener('change', e=>{state.sort = e.target.value; apply();});
+    apply();
+
+    // Modal (Quick View)
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modalContent');
+    const modalClose = document.getElementById('modalClose');
+    document.addEventListener('click', (e)=>{
+      const qv = e.target.closest('.quick-view');
+      if(qv){
+        const card = qv.closest('.product__card');
+        const img = card.querySelector('img').outerHTML.replace('class="product__img"','');
+        const title = card.querySelector('.product__title').textContent;
+        const desc = card.querySelector('.product__desc')?.textContent || '';
+        const price = card.querySelector('.price__current')?.textContent || '';
+        modalContent.innerHTML = `
+          <div class="bd-grid" style="grid-template-columns: 1fr 1fr; gap: 1rem; align-items:center;">
+            <div>${img}</div>
+            <div>
+              <h3 style="margin:.25rem 0 0;">${title}</h3>
+              <p style="opacity:.85;margin:.35rem 0 1rem;">${desc}</p>
+              <div style="font-weight:800;margin-bottom:1rem;">${price}</div>
+              <button class="btn add-to-cart" data-id="${card.dataset.id}" data-name="${card.dataset.name}" data-price="${card.dataset.price}"><i class='bx bx-cart'></i> Add to Cart</button>
+            </div>
+          </div>`;
+        modal.setAttribute('aria-hidden','false'); modal.setAttribute('aria-modal','true');
+      }
+    });
+    modalClose.addEventListener('click', ()=>{ modal.setAttribute('aria-hidden','true'); modal.setAttribute('aria-modal','false'); });
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) modalClose.click(); });
+
+    // Cart
+    const cartBtn = document.getElementById('cartFloating');
+    const cartClose = document.getElementById('cartClose');
+    const cart = document.getElementById('cart');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const cartBadge = document.getElementById('cartBadge');
+    const cartCount = document.getElementById('cartCount');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    let cartItems = JSON.parse(localStorage.getItem('gw_cart')||'[]');
+    function openCart(){ cart.setAttribute('aria-hidden','false'); }
+    function closeCart(){ cart.setAttribute('aria-hidden','true'); }
+    function money(n){ return Number(n).toFixed(2); }
+    function save(){ localStorage.setItem('gw_cart', JSON.stringify(cartItems)); }
+    function render(){
+      cartItemsEl.innerHTML = cartItems.map((it,idx)=>`
+        <div class="cart__row">
+          <div>
+            <div class="cart__row-title">${it.name}</div>
+            <div style="opacity:.75">$${money(it.price)} each</div>
+          </div>
+          <div class="cart__qty">
+            <button class="qtybtn" data-act="dec" data-idx="${idx}">-</button>
+            <span>${it.qty}</span>
+            <button class="qtybtn" data-act="inc" data-idx="${idx}">+</button>
+            <button class="qtybtn" data-act="rm" data-idx="${idx}"><i class='bx bx-trash'></i></button>
+          </div>
+        </div>`).join('');
+      const total = cartItems.reduce((s,i)=> s + (i.price*i.qty), 0);
+      const count = cartItems.reduce((s,i)=> s + i.qty, 0);
+      cartTotalEl.textContent = money(total);
+      cartBadge.textContent = count;
+      if (cartCount) cartCount.textContent = count;
+      save();
+    }
+    function upsert(item){
+      const i = cartItems.findIndex(x=>x.id===item.id);
+      if(i>-1) cartItems[i].qty += item.qty; else cartItems.push(item);
+      render(); openCart();
+    }
+    // delegation for add-to-cart + qty
+    document.addEventListener('click', (e)=>{
+      const add = e.target.closest('.add-to-cart');
+      if(add){
+        const { id, name, price } = add.dataset;
+        upsert({ id, name, price: Number(price), qty: 1 });
+      }
+      const btn = e.target.closest('.qtybtn');
+      if(btn){
+        const idx = Number(btn.dataset.idx);
+        const act = btn.dataset.act;
+        if(act==='inc') cartItems[idx].qty++;
+        if(act==='dec') cartItems[idx].qty = Math.max(1, cartItems[idx].qty-1);
+        if(act==='rm') cartItems.splice(idx,1);
+        render();
+      }
+    });
+    cartBtn.addEventListener('click', openCart);
+    cartClose.addEventListener('click', closeCart);
+
+    // placeholder checkout (hook to Stripe backend or Payment Links)
+    checkoutBtn.addEventListener('click', ()=>{
+      if(!cartItems.length){ alert('Your cart is empty.'); return; }
+      alert('Checkout not configured yet. Map items to Stripe Prices or Payment Links.');
+    });
+
+    render();
+  })();
+  </script>
+
+  <!-- Your site JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+

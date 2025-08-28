@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Gigways | Partners & Collaboration</title>
+  <meta name="description" content="Partner with Gigways — advertising, driver perks, affiliates, and API/data collaborations that support gig workers." />
+  <meta name="keywords" content="Gigways partners, advertise to gig drivers, driver perks, affiliates, API data partnership" />
+  <meta name="author" content="Gigways Team" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Gigways | Partners & Collaboration" />
+  <meta property="og:description" content="Partner with Gigways — from ads to driver perks, we collaborate with brands to empower the gig economy." />
+  <meta property="og:image" content="https://gigways.com/assets/img/App.png" />
+  <meta property="og:url" content="https://gigways.com/partners.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Gigways" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Gigways | Partners & Collaboration" />
+  <meta name="twitter:description" content="Collaborate with Gigways on advertising, affiliates, and driver wellness initiatives." />
+  <meta name="twitter:image" content="https://gigways.com/assets/img/App.png" />
+
+  <link rel="icon" href="assets/img/App.png" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Gigways",
+    "url": "https://gigways.com",
+    "logo": "https://gigways.com/assets/img/App.png",
+    "sameAs": [
+      "https://www.linkedin.com/company/gigways",
+      "https://www.instagram.com/gigways",
+      "https://twitter.com/gigways"
+    ]
+  }
+  </script>
+
+  <!-- Base page styles -->
+  <style>
+    :root{
+      --card-bg: rgba(255,255,255,0.06);
+      --card-bd: rgba(255,255,255,0.14);
+      --input-bg: rgba(255,255,255,0.08);
+      --input-bd: rgba(255,255,255,0.30);
+      --input-bd-hover: rgba(255,255,255,0.44);
+      --ring: #22d3ee;
+      --ring-soft: rgba(34,211,238,.28);
+      --button-grad: linear-gradient(90deg,#6ee7ff,#22d3ee);
+      --button-text: #062a33;
+      --ok: #22c55e;
+      --err: #ef4444;
+    }
+
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 1rem; }
+    .section { padding: 4.5rem 1rem 3rem; }
+
+    /* Headings used by hero/featured */
+    .section-title{ text-align:center; font-size: clamp(1.6rem, 2vw + 1rem, 2.4rem); margin:0; }
+    .section-subtitle{ text-align:center; opacity:.85; max-width:720px; margin:.5rem auto 1.5rem; }
+
+    /* Hero + buttons */
+    .partners-hero{ padding-top: 5rem; }
+    .cta-row{ display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
+    .btn{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.75rem 1rem; border:2px solid #0f172a; border-radius:999px;
+      background:#fff; color:#0f172a; text-decoration:none; font-weight:700;
+      transition: transform .12s ease, .15s ease, color .15s ease, border-color .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background:var(--third-color); color:#fff; }
+    .btn--primary{ background: var(--button-grad); border-color: transparent; color: var(--button-text); }
+    .btn--primary:hover{ filter: brightness(.97); color: var(--button-text); transform: translateY(-1px); }
+
+    /* Featured partners */
+    .partners__grid{
+      display:grid; gap:1.25rem; margin-top:2rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      color: black;
+    }
+    .partner__card{
+      background:#fff; border:1.5px solid #e5e7eb; border-radius:16px; padding:1.25rem; text-align:center;
+      box-shadow: 0 8px 20px rgba(0,0,0,.06);
+      transition: transform .12s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .partner__card:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.10); border-color:#cbd5e1; }
+    .partner__card img{ max-width:120px; display:block; margin:0 auto .75rem; }
+
+    /* Form card + fields */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-bd);
+      border-radius: 16px;
+      padding: 1.25rem;
+      box-shadow: 0 10px 28px rgba(0,0,0,.16);
+    }
+    .form__grid { display:grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 860px){ .form__grid { grid-template-columns:1fr; } }
+    .form__group { display:flex; flex-direction:column; gap:.45rem; position: relative; }
+    .label { font-size:.95rem; opacity:.95; }
+    .field { position: relative; }
+    .icon {
+      position:absolute; left: .85rem; top: 50%; transform: translateY(-50%);
+      font-size: 1.05rem; opacity:.9; pointer-events:none;
+    }
+    .input, .textarea, .file {
+      width:100%;
+      border-radius: 12px;
+      border:2px solid var(--input-bd);
+      background: var(--input-bg);
+      color: inherit;
+      padding:.9rem 1rem .9rem 2.35rem;
+      transition: box-shadow .15s ease, border-color .15s ease, background .15s ease;
+    }
+    .textarea { min-height: 140px; resize: vertical; padding-left: 2.35rem; }
+    .input:hover, .textarea:hover, .file:hover { border-color: var(--input-bd-hover); background: rgba(255,255,255,0.10); }
+    .input:focus, .textarea:focus, .file:focus { outline:none; border-color: #fff; box-shadow: 0 0 0 3px var(--ring-soft); background: rgba(255,255,255,0.12); }
+    .input[aria-invalid="true"], .textarea[aria-invalid="true"]{ border-color: var(--err); }
+    .error { color: var(--err); font-size:.85rem; min-height: 1.1rem; }
+    .hint { font-size:.83rem; opacity:.7; }
+    .counter { font-size:.78rem; opacity:.7; text-align:right; }
+
+    .btn-primary {
+      width:100%; display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
+      padding: 1rem 1.1rem; border-radius:999px; border:0;
+      background: var(--button-grad); color: var(--button-text);
+      font-weight:700; cursor:pointer; transition: transform .12s ease, filter .15s ease;
+    }
+    .btn-primary:hover { filter: brightness(.97); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary[disabled] { opacity:.7; cursor:not-allowed; transform:none; }
+
+    .status { min-height:1.25rem; margin-top:.75rem; font-size:.95rem; }
+    .status.ok { color: var(--ok); }
+    .status.err { color: var(--err); }
+    .spinner { width:16px; height:16px; border:2px solid rgba(0,0,0,.2); border-top-color: rgba(0,0,0,.5); border-radius:50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+
+  <!-- High-contrast overrides for WHITE background -->
+  <style>
+    #partner-card.card{
+      background: #ffffff !important;
+      border: 1.5px solid #e5e7eb !important;
+      color: #0b0f12;
+    }
+    #partner-card .input,
+    #partner-card .textarea,
+    #partner-card .file{
+      background: #ffffff !important;
+      color: #0b0f12 !important;
+      border: 2px solid rgba(17,24,39,0.88) !important;
+      border-radius: 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,.06);
+    }
+    #partner-card .input::placeholder,
+    #partner-card .textarea::placeholder{ color:#6b7280; }
+    #partner-card .label{ color:#0b0f12; }
+    #partner-card .icon{ color:#111827; opacity:.9; }
+
+    #partner-card .input:hover,
+    #partner-card .textarea:hover,
+    #partner-card .file:hover{ border-color: #0f172a !important; }
+    #partner-card .input:focus,
+    #partner-card .textarea:focus,
+    #partner-card .file:focus{
+      outline: none;
+      border-color: #0891b2 !important;
+      box-shadow:
+        0 0 0 3px rgba(34,211,238,.28),
+        0 0 0 1.5px rgba(17,24,39,.95) inset;
+      background: #ffffff !important;
+    }
+    #partner-card .input[aria-invalid="true"],
+    #partner-card .textarea[aria-invalid="true"]{
+      border-color: #ef4444 !important;
+      box-shadow: 0 0 0 2px rgba(239,68,68,.15);
+    }
+  </style>
+</head>
+<body>
+  <!-- Background -->
+  <div class="bubble-container"></div>
+
+  <!-- Header -->
+  <header class="l-header">
+    <nav class="nav bd-grid">
+      <div><a href="index.html" class="nav__logo">Gigways</a></div>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="index.html#preview" class="nav__link">App Preview</a></li>
+          <li class="nav__item"><a href="market.html" class="nav__link">Marketplace</a></li>
+          <li class="nav__item"><a href="partners.html" class="nav__link active">Partners</a></li>
+          <li class="nav__item"><a href="carrers.html" class="nav__link">Careers</a></li>
+        </ul>
+      </div>
+      <div class="theme"><img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" /></div>
+      <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
+    </nav>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="partners-hero section" id="partners">
+    <div class="container">
+      <h1 class="section-title">Partners & Collaboration</h1>
+      <p class="section-subtitle">Work with Gigways on driver perks, contextual ads, affiliates, or simple API/data collabs.</p>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="#forms"><i class="bx bx-handshake"></i><span>Become a partner</span></a>
+        <a class="btn" href="#featured"><i class="bx bx-grid"></i><span>Featured partners</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED ===== -->
+  <section class="section" id="featured">
+    <div class="container">
+      <h2 class="section-title">Featured Partners</h2>
+      <p class="section-subtitle">A few examples — swap these for your actual logos.</p>
+      <div class="partners__grid">
+        <article class="partner__card">
+          <img src="assets/img/partner1.png" alt="Partner 1 logo" />
+          <h3>Tax File</h3>
+          <p>Tax tools for gig driver.</p>
+        </article>
+        <article class="partner__card">
+          <img src="assets/img/partner2.png" alt="Partner 2 logo" />
+          <h3>Car Ads</h3>
+          <p>Rooftop car ads, in-app spots, reach gig drivers.</p>
+        </article>
+        <article class="partner__card">
+          <img src="assets/img/partner3.png" alt="Partner 3 logo" />
+          <h3>Vehicle Care</h3>
+          <p>Oil change, maintance and insurances for drivers.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FORM ===== -->
+  <main class="section" id="forms">
+    <div class="container">
+      <h2 class="section-title">Send a Partnership Brief</h2>
+      <p class="section-subtitle">Tell us what you want to build. We’ll reply fast.</p>
+
+      <div class="card" id="partner-card">
+        <form id="my-form"
+              action="https://formspree.io/f/mzboyvbe"
+              method="POST"
+              enctype="multipart/form-data"
+              aria-describedby="my-form-status">
+
+          <!-- spam traps -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_subject" value="Gigways Partnership Brief" />
+          <input type="hidden" id="load_ts" value="" />
+
+          <!-- Contact + Org -->
+          <div class="form__grid">
+            <div class="form__group">
+              <label class="label" for="name">Your Name *</label>
+              <div class="field">
+                <i class="bx bx-user icon"></i>
+                <input class="input" id="name" name="name" type="text" placeholder="Full name" required autocomplete="name" />
+              </div>
+              <div class="error" id="err-name"></div>
+            </div>
+
+            <div class="form__group">
+              <label class="label" for="email">Email *</label>
+              <div class="field">
+                <i class="bx bx-at icon"></i>
+                <input class="input" id="email" name="email" type="email" placeholder="you@company.com" required autocomplete="email" inputmode="email" />
+              </div>
+              <div class="error" id="err-email"></div>
+            </div>
+
+            <div class="form__group">
+              <label class="label" for="phone">Phone</label>
+              <div class="field">
+                <i class="bx bx-phone icon"></i>
+                <input class="input" id="phone" name="phone" type="tel" placeholder="+1 (470) 555-1234" autocomplete="tel" inputmode="tel" />
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="label" for="contact_pref">Preferred Contact</label>
+              <div class="field">
+                <i class="bx bx-message-dots icon"></i>
+                <input class="input" id="contact_pref" name="contact_pref" type="text" placeholder="Email, Phone, or Either" />
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="label" for="company">Company / Organization *</label>
+              <div class="field">
+                <i class="bx bx-buildings icon"></i>
+                <input class="input" id="company" name="company" type="text" placeholder="Company name" required autocomplete="organization" />
+              </div>
+              <div class="error" id="err-company"></div>
+            </div>
+
+            <div class="form__group">
+              <label class="label" for="website">Website</label>
+              <div class="field">
+                <i class="bx bx-globe icon"></i>
+                <input class="input" id="website" name="website" type="url" placeholder="https://example.com" inputmode="url" autocomplete="url" />
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="label" for="industry">Industry</label>
+              <div class="field">
+                <i class="bx bx-category icon"></i>
+                <input class="input" id="industry" name="industry" type="text" placeholder="e.g., Finance, Insurance, Auto, SaaS" />
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="label" for="company_size">Company Size</label>
+              <div class="field">
+                <i class="bx bx-group icon"></i>
+                <input class="input" id="company_size" name="company_size" type="text" placeholder="e.g., 51–200, 1,001–10,000" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Objectives -->
+          <div class="form__group" style="margin-top:.4rem;">
+            <label class="label" for="objectives">Objectives *</label>
+            <div class="field">
+              <i class="bx bx-bullseye icon"></i>
+              <textarea class="textarea" id="objectives" name="objectives" required maxlength="700"
+                placeholder="What are you trying to achieve? (e.g., awareness, signups, sales, redemptions, leads)"></textarea>
+            </div>
+            <div class="counter"><span id="count-objectives">0</span>/700</div>
+            <div class="error" id="err-objectives"></div>
+          </div>
+
+          <!-- Targeting -->
+          <div class="form__grid">
+            <div class="form__group">
+              <label class="label" for="geo">Geography</label>
+              <div class="field">
+                <i class="bx bx-map icon"></i>
+                <input class="input" id="geo" name="geo" type="text" placeholder="Cities / states / regions (comma-separated)" />
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="label" for="audience">Audience Notes</label>
+              <div class="field">
+                <i class="bx bx-user-pin icon"></i>
+                <input class="input" id="audience" name="audience" type="text" placeholder="Rideshare vs delivery, vehicle type, experience, etc." />
+              </div>
+            </div>
+          </div>
+
+          <!-- Channels & Creative -->
+          <div class="form__grid">
+            <div class="form__group">
+              <label class="label" for="channels">Channels & Placements</label>
+              <div class="field">
+                <i class="bx bx-broadcast icon"></i>
+                <textarea class="textarea" id="channels" name="channels" maxlength="600"
+                  placeholder="e.g., In-app (Driver Density Map), banners, partner perks, email, rooftop static, API/data"></textarea>
+              </div>
+              <div class="counter"><span id="count-channels">0</span>/600</div>
+            </div>
+            <div class="form__group">
+              <label class="label" for="creative">Creative Assets Available</label>
+              <div class="field">
+                <i class="bx bx-image icon"></i>
+                <textarea class="textarea" id="creative" name="creative" maxlength="600"
+                  placeholder="e.g., logo, banner sizes, video links, copy/CTAs — or note if you need creative help"></textarea>
+              </div>
+              <div class="counter"><span id="count-creative">0</span>/600</div>
+            </div>
+          </div>
+
+          <!-- KPIs + Budget/Timeline -->
+          <div class="form__grid">
+            <div class="form__group">
+              <label class="label" for="kpi">Primary KPIs</label>
+              <div class="field">
+                <i class="bx bx-target-lock icon"></i>
+                <input class="input" id="kpi" name="kpi" type="text" placeholder="e.g., CTR, CPC, CPA, CPM, redemptions, signups" />
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="label" for="budget">Estimated Monthly Budget</label>
+              <div class="field">
+                <i class="bx bx-dollar icon"></i>
+                <input class="input" id="budget" name="budget" type="text" placeholder="$5,000–$20,000 or exact amount" />
+              </div>
+              <input type="hidden" id="budget_raw" name="budget_raw" value="" />
+              <div class="hint">We’ll never publish this — it helps us size a pilot.</div>
+            </div>
+            <div class="form__group">
+              <label class="label" for="timeline">Campaign Plan</label>
+              <div class="field">
+                <i class="bx bx-time icon"></i>
+                <input class="input" id="timeline" name="timeline" type="text" placeholder="Pilot (2–6 weeks), Quarterly, Ongoing" />
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="label" for="engagement">Engagement Type</label>
+              <div class="field">
+                <i class="bx bx-repeat icon"></i>
+                <input class="input" id="engagement" name="engagement" type="text" placeholder="Pilot, One-off, or Ongoing" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Dates -->
+          <div class="form__grid">
+            <div class="form__group">
+              <label class="label" for="start_date">Preferred Start Date</label>
+              <div class="field">
+                <i class="bx bx-calendar icon"></i>
+                <input class="input" id="start_date" name="start_date" type="date" />
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="label" for="duration">Estimated Duration</label>
+              <div class="field">
+                <i class="bx bx-timer icon"></i>
+                <input class="input" id="duration" name="duration" type="text" placeholder="e.g., 8 weeks, Q4 only, ongoing" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Brief -->
+          <div class="form__group">
+            <label class="label" for="message">Brief *</label>
+            <div class="field">
+              <i class="bx bx-file icon"></i>
+              <textarea class="textarea" id="message" name="message" required maxlength="1500"
+                placeholder="Tell us the plan: goals, audience, targeting, geography, creative formats, must-haves…"></textarea>
+            </div>
+            <div class="counter"><span id="count-message">0</span>/1500</div>
+            <div class="error" id="err-message"></div>
+          </div>
+
+          <!-- Extras -->
+          <div class="form__grid">
+            <div class="form__group">
+              <label class="label" for="attachment">Attach a brief / deck (optional)</label>
+              <div class="field">
+                <i class="bx bx-paperclip icon"></i>
+                <input class="file" id="attachment" name="attachment" type="file"
+                       accept=".pdf,.ppt,.pptx,.doc,.docx,.zip,.jpg,.jpeg,.png" />
+              </div>
+              <div class="hint">Max 15MB · PDF/PPT/DOC/ZIP/JPG/PNG</div>
+              <div class="error" id="err-file"></div>
+            </div>
+            <div class="form__group">
+              <label class="label" for="referrer">How did you hear about us?</label>
+              <div class="field">
+                <i class="bx bx-compass icon"></i>
+                <input class="input" id="referrer" name="referrer" type="text" placeholder="Search, social, friend, event…" />
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="label" for="call_times">Call Availability</label>
+              <div class="field">
+                <i class="bx bx-phone-call icon"></i>
+                <input class="input" id="call_times" name="call_times" type="text" placeholder="Days/times + timezone" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Consent + Submit -->
+          <label class="label" style="display:flex;align-items:center;gap:.55rem;margin:.5rem 0 1rem;">
+            <input type="checkbox" name="consent" required style="width:18px;height:18px;" />
+            <span>I agree to be contacted and accept the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+          </label>
+
+          <button type="submit" id="my-form-button" class="btn-primary">
+            <i class="bx bx-send"></i>
+            <span id="btn-text">Send Partnership Brief</span>
+            <span id="btn-spin" class="spinner" style="display:none;"></span>
+          </button>
+          <p id="my-form-status" class="status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__content">
+        <h2 class="footer__title">Gigways LLC</h2>
+        <p class="footer__description">Making work easier, safer, and more organized for gig workers</p>
+      </div>
+      <div class="footer__content">
+        <h3 class="footer__subtitle">Quick Links</h3>
+          <ul class="footer__links">
+            <li><a href="#home" class="footer__link">Home</a></li>
+            <li><a href="market.html" class="footer__link">Marketplace</a></li>
+            <li><a href="partners.html#forms" class="footer__link">Partners</a></li>
+            <li><a href="carrers.html" class="footer__link">Carrers</a></li>
+            <li>
+              <a href="privacy-policy.html" class="footer__link"
+                >Privacy Policy</a
+              >
+            </li>
+             <li><a href="backer.html" class="footer__link">Early Backer</a></li>
+          </ul>
+      </div>
+      <div class="footer__content">
+        <h3 class="footer__subtitle">Connect With Us</h3>
+        <div class="footer__social">
+          <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon"><i class="bx bxl-facebook"></i></a>
+          <a href="https://x.com/i/flow/single_sign_on" class="footer__icon"><i class="bx bxl-twitter"></i></a>
+          <a href="https://www.instagram.com/" class="footer__icon"><i class="bx bxl-instagram"></i></a>
+          <a href="mailto:support@gigways.com" class="footer__icon"><i class="bx bxs-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom"><p class="footer__copy">© Gigways LLC 2025. All rights reserved.</p></div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
+  <script>
+    (function () {
+      const form = document.getElementById("my-form");
+      const button = document.getElementById("my-form-button");
+      const status = document.getElementById("my-form-status");
+      const spin = document.getElementById("btn-spin");
+      const btnText = document.getElementById("btn-text");
+      const loadTs = document.getElementById("load_ts");
+      const STORAGE_KEY = "gigways_partner_brief_v1";
+
+      const $ = (id) => document.getElementById(id);
+      const setErr = (id, msg, fieldId) => {
+        const el = $(id);
+        if (el) el.textContent = msg || "";
+        if (fieldId) {
+          const f = $(fieldId);
+          if (f) f.setAttribute("aria-invalid", msg ? "true" : "false");
+        }
+      };
+
+      // counters
+      [["objectives","count-objectives"],["channels","count-channels"],["creative","count-creative"],["message","count-message"]]
+        .forEach(([f,c])=>{ const F=$(f),C=$(c); if(!F||!C) return; const u=()=>C.textContent=F.value.length; F.addEventListener("input",u); u(); });
+
+      // phone mask
+      const phone = $("phone");
+      if (phone) {
+        phone.addEventListener("input", () => {
+          let v = phone.value.replace(/[^\d]/g, "").slice(0,10);
+          let out = v;
+          if (v.length > 6) out = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
+          else if (v.length > 3) out = `(${v.slice(0,3)}) ${v.slice(3)}`;
+          phone.value = out;
+        });
+      }
+
+      // budget formatting
+      const budget = $("budget"), budgetRaw = $("budget_raw");
+      if (budget && budgetRaw) {
+        budget.addEventListener("input", () => {
+          const raw = budget.value.replace(/[^\d.]/g, "");
+          budgetRaw.value = raw;
+          const num = Number(raw);
+          if (!isNaN(num) && raw) {
+            budget.dataset.userEditing = "1";
+            budget.value = new Intl.NumberFormat("en-US", { style:"currency", currency:"USD", maximumFractionDigits:0 }).format(num);
+            setTimeout(()=>{ delete budget.dataset.userEditing; },0);
+          }
+        });
+        budget.addEventListener("focus", () => budget.select());
+      }
+
+      // file checks
+      const file = $("attachment");
+      if (file) {
+        file.addEventListener("change", () => {
+          setErr("err-file", "");
+          if (!file.files || !file.files[0]) return;
+          const f = file.files[0];
+          if (f.size > 15 * 1024 * 1024) {
+            setErr("err-file", "File is larger than 15MB.");
+            file.value = "";
+          }
+        });
+      }
+
+      // autosave/restore
+      const ids = ["name","email","phone","contact_pref","company","website","industry","company_size","objectives","geo","audience","channels","creative","kpi","budget","timeline","engagement","start_date","duration","message","referrer","call_times"];
+      function save() { const data={}; ids.forEach(id=>{ const el=$(id); if(el) data[id]=el.value; }); localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+      function restore() { try{ const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}"); ids.forEach(id=>{ const el=$(id); if(el && data[id]!=null) el.value=data[id]; }); }catch{} }
+      restore(); if (form) form.addEventListener("input", save);
+
+      // timing trap
+      loadTs.value = Date.now().toString();
+
+      // validate
+      function validate() {
+        let ok = true;
+        [["name","err-name","Please enter your name."],
+         ["email","err-email","Please enter a valid email."],
+         ["company","err-company","Please enter your company."],
+         ["objectives","err-objectives","Please share your objectives."],
+         ["message","err-message","Please include a brief."]]
+        .forEach(([fid,eid,msg])=>{
+          const el=$(fid), v=(el?.value||"").trim();
+          const fail=!v || (fid==="email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+          setErr(eid, fail?msg:"", fid);
+          if(fail) ok=false;
+        });
+        const website = $("website");
+        if (website && website.value.trim() && !/^https?:\/\//i.test(website.value.trim())) {
+          status.className = "status err";
+          status.textContent = "Website should start with http:// or https://";
+          ok = false;
+        }
+        return ok;
+      }
+
+      // submit
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const delta = Date.now() - Number(loadTs.value || "0");
+        if (delta < 3000) {
+          status.className = "status err";
+          status.textContent = "Please take a moment to complete the brief.";
+          return;
+        }
+        if (!validate()) {
+          status className = "status err";
+          status.textContent = "Please fix the highlighted fields.";
+          return;
+        }
+
+        if (button) button.disabled = true;
+        if (spin) spin.style.display = "inline-block";
+        if (btnText) btnText.textContent = "Sending…";
+        status.className = "status";
+        status.textContent = "";
+
+        try {
+          const res = await fetch(form.action, {
+            method: form.method,
+            body: new FormData(form),
+            headers: { Accept: "application/json" }
+          });
+          if (res.ok) {
+            form.reset();
+            localStorage.removeItem(STORAGE_KEY);
+            status.className = "status ok";
+            status.textContent = "Thanks! We’ll get back to you shortly.";
+            window.scrollTo({ top: document.getElementById("partner-card").offsetTop - 20, behavior: "smooth" });
+          } else {
+            let msg = "Oops, please try again.";
+            try { const json = await res.json(); msg = json?.errors?.[0]?.message || msg; } catch {}
+            status.className = "status err";
+            status.textContent = msg;
+          }
+        } catch (err) {
+          status.className = "status err";
+          status.textContent = "Network error. Please retry.";
+        } finally {
+          if (button) button.disabled = false;
+          if (spin) spin.style.display = "none";
+          if (btnText) btnText.textContent = "Send Partnership Brief";
+        }
+      });
+
+      if (window.ScrollReveal) {
+        ScrollReveal().reveal('#partner-card', { distance: '20px', duration: 600, origin: 'bottom', easing: 'ease-out', opacity: 0 });
+      }
+    })();
+  </script>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Meta -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Gigways Careers | Build the Driver-First Platform</title>
+  <meta name="description" content="Join Gigways — a driver-first wellness & tracking platform. Explore roles in engineering, design, growth, community, and partnerships." />
+  <meta name="keywords" content="Gigways careers, driver app jobs, React jobs, React Native jobs, Mapbox, ASO, Atlanta tech, remote jobs" />
+  <meta name="author" content="Gigways Team" />
+  <link rel="canonical" href="https://gigways.com/Carrers.html" />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Gigways Careers | Build the Driver-First Platform" />
+  <meta property="og:description" content="We’re hiring builders who care about drivers. Engineering, Product, Growth, Community, and more." />
+  <meta property="og:image" content="https://gigways.com/assets/img/App.png" />
+  <meta property="og:image:alt" content="Gigways app preview" />
+  <meta property="og:url" content="https://gigways.com/Carrers.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Gigways" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Gigways Careers | Build the Driver-First Platform" />
+  <meta name="twitter:description" content="Help drivers work smarter and rest better. See open roles." />
+  <meta name="twitter:image" content="https://gigways.com/assets/img/App.png" />
+
+  <!-- Favicon + Styles -->
+  <link rel="icon" href="assets/img/App.png" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Gigways",
+    "url":"https://gigways.com",
+    "logo":"https://gigways.com/assets/img/App.png",
+    "sameAs":[
+      "https://www.linkedin.com/company/gigways",
+      "https://www.instagram.com/gigways",
+      "https://twitter.com/gigways"
+    ]
+  }
+  </script>
+
+  <style>
+    /* Force black text for everything in the Open Roles section */
+#open-roles { color: #000; }
+
+#open-roles h1,
+#open-roles h2,
+#open-roles h3,
+#open-roles h4,
+#open-roles p,
+#open-roles li,
+#open-roles span,
+#open-roles a:not(.btn),
+#open-roles .job__title,
+#open-roles .job__meta,
+#open-roles .job__card p,
+#open-roles .job__body li,
+#open-roles .badge,
+#open-roles .bx {
+  color: #000 !important;
+}
+
+/* Match "Open Roles" heading/subtitle to global section styles */
+#open-roles h2.section-title,
+#open-roles p.section-subtitle {
+  color: var(--second-color) !important; /* same as How We Work */
+}
+
+/* Keep the underline consistent with your global accent */
+#open-roles h2.section-title::after {
+  background-color: var(--third-color) !important;
+}
+
+/* Match the jobs count ("7 roles") to How We Work color */
+#open-roles #jobCount,
+#open-roles .count {
+  color: var(--second-color) !important;
+}
+
+
+
+
+    /* ---- Page-local styles (keep your global theme intact) ---- */
+    :root { --card-bg: rgba(0,0,0,.02); --card-bd: rgba(0,0,0,.12); }
+    .careers-hero { text-align:center; padding:6rem 1.5rem 3rem; }
+    .careers-hero h1 { font-size:2.25rem; margin:.5rem 0; }
+    .badge { display:inline-block; font-size:.8rem; padding:.25rem .6rem; border-radius:999px; border:1px solid currentColor; opacity:.9; margin:.2rem .3rem; }
+    .filters.card, .card { border:1px solid var(--card-bd); border-radius:1rem; background:var(--card-bg); }
+    .filters { padding:1rem; display:grid; gap:.75rem; }
+    .filters .row { display:grid; gap:.75rem; grid-template-columns: 1fr; }
+    .filters input, .filters select { width:100%; padding:.8rem 1rem; border-radius:.75rem; border:1px solid var(--first-color, #ccc); background:#fff; color:#111; }
+    .filters .right { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; }
+    .count { opacity:.9; font-size:.95rem; }
+    .jobs__grid { display:grid; gap:1rem; grid-template-columns:1fr; }
+    .job__card { padding:1rem; border:1px solid var(--card-bd); border-radius:1rem; background:#fff; }
+    .job__header { display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; }
+    .job__title { margin:.1rem 0; font-size:1.1rem; }
+    .job__meta { font-size:.9rem; opacity:.9; margin:.25rem 0 .75rem; }
+    .job__body { display:none; margin-top:.75rem; }
+    .job__body.open { display:block; }
+    .job__body ul { padding-left:1.25rem; margin:.5rem 0; }
+    .values__grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); }
+    .cta { text-align:center; padding:2rem 1rem; }
+    .btn-row { display:flex; gap:.6rem; flex-wrap:wrap; justify-content:center; }
+    .eeo { font-size:.9rem; opacity:.9; }
+    @media (min-width:800px){
+      .filters .row { grid-template-columns: 2fr 1fr 1fr 1fr auto; }
+      .jobs__grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Bubble Background Animation -->
+  <div class="bubble-container"></div>
+
+  <!--===== HEADER =====-->
+  <header class="l-header">
+    <nav class="nav bd-grid">
+      <div><a href="index.html" class="nav__logo">Gigways</a></div>
+      <div class="nav__menu" id="nav-menu">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+          <li class="nav__item"><a href="index.html#preview" class="nav__link">App Preview</a></li>
+          <li class="nav__item"><a href="market.html" class="nav__link">Marketplace</a></li>
+          <li class="nav__item"><a href="Partners.html" class="nav__link">Partners</a></li>
+          <li class="nav__item"><a href="Carrers.html" class="nav__link active">Careers</a></li>
+        </ul>
+      </div>
+      <div class="theme"><img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" /></div>
+      <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
+    </nav>
+  </header>
+
+  <main id="careers" tabindex="-1">
+    <!-- HERO -->
+    <section class="section careers-hero" id="careers-hero">
+      <div class="container">
+        <span class="badge">Remote-friendly</span>
+        <span class="badge">Driver-first</span>
+        <h1 class="section-title">Join Gigways</h1>
+        <p class="section-subtitle">Help gig drivers work smarter and rest better. Build wellness, tracking, and community tools that respect drivers.</p>
+        <div class="btn-row" style="margin-top:1rem;">
+          <a class="btn btn--primary" href="#open-roles"><i class="bx bx-briefcase-alt-2"></i><span>View open roles</span></a>
+          <a class="btn" href="#values"><i class="bx bx-heart"></i><span>Our values</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTERS + OPEN ROLES -->
+    <section class="section" id="open-roles" aria-labelledby="open-roles-title">
+      <div class="container">
+        <h2 id="open-roles-title" class="section-title">Open Roles</h2>
+        <p class="section-subtitle">We’ll post new roles here when we’re hiring. Stay tuned and check back soon.</p>
+
+        <div class="filters card" role="region" aria-label="Job filters">
+          <div class="row">
+            <input id="jobSearch" type="search" placeholder="Search roles (e.g., React, partnerships, Atlanta)" aria-label="Search jobs" />
+            <select id="deptFilter" aria-label="Filter by department">
+              <option value="">All departments</option>
+              <option>Engineering</option>
+              <option>Product & Design</option>
+              <option>Growth & ASO</option>
+              <option>Community & Support</option>
+              <option>Partnerships</option>
+              <option>Operations</option>
+              <option>Internships</option>
+            </select>
+            <select id="locationFilter" aria-label="Filter by location">
+              <option value="">All locations</option>
+              <option>Remote (USA)</option>
+              <option>Hybrid – Atlanta, GA</option>
+            </select>
+            <select id="sortBy" aria-label="Sort jobs">
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+              <option value="az">A–Z</option>
+            </select>
+            <div class="right">
+              <span id="jobCount" class="count" aria-live="polite"></span>
+              <button id="clearFilters" class="btn" type="button" title="Clear filters"><i class="bx bx-eraser"></i> Clear</button>
+              <button id="shareFilters" class="btn" type="button" title="Copy link with filters"><i class="bx bx-link"></i> Share</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="jobsList" class="jobs__grid" role="list" aria-live="polite"></div>
+
+        <div id="noResults" class="card" style="display:none;text-align:center;">
+          <p>No roles match your filters. Try clearing filters or check back soon.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="section" id="values">
+      <div class="container">
+        <h2 class="section-title">How We Work</h2>
+        <div class="values__grid">
+          <article class="card"><h3><i class="bx bx-shield-quarter"></i> Drivers first</h3><p>Health, rest, and earnings guide our choices.</p></article>
+          <article class="card"><h3><i class="bx bx-rocket"></i> Ship, learn, improve</h3><p>Bias to action and iteration. Progress over perfection.</p></article>
+          <article class="card"><h3><i class="bx bx-message-square-dots"></i> Straight talk</h3><p>Clear writing, candid feedback, zero politics.</p></article>
+          <article class="card"><h3><i class="bx bx-lock-alt"></i> Privacy by design</h3><p>Client-first tech. We don’t sell driver data.</p></article>
+        </div>
+        <div class="cta">
+          <p class="eeo" style="margin-top:1rem;">Gigways is an Equal Opportunity Employer. We welcome teammates of every background. If you’re excited about the role but don’t meet 100% of qualifications, apply anyway.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!--===== FOOTER =====-->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__content">
+        <h2 class="footer__title">Gigways Careers</h2>
+        <p class="footer__description">Join us in shaping the future of gig work — creating tools that empower drivers, support wellness, and build stronger communities.</p>
+      </div>
+      <div class="footer__content">
+        <h3 class="footer__subtitle">Quick Links</h3>
+          <ul class="footer__links">
+            <li><a href="#home" class="footer__link">Home</a></li>
+            <li><a href="market.html" class="footer__link">Marketplace</a></li>
+            <li><a href="partners.html#forms" class="footer__link">Partners</a></li>
+            <li><a href="carrers.html" class="footer__link">Carrers</a></li>
+            <li>
+              <a href="privacy-policy.html" class="footer__link"
+                >Privacy Policy</a
+              >
+            </li>
+             <li><a href="backer.html" class="footer__link">Early Backer</a></li>
+          </ul>
+      </div>
+      <div class="footer__content">
+        <h3 class="footer__subtitle">Connect With Us</h3>
+        <div class="footer__social">
+          <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon" target="_blank" rel="noopener noreferrer"><i class="bx bxl-facebook"></i></a>
+          <a href="https://x.com/i/flow/single_sign_on" class="footer__icon" target="_blank" rel="noopener noreferrer"><i class="bx bxl-twitter"></i></a>
+          <a href="https://www.instagram.com/" class="footer__icon" target="_blank" rel="noopener noreferrer"><i class="bx bxl-instagram"></i></a>
+          <a href="mailto:Support@gigways.com" class="footer__icon"><i class="bx bxs-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p class="footer__copy">© Gigways LLC 2025. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!--===== SCROLL REVEAL =====-->
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" integrity="sha256-YHdamLXLIBEicRscu4gge3gdzJSWGvvWggYMiCYwCg0=" crossorigin="anonymous"></script>
+
+  <!-- Page JS -->
+  <script>
+    /* ---------- Jobs data ---------- */
+    <!-- const JOBS = [
+      {
+        id:"fs-eng",
+        title:"Full-Stack Engineer (React/Node/Mapbox)",
+        dept:"Engineering",
+        location:"Remote (USA)",
+        type:"Full-time",
+        level:"Mid–Senior",
+        datePosted:"2025-08-27",
+        description:"Build core app features: driver density maps, trackers, and privacy-first data flows.",
+        responsibilities:[
+          "Ship React/Node features end-to-end with strong TypeScript hygiene.",
+          "Implement Mapbox layers, tiles, and grid overlays for density forecasts.",
+          "Design clean, privacy-first data contracts with the backend.",
+          "Own performance, testing, and reliability."
+        ],
+        requirements:[
+          "3+ years with React/Node.",
+          "Mapbox GL JS or similar mapping experience.",
+          "Product sense and bias to ship.",
+          "Nice to have: React Native."
+        ]
+      },
+      {
+        id:"mobile-eng",
+        title:"Mobile Engineer (React Native)",
+        dept:"Engineering",
+        location:"Remote (USA)",
+        type:"Full-time",
+        level:"Mid",
+        datePosted:"2025-08-27",
+        description:"Own the RN app: tracking, Focus rest scheduling, and clean offline-first UX.",
+        responsibilities:[
+          "Build RN screens, state, and background services responsibly.",
+          "Integrate OS-safe mic/gesture triggers for quick inputs.",
+          "Improve startup time, bundle size, and crash-free rate."
+        ],
+        requirements:[
+          "2+ years with React Native.",
+          "iOS/Android store submission know-how.",
+          "Great craft around UX details and accessibility."
+        ]
+      },
+      {
+        id:"product-designer",
+        title:"Product Designer (Mobile/Web)",
+        dept:"Product & Design",
+        location:"Remote (USA)",
+        type:"Full-time",
+        level:"Mid–Senior",
+        datePosted:"2025-08-27",
+        description:"Design driver-first experiences that are fast, clear, and respectful.",
+        responsibilities:[
+          "Own flows across onboarding, tracking, density map, and Focus.",
+          "Create systems (tokens, components) and spec interactions.",
+          "Partner with engineering to ship pixel-tight builds."
+        ],
+        requirements:[
+          "Mobile product design portfolio.",
+          "Systems thinking and prototyping chops.",
+          "Strong writing and UX research instincts."
+        ]
+      },
+      {
+        id:"growth-aso",
+        title:"Growth & ASO Manager",
+        dept:"Growth & ASO",
+        location:"Hybrid – Atlanta, GA",
+        type:"Full-time",
+        level:"Mid",
+        datePosted:"2025-08-27",
+        description:"Own ASO, onboarding funnels, and backer/community growth.",
+        responsibilities:[
+          "Keyword research, listing tests, screenshots/video iteration.",
+          "Cohort analytics, retention experiments, and referral loops.",
+          "Partner with community on creator & affiliate programs."
+        ],
+        requirements:[
+          "Hands-on ASO experience.",
+          "Comfort with analytics & experimentation.",
+          "Strong copy instincts."
+        ]
+      },
+      {
+        id:"community",
+        title:"Community & Support Lead",
+        dept:"Community & Support",
+        location:"Hybrid – Atlanta, GA",
+        type:"Full-time",
+        level:"Mid",
+        datePosted:"2025-08-27",
+        description:"Be the voice for drivers. Build community programs and fast, human support.",
+        responsibilities:[
+          "Create helpful guides, FAQs, and feedback channels.",
+          "Run Zooms/AMAs; partner with drivers for feature input.",
+          "Measure satisfaction and close the loop with product."
+        ],
+        requirements:[
+          "Community or CX leadership at a consumer app.",
+          "Empathy and crisp communication.",
+          "Bonus: gig driving experience."
+        ]
+      },
+      {
+        id:"partnerships",
+        title:"Partnerships Manager (Affiliates & Sponsors)",
+        dept:"Partnerships",
+        location:"Remote (USA)",
+        type:"Full-time",
+        level:"Mid–Senior",
+        datePosted:"2025-08-27",
+        description:"Grow responsible partner programs (tax, auto parts, insurance) that help drivers save.",
+        responsibilities:[
+          "Source, negotiate, and manage affiliate/sponsor relationships.",
+          "Ensure compliance (CJ policies, privacy, transparent UX).",
+          "Report performance and ROI."
+        ],
+        requirements:[
+          "Partner/BD or affiliate track record.",
+          "Comfort with legal/compliance basics.",
+          "Clear communicator and closer."
+        ]
+      },
+      {
+        id:"ops-intern",
+        title:"Ops Intern (Fall/Winter)",
+        dept:"Internships",
+        location:"Remote (USA)",
+        type:"Internship",
+        level:"Intern",
+        datePosted:"2025-08-27",
+        description:"Help with research, QA, and light ops to keep the team shipping.",
+        responsibilities:[
+          "Support launches, QA features, document processes.",
+          "Assist with data clean-up and light analytics."
+        ],
+        requirements:[
+          "Strong curiosity and follow-through.",
+          "Clear writing and organization."
+        ]
+      }
+    ]; -->
+
+    /* ---------- Helpers ---------- */
+    const els = {
+      list: document.getElementById("jobsList"),
+      noResults: document.getElementById("noResults"),
+      q: document.getElementById("jobSearch"),
+      dept: document.getElementById("deptFilter"),
+      loc: document.getElementById("locationFilter"),
+      sort: document.getElementById("sortBy"),
+      clear: document.getElementById("clearFilters"),
+      share: document.getElementById("shareFilters"),
+      count: document.getElementById("jobCount")
+    };
+
+    const params = new URLSearchParams(location.search);
+    // Seed filters from URL
+    els.q.value = params.get("q") || "";
+    els.dept.value = params.get("dept") || "";
+    els.loc.value = params.get("loc") || "";
+    els.sort.value = params.get("sort") || "newest";
+
+    function withinDays(dateStr, days=14){
+      const d = new Date(dateStr);
+      const diff = (Date.now() - d.getTime()) / (1000*60*60*24);
+      return diff <= days;
+    }
+
+    function slug(id){ return id.replace(/[^\w\-]+/g,"-"); }
+
+    function mailtoFor(title, id){
+      const subject = encodeURIComponent(`Application: ${title} (${id})`);
+      const body = encodeURIComponent(
+`Hi Gigways Team,
+
+I'm applying for ${title}. Links and resume below:
+- Portfolio:
+- GitHub:
+- LinkedIn:
+
+Best,
+`);
+      return `mailto:support@gigways.com?subject=${subject}&body=${body}`;
+    }
+
+    function matchesFilters(job, q, dept, loc){
+      const hay = [
+        job.title, job.dept, job.location, job.type, job.level,
+        job.description, ...(job.requirements||[]), ...(job.responsibilities||[])
+      ].join(" ").toLowerCase();
+      const qok = q ? hay.includes(q.toLowerCase()) : true;
+      const dok = dept ? job.dept === dept : true;
+      const lok = loc ? job.location === loc : true;
+      return qok && dok && lok;
+    }
+
+    function sortJobs(arr, how){
+      const copy = [...arr];
+      if(how === "oldest") copy.sort((a,b)=> new Date(a.datePosted) - new Date(b.datePosted));
+      else if(how === "az") copy.sort((a,b)=> a.title.localeCompare(b.title));
+      else copy.sort((a,b)=> new Date(b.datePosted) - new Date(a.datePosted)); // newest
+      return copy;
+    }
+
+    function jobCard(job){
+      const isNew = withinDays(job.datePosted, 21);
+      return `
+      <article class="job__card" role="listitem" id="${slug(job.id)}">
+        <div class="job__header">
+          <div>
+            <h3 class="job__title">${job.title} ${isNew ? '<span class="badge">New</span>' : ''}</h3>
+            <div class="job__meta">
+              <span><i class="bx bx-buildings"></i> ${job.dept}</span> •
+              <span><i class="bx bx-map"></i> ${job.location}</span> •
+              <span><i class="bx bx-time"></i> ${job.type}</span> •
+              <span><i class="bx bx-user"></i> ${job.level}</span>
+            </div>
+            <p>${job.description}</p>
+            <div class="job__tags">
+              <span class="badge">${new Date(job.datePosted).toLocaleDateString()}</span>
+              <a class="badge" href="#${slug(job.id)}" title="Direct link to this role">#</a>
+            </div>
+          </div>
+          <div class="btn-row" style="align-items:flex-start;">
+            <a class="btn btn--primary" href="${mailtoFor(job.title, job.id)}"><i class="bx bx-send"></i> Apply</a>
+            <button class="btn toggle" type="button" aria-expanded="false" aria-controls="details-${job.id}">
+              <i class="bx bx-chevron-down"></i> Details
+            </button>
+          </div>
+        </div>
+        <div id="details-${job.id}" class="job__body" role="region" aria-label="${job.title} details">
+          <h4>What you’ll do</h4>
+          <ul>${(job.responsibilities||[]).map(i=>`<li>${i}</li>`).join("")}</ul>
+          <h4>What you’ll bring</h4>
+          <ul>${(job.requirements||[]).map(i=>`<li>${i}</li>`).join("")}</ul>
+          <div class="btn-row" style="margin-top:.5rem;">
+            <a class="btn btn--primary" href="${mailtoFor(job.title, job.id)}"><i class="bx bx-send"></i> Apply via Email</a>
+            <a class="btn" href="mailto:support@gigways.com?subject=${encodeURIComponent('Question about ' + job.title)}"><i class="bx bx-chat"></i> Ask a question</a>
+          </div>
+        </div>
+      </article>`;
+    }
+
+    function updateURL(){
+      const p = new URLSearchParams();
+      if(els.q.value) p.set("q", els.q.value);
+      if(els.dept.value) p.set("dept", els.dept.value);
+      if(els.loc.value) p.set("loc", els.loc.value);
+      if(els.sort.value && els.sort.value!=="newest") p.set("sort", els.sort.value);
+      const newUrl = `${location.pathname}?${p.toString()}`;
+      history.replaceState(null, "", newUrl);
+    }
+
+    function render(){
+      const q = els.q.value.trim();
+      const d = els.dept.value;
+      const l = els.loc.value;
+      const s = els.sort.value;
+
+      let results = JOBS.filter(j => matchesFilters(j, q, d, l));
+      results = sortJobs(results, s);
+
+      els.list.innerHTML = results.map(jobCard).join("");
+      els.noResults.style.display = results.length ? "none" : "block";
+      els.count.textContent = results.length ? `${results.length} role${results.length>1?'s':''}` : "0 roles";
+      updateURL();
+
+      // Attach toggles
+      els.list.querySelectorAll(".toggle").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const card = btn.closest(".job__card");
+          const body = card.querySelector(".job__body");
+          const open = body.classList.toggle("open");
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          btn.innerHTML = open ? `<i class="bx bx-chevron-up"></i> Hide` : `<i class="bx bx-chevron-down"></i> Details`;
+        });
+      });
+    }
+
+    // Events
+    ["input","change"].forEach(ev=>{
+      els.q.addEventListener(ev, render);
+      els.dept.addEventListener(ev, render);
+      els.loc.addEventListener(ev, render);
+      els.sort.addEventListener(ev, render);
+    });
+    els.clear.addEventListener("click", ()=>{
+      els.q.value = ""; els.dept.value = ""; els.loc.value = ""; els.sort.value = "newest"; render();
+    });
+    els.share.addEventListener("click", async ()=>{
+      try {
+        await navigator.clipboard.writeText(location.href);
+        els.share.innerHTML = '<i class="bx bx-check"></i> Copied';
+        setTimeout(()=> els.share.innerHTML = '<i class="bx bx-link"></i> Share', 1500);
+      } catch(e){ alert("Link copied: " + location.href); }
+    });
+
+    // Initial render
+    render();
+
+    // Auto-open role from hash (nice for sharable links)
+    function openFromHash() {
+      const id = location.hash.replace('#','');
+      if (!id) return;
+      const card = document.getElementById(id);
+      if (!card) return;
+      const btn = card.querySelector('.toggle');
+      const body = card.querySelector('.job__body');
+      if (btn && body && !body.classList.contains('open')) {
+        body.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.innerHTML = '<i class="bx bx-chevron-up"></i> Hide';
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    window.addEventListener('hashchange', openFromHash);
+    openFromHash();
+
+    // Scroll reveal (optional; disable if user prefers reduced motion)
+    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (window.ScrollReveal && !prefersReduced) {
+      const sr = ScrollReveal({ distance:"24px", duration:700, easing:"ease-out", interval:80 });
+      sr.reveal(".careers-hero .section-title, .careers-hero .section-subtitle, .careers-hero .btn-row");
+      sr.reveal("#open-roles .filters, #open-roles .jobs__grid");
+      sr.reveal("#values .card");
+    }
+  </script>
+
+  <!-- Main JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
+
+
+
+
+
