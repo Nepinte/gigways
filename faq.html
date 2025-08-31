@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="icon" href="assets/img/App.png" />
+    <title>FAQ - Gigways</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      body {
+        font-family: var(--body-font);
+        background-color: var(--first-color);
+        color: var(--second-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      .l-header {
+        position: fixed; top: 0; left: 0; width: 100%;
+        background-color: var(--first-color);
+        box-shadow: 0 2px 10px rgba(0,0,0,.1);
+        z-index: 100;
+      }
+      .nav { display:flex;justify-content:space-between;align-items:center;padding:10px 20px;max-width:1024px;margin:0 auto; }
+      .nav__logo { font-size:1.5rem;font-weight:700;color:var(--second-color); }
+      main { padding-top:80px;max-width:1024px;margin:0 auto; }
+      .faq-container {
+        background:#fff;border-radius:8px;padding:40px;margin:20px;
+        box-shadow:0 4px 15px rgba(0,0,0,.1);
+      }
+      h1 { font-size:2.2rem;color:var(--third-color);text-align:center;margin-bottom:10px; }
+      .subhead { text-align:center;font-size:.95rem;margin-bottom:24px;opacity:.8; }
+      details { background:#fafafa;border:1px solid rgba(0,0,0,.06);border-radius:10px;padding:14px 16px;margin-bottom:12px; }
+      summary { cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center; }
+      summary::-webkit-details-marker{display:none;}
+      .arrow { transition:transform .25s ease;margin-left:12px; }
+      details[open] .arrow { transform:rotate(90deg); }
+      .answer { margin-top:10px; }
+      .footer { background-color:var(--second-color);color:var(--first-color);padding:20px;text-align:center;margin-top:40px; }
+    </style>
+  </head>
+  <body>
+    <header class="l-header">
+      <nav class="nav">
+        <a href="index.html" class="nav__logo">Gigways</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="faq-container">
+        <h1>Frequently Asked Questions</h1>
+        <p class="subhead">Quick answers about Gigways features, privacy, and driver tools.</p>
+
+        <details><summary>1) What is Gigways? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Gigways is a wellness and productivity app for gig drivers. Track miles, expenses, hours, and trips, plus use tools like <strong>Focus</strong> and <strong>Driver Density Forecasts</strong>.</p></div>
+        </details>
+
+        <details><summary>2) Who can use Gigways? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Any gig driver — rideshare (Uber, Lyft), delivery (DoorDash, Uber Eats, Grubhub), shopping (Instacart), and more.</p></div>
+        </details>
+
+        <details><summary>3) How does the Focus feature work? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Focus lets you pick or join rest days. It shows popular rest times, sends reminders, and encourages wellness. 100% optional.</p></div>
+        </details>
+
+        <details><summary>4) What is the Driver Density Forecast? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>A map showing real-time and forecasted driver concentrations (city, ZIP, or 5-mile grids) with Red = high, Green = low.</p></div>
+        </details>
+
+        <details><summary>5) How is driver density calculated? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>We use anonymized, consented activity plus time-of-day population rules. All users see the same consistent estimates.</p></div>
+        </details>
+
+        <details><summary>6) Does Gigways help with taxes? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Yes — mileage and expense tracking is built in. We also partner with tax services for easy filing inside the app.</p></div>
+        </details>
+
+        <details><summary>7) Is my data secure? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Yes. We use encryption, strong security practices, and privacy-by-design. We never sell your personal information.</p></div>
+        </details>
+
+        <details><summary>8) Can I control location and motion tracking? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Yes. These features are off by default and only enabled with your consent. You can turn them off anytime.</p></div>
+        </details>
+
+        <details><summary>9) Where is Gigways available? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Currently in the United States.</p></div>
+        </details>
+
+        <details><summary>10) Which devices are supported? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>iOS and Android smartphones running recent OS versions.</p></div>
+        </details>
+
+        <details><summary>11) How accurate is mileage tracking? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>It’s designed for reliable capture with low battery drain. Keep permissions on and exclude Gigways from aggressive battery savers.</p></div>
+        </details>
+
+        <details><summary>12) Can I export my data? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Yes. You can export reports inside the app or request via <a href="mailto:support@gigways.com">support@gigways.com</a>.</p></div>
+        </details>
+
+        <details><summary>13) How do I delete my account or data? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Request deletion in the app or by emailing support. We remove personal data unless law requires retention.</p></div>
+        </details>
+
+        <details><summary>14) Will Gigways affect my gig platform accounts? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>No. Gigways is independent. Focus and Density are planning tools and do not connect to Uber, Lyft, or others.</p></div>
+        </details>
+
+        <details><summary>15) I found a bug — how do I report it? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Email <a href="mailto:support@gigways.com">support@gigways.com</a> with details and screenshots. We’ll respond quickly.</p></div>
+        </details>
+
+        <details><summary>16) Can teams or fleets use Gigways? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Yes. Fleet and group tools are planned. Contact us if you want early access.</p></div>
+        </details>
+
+        <details><summary>17) Does Gigways work offline? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Basic tracking continues offline. Data syncs automatically once your phone reconnects to the internet.</p></div>
+        </details>
+
+        <details><summary>18) How does Focus protect my privacy? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Focus only shows aggregated rest trends. We never display individual driver choices or personal details.</p></div>
+        </details>
+
+        <details><summary>19) How often is the Driver Density Forecast updated? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Current activity updates frequently, and forecasts project 15-, 30-, and 60-minute windows ahead.</p></div>
+        </details>
+
+        <details><summary>20) How do I contact support? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Email: <a href="mailto:support@gigways.com">support@gigways.com</a><br/>Phone: 470-530-9251</p></div>
+        </details>
+
+        <details><summary>21) What are Gigways Rooftop Car Ads? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Gigways Rooftop Ads allow drivers to place branded decals or rooftop toppers on their cars. This gives drivers an extra way to earn while companies get visible advertising on the road.</p></div>
+        </details>
+
+        <details><summary>22) How much can drivers earn from car ads? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Earnings vary by campaign and region. Drivers may receive a flat monthly rate or campaign-based payment. Gigways works to ensure fair compensation after covering printing and setup costs.</p></div>
+        </details>
+
+        <details><summary>23) Do drivers install the rooftop ads themselves? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>Yes, most rooftop decals or toppers are simple to install. Gigways provides clear instructions and support. In some cases, local pickup or installation partners may be available.</p></div>
+        </details>
+
+        <details><summary>24) What affiliate partners does Gigways work with? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>We partner with services that benefit drivers, such as tax filing (FreeTaxUSA), auto parts (AutoZone, NAPA), insurance (eHealth), and maintenance shops. These appear in-app as partner offers or discounts.</p></div>
+        </details>
+
+        <details><summary>25) How do affiliate offers work inside the app? <span class="arrow">▶</span></summary>
+          <div class="answer"><p>When you tap a partner link inside Gigways, you’re taken to their official site or WebView. If you complete a purchase or service, the partner pays Gigways a small commission, often with special discounts for you.</p></div>
+        </details>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 Gigways LLC. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
