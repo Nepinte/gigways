@@ -4,31 +4,28 @@
   <!-- Meta -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <title>Gigways Careers | Build the Driver-First Platform</title>
   <meta name="description" content="Join Gigways — a driver-first wellness & tracking platform. Explore roles in engineering, design, growth, community, and partnerships." />
   <meta name="keywords" content="Gigways careers, driver app jobs, React jobs, React Native jobs, Mapbox, ASO, Atlanta tech, remote jobs" />
   <meta name="author" content="Gigways Team" />
-  <link rel="canonical" href="https://gigways.com/Carrers.html" />
+  <link rel="canonical" href="https://gigways.com/careers.html" />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#ffffff" />
 
-  <!-- Open Graph -->
+  <!-- OG / Twitter -->
   <meta property="og:title" content="Gigways Careers | Build the Driver-First Platform" />
   <meta property="og:description" content="We’re hiring builders who care about drivers. Engineering, Product, Growth, Community, and more." />
   <meta property="og:image" content="https://gigways.com/assets/img/App.png" />
   <meta property="og:image:alt" content="Gigways app preview" />
-  <meta property="og:url" content="https://gigways.com/Carrers.html" />
+  <meta property="og:url" content="https://gigways.com/careers.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Gigways" />
-
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Gigways Careers | Build the Driver-First Platform" />
   <meta name="twitter:description" content="Help drivers work smarter and rest better. See open roles." />
   <meta name="twitter:image" content="https://gigways.com/assets/img/App.png" />
 
-  <!-- Favicon + Styles -->
+  <!-- Favicon + Base Styles -->
   <link rel="icon" href="assets/img/App.png" />
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
@@ -50,80 +47,244 @@
   </script>
 
   <style>
-    /* Force black text for everything in the Open Roles section */
-#open-roles { color: #000; }
-
-#open-roles h1,
-#open-roles h2,
-#open-roles h3,
-#open-roles h4,
-#open-roles p,
-#open-roles li,
-#open-roles span,
-#open-roles a:not(.btn),
-#open-roles .job__title,
-#open-roles .job__meta,
-#open-roles .job__card p,
-#open-roles .job__body li,
-#open-roles .badge,
-#open-roles .bx {
-  color: #000 !important;
-}
-
-/* Match "Open Roles" heading/subtitle to global section styles */
-#open-roles h2.section-title,
-#open-roles p.section-subtitle {
-  color: var(--second-color) !important; /* same as How We Work */
-}
-
-/* Keep the underline consistent with your global accent */
-#open-roles h2.section-title::after {
-  background-color: var(--third-color) !important;
-}
-
-/* Match the jobs count ("7 roles") to How We Work color */
-#open-roles #jobCount,
-#open-roles .count {
-  color: var(--second-color) !important;
-}
-
-
-
-
-    /* ---- Page-local styles (keep your global theme intact) ---- */
-    :root { --card-bg: rgba(0,0,0,.02); --card-bd: rgba(0,0,0,.12); }
-    .careers-hero { text-align:center; padding:6rem 1.5rem 3rem; }
-    .careers-hero h1 { font-size:2.25rem; margin:.5rem 0; }
-    .badge { display:inline-block; font-size:.8rem; padding:.25rem .6rem; border-radius:999px; border:1px solid currentColor; opacity:.9; margin:.2rem .3rem; }
-    .filters.card, .card { border:1px solid var(--card-bd); border-radius:1rem; background:var(--card-bg); }
-    .filters { padding:1rem; display:grid; gap:.75rem; }
-    .filters .row { display:grid; gap:.75rem; grid-template-columns: 1fr; }
-    .filters input, .filters select { width:100%; padding:.8rem 1rem; border-radius:.75rem; border:1px solid var(--first-color, #ccc); background:#fff; color:#111; }
-    .filters .right { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; }
-    .count { opacity:.9; font-size:.95rem; }
-    .jobs__grid { display:grid; gap:1rem; grid-template-columns:1fr; }
-    .job__card { padding:1rem; border:1px solid var(--card-bd); border-radius:1rem; background:#fff; }
-    .job__header { display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; }
-    .job__title { margin:.1rem 0; font-size:1.1rem; }
-    .job__meta { font-size:.9rem; opacity:.9; margin:.25rem 0 .75rem; }
-    .job__body { display:none; margin-top:.75rem; }
-    .job__body.open { display:block; }
-    .job__body ul { padding-left:1.25rem; margin:.5rem 0; }
-    .values__grid { display:grid; gap:1rem; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); }
-    .cta { text-align:center; padding:2rem 1rem; }
-    .btn-row { display:flex; gap:.6rem; flex-wrap:wrap; justify-content:center; }
-    .eeo { font-size:.9rem; opacity:.9; }
-    @media (min-width:800px){
-      .filters .row { grid-template-columns: 2fr 1fr 1fr 1fr auto; }
-      .jobs__grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    /* ========= Design tokens ========= */
+    :root{
+      --radius-lg: 16px;
+      --radius-xl: 22px;
+      --shadow-sm: 0 4px 16px rgba(0,0,0,.08);
+      --shadow-md: 0 10px 30px rgba(0,0,0,.12);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,.18);
+      --glass: rgba(255,255,255,.6);
+      --glass-bd: rgba(255,255,255,.35);
+      --glass-dark: rgba(0,0,0,.25);
+      --chip-bg: rgba(100,160,255,.12);
+      --chip-bd: rgba(100,160,255,.35);
+      --page-max: 1040px;
     }
+    .dark-theme{
+      --glass: rgba(18,18,18,.6);
+      --glass-bd: rgba(255,255,255,.1);
+      --glass-dark: rgba(255,255,255,.18);
+      --chip-bg: rgba(100,160,255,.18);
+      --chip-bd: rgba(100,160,255,.5);
+    }
+
+    /* ========= Background polish ========= */
+    body{
+      background:
+        radial-gradient(1400px 700px at 10% -10%, rgba(100,160,255,.14), transparent 60%),
+        radial-gradient(1200px 600px at 100% 10%, rgba(84,107,171,.12), transparent 60%),
+        var(--first-color);
+    }
+    .bg-ornament{ position: fixed; inset: 0; pointer-events:none; z-index:0; overflow:hidden; }
+    .blob{
+      position:absolute; filter: blur(40px); opacity:.28; border-radius:50%;
+      animation: floaty 24s ease-in-out infinite;
+      background: radial-gradient(circle at 30% 30%, var(--third-color), transparent 60%);
+    }
+    .blob.one{ width:460px; height:460px; top: -120px; left: -110px; }
+    .blob.two{ width:520px; height:520px; right:-140px; top: 120px; animation-delay: -6s; }
+    @keyframes floaty{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-20px) } }
+
+    /* ========= Hero ========= */
+    .careers-hero{
+      position:relative; z-index:1;
+      padding: 8rem 1.25rem 3.25rem;
+      text-align:center;
+      max-width: var(--page-max); margin: 0 auto;
+    }
+    .careers-hero .section-title{
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -0.02em;
+      margin-bottom: .65rem;
+    }
+    .section-subtitle{
+      max-width: 760px; margin: 0.25rem auto 0;
+      color: var(--text-color-light);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    .hero-actions{ margin-top: 1.1rem; display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
+
+    /* ========= Buttons ========= */
+    .btn{
+      border-radius: var(--radius-lg);
+      padding: .85rem 1.2rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease, border-color .2s ease;
+      border: 1px solid transparent;
+      font-weight: 600;
+      display: inline-flex; align-items:center; gap:.45rem;
+    }
+    .btn--primary{
+      background: linear-gradient(180deg, var(--third-color), var(--accent-color));
+      color:#fff;
+    }
+    .btn--primary:hover{ transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn--ghost{ background: transparent; border-color: var(--third-color); color: var(--third-color); }
+    .btn--ghost:hover{ background: rgba(100,160,255,.08); transform: translateY(-2px); }
+
+    /* === Uniform action buttons on job cards === */
+    .btn-pair{ display:flex; gap:.75rem; align-items:stretch; }
+    .btn-pair .btn{
+      flex: 1 1 0;
+      justify-content:center;
+      padding: 1rem;
+      border-radius: 12px;
+      border-width: 1px;
+      min-height: 48px;        /* good tap target */
+      font-size: 1rem;
+    }
+    .btn--ghost[aria-expanded="true"]{ background: rgba(100,160,255,.12); }
+
+    /* ========= Filters (glass, sticky) ========= */
+    .filters{
+      position: sticky; top: calc(var(--header-height) + 10px);
+      backdrop-filter: saturate(140%) blur(8px);
+      -webkit-backdrop-filter: saturate(140%) blur(8px);
+      background: var(--glass);
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      z-index: 5;
+      max-width: var(--page-max); margin: 0 auto 1.1rem;
+      padding: .9rem;
+    }
+    .filters .row{ display:grid; gap:.6rem; grid-template-columns:1fr; align-items:center; }
+    .filters :is(input,select){
+      width:100%; padding:.9rem 1rem; border-radius: 12px;
+      border:1px solid var(--border-color);
+      background: #fff; color:#111;
+      transition: border-color .2s ease, box-shadow .2s ease;
+      font-size: 1rem;
+    }
+    .dark-theme .filters :is(input,select){ background: #0f0f0f; color:#eee; }
+    .filters :is(input,select):focus{
+      border-color: var(--third-color);
+      box-shadow: 0 0 0 3px rgba(84,107,171,.2);
+      outline: none;
+    }
+    .filters .right{ display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; justify-content:flex-start; }
+    .count{ font-weight:600; color: var(--second-color); }
+    @media (min-width: 860px){ .filters .row{ grid-template-columns: 2fr 1fr 1fr 1fr auto; } }
+
+    /* ========= Section shell ========= */
+    .section{ padding: 1.6rem .9rem 0; }
+    .section .container{ max-width: var(--page-max); margin: 0 auto; }
+    .section-title::after{ height:3px; width:72px; }
+
+    /* ========= Open roles grid ========= */
+    .jobs__grid{
+      display:grid; gap: .9rem;
+      grid-template-columns: 1fr;
+      max-width: var(--page-max); margin: .8rem auto 0;
+    }
+    @media (min-width: 900px){ .jobs__grid{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+
+    /* ========= Job card ========= */
+    .job__card{
+      background: rgba(255,255,255,.75);
+      border: 1px solid var(--glass-bd);
+      border-left: 5px solid var(--third-color);
+      border-radius: 18px;
+      box-shadow: var(--shadow-sm);
+      padding: .95rem;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .dark-theme .job__card{ background: rgba(0,0,0,.36); }
+    .job__card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-md); border-left-color: var(--accent-color); }
+
+    .job__header{ display:flex; gap:.85rem; justify-content:space-between; align-items:flex-start; }
+    .job__title{ font-size: 1.02rem; letter-spacing: -.01em; margin:.1rem 0; display:flex; gap:.45rem; align-items:center; flex-wrap: wrap;}
+    .badge{
+      display:inline-flex; align-items:center; gap:.3rem;
+      font-size:.76rem; padding:.18rem .5rem; border-radius: 999px;
+      border: 1px solid var(--chip-bd); background: var(--chip-bg); color: var(--second-color);
+    }
+    .job__meta{ font-size:.92rem; opacity:.95; color: var(--text-color-light); display:flex; gap:.35rem; flex-wrap:wrap; }
+    .job__meta span{ display:inline-flex; gap:.35rem; align-items:center; }
+    .job__meta .bx{ font-size:1.05rem; }
+
+    .job__tags{ display:flex; gap:.35rem; flex-wrap:wrap; margin-top:.45rem; }
+    .job__body{
+      display:none; margin-top:.7rem; padding-top:.7rem; border-top: 1px dashed var(--border-color);
+      animation: fadeIn .2s ease both;
+    }
+    .job__body.open{ display:block; }
+    .job__body h4{ font-size:.95rem; margin:.2rem 0 .3rem; }
+    .job__body ul{ padding-left:1.05rem; display:grid; gap:.32rem; }
+    .job__body li{ line-height:1.5; }
+    @keyframes fadeIn{ from{ opacity:0; transform: translateY(4px); } to{ opacity:1; transform: translateY(0); } }
+
+    /* ========= “No results” card ========= */
+    #noResults{
+      background: rgba(255,255,255,.7);
+      border:1px dashed var(--glass-bd);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      box-shadow: var(--shadow-sm);
+      max-width: var(--page-max); margin: .5rem auto 0;
+    }
+    #open-roles #noResults p{ color: var(--second-color) !important; }
+
+    /* ========= Values ========= */
+    .values__grid{
+      display:grid; gap: .9rem;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      margin-top: .8rem;
+    }
+    .values__grid .card{
+      border-radius: 18px; padding: 1rem;
+      background: rgba(255,255,255,.7); border: 1px solid var(--glass-bd); box-shadow: var(--shadow-sm);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .dark-theme .values__grid .card{ background: rgba(0,0,0,.36); }
+    .values__grid .card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--glass-dark); }
+    .values__grid h3{ display:flex; gap:.5rem; align-items:center; font-size:1rem; }
+    .values__grid h3 i{
+      width:32px; height:32px; border-radius:50%;
+      display:inline-flex; align-items:center; justify-content:center;
+      background: var(--chip-bg); border: 1px solid var(--chip-bd); color: var(--third-color);
+      font-size:1.1rem;
+    }
+    .cta{ text-align:center; padding: 1.25rem 1rem 1.9rem; }
+
+    /* ========= Footer polish ========= */
+    .footer{ position: relative; overflow: hidden; }
+    .footer::before{
+      content:""; position:absolute; inset:auto 0 0 0; height:4px;
+      background: linear-gradient(90deg, var(--third-color), var(--accent-color));
+    }
+
+    /* ========= Mobile-first tweaks ========= */
+    @media (max-width: 600px){
+      .careers-hero{ padding: 6.2rem 1rem 2.2rem; }
+      .section-subtitle{ font-size: .98rem; }
+      .job__header{ flex-direction: column; }
+      .btn-pair{ width: 100%; margin-top: .5rem; }
+      .job__card{ padding: .85rem; border-left-width: 4px; }
+      .jobs__grid{ gap: .8rem; }
+      .filters{ top: calc(var(--header-height) + 8px); }
+      .filters :is(input,select){ padding: .85rem 1rem; font-size: .98rem; }
+    }
+
+    /* ========= Accessibility ========= */
+    @media (prefers-reduced-motion: reduce){ *{ animation: none !important; transition: none !important; } }
+
+    /* ========= Let this section follow theme colors ========= */
+    #open-roles{ color: inherit; }
+    #open-roles :is(h1,h2,h3,h4,p,li,span,.job__title,.job__meta,.job__card p,.job__body li,.badge,.bx){ color: inherit !important; }
+    #open-roles a:not(.btn){ color: inherit !important; }
   </style>
 </head>
 <body>
-  <!-- Bubble Background Animation -->
-  <div class="bubble-container"></div>
+  <!-- Decorative background blobs -->
+  <div class="bg-ornament" aria-hidden="true">
+    <span class="blob one"></span>
+    <span class="blob two"></span>
+  </div>
 
-  <!--===== HEADER =====-->
+  <!-- HEADER -->
   <header class="l-header">
     <nav class="nav bd-grid">
       <div><a href="index.html" class="nav__logo">Gigways</a></div>
@@ -132,16 +293,12 @@
           <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
           <li class="nav__item"><a href="index.html#preview" class="nav__link">App Preview</a></li>
           <li class="nav__item"><a href="market.html" class="nav__link">Marketplace</a></li>
-          <li class="nav__item">
-              <a href="partners.html"class="nav__link">Partners</a>
-            </li>
-            <li class="nav__item">
-              <a href="carrers.html" class="nav__link">Carrers</a>
-            </li>
+          <li class="nav__item"><a href="partners.html" class="nav__link">Partners</a></li>
+          <li class="nav__item"><a href="careers.html" class="nav__link active">Careers</a></li>
         </ul>
       </div>
       <div class="theme"><img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" /></div>
-      <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
+      <div class="nav__toggle" id="nav-toggle" aria-label="Open menu"><i class="bx bx-menu"></i></div>
     </nav>
   </header>
 
@@ -149,13 +306,13 @@
     <!-- HERO -->
     <section class="section careers-hero" id="careers-hero">
       <div class="container">
-        <span class="badge">Remote-friendly</span>
-        <span class="badge">Driver-first</span>
+        <span class="badge"><i class="bx bx-globe"></i> Remote-friendly</span>
+        <span class="badge"><i class="bx bx-user-voice"></i> Driver-first</span>
         <h1 class="section-title">Join Gigways</h1>
         <p class="section-subtitle">Help gig drivers work smarter and rest better. Build wellness, tracking, and community tools that respect drivers.</p>
-        <div class="btn-row" style="margin-top:1rem;">
-          <a class="btn btn--primary" href="#open-roles"><i class="bx bx-briefcase-alt-2"></i><span>View open roles</span></a>
-          <a class="btn" href="#values"><i class="bx bx-heart"></i><span>Our values</span></a>
+        <div class="hero-actions">
+          <a class="btn btn--primary" href="#open-roles"><i class="bx bx-briefcase-alt-2"></i><span> View open roles</span></a>
+          <a class="btn btn--ghost" href="#values"><i class="bx bx-heart"></i><span> Our values</span></a>
         </div>
       </div>
     </section>
@@ -166,7 +323,7 @@
         <h2 id="open-roles-title" class="section-title">Open Roles</h2>
         <p class="section-subtitle">We’ll post new roles here when we’re hiring. Stay tuned and check back soon.</p>
 
-        <div class="filters card" role="region" aria-label="Job filters">
+        <div class="filters" role="region" aria-label="Job filters">
           <div class="row">
             <input id="jobSearch" type="search" placeholder="Search roles (e.g., React, partnerships, Atlanta)" aria-label="Search jobs" />
             <select id="deptFilter" aria-label="Filter by department">
@@ -199,7 +356,7 @@
 
         <div id="jobsList" class="jobs__grid" role="list" aria-live="polite"></div>
 
-        <div id="noResults" class="card" style="display:none;text-align:center;">
+        <div id="noResults" style="display:none;text-align:center;">
           <p>No roles match your filters. Try clearing filters or check back soon.</p>
         </div>
       </div>
@@ -216,13 +373,13 @@
           <article class="card"><h3><i class="bx bx-lock-alt"></i> Privacy by design</h3><p>Client-first tech. We don’t sell driver data.</p></article>
         </div>
         <div class="cta">
-          <p class="eeo" style="margin-top:1rem;">Gigways is an Equal Opportunity Employer. We welcome teammates of every background. If you’re excited about the role but don’t meet 100% of qualifications, apply anyway.</p>
+          <p class="eeo">Gigways is an Equal Opportunity Employer. We welcome teammates of every background. If you’re excited about the role but don’t meet 100% of qualifications, apply anyway.</p>
         </div>
       </div>
     </section>
   </main>
 
-  <!--===== FOOTER =====-->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer__container">
       <div class="footer__content">
@@ -231,19 +388,14 @@
       </div>
       <div class="footer__content">
         <h3 class="footer__subtitle">Quick Links</h3>
-          <ul class="footer__links">
-            <li><a href="#home" class="footer__link">Home</a></li>
-            <li><a href="market.html" class="footer__link">Marketplace</a></li>
-            <li><a href="partners.html#forms" class="footer__link">Partners</a></li>
-            <li><a href="carrers.html" class="footer__link">Carrers</a></li>
-            <li>
-              <a href="privacy-policy.html" class="footer__link"
-                >Privacy Policy</a
-              >
-            </li>
-             <li><a href="backer.html" class="footer__link">Early Backer</a></li>
-            <li><a href="faq.html" class="footer__link">FAQ Support</a></li>
-          </ul>
+        <ul class="footer__links">
+          <li><a href="index.html" class="footer__link">Home</a></li>
+          <li><a href="market.html" class="footer__link">Marketplace</a></li>
+          <li><a href="partners.html#forms" class="footer__link">Partners</a></li>
+          <li><a href="careers.html" class="footer__link">Careers</a></li>
+          <li><a href="privacy-policy.html" class="footer__link">Privacy Policy</a></li>
+          <li><a href="backer.html" class="footer__link">Early Backer</a></li>
+        </ul>
       </div>
       <div class="footer__content">
         <h3 class="footer__subtitle">Connect With Us</h3>
@@ -251,7 +403,7 @@
           <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon" target="_blank" rel="noopener noreferrer"><i class="bx bxl-facebook"></i></a>
           <a href="https://x.com/i/flow/single_sign_on" class="footer__icon" target="_blank" rel="noopener noreferrer"><i class="bx bxl-twitter"></i></a>
           <a href="https://www.instagram.com/" class="footer__icon" target="_blank" rel="noopener noreferrer"><i class="bx bxl-instagram"></i></a>
-          <a href="mailto:Support@gigways.com" class="footer__icon"><i class="bx bxs-envelope"></i></a>
+          <a href="mailto:support@gigways.com" class="footer__icon"><i class="bx bxs-envelope"></i></a>
         </div>
       </div>
     </div>
@@ -260,153 +412,41 @@
     </div>
   </footer>
 
-  <!--===== SCROLL REVEAL =====-->
+  <!-- ScrollReveal (optional) -->
   <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" integrity="sha256-YHdamLXLIBEicRscu4gge3gdzJSWGvvWggYMiCYwCg0=" crossorigin="anonymous"></script>
 
   <!-- Page JS -->
   <script>
-    /* ---------- Jobs data ---------- */
+    /* ---------- Jobs data (sample) ---------- */
     <!-- const JOBS = [
-      {
-        id:"fs-eng",
-        title:"Full-Stack Engineer (React/Node/Mapbox)",
-        dept:"Engineering",
-        location:"Remote (USA)",
-        type:"Full-time",
-        level:"Mid–Senior",
-        datePosted:"2025-08-27",
+      { id:"fs-eng", title:"Full-Stack Engineer (React/Node/Mapbox)", dept:"Engineering", location:"Remote (USA)", type:"Full-time", level:"Mid–Senior", datePosted:"2025-08-27",
         description:"Build core app features: driver density maps, trackers, and privacy-first data flows.",
-        responsibilities:[
-          "Ship React/Node features end-to-end with strong TypeScript hygiene.",
-          "Implement Mapbox layers, tiles, and grid overlays for density forecasts.",
-          "Design clean, privacy-first data contracts with the backend.",
-          "Own performance, testing, and reliability."
-        ],
-        requirements:[
-          "3+ years with React/Node.",
-          "Mapbox GL JS or similar mapping experience.",
-          "Product sense and bias to ship.",
-          "Nice to have: React Native."
-        ]
-      },
-      {
-        id:"mobile-eng",
-        title:"Mobile Engineer (React Native)",
-        dept:"Engineering",
-        location:"Remote (USA)",
-        type:"Full-time",
-        level:"Mid",
-        datePosted:"2025-08-27",
+        responsibilities:["Ship React/Node features end-to-end with strong TypeScript hygiene.","Implement Mapbox layers, tiles, and grid overlays for density forecasts.","Design clean, privacy-first data contracts with the backend.","Own performance, testing, and reliability."],
+        requirements:["3+ years with React/Node.","Mapbox GL JS or similar mapping experience.","Product sense and bias to ship.","Nice to have: React Native."]},
+      { id:"mobile-eng", title:"Mobile Engineer (React Native)", dept:"Engineering", location:"Remote (USA)", type:"Full-time", level:"Mid", datePosted:"2025-08-27",
         description:"Own the RN app: tracking, Focus rest scheduling, and clean offline-first UX.",
-        responsibilities:[
-          "Build RN screens, state, and background services responsibly.",
-          "Integrate OS-safe mic/gesture triggers for quick inputs.",
-          "Improve startup time, bundle size, and crash-free rate."
-        ],
-        requirements:[
-          "2+ years with React Native.",
-          "iOS/Android store submission know-how.",
-          "Great craft around UX details and accessibility."
-        ]
-      },
-      {
-        id:"product-designer",
-        title:"Product Designer (Mobile/Web)",
-        dept:"Product & Design",
-        location:"Remote (USA)",
-        type:"Full-time",
-        level:"Mid–Senior",
-        datePosted:"2025-08-27",
+        responsibilities:["Build RN screens, state, and background services responsibly.","Integrate OS-safe mic/gesture triggers for quick inputs.","Improve startup time, bundle size, and crash-free rate."],
+        requirements:["2+ years with React Native.","iOS/Android store submission know-how.","Great craft around UX details and accessibility."]},
+      { id:"product-designer", title:"Product Designer (Mobile/Web)", dept:"Product & Design", location:"Remote (USA)", type:"Full-time", level:"Mid–Senior", datePosted:"2025-08-27",
         description:"Design driver-first experiences that are fast, clear, and respectful.",
-        responsibilities:[
-          "Own flows across onboarding, tracking, density map, and Focus.",
-          "Create systems (tokens, components) and spec interactions.",
-          "Partner with engineering to ship pixel-tight builds."
-        ],
-        requirements:[
-          "Mobile product design portfolio.",
-          "Systems thinking and prototyping chops.",
-          "Strong writing and UX research instincts."
-        ]
-      },
-      {
-        id:"growth-aso",
-        title:"Growth & ASO Manager",
-        dept:"Growth & ASO",
-        location:"Hybrid – Atlanta, GA",
-        type:"Full-time",
-        level:"Mid",
-        datePosted:"2025-08-27",
+        responsibilities:["Own flows across onboarding, tracking, density map, and Focus.","Create systems (tokens, components) and spec interactions.","Partner with engineering to ship pixel-tight builds."],
+        requirements:["Mobile product design portfolio.","Systems thinking and prototyping chops.","Strong writing and UX research instincts."]},
+      { id:"growth-aso", title:"Growth & ASO Manager", dept:"Growth & ASO", location:"Hybrid – Atlanta, GA", type:"Full-time", level:"Mid", datePosted:"2025-08-27",
         description:"Own ASO, onboarding funnels, and backer/community growth.",
-        responsibilities:[
-          "Keyword research, listing tests, screenshots/video iteration.",
-          "Cohort analytics, retention experiments, and referral loops.",
-          "Partner with community on creator & affiliate programs."
-        ],
-        requirements:[
-          "Hands-on ASO experience.",
-          "Comfort with analytics & experimentation.",
-          "Strong copy instincts."
-        ]
-      },
-      {
-        id:"community",
-        title:"Community & Support Lead",
-        dept:"Community & Support",
-        location:"Hybrid – Atlanta, GA",
-        type:"Full-time",
-        level:"Mid",
-        datePosted:"2025-08-27",
+        responsibilities:["Keyword research, listing tests, screenshots/video iteration.","Cohort analytics, retention experiments, and referral loops.","Partner with community on creator & affiliate programs."],
+        requirements:["Hands-on ASO experience.","Comfort with analytics & experimentation.","Strong copy instincts."]},
+      { id:"community", title:"Community & Support Lead", dept:"Community & Support", location:"Hybrid – Atlanta, GA", type:"Full-time", level:"Mid", datePosted:"2025-08-27",
         description:"Be the voice for drivers. Build community programs and fast, human support.",
-        responsibilities:[
-          "Create helpful guides, FAQs, and feedback channels.",
-          "Run Zooms/AMAs; partner with drivers for feature input.",
-          "Measure satisfaction and close the loop with product."
-        ],
-        requirements:[
-          "Community or CX leadership at a consumer app.",
-          "Empathy and crisp communication.",
-          "Bonus: gig driving experience."
-        ]
-      },
-      {
-        id:"partnerships",
-        title:"Partnerships Manager (Affiliates & Sponsors)",
-        dept:"Partnerships",
-        location:"Remote (USA)",
-        type:"Full-time",
-        level:"Mid–Senior",
-        datePosted:"2025-08-27",
+        responsibilities:["Create helpful guides, FAQs, and feedback channels.","Run Zooms/AMAs; partner with drivers for feature input.","Measure satisfaction and close the loop with product."],
+        requirements:["Community or CX leadership at a consumer app.","Empathy and crisp communication.","Bonus: gig driving experience."]},
+      { id:"partnerships", title:"Partnerships Manager (Affiliates & Sponsors)", dept:"Partnerships", location:"Remote (USA)", type:"Full-time", level:"Mid–Senior", datePosted:"2025-08-27",
         description:"Grow responsible partner programs (tax, auto parts, insurance) that help drivers save.",
-        responsibilities:[
-          "Source, negotiate, and manage affiliate/sponsor relationships.",
-          "Ensure compliance (CJ policies, privacy, transparent UX).",
-          "Report performance and ROI."
-        ],
-        requirements:[
-          "Partner/BD or affiliate track record.",
-          "Comfort with legal/compliance basics.",
-          "Clear communicator and closer."
-        ]
-      },
-      {
-        id:"ops-intern",
-        title:"Ops Intern (Fall/Winter)",
-        dept:"Internships",
-        location:"Remote (USA)",
-        type:"Internship",
-        level:"Intern",
-        datePosted:"2025-08-27",
+        responsibilities:["Source, negotiate, and manage affiliate/sponsor relationships.","Ensure compliance (CJ policies, privacy, transparent UX).","Report performance and ROI."],
+        requirements:["Partner/BD or affiliate track record.","Comfort with legal/compliance basics.","Clear communicator and closer."]},
+      { id:"ops-intern", title:"Ops Intern (Fall/Winter)", dept:"Internships", location:"Remote (USA)", type:"Internship", level:"Intern", datePosted:"2025-08-27",
         description:"Help with research, QA, and light ops to keep the team shipping.",
-        responsibilities:[
-          "Support launches, QA features, document processes.",
-          "Assist with data clean-up and light analytics."
-        ],
-        requirements:[
-          "Strong curiosity and follow-through.",
-          "Clear writing and organization."
-        ]
-      }
+        responsibilities:["Support launches, QA features, document processes.","Assist with data clean-up and light analytics."],
+        requirements:["Strong curiosity and follow-through.","Clear writing and organization."]}
     ]; -->
 
     /* ---------- Helpers ---------- */
@@ -423,24 +463,17 @@
     };
 
     const params = new URLSearchParams(location.search);
-    // Seed filters from URL
     els.q.value = params.get("q") || "";
     els.dept.value = params.get("dept") || "";
     els.loc.value = params.get("loc") || "";
     els.sort.value = params.get("sort") || "newest";
 
-    function withinDays(dateStr, days=14){
-      const d = new Date(dateStr);
-      const diff = (Date.now() - d.getTime()) / (1000*60*60*24);
-      return diff <= days;
-    }
+    const withinDays = (d, days=14) => (Date.now()-new Date(d).getTime())/86400000 <= days;
+    const slug = s => s.toLowerCase().replace(/[^\w-]+/g,"-");
 
-    function slug(id){ return id.replace(/[^\w\-]+/g,"-"); }
-
-    function mailtoFor(title, id){
+    const mailtoFor = (title,id) => {
       const subject = encodeURIComponent(`Application: ${title} (${id})`);
-      const body = encodeURIComponent(
-`Hi Gigways Team,
+      const body = encodeURIComponent(`Hi Gigways Team,
 
 I'm applying for ${title}. Links and resume below:
 - Portfolio:
@@ -450,61 +483,65 @@ I'm applying for ${title}. Links and resume below:
 Best,
 `);
       return `mailto:support@gigways.com?subject=${subject}&body=${body}`;
-    }
+    };
 
-    function matchesFilters(job, q, dept, loc){
+    function matches(job,q,dept,loc){
       const hay = [
-        job.title, job.dept, job.location, job.type, job.level,
-        job.description, ...(job.requirements||[]), ...(job.responsibilities||[])
+        job.title, job.dept, job.location, job.type, job.level, job.description,
+        ...(job.requirements||[]), ...(job.responsibilities||[])
       ].join(" ").toLowerCase();
-      const qok = q ? hay.includes(q.toLowerCase()) : true;
-      const dok = dept ? job.dept === dept : true;
-      const lok = loc ? job.location === loc : true;
-      return qok && dok && lok;
+      return (!q || hay.includes(q.toLowerCase())) &&
+             (!dept || job.dept === dept) &&
+             (!loc || job.location === loc);
     }
 
     function sortJobs(arr, how){
-      const copy = [...arr];
-      if(how === "oldest") copy.sort((a,b)=> new Date(a.datePosted) - new Date(b.datePosted));
-      else if(how === "az") copy.sort((a,b)=> a.title.localeCompare(b.title));
-      else copy.sort((a,b)=> new Date(b.datePosted) - new Date(a.datePosted)); // newest
-      return copy;
+      const a=[...arr];
+      if(how==="oldest") a.sort((x,y)=>+new Date(x.datePosted)-+new Date(y.datePosted));
+      else if(how==="az") a.sort((x,y)=>x.title.localeCompare(y.title));
+      else a.sort((x,y)=>+new Date(y.datePosted)-+new Date(x.datePosted));
+      return a;
     }
 
     function jobCard(job){
-      const isNew = withinDays(job.datePosted, 21);
+      const isNew = withinDays(job.datePosted,21);
       return `
       <article class="job__card" role="listitem" id="${slug(job.id)}">
         <div class="job__header">
           <div>
-            <h3 class="job__title">${job.title} ${isNew ? '<span class="badge">New</span>' : ''}</h3>
+            <h3 class="job__title">${job.title} ${isNew?'<span class="badge"><i class="bx bx-star"></i> New</span>':''}</h3>
             <div class="job__meta">
               <span><i class="bx bx-buildings"></i> ${job.dept}</span> •
               <span><i class="bx bx-map"></i> ${job.location}</span> •
               <span><i class="bx bx-time"></i> ${job.type}</span> •
               <span><i class="bx bx-user"></i> ${job.level}</span>
             </div>
-            <p>${job.description}</p>
+            <p style="margin-top:.35rem;">${job.description||''}</p>
             <div class="job__tags">
-              <span class="badge">${new Date(job.datePosted).toLocaleDateString()}</span>
-              <a class="badge" href="#${slug(job.id)}" title="Direct link to this role">#</a>
+              <span class="badge"><i class="bx bx-calendar"></i> ${new Date(job.datePosted).toLocaleDateString()}</span>
+              <a class="badge" href="#${slug(job.id)}" title="Direct link to this role"><i class="bx bx-link"></i></a>
             </div>
           </div>
-          <div class="btn-row" style="align-items:flex-start;">
+
+          <!-- Equal-width action buttons -->
+          <div class="btn-pair">
             <a class="btn btn--primary" href="${mailtoFor(job.title, job.id)}"><i class="bx bx-send"></i> Apply</a>
-            <button class="btn toggle" type="button" aria-expanded="false" aria-controls="details-${job.id}">
+            <button class="btn btn--ghost toggle" type="button" aria-expanded="false" aria-controls="details-${job.id}">
               <i class="bx bx-chevron-down"></i> Details
             </button>
           </div>
         </div>
+
         <div id="details-${job.id}" class="job__body" role="region" aria-label="${job.title} details">
-          <h4>What you’ll do</h4>
-          <ul>${(job.responsibilities||[]).map(i=>`<li>${i}</li>`).join("")}</ul>
-          <h4>What you’ll bring</h4>
-          <ul>${(job.requirements||[]).map(i=>`<li>${i}</li>`).join("")}</ul>
-          <div class="btn-row" style="margin-top:.5rem;">
+          ${ (job.responsibilities?.length ? `<h4>What you’ll do</h4><ul>${job.responsibilities.map(i=>`<li>${i}</li>`).join("")}</ul>` : "" ) }
+          ${ (job.requirements?.length ? `<h4>What you’ll bring</h4><ul>${job.requirements.map(i=>`<li>${i}</li>`).join("")}</ul>` : "" ) }
+
+          <!-- Consistent button pair in details -->
+          <div class="btn-pair" style="margin-top:.6rem;">
             <a class="btn btn--primary" href="${mailtoFor(job.title, job.id)}"><i class="bx bx-send"></i> Apply via Email</a>
-            <a class="btn" href="mailto:support@gigways.com?subject=${encodeURIComponent('Question about ' + job.title)}"><i class="bx bx-chat"></i> Ask a question</a>
+            <a class="btn btn--ghost" href="mailto:support@gigways.com?subject=${encodeURIComponent('Question about ' + job.title)}">
+              <i class="bx bx-chat"></i> Ask a question
+            </a>
           </div>
         </div>
       </article>`;
@@ -515,33 +552,28 @@ Best,
       if(els.q.value) p.set("q", els.q.value);
       if(els.dept.value) p.set("dept", els.dept.value);
       if(els.loc.value) p.set("loc", els.loc.value);
-      if(els.sort.value && els.sort.value!=="newest") p.set("sort", els.sort.value);
-      const newUrl = `${location.pathname}?${p.toString()}`;
-      history.replaceState(null, "", newUrl);
+      if(els.sort.value !== "newest") p.set("sort", els.sort.value);
+      history.replaceState(null, "", `${location.pathname}?${p.toString()}`);
     }
 
     function render(){
-      const q = els.q.value.trim();
-      const d = els.dept.value;
-      const l = els.loc.value;
-      const s = els.sort.value;
-
-      let results = JOBS.filter(j => matchesFilters(j, q, d, l));
-      results = sortJobs(results, s);
-
+      const q = els.q.value.trim(), d = els.dept.value, l = els.loc.value, s = els.sort.value;
+      let results = sortJobs(JOBS.filter(j => matches(j,q,d,l)), s);
       els.list.innerHTML = results.map(jobCard).join("");
       els.noResults.style.display = results.length ? "none" : "block";
-      els.count.textContent = results.length ? `${results.length} role${results.length>1?'s':''}` : "0 roles";
+      els.count.textContent = `${results.length} role${results.length!==1?'s':''}`;
       updateURL();
 
-      // Attach toggles
+      // Toggle handlers (flip icon, keep label width stable)
       els.list.querySelectorAll(".toggle").forEach(btn=>{
         btn.addEventListener("click", ()=>{
           const card = btn.closest(".job__card");
           const body = card.querySelector(".job__body");
           const open = body.classList.toggle("open");
-          btn.setAttribute("aria-expanded", open ? "true" : "false");
-          btn.innerHTML = open ? `<i class="bx bx-chevron-up"></i> Hide` : `<i class="bx bx-chevron-down"></i> Details`;
+          btn.setAttribute("aria-expanded", String(open));
+          btn.innerHTML = open
+            ? `<i class="bx bx-chevron-up"></i> Details`
+            : `<i class="bx bx-chevron-down"></i> Details`;
         });
       });
     }
@@ -553,43 +585,43 @@ Best,
       els.loc.addEventListener(ev, render);
       els.sort.addEventListener(ev, render);
     });
-    els.clear.addEventListener("click", ()=>{
-      els.q.value = ""; els.dept.value = ""; els.loc.value = ""; els.sort.value = "newest"; render();
-    });
+    els.clear.addEventListener("click", ()=>{ els.q.value=""; els.dept.value=""; els.loc.value=""; els.sort.value="newest"; render(); });
     els.share.addEventListener("click", async ()=>{
-      try {
+      try{
         await navigator.clipboard.writeText(location.href);
-        els.share.innerHTML = '<i class="bx bx-check"></i> Copied';
-        setTimeout(()=> els.share.innerHTML = '<i class="bx bx-link"></i> Share', 1500);
-      } catch(e){ alert("Link copied: " + location.href); }
+        els.share.innerHTML='<i class="bx bx-check"></i> Copied';
+        setTimeout(()=> els.share.innerHTML='<i class="bx bx-link"></i> Share', 1500);
+      }catch(e){
+        alert("Link copied: " + location.href);
+      }
     });
 
     // Initial render
     render();
 
-    // Auto-open role from hash (nice for sharable links)
-    function openFromHash() {
-      const id = location.hash.replace('#','');
-      if (!id) return;
+    // Auto-open from hash
+    function openFromHash(){
+      const id = location.hash.slice(1);
+      if(!id) return;
       const card = document.getElementById(id);
-      if (!card) return;
-      const btn = card.querySelector('.toggle');
-      const body = card.querySelector('.job__body');
-      if (btn && body && !body.classList.contains('open')) {
-        body.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-        btn.innerHTML = '<i class="bx bx-chevron-up"></i> Hide';
-        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if(!card) return;
+      const btn = card.querySelector(".toggle");
+      const body = card.querySelector(".job__body");
+      if(btn && body && !body.classList.contains("open")){
+        body.classList.add("open");
+        btn.setAttribute("aria-expanded","true");
+        btn.innerHTML = '<i class="bx bx-chevron-up"></i> Details';
+        card.scrollIntoView({ behavior:"smooth", block:"start" });
       }
     }
-    window.addEventListener('hashchange', openFromHash);
+    window.addEventListener("hashchange", openFromHash);
     openFromHash();
 
-    // Scroll reveal (optional; disable if user prefers reduced motion)
-    const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (window.ScrollReveal && !prefersReduced) {
+    // Scroll reveal (respects reduced motion)
+    const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if(window.ScrollReveal && !prefersReduced){
       const sr = ScrollReveal({ distance:"24px", duration:700, easing:"ease-out", interval:80 });
-      sr.reveal(".careers-hero .section-title, .careers-hero .section-subtitle, .careers-hero .btn-row");
+      sr.reveal(".careers-hero .section-title, .careers-hero .section-subtitle, .careers-hero .hero-actions");
       sr.reveal("#open-roles .filters, #open-roles .jobs__grid");
       sr.reveal("#values .card");
     }
@@ -599,6 +631,9 @@ Best,
   <script src="assets/js/main.js"></script>
 </body>
 </html>
+
+
+
 
 
 
