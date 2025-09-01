@@ -2,30 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Gigways | Partners & Collaboration</title>
-  <meta name="description" content="Partner with Gigways — advertising, driver perks, affiliates, and API/data collaborations that support gig workers." />
-  <meta name="keywords" content="Gigways partners, advertise to gig drivers, driver perks, affiliates, API data partnership" />
-  <meta name="author" content="Gigways Team" />
+  <meta name="description" content="Partner with Gigways — advertising, driver perks, affiliates, and API/data collaborations that support gig workers.">
+  <meta name="keywords" content="Gigways partners, advertise to gig drivers, driver perks, affiliates, API data partnership">
+  <meta name="author" content="Gigways Team">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Gigways | Partners & Collaboration" />
-  <meta property="og:description" content="Partner with Gigways — from ads to driver perks, we collaborate with brands to empower the gig economy." />
-  <meta property="og:image" content="https://gigways.com/assets/img/App.png" />
-  <meta property="og:url" content="https://gigways.com/partners.html" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Gigways" />
+  <meta property="og:title" content="Gigways | Partners & Collaboration">
+  <meta property="og:description" content="Partner with Gigways — from ads to driver perks, we collaborate with brands to empower the gig economy.">
+  <meta property="og:image" content="https://gigways.com/assets/img/App.png">
+  <meta property="og:url" content="https://gigways.com/partners.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Gigways">
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Gigways | Partners & Collaboration" />
-  <meta name="twitter:description" content="Collaborate with Gigways on advertising, affiliates, and driver wellness initiatives." />
-  <meta name="twitter:image" content="https://gigways.com/assets/img/App.png" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gigways | Partners & Collaboration">
+  <meta name="twitter:description" content="Collaborate with Gigways on advertising, affiliates, and driver wellness initiatives.">
+  <meta name="twitter:image" content="https://gigways.com/assets/img/App.png">
 
-  <link rel="icon" href="assets/img/App.png" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="icon" href="assets/img/App.png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet">
 
   <!-- Schema -->
   <script type="application/ld+json">
@@ -43,153 +43,97 @@
   }
   </script>
 
-  <!-- Base page styles -->
   <style>
+    /* ——— Local page tweaks (keeps your global design system intact) ——— */
     :root{
-      --card-bg: rgba(255,255,255,0.06);
-      --card-bd: rgba(255,255,255,0.14);
-      --input-bg: rgba(255,255,255,0.08);
-      --input-bd: rgba(255,255,255,0.30);
-      --input-bd-hover: rgba(255,255,255,0.44);
+      --card-bg: rgba(255,255,255,.06);
+      --card-bd: rgba(255,255,255,.14);
+      --input-bg: rgba(255,255,255,.08);
+      --input-bd: rgba(255,255,255,.30);
+      --input-bd-hover: rgba(255,255,255,.44);
       --ring: #22d3ee;
       --ring-soft: rgba(34,211,238,.28);
       --button-grad: linear-gradient(90deg,#6ee7ff,#22d3ee);
       --button-text: #062a33;
-      --ok: #22c55e;
-      --err: #ef4444;
+      --ok:#22c55e; --err:#ef4444;
     }
 
-    .container { max-width: 1040px; margin: 0 auto; padding: 0 1rem; }
-    .section { padding: 4.5rem 1rem 3rem; }
+    .container{ max-width:1040px; margin:0 auto; padding:0 1rem }
+    .section{ padding:4.5rem 1rem 3rem }
+    .section-title{ text-align:center; font-size:clamp(1.6rem,2vw+1rem,2.4rem); margin:0 }
+    .section-subtitle{ text-align:center; opacity:.85; max-width:720px; margin:.5rem auto 1.5rem }
 
-    /* Headings used by hero/featured */
-    .section-title{ text-align:center; font-size: clamp(1.6rem, 2vw + 1rem, 2.4rem); margin:0; }
-    .section-subtitle{ text-align:center; opacity:.85; max-width:720px; margin:.5rem auto 1.5rem; }
+    /* Hero */
+    .partners-hero{ padding-top:5rem }
+    .cta-row{ display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap }
+    .btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.75rem 1rem; border:2px solid #0f172a; border-radius:999px; background:#fff; color:#0f172a; text-decoration:none; font-weight:700; transition:.15s ease }
+    .btn:hover{ transform:translateY(-1px); background:var(--third-color); color:#fff }
+    .btn--primary{ background:var(--button-grad); border-color:transparent; color:var(--button-text) }
+    .btn--primary:hover{ filter:brightness(.97); transform:translateY(-1px) }
 
-    /* Hero + buttons */
-    .partners-hero{ padding-top: 5rem; }
-    .cta-row{ display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap; }
-    .btn{
-      display:inline-flex; align-items:center; gap:.5rem;
-      padding:.75rem 1rem; border:2px solid #0f172a; border-radius:999px;
-      background:#fff; color:#0f172a; text-decoration:none; font-weight:700;
-      transition: transform .12s ease, .15s ease, color .15s ease, border-color .15s ease;
-    }
-    .btn:hover{ transform: translateY(-1px); background:var(--third-color); color:#fff; }
-    .btn--primary{ background: var(--button-grad); border-color: transparent; color: var(--button-text); }
-    .btn--primary:hover{ filter: brightness(.97); color: var(--button-text); transform: translateY(-1px); }
+    /* Featured grid */
+    .partners__grid{ display:grid; gap:1.25rem; margin-top:2rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); color:black }
+    .partner__card{ background:#fff; border:1.5px solid #e5e7eb; border-radius:16px; padding:1.25rem; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,.06); transition:.15s ease }
+    .partner__card:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.10); border-color:#cbd5e1 }
+    .partner__card img{ max-width:120px; display:block; margin:0 auto .75rem }
 
-    /* Featured partners */
-    .partners__grid{
-      display:grid; gap:1.25rem; margin-top:2rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      color: black;
-    }
-    .partner__card{
-      background:#fff; border:1.5px solid #e5e7eb; border-radius:16px; padding:1.25rem; text-align:center;
-      box-shadow: 0 8px 20px rgba(0,0,0,.06);
-      transition: transform .12s ease, box-shadow .15s ease, border-color .15s ease;
-    }
-    .partner__card:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.10); border-color:#cbd5e1; }
-    .partner__card img{ max-width:120px; display:block; margin:0 auto .75rem; }
+    /* Card + form */
+    .card{ background:var(--card-bg); border:1px solid var(--card-bd); border-radius:16px; padding:1.25rem; box-shadow:0 10px 28px rgba(0,0,0,.16) }
+    .form__grid{ display:grid; gap:1rem; grid-template-columns:1fr 1fr }
+    @media (max-width:860px){ .form__grid{ grid-template-columns:1fr } }
+    .form__group{ display:flex; flex-direction:column; gap:.45rem; position:relative }
+    .label{ font-size:.95rem; opacity:.95 }
+    .field{ position:relative }
+    .icon{ position:absolute; left:.85rem; top:50%; transform:translateY(-50%); font-size:1.05rem; opacity:.9; pointer-events:none }
 
-    /* Form card + fields */
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-bd);
-      border-radius: 16px;
-      padding: 1.25rem;
-      box-shadow: 0 10px 28px rgba(0,0,0,.16);
-    }
-    .form__grid { display:grid; gap: 1rem; grid-template-columns: 1fr 1fr; }
-    @media (max-width: 860px){ .form__grid { grid-template-columns:1fr; } }
-    .form__group { display:flex; flex-direction:column; gap:.45rem; position: relative; }
-    .label { font-size:.95rem; opacity:.95; }
-    .field { position: relative; }
-    .icon {
-      position:absolute; left: .85rem; top: 50%; transform: translateY(-50%);
-      font-size: 1.05rem; opacity:.9; pointer-events:none;
-    }
-    .input, .textarea, .file {
-      width:100%;
-      border-radius: 12px;
-      border:2px solid var(--input-bd);
-      background: var(--input-bg);
-      color: inherit;
-      padding:.9rem 1rem .9rem 2.35rem;
-      transition: box-shadow .15s ease, border-color .15s ease, background .15s ease;
-    }
-    .textarea { min-height: 140px; resize: vertical; padding-left: 2.35rem; }
-    .input:hover, .textarea:hover, .file:hover { border-color: var(--input-bd-hover); background: rgba(255,255,255,0.10); }
-    .input:focus, .textarea:focus, .file:focus { outline:none; border-color: #fff; box-shadow: 0 0 0 3px var(--ring-soft); background: rgba(255,255,255,0.12); }
-    .input[aria-invalid="true"], .textarea[aria-invalid="true"]{ border-color: var(--err); }
-    .error { color: var(--err); font-size:.85rem; min-height: 1.1rem; }
-    .hint { font-size:.83rem; opacity:.7; }
-    .counter { font-size:.78rem; opacity:.7; text-align:right; }
+    .input,.textarea,.file{ width:100%; border-radius:12px; border:2px solid var(--input-bd); background:var(--input-bg); color:inherit; padding:.9rem 1rem .9rem 2.35rem; transition:.15s ease }
+    .textarea{ min-height:140px; resize:vertical }
+    .input:hover,.textarea:hover,.file:hover{ border-color:var(--input-bd-hover); background:rgba(255,255,255,.10) }
+    .input:focus,.textarea:focus,.file:focus{ outline:none; border-color:#fff; box-shadow:0 0 0 3px var(--ring-soft); background:rgba(255,255,255,.12) }
+    .input[aria-invalid="true"],.textarea[aria-invalid="true"]{ border-color:var(--err) }
+    .error{ color:var(--err); font-size:.85rem; min-height:1.1rem }
+    .hint{ font-size:.83rem; opacity:.7 }
+    .counter{ font-size:.78rem; opacity:.7; text-align:right }
 
-    .btn-primary {
-      width:100%; display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
-      padding: 1rem 1.1rem; border-radius:999px; border:0;
-      background: var(--button-grad); color: var(--button-text);
-      font-weight:700; cursor:pointer; transition: transform .12s ease, filter .15s ease;
-    }
-    .btn-primary:hover { filter: brightness(.97); transform: translateY(-1px); }
-    .btn-primary:active { transform: translateY(0); }
-    .btn-primary[disabled] { opacity:.7; cursor:not-allowed; transform:none; }
+    .btn-primary{ width:100%; display:inline-flex; align-items:center; justify-content:center; gap:.6rem; padding:1rem 1.1rem; border-radius:999px; border:0; background:var(--button-grad); color:var(--button-text); font-weight:700; cursor:pointer; transition:.15s ease }
+    .btn-primary:hover{ filter:brightness(.97); transform:translateY(-1px) }
+    .btn-primary[disabled]{ opacity:.7; cursor:not-allowed }
 
-    .status { min-height:1.25rem; margin-top:.75rem; font-size:.95rem; }
-    .status.ok { color: var(--ok); }
-    .status.err { color: var(--err); }
-    .spinner { width:16px; height:16px; border:2px solid rgba(0,0,0,.2); border-top-color: rgba(0,0,0,.5); border-radius:50%; animation: spin .8s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-  </style>
+    .status{ min-height:1.25rem; margin-top:.75rem; font-size:.95rem }
+    .status.ok{ color:var(--ok) } .status.err{ color:var(--err) }
+    .spinner{ width:16px; height:16px; border:2px solid rgba(0,0,0,.2); border-top-color:rgba(0,0,0,.5); border-radius:50%; animation:spin .8s linear infinite }
+    @keyframes spin{ to{ transform:rotate(360deg) } }
 
-  <!-- High-contrast overrides for WHITE background -->
-  <style>
-    #partner-card.card{
-      background: #ffffff !important;
-      border: 1.5px solid #e5e7eb !important;
-      color: #0b0f12;
+    /* Keep the high-contrast white visuals for the form */
+    #partner-card.card{ background:#fff!important; border:1.5px solid #e5e7eb!important; color:#0b0f12 }
+    #partner-card .input,#partner-card .textarea,#partner-card .file{
+      background:#fff!important; color:#0b0f12!important; border:2px solid rgba(17,24,39,.88)!important; border-radius:12px; box-shadow:0 1px 2px rgba(0,0,0,.06)
     }
-    #partner-card .input,
-    #partner-card .textarea,
-    #partner-card .file{
-      background: #ffffff !important;
-      color: #0b0f12 !important;
-      border: 2px solid rgba(17,24,39,0.88) !important;
-      border-radius: 12px;
-      box-shadow: 0 1px 2px rgba(0,0,0,.06);
+    #partner-card .input::placeholder,#partner-card .textarea::placeholder{ color:#6b7280 }
+    #partner-card .label{ color:#0b0f12 } #partner-card .icon{ color:#111827; opacity:.9 }
+    #partner-card .input:hover,#partner-card .textarea:hover,#partner-card .file:hover{ border-color:#0f172a!important }
+    #partner-card .input:focus,#partner-card .textarea:focus,#partner-card .file:focus{
+      outline:none; border-color:#0891b2!important; box-shadow:0 0 0 3px rgba(34,211,238,.28),0 0 0 1.5px rgba(17,24,39,.95) inset; background:#fff!important
     }
-    #partner-card .input::placeholder,
-    #partner-card .textarea::placeholder{ color:#6b7280; }
-    #partner-card .label{ color:#0b0f12; }
-    #partner-card .icon{ color:#111827; opacity:.9; }
+    #partner-card .input[aria-invalid="true"],#partner-card .textarea[aria-invalid="true"]{ border-color:#ef4444!important; box-shadow:0 0 0 2px rgba(239,68,68,.15) }
+      /* Partner type pill switch */
+    .type-switch{ display:flex; flex-wrap:wrap; gap:.5rem }
+    .type-btn{ padding:.5rem .85rem; border:1.5px solid #0f172a; background:#fff; color:#0f172a; border-radius:999px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:.45rem }
+    .type-btn:hover{ transform:translateY(-1px) }
+    .type-btn.active{ background:var(--button-grad); border-color:transparent; color:var(--button-text) }
 
-    #partner-card .input:hover,
-    #partner-card .textarea:hover,
-    #partner-card .file:hover{ border-color: #0f172a !important; }
-    #partner-card .input:focus,
-    #partner-card .textarea:focus,
-    #partner-card .file:focus{
-      outline: none;
-      border-color: #0891b2 !important;
-      box-shadow:
-        0 0 0 3px rgba(34,211,238,.28),
-        0 0 0 1.5px rgba(17,24,39,.95) inset;
-      background: #ffffff !important;
-    }
-    #partner-card .input[aria-invalid="true"],
-    #partner-card .textarea[aria-invalid="true"]{
-      border-color: #ef4444 !important;
-      box-shadow: 0 0 0 2px rgba(239,68,68,.15);
-    }
+    /* Fieldsets */
+    .fieldset{ border:1.5px solid #e5e7eb; border-radius:14px; padding:1rem; margin:.75rem 0 1rem; background:#fff }
+    .fieldset legend{ padding:0 .5rem; font-weight:700 }
+    .hidden{ display:none }
+      /* Car Ads image thumbnails */
+    #car_img_preview.thumbs{ display:grid; grid-template-columns:repeat(auto-fill,minmax(90px,1fr)); gap:.5rem; margin-top:.5rem }
+    #car_img_preview.thumbs img{ width:100%; height:90px; object-fit:cover; border-radius:10px; border:1.5px solid #e5e7eb }
   </style>
 </head>
 <body>
-  <!-- Background -->
   <div class="bubble-container"></div>
 
-  <!-- Header -->
   <header class="l-header">
     <nav class="nav bd-grid">
       <div><a href="index.html" class="nav__logo">Gigways</a></div>
@@ -207,7 +151,7 @@
     </nav>
   </header>
 
-  <!-- ===== HERO ===== -->
+  <!-- HERO -->
   <section class="partners-hero section" id="partners">
     <div class="container">
       <h1 class="section-title">Partners & Collaboration</h1>
@@ -219,24 +163,24 @@
     </div>
   </section>
 
-  <!-- ===== FEATURED ===== -->
+  <!-- FEATURED -->
   <section class="section" id="featured">
     <div class="container">
       <h2 class="section-title">Featured Partners</h2>
       <p class="section-subtitle">A few examples — swap these for your actual logos.</p>
       <div class="partners__grid">
         <article class="partner__card">
-          <img src="assets/img/partner1.png" alt="Partner 1 logo" />
+          <img src="assets/img/partner1.png" alt="Partner 1 logo">
           <h3>Tax File</h3>
           <p>Tax tools for gig driver.</p>
         </article>
         <article class="partner__card">
-          <img src="assets/img/partner2.png" alt="Partner 2 logo" />
+          <img src="assets/img/partner2.png" alt="Partner 2 logo">
           <h3>Car Ads</h3>
           <p>Rooftop car ads, in-app spots, reach gig drivers.</p>
         </article>
         <article class="partner__card">
-          <img src="assets/img/partner3.png" alt="Partner 3 logo" />
+          <img src="assets/img/partner3.png" alt="Partner 3 logo">
           <h3>Vehicle Care</h3>
           <p>Oil change, maintance and insurances for drivers.</p>
         </article>
@@ -244,248 +188,250 @@
     </div>
   </section>
 
-  <!-- ===== FORM ===== -->
+  <!-- FORM -->
   <main class="section" id="forms">
     <div class="container">
       <h2 class="section-title">Send a Partnership Brief</h2>
-      <p class="section-subtitle">Tell us what you want to build. We’ll reply fast.</p>
+      <p class="section-subtitle">Pick a partner type first. We’ll only ask what’s needed.</p>
 
       <div class="card" id="partner-card">
-        <form id="my-form"
-              action="https://formspree.io/f/mzboyvbe"
-              method="POST"
-              enctype="multipart/form-data"
-              aria-describedby="my-form-status">
+        <form id="my-form" action="https://formspree.io/f/mzboyvbe" method="POST" enctype="multipart/form-data" aria-describedby="my-form-status">
+          <input type="hidden" name="_subject" value="Gigways Partnership Brief">
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <input type="hidden" id="partner_type_input" name="partner_type" value="affiliate">
 
-          <!-- spam traps -->
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
-          <input type="hidden" name="_subject" value="Gigways Partnership Brief" />
-          <input type="hidden" id="load_ts" value="" />
+          <!-- 1) PARTNER TYPE SWITCH -->
+          <div class="form__group">
+            <label class="label">Partner Type *</label>
+            <div class="type-switch" role="tablist" aria-label="Partner type">
+              <button class="type-btn active" data-type="affiliate" role="tab" aria-selected="true"><i class="bx bx-link"></i> Affiliate</button>
+              <button class="type-btn" data-type="inapp" role="tab" aria-selected="false"><i class="bx bx-rectangle"></i> In‑app Ads/Banners</button>
+              <button class="type-btn" data-type="carads" role="tab" aria-selected="false"><i class="bx bx-car"></i> Car Ads (Rooftop/Decals)</button>
+              <button class="type-btn" data-type="perks" role="tab" aria-selected="false"><i class="bx bx-gift"></i> Driver Perks/Discounts</button>
+              <button class="type-btn" data-type="api" role="tab" aria-selected="false"><i class="bx bx-code-alt"></i> API/Data</button>
+            </div>
+          </div>
 
-          <!-- Contact + Org -->
+          <!-- 2) BASIC INFO (always shown) -->
           <div class="form__grid">
             <div class="form__group">
               <label class="label" for="name">Your Name *</label>
               <div class="field">
                 <i class="bx bx-user icon"></i>
-                <input class="input" id="name" name="name" type="text" placeholder="Full name" required autocomplete="name" />
+                <input class="input" id="name" name="name" type="text" placeholder="Full name" required autocomplete="name">
               </div>
-              <div class="error" id="err-name"></div>
             </div>
-
             <div class="form__group">
               <label class="label" for="email">Email *</label>
               <div class="field">
                 <i class="bx bx-at icon"></i>
-                <input class="input" id="email" name="email" type="email" placeholder="you@company.com" required autocomplete="email" inputmode="email" />
-              </div>
-              <div class="error" id="err-email"></div>
-            </div>
-
-            <div class="form__group">
-              <label class="label" for="phone">Phone</label>
-              <div class="field">
-                <i class="bx bx-phone icon"></i>
-                <input class="input" id="phone" name="phone" type="tel" placeholder="+1 (470) 555-1234" autocomplete="tel" inputmode="tel" />
+                <input class="input" id="email" name="email" type="email" placeholder="you@company.com" required autocomplete="email" inputmode="email">
               </div>
             </div>
-
             <div class="form__group">
-              <label class="label" for="contact_pref">Preferred Contact</label>
-              <div class="field">
-                <i class="bx bx-message-dots icon"></i>
-                <input class="input" id="contact_pref" name="contact_pref" type="text" placeholder="Email, Phone, or Either" />
-              </div>
-            </div>
-
-            <div class="form__group">
-              <label class="label" for="company">Company / Organization *</label>
+              <label class="label" for="company">Company *</label>
               <div class="field">
                 <i class="bx bx-buildings icon"></i>
-                <input class="input" id="company" name="company" type="text" placeholder="Company name" required autocomplete="organization" />
+                <input class="input" id="company" name="company" type="text" placeholder="Company / org" required autocomplete="organization">
               </div>
-              <div class="error" id="err-company"></div>
             </div>
-
             <div class="form__group">
               <label class="label" for="website">Website</label>
               <div class="field">
                 <i class="bx bx-globe icon"></i>
-                <input class="input" id="website" name="website" type="url" placeholder="https://example.com" inputmode="url" autocomplete="url" />
-              </div>
-            </div>
-
-            <div class="form__group">
-              <label class="label" for="industry">Industry</label>
-              <div class="field">
-                <i class="bx bx-category icon"></i>
-                <input class="input" id="industry" name="industry" type="text" placeholder="e.g., Finance, Insurance, Auto, SaaS" />
-              </div>
-            </div>
-
-            <div class="form__group">
-              <label class="label" for="company_size">Company Size</label>
-              <div class="field">
-                <i class="bx bx-group icon"></i>
-                <input class="input" id="company_size" name="company_size" type="text" placeholder="e.g., 51–200, 1,001–10,000" />
+                <input class="input" id="website" name="website" type="url" placeholder="https://example.com" inputmode="url" autocomplete="url">
               </div>
             </div>
           </div>
 
-          <!-- Objectives -->
-          <div class="form__group" style="margin-top:.4rem;">
-            <label class="label" for="objectives">Objectives *</label>
-            <div class="field">
-              <i class="bx bx-bullseye icon"></i>
-              <textarea class="textarea" id="objectives" name="objectives" required maxlength="700"
-                placeholder="What are you trying to achieve? (e.g., awareness, signups, sales, redemptions, leads)"></textarea>
+          <!-- 3) TYPE-SPECIFIC FIELDS -->
+          <!-- Affiliate -->
+          <fieldset id="fs-affiliate" class="fieldset">
+            <legend>Affiliate Details</legend>
+            <div class="form__grid">
+              <div class="form__group">
+                <label class="label" for="aff_url">Program / Offer URL *</label>
+                <div class="field">
+                  <i class="bx bx-link-external icon"></i>
+                  <input class="input req-aff" id="aff_url" name="aff_url" type="url" placeholder="https://network.com/program" inputmode="url">
+                </div>
+              </div>
+              <div class="form__group">
+                <label class="label" for="aff_network">Network</label>
+                <div class="field">
+                  <i class="bx bx-network-chart icon"></i>
+                  <input class="input" id="aff_network" name="aff_network" type="text" placeholder="CJ, Impact, ShareASale, Other">
+                </div>
+              </div>
             </div>
-            <div class="counter"><span id="count-objectives">0</span>/700</div>
-            <div class="error" id="err-objectives"></div>
-          </div>
+            <div class="form__grid">
+              <div class="form__group">
+                <label class="label" for="aff_model">Payout Model</label>
+                <div class="field">
+                  <i class="bx bx-target-lock icon"></i>
+                  <input class="input" id="aff_model" name="aff_model" type="text" placeholder="CPS, CPA, CPL, Flat">
+                </div>
+              </div>
+              <div class="form__group">
+                <label class="label" for="aff_est">Expected Volume</label>
+                <div class="field">
+                  <i class="bx bx-trending-up icon"></i>
+                  <input class="input" id="aff_est" name="aff_est" type="text" placeholder="e.g., 5k clicks/mo or 300 conversions/mo">
+                </div>
+              </div>
+            </div>
+          </fieldset>
 
-          <!-- Targeting -->
-          <div class="form__grid">
-            <div class="form__group">
-              <label class="label" for="geo">Geography</label>
-              <div class="field">
-                <i class="bx bx-map icon"></i>
-                <input class="input" id="geo" name="geo" type="text" placeholder="Cities / states / regions (comma-separated)" />
+          <!-- In‑app Ads/Banners -->
+          <fieldset id="fs-inapp" class="fieldset hidden">
+            <legend>In‑app Ads / Banners</legend>
+            <div class="form__grid">
+              <div class="form__group">
+                <label class="label" for="inapp_placement">Placement *</label>
+                <div class="field">
+                  <i class="bx bx-layout icon"></i>
+                  <input class="input req-inapp" id="inapp_placement" name="inapp_placement" type="text" placeholder="Driver Density Map, Feed, Onboarding, Email">
+                </div>
+              </div>
+              <div class="form__group">
+                <label class="label" for="inapp_budget">Monthly Budget</label>
+                <div class="field">
+                  <i class="bx bx-dollar icon"></i>
+                  <input class="input" id="inapp_budget" name="inapp_budget" type="text" placeholder="$5,000–$20,000">
+                </div>
               </div>
             </div>
             <div class="form__group">
-              <label class="label" for="audience">Audience Notes</label>
-              <div class="field">
-                <i class="bx bx-user-pin icon"></i>
-                <input class="input" id="audience" name="audience" type="text" placeholder="Rideshare vs delivery, vehicle type, experience, etc." />
-              </div>
-            </div>
-          </div>
-
-          <!-- Channels & Creative -->
-          <div class="form__grid">
-            <div class="form__group">
-              <label class="label" for="channels">Channels & Placements</label>
-              <div class="field">
-                <i class="bx bx-broadcast icon"></i>
-                <textarea class="textarea" id="channels" name="channels" maxlength="600"
-                  placeholder="e.g., In-app (Driver Density Map), banners, partner perks, email, rooftop static, API/data"></textarea>
-              </div>
-              <div class="counter"><span id="count-channels">0</span>/600</div>
-            </div>
-            <div class="form__group">
-              <label class="label" for="creative">Creative Assets Available</label>
+              <label class="label" for="inapp_assets">Creative Sizes / Links</label>
               <div class="field">
                 <i class="bx bx-image icon"></i>
-                <textarea class="textarea" id="creative" name="creative" maxlength="600"
-                  placeholder="e.g., logo, banner sizes, video links, copy/CTAs — or note if you need creative help"></textarea>
+                <input class="input" id="inapp_assets" name="inapp_assets" type="text" placeholder="e.g., 1200x400, 1080x1080, video URL">
               </div>
-              <div class="counter"><span id="count-creative">0</span>/600</div>
             </div>
-          </div>
+          </fieldset>
 
-          <!-- KPIs + Budget/Timeline -->
-          <div class="form__grid">
-            <div class="form__group">
-              <label class="label" for="kpi">Primary KPIs</label>
-              <div class="field">
-                <i class="bx bx-target-lock icon"></i>
-                <input class="input" id="kpi" name="kpi" type="text" placeholder="e.g., CTR, CPC, CPA, CPM, redemptions, signups" />
+          <!-- Car Ads -->
+          <fieldset id="fs-carads" class="fieldset hidden">
+            <legend>Car Ads (Rooftop / Decals)</legend>
+            <div class="form__grid">
+              <div class="form__group">
+                <label class="label" for="car_geo">Cities/Regions *</label>
+                <div class="field">
+                  <i class="bx bx-map icon"></i>
+                  <input class="input req-carads" id="car_geo" name="car_geo" type="text" placeholder="Atlanta, Dallas, Nationwide">
+                </div>
+              </div>
+              <div class="form__group">
+                <label class="label" for="car_count"># of Cars *</label>
+                <div class="field">
+                  <i class="bx bx-car icon"></i>
+                  <input class="input req-carads" id="car_count" name="car_count" type="number" min="1" placeholder="e.g., 25">
+                </div>
+              </div>
+            </div>
+            <div class="form__grid">
+              <div class="form__group">
+                <label class="label" for="car_length">Campaign Length</label>
+                <div class="field">
+                  <i class="bx bx-time icon"></i>
+                  <input class="input" id="car_length" name="car_length" type="text" placeholder="e.g., 4–12 weeks">
+                </div>
+              </div>
+              <div class="form__group">
+                <label class="label" for="car_logistics">Creative / Logistics</label>
+                <div class="field">
+                  <i class="bx bx-package icon"></i>
+                  <input class="input" id="car_logistics" name="car_logistics" type="text" placeholder="Ship decals vs. pickup, install support, etc.">
+                </div>
               </div>
             </div>
             <div class="form__group">
-              <label class="label" for="budget">Estimated Monthly Budget</label>
+              <label class="label" for="car_images">Creative Images (optional)</label>
               <div class="field">
-                <i class="bx bx-dollar icon"></i>
-                <input class="input" id="budget" name="budget" type="text" placeholder="$5,000–$20,000 or exact amount" />
+                <i class="bx bx-images icon"></i>
+                <input class="file" id="car_images" name="car_images" type="file" accept="image/*" multiple>
               </div>
-              <input type="hidden" id="budget_raw" name="budget_raw" value="" />
-              <div class="hint">We’ll never publish this — it helps us size a pilot.</div>
+              <div class="hint">Up to 5 images, max 8MB each (PNG, JPG, WEBP).</div>
+              <div class="error" id="car_img_err"></div>
+              <div id="car_img_preview" class="thumbs"></div>
             </div>
-            <div class="form__group">
-              <label class="label" for="timeline">Campaign Plan</label>
-              <div class="field">
-                <i class="bx bx-time icon"></i>
-                <input class="input" id="timeline" name="timeline" type="text" placeholder="Pilot (2–6 weeks), Quarterly, Ongoing" />
-              </div>
-            </div>
-            <div class="form__group">
-              <label class="label" for="engagement">Engagement Type</label>
-              <div class="field">
-                <i class="bx bx-repeat icon"></i>
-                <input class="input" id="engagement" name="engagement" type="text" placeholder="Pilot, One-off, or Ongoing" />
-              </div>
-            </div>
-          </div>
+          </fieldset>
 
-          <!-- Dates -->
-          <div class="form__grid">
-            <div class="form__group">
-              <label class="label" for="start_date">Preferred Start Date</label>
-              <div class="field">
-                <i class="bx bx-calendar icon"></i>
-                <input class="input" id="start_date" name="start_date" type="date" />
+          <!-- Driver Perks -->
+          <fieldset id="fs-perks" class="fieldset hidden">
+            <legend>Driver Perks / Discounts</legend>
+            <div class="form__grid">
+              <div class="form__group">
+                <label class="label" for="perk_offer">Offer *</label>
+                <div class="field">
+                  <i class="bx bx-gift icon"></i>
+                  <input class="input req-perks" id="perk_offer" name="perk_offer" type="text" placeholder="e.g., 20% off oil change">
+                </div>
+              </div>
+              <div class="form__group">
+                <label class="label" for="perk_redemption">Redemption Method</label>
+                <div class="field">
+                  <i class="bx bx-badge-check icon"></i>
+                  <input class="input" id="perk_redemption" name="perk_redemption" type="text" placeholder="Code, link, in‑store, app‑only">
+                </div>
               </div>
             </div>
             <div class="form__group">
-              <label class="label" for="duration">Estimated Duration</label>
+              <label class="label" for="perk_scope">Geography / Limits</label>
               <div class="field">
-                <i class="bx bx-timer icon"></i>
-                <input class="input" id="duration" name="duration" type="text" placeholder="e.g., 8 weeks, Q4 only, ongoing" />
+                <i class="bx bx-world icon"></i>
+                <input class="input" id="perk_scope" name="perk_scope" type="text" placeholder="US‑only, ATL metro, first 5k redemptions, etc.">
               </div>
             </div>
-          </div>
+          </fieldset>
 
-          <!-- Brief -->
+          <!-- API / Data -->
+          <fieldset id="fs-api" class="fieldset hidden">
+            <legend>API / Data Collaboration</legend>
+            <div class="form__group">
+              <label class="label" for="api_use">Use Case *</label>
+              <div class="field">
+                <i class="bx bx-bulb icon"></i>
+                <input class="input req-api" id="api_use" name="api_use" type="text" placeholder="What do you want to build?">
+              </div>
+            </div>
+            <div class="form__grid">
+              <div class="form__group">
+                <label class="label" for="api_fields">Data / Endpoints</label>
+                <div class="field">
+                  <i class="bx bx-data icon"></i>
+                  <input class="input" id="api_fields" name="api_fields" type="text" placeholder="Fields, frequency, retention">
+                </div>
+              </div>
+              <div class="form__group">
+                <label class="label" for="api_compliance">Compliance Contact</label>
+                <div class="field">
+                  <i class="bx bx-shield-alt-2 icon"></i>
+                  <input class="input" id="api_compliance" name="api_compliance" type="text" placeholder="Name/email for legal/security">
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- 4) BRIEF (always shown) -->
           <div class="form__group">
             <label class="label" for="message">Brief *</label>
             <div class="field">
               <i class="bx bx-file icon"></i>
-              <textarea class="textarea" id="message" name="message" required maxlength="1500"
-                placeholder="Tell us the plan: goals, audience, targeting, geography, creative formats, must-haves…"></textarea>
-            </div>
-            <div class="counter"><span id="count-message">0</span>/1500</div>
-            <div class="error" id="err-message"></div>
-          </div>
-
-          <!-- Extras -->
-          <div class="form__grid">
-            <div class="form__group">
-              <label class="label" for="attachment">Attach a brief / deck (optional)</label>
-              <div class="field">
-                <i class="bx bx-paperclip icon"></i>
-                <input class="file" id="attachment" name="attachment" type="file"
-                       accept=".pdf,.ppt,.pptx,.doc,.docx,.zip,.jpg,.jpeg,.png" />
-              </div>
-              <div class="hint">Max 15MB · PDF/PPT/DOC/ZIP/JPG/PNG</div>
-              <div class="error" id="err-file"></div>
-            </div>
-            <div class="form__group">
-              <label class="label" for="referrer">How did you hear about us?</label>
-              <div class="field">
-                <i class="bx bx-compass icon"></i>
-                <input class="input" id="referrer" name="referrer" type="text" placeholder="Search, social, friend, event…" />
-              </div>
-            </div>
-            <div class="form__group">
-              <label class="label" for="call_times">Call Availability</label>
-              <div class="field">
-                <i class="bx bx-phone-call icon"></i>
-                <input class="input" id="call_times" name="call_times" type="text" placeholder="Days/times + timezone" />
-              </div>
+              <textarea class="textarea" id="message" name="message" required maxlength="1200" placeholder="Give us the quick context so we can respond with the right next step."></textarea>
             </div>
           </div>
 
-          <!-- Consent + Submit -->
-          <label class="label" style="display:flex;align-items:center;gap:.55rem;margin:.5rem 0 1rem;">
-            <input type="checkbox" name="consent" required style="width:18px;height:18px;" />
+          <!-- 5) CONSENT + SUBMIT -->
+          <label class="label" style="display:flex;align-items:center;gap:.55rem;margin:.5rem 0 1rem">
+            <input type="checkbox" name="consent" required style="width:18px;height:18px">
             <span>I agree to be contacted and accept the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
           </label>
 
           <button type="submit" id="my-form-button" class="btn-primary">
             <i class="bx bx-send"></i>
-            <span id="btn-text">Send Partnership Brief</span>
-            <span id="btn-spin" class="spinner" style="display:none;"></span>
+            <span id="btn-text">Send</span>
+            <span id="btn-spin" class="spinner" style="display:none"></span>
           </button>
           <p id="my-form-status" class="status" role="status" aria-live="polite"></p>
         </form>
@@ -493,7 +439,6 @@
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="footer__container">
       <div class="footer__content">
@@ -502,19 +447,14 @@
       </div>
       <div class="footer__content">
         <h3 class="footer__subtitle">Quick Links</h3>
-          <ul class="footer__links">
-            <li><a href="#home" class="footer__link">Home</a></li>
-            <li><a href="market.html" class="footer__link">Marketplace</a></li>
-            <li><a href="partners.html#forms" class="footer__link">Partners</a></li>
-            <li><a href="carrers.html" class="footer__link">Carrers</a></li>
-            <li>
-              <a href="privacy-policy.html" class="footer__link"
-                >Privacy Policy</a
-              >
-            </li>
-             <li><a href="backer.html" class="footer__link">Early Backer</a></li>
-            <li><a href="faq.html" class="footer__link">FAQ Support</a></li>
-          </ul>
+        <ul class="footer__links">
+          <li><a href="#home" class="footer__link">Home</a></li>
+          <li><a href="market.html" class="footer__link">Marketplace</a></li>
+          <li><a href="partners.html#forms" class="footer__link">Partners</a></li>
+          <li><a href="carrers.html" class="footer__link">Carrers</a></li>
+          <li><a href="privacy-policy.html" class="footer__link">Privacy Policy</a></li>
+          <li><a href="backer.html" class="footer__link">Early Backer</a></li>
+        </ul>
       </div>
       <div class="footer__content">
         <h3 class="footer__subtitle">Connect With Us</h3>
@@ -529,158 +469,78 @@
     <div class="footer__bottom"><p class="footer__copy">© Gigways LLC 2025. All rights reserved.</p></div>
   </footer>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
   <script>
-    (function () {
-      const form = document.getElementById("my-form");
-      const button = document.getElementById("my-form-button");
-      const status = document.getElementById("my-form-status");
-      const spin = document.getElementById("btn-spin");
-      const btnText = document.getElementById("btn-text");
-      const loadTs = document.getElementById("load_ts");
-      const STORAGE_KEY = "gigways_partner_brief_v1";
+    (function(){
+      const $ = s => document.querySelector(s);
+      const $$ = s => Array.from(document.querySelectorAll(s));
+      const form = document.querySelector('#my-form');
+      const status = document.querySelector('#my-form-status');
+      const btn = document.querySelector('#my-form-button');
+      const spin = document.querySelector('#btn-spin');
+      const btnText = document.querySelector('#btn-text');
+      const partnerTypeInput = document.querySelector('#partner_type_input');
 
-      const $ = (id) => document.getElementById(id);
-      const setErr = (id, msg, fieldId) => {
-        const el = $(id);
-        if (el) el.textContent = msg || "";
-        if (fieldId) {
-          const f = $(fieldId);
-          if (f) f.setAttribute("aria-invalid", msg ? "true" : "false");
-        }
-      };
-
-      // counters
-      [["objectives","count-objectives"],["channels","count-channels"],["creative","count-creative"],["message","count-message"]]
-        .forEach(([f,c])=>{ const F=$(f),C=$(c); if(!F||!C) return; const u=()=>C.textContent=F.value.length; F.addEventListener("input",u); u(); });
-
-      // phone mask
-      const phone = $("phone");
-      if (phone) {
-        phone.addEventListener("input", () => {
-          let v = phone.value.replace(/[^\d]/g, "").slice(0,10);
-          let out = v;
-          if (v.length > 6) out = `(${v.slice(0,3)}) ${v.slice(3,6)}-${v.slice(6)}`;
-          else if (v.length > 3) out = `(${v.slice(0,3)}) ${v.slice(3)}`;
-          phone.value = out;
+      function setType(type){
+        partnerTypeInput.value = type;
+        $$('.type-btn').forEach(b=>{
+          const on = b.getAttribute('data-type')===type;
+          b.classList.toggle('active', on);
+          b.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        $$('#partner-card .fieldset').forEach(fs=>fs.classList.add('hidden'));
+        const map = {affiliate:'#fs-affiliate', inapp:'#fs-inapp', carads:'#fs-carads', perks:'#fs-perks', api:'#fs-api'};
+        const targetSel = map[type];
+        if (targetSel) document.querySelector(targetSel).classList.remove('hidden');
+        $$('#partner-card [class^="req-"]').forEach(el=> el.required=false);
+        $$('#partner-card .req-'+type).forEach(el=> el.required=true);
+      }
+      $$('.type-btn').forEach(b=> b.addEventListener('click',()=> setType(b.getAttribute('data-type'))));
+      setType('affiliate');
+      const firstTypeBtn = document.querySelector('.type-btn');
+      if(firstTypeBtn) firstTypeBtn.focus();
+      // Car Ads image previews
+      const carImgInput = $('#car_images');
+      const carImgPrev = $('#car_img_preview');
+      const carImgErr = $('#car_img_err');
+      if (carImgInput) {
+        carImgInput.addEventListener('change', ()=>{
+          if (carImgErr) carImgErr.textContent='';
+          if (carImgPrev) carImgPrev.innerHTML='';
+          const files = Array.from(carImgInput.files||[]);
+          const MAX_FILES = 5, MAX_SIZE = 8*1024*1024; // 8MB each
+          if (files.length > MAX_FILES) { if (carImgErr) carImgErr.textContent=`Please select up to ${MAX_FILES} images.`; carImgInput.value=''; return; }
+          for (const f of files){ if (f.size > MAX_SIZE){ if (carImgErr) carImgErr.textContent='Each image must be under 8MB.'; carImgInput.value=''; return; } }
+          files.forEach(f=>{ const img = new Image(); img.alt = f.name; img.src = URL.createObjectURL(f); carImgPrev && carImgPrev.appendChild(img); });
         });
       }
 
-      // budget formatting
-      const budget = $("budget"), budgetRaw = $("budget_raw");
-      if (budget && budgetRaw) {
-        budget.addEventListener("input", () => {
-          const raw = budget.value.replace(/[^\d.]/g, "");
-          budgetRaw.value = raw;
-          const num = Number(raw);
-          if (!isNaN(num) && raw) {
-            budget.dataset.userEditing = "1";
-            budget.value = new Intl.NumberFormat("en-US", { style:"currency", currency:"USD", maximumFractionDigits:0 }).format(num);
-            setTimeout(()=>{ delete budget.dataset.userEditing; },0);
-          }
-        });
-        budget.addEventListener("focus", () => budget.select());
+      function validEmail(v){ return v.includes('@') && v.includes('.'); }
+      function validate(){
+        const name = document.querySelector('#name').value.trim();
+        const email = document.querySelector('#email').value.trim();
+        const company = document.querySelector('#company').value.trim();
+        if(!name||!validEmail(email)||!company) return false;
+        const visibleReq = Array.from(document.querySelectorAll('#partner-card .fieldset:not(.hidden) [required]'));
+        if (visibleReq.some(el=>!String((el.value||'')).trim())) return false;
+        const msg = document.querySelector('#message').value.trim();
+        return !!msg;
       }
 
-      // file checks
-      const file = $("attachment");
-      if (file) {
-        file.addEventListener("change", () => {
-          setErr("err-file", "");
-          if (!file.files || !file.files[0]) return;
-          const f = file.files[0];
-          if (f.size > 15 * 1024 * 1024) {
-            setErr("err-file", "File is larger than 15MB.");
-            file.value = "";
-          }
-        });
-      }
-
-      // autosave/restore
-      const ids = ["name","email","phone","contact_pref","company","website","industry","company_size","objectives","geo","audience","channels","creative","kpi","budget","timeline","engagement","start_date","duration","message","referrer","call_times"];
-      function save() { const data={}; ids.forEach(id=>{ const el=$(id); if(el) data[id]=el.value; }); localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
-      function restore() { try{ const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}"); ids.forEach(id=>{ const el=$(id); if(el && data[id]!=null) el.value=data[id]; }); }catch{} }
-      restore(); if (form) form.addEventListener("input", save);
-
-      // timing trap
-      loadTs.value = Date.now().toString();
-
-      // validate
-      function validate() {
-        let ok = true;
-        [["name","err-name","Please enter your name."],
-         ["email","err-email","Please enter a valid email."],
-         ["company","err-company","Please enter your company."],
-         ["objectives","err-objectives","Please share your objectives."],
-         ["message","err-message","Please include a brief."]]
-        .forEach(([fid,eid,msg])=>{
-          const el=$(fid), v=(el?.value||"").trim();
-          const fail=!v || (fid==="email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
-          setErr(eid, fail?msg:"", fid);
-          if(fail) ok=false;
-        });
-        const website = $("website");
-        if (website && website.value.trim() && !/^https?:\/\//i.test(website.value.trim())) {
-          status.className = "status err";
-          status.textContent = "Website should start with http:// or https://";
-          ok = false;
-        }
-        return ok;
-      }
-
-      // submit
-      form.addEventListener("submit", async (e) => {
+      form.addEventListener('submit', async (e)=>{
         e.preventDefault();
-        const delta = Date.now() - Number(loadTs.value || "0");
-        if (delta < 3000) {
-          status.className = "status err";
-          status.textContent = "Please take a moment to complete the brief.";
-          return;
-        }
-        if (!validate()) {
-          status className = "status err";
-          status.textContent = "Please fix the highlighted fields.";
-          return;
-        }
-
-        if (button) button.disabled = true;
-        if (spin) spin.style.display = "inline-block";
-        if (btnText) btnText.textContent = "Sending…";
-        status.className = "status";
-        status.textContent = "";
-
-        try {
-          const res = await fetch(form.action, {
-            method: form.method,
-            body: new FormData(form),
-            headers: { Accept: "application/json" }
-          });
-          if (res.ok) {
-            form.reset();
-            localStorage.removeItem(STORAGE_KEY);
-            status.className = "status ok";
-            status.textContent = "Thanks! We’ll get back to you shortly.";
-            window.scrollTo({ top: document.getElementById("partner-card").offsetTop - 20, behavior: "smooth" });
-          } else {
-            let msg = "Oops, please try again.";
-            try { const json = await res.json(); msg = json?.errors?.[0]?.message || msg; } catch {}
-            status.className = "status err";
-            status.textContent = msg;
-          }
-        } catch (err) {
-          status.className = "status err";
-          status.textContent = "Network error. Please retry.";
-        } finally {
-          if (button) button.disabled = false;
-          if (spin) spin.style.display = "none";
-          if (btnText) btnText.textContent = "Send Partnership Brief";
-        }
+        status.className='status'; status.textContent='';
+        if(!validate()){ status.className='status err'; status.textContent='Please complete the required fields.'; return; }
+        btn.disabled=true; spin.style.display='inline-block'; btnText.textContent='Sending…';
+        try{
+          const res = await fetch(form.action,{ method:'POST', body:new FormData(form), headers:{Accept:'application/json'} });
+          if(res.ok){ form.reset(); status.className='status ok'; status.textContent='Thanks! We’ll get back to you shortly.'; window.scrollTo({top: document.getElementById('partner-card').offsetTop - 20, behavior:'smooth'}); }
+          else { status.className='status err'; status.textContent='Oops, please try again.'; }
+        }catch{ status.className='status err'; status.textContent='Network error. Please retry.'; }
+        finally{ btn.disabled=false; spin.style.display='none'; btnText.textContent='Send'; }
       });
 
-      if (window.ScrollReveal) {
-        ScrollReveal().reveal('#partner-card', { distance: '20px', duration: 600, origin: 'bottom', easing: 'ease-out', opacity: 0 });
-      }
+      if (window.ScrollReveal) ScrollReveal().reveal('#partner-card',{ distance:'20px', duration:600, origin:'bottom', easing:'ease-out', opacity:0 });
     })();
   </script>
 
