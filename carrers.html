@@ -60,6 +60,9 @@
       --chip-bg: rgba(100,160,255,.12);
       --chip-bd: rgba(100,160,255,.35);
       --page-max: 1040px;
+      /* default fallbacks if global CSS doesn't set these */
+      --border-color: rgba(0,0,0,.12);
+    
     }
     .dark-theme{
       --glass: rgba(18,18,18,.6);
@@ -69,22 +72,7 @@
       --chip-bd: rgba(100,160,255,.5);
     }
 
-    /* ========= Background polish ========= */
-    body{
-      background:
-        radial-gradient(1400px 700px at 10% -10%, rgba(100,160,255,.14), transparent 60%),
-        radial-gradient(1200px 600px at 100% 10%, rgba(84,107,171,.12), transparent 60%),
-        var(--first-color);
-    }
-    .bg-ornament{ position: fixed; inset: 0; pointer-events:none; z-index:0; overflow:hidden; }
-    .blob{
-      position:absolute; filter: blur(40px); opacity:.28; border-radius:50%;
-      animation: floaty 24s ease-in-out infinite;
-      background: radial-gradient(circle at 30% 30%, var(--third-color), transparent 60%);
-    }
-    .blob.one{ width:460px; height:460px; top: -120px; left: -110px; }
-    .blob.two{ width:520px; height:520px; right:-140px; top: 120px; animation-delay: -6s; }
-    @keyframes floaty{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-20px) } }
+    /* (BG removed here so it matches partners.html which uses global bubble background) */
 
     /* ========= Hero ========= */
     .careers-hero{
@@ -115,12 +103,13 @@
       border: 1px solid transparent;
       font-weight: 600;
       display: inline-flex; align-items:center; gap:.45rem;
+      cursor:pointer; text-decoration:none;
     }
     .btn--primary{
       background: linear-gradient(180deg, var(--third-color), var(--accent-color));
       color:#fff;
     }
-    .btn--primary:hover{ transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn--primary:hover{ background: rgba(100,160,255,.08);transform: translateY(-2px); box-shadow: var(--shadow-md); }
     .btn--ghost{ background: transparent; border-color: var(--third-color); color: var(--third-color); }
     .btn--ghost:hover{ background: rgba(100,160,255,.08); transform: translateY(-2px); }
 
@@ -137,18 +126,22 @@
     }
     .btn--ghost[aria-expanded="true"]{ background: rgba(100,160,255,.12); }
 
-    /* ========= Filters (glass, sticky) ========= */
+    /* ========= Filters (white on light; glassy on dark) ========= */
     .filters{
-      position: sticky; top: calc(var(--header-height) + 10px);
+      position: sticky; top: calc(var(--header-height, 60px) + 10px);
       backdrop-filter: saturate(140%) blur(8px);
       -webkit-backdrop-filter: saturate(140%) blur(8px);
-      background: var(--glass);
-      border: 1px solid var(--glass-bd);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow-sm);
       z-index: 5;
       max-width: var(--page-max); margin: 0 auto 1.1rem;
       padding: .9rem;
+      border: 1px solid var(--border-color);
+      background:#fff;
+    }
+    body.dark-theme .filters{
+      background: var(--glass);
+      border-color: var(--glass-bd);
     }
     .filters .row{ display:grid; gap:.6rem; grid-template-columns:1fr; align-items:center; }
     .filters :is(input,select){
@@ -158,7 +151,7 @@
       transition: border-color .2s ease, box-shadow .2s ease;
       font-size: 1rem;
     }
-    .dark-theme .filters :is(input,select){ background: #0f0f0f; color:#eee; }
+    body.dark-theme .filters :is(input,select){ background: #0f0f0f; color:#eee; border-color: rgba(255,255,255,.18); }
     .filters :is(input,select):focus{
       border-color: var(--third-color);
       box-shadow: 0 0 0 3px rgba(84,107,171,.2);
@@ -183,15 +176,18 @@
 
     /* ========= Job card ========= */
     .job__card{
-      background: rgba(255,255,255,.75);
-      border: 1px solid var(--glass-bd);
+      background:#fff;
+      border: 1px solid var(--border-color);
       border-left: 5px solid var(--third-color);
       border-radius: 18px;
       box-shadow: var(--shadow-sm);
       padding: .95rem;
       transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
     }
-    .dark-theme .job__card{ background: rgba(0,0,0,.36); }
+    body.dark-theme .job__card{
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.18);
+    }
     .job__card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-md); border-left-color: var(--accent-color); }
 
     .job__header{ display:flex; gap:.85rem; justify-content:space-between; align-items:flex-start; }
@@ -202,7 +198,6 @@
       border: 1px solid var(--chip-bd); background: var(--chip-bg); color: var(--second-color);
     }
     .job__meta{ font-size:.92rem; opacity:.95; color: var(--text-color-light); display:flex; gap:.35rem; flex-wrap:wrap; }
-    .job__meta span{ display:inline-flex; gap:.35rem; align-items:center; }
     .job__meta .bx{ font-size:1.05rem; }
 
     .job__tags{ display:flex; gap:.35rem; flex-wrap:wrap; margin-top:.45rem; }
@@ -218,13 +213,14 @@
 
     /* ========= “No results” card ========= */
     #noResults{
-      background: rgba(255,255,255,.7);
-      border:1px dashed var(--glass-bd);
+      background:#fff;
+      border:1px dashed var(--border-color);
       border-radius: var(--radius-lg);
       padding: 1rem;
       box-shadow: var(--shadow-sm);
       max-width: var(--page-max); margin: .5rem auto 0;
     }
+    body.dark-theme #noResults{ background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
     #open-roles #noResults p{ color: var(--second-color) !important; }
 
     /* ========= Values ========= */
@@ -235,11 +231,11 @@
     }
     .values__grid .card{
       border-radius: 18px; padding: 1rem;
-      background: rgba(255,255,255,.7); border: 1px solid var(--glass-bd); box-shadow: var(--shadow-sm);
+      background:#fff; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);
       transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
     }
-    .dark-theme .values__grid .card{ background: rgba(0,0,0,.36); }
-    .values__grid .card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--glass-dark); }
+    body.dark-theme .values__grid .card{ background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+    .values__grid .card:hover{ transform: translateY(-4px); box-shadow: var(--shadow-md); }
     .values__grid h3{ display:flex; gap:.5rem; align-items:center; font-size:1rem; }
     .values__grid h3 i{
       width:32px; height:32px; border-radius:50%;
@@ -248,13 +244,6 @@
       font-size:1.1rem;
     }
     .cta{ text-align:center; padding: 1.25rem 1rem 1.9rem; }
-
-    /* ========= Footer polish ========= */
-    .footer{ position: relative; overflow: hidden; }
-    .footer::before{
-      content:""; position:absolute; inset:auto 0 0 0; height:4px;
-      background: linear-gradient(90deg, var(--third-color), var(--accent-color));
-    }
 
     /* ========= Mobile-first tweaks ========= */
     @media (max-width: 600px){
@@ -275,14 +264,12 @@
     #open-roles{ color: inherit; }
     #open-roles :is(h1,h2,h3,h4,p,li,span,.job__title,.job__meta,.job__card p,.job__body li,.badge,.bx){ color: inherit !important; }
     #open-roles a:not(.btn){ color: inherit !important; }
+ 
   </style>
 </head>
 <body>
-  <!-- Decorative background blobs -->
-  <div class="bg-ornament" aria-hidden="true">
-    <span class="blob one"></span>
-    <span class="blob two"></span>
-  </div>
+  <!-- match partners.html background -->
+  <div class="bubble-container"></div>
 
   <!-- HEADER -->
   <header class="l-header">
@@ -297,7 +284,9 @@
           <li class="nav__item"><a href="careers.html" class="nav__link active">Careers</a></li>
         </ul>
       </div>
-      <div class="theme"><img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" /></div>
+      <div class="theme" title="Toggle theme">
+        <img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" style="cursor:pointer"/>
+      </div>
       <div class="nav__toggle" id="nav-toggle" aria-label="Open menu"><i class="bx bx-menu"></i></div>
     </nav>
   </header>
@@ -417,38 +406,6 @@
 
   <!-- Page JS -->
   <script>
-    /* ---------- Jobs data (sample) ---------- */
-    <!-- const JOBS = [
-      { id:"fs-eng", title:"Full-Stack Engineer (React/Node/Mapbox)", dept:"Engineering", location:"Remote (USA)", type:"Full-time", level:"Mid–Senior", datePosted:"2025-08-27",
-        description:"Build core app features: driver density maps, trackers, and privacy-first data flows.",
-        responsibilities:["Ship React/Node features end-to-end with strong TypeScript hygiene.","Implement Mapbox layers, tiles, and grid overlays for density forecasts.","Design clean, privacy-first data contracts with the backend.","Own performance, testing, and reliability."],
-        requirements:["3+ years with React/Node.","Mapbox GL JS or similar mapping experience.","Product sense and bias to ship.","Nice to have: React Native."]},
-      { id:"mobile-eng", title:"Mobile Engineer (React Native)", dept:"Engineering", location:"Remote (USA)", type:"Full-time", level:"Mid", datePosted:"2025-08-27",
-        description:"Own the RN app: tracking, Focus rest scheduling, and clean offline-first UX.",
-        responsibilities:["Build RN screens, state, and background services responsibly.","Integrate OS-safe mic/gesture triggers for quick inputs.","Improve startup time, bundle size, and crash-free rate."],
-        requirements:["2+ years with React Native.","iOS/Android store submission know-how.","Great craft around UX details and accessibility."]},
-      { id:"product-designer", title:"Product Designer (Mobile/Web)", dept:"Product & Design", location:"Remote (USA)", type:"Full-time", level:"Mid–Senior", datePosted:"2025-08-27",
-        description:"Design driver-first experiences that are fast, clear, and respectful.",
-        responsibilities:["Own flows across onboarding, tracking, density map, and Focus.","Create systems (tokens, components) and spec interactions.","Partner with engineering to ship pixel-tight builds."],
-        requirements:["Mobile product design portfolio.","Systems thinking and prototyping chops.","Strong writing and UX research instincts."]},
-      { id:"growth-aso", title:"Growth & ASO Manager", dept:"Growth & ASO", location:"Hybrid – Atlanta, GA", type:"Full-time", level:"Mid", datePosted:"2025-08-27",
-        description:"Own ASO, onboarding funnels, and backer/community growth.",
-        responsibilities:["Keyword research, listing tests, screenshots/video iteration.","Cohort analytics, retention experiments, and referral loops.","Partner with community on creator & affiliate programs."],
-        requirements:["Hands-on ASO experience.","Comfort with analytics & experimentation.","Strong copy instincts."]},
-      { id:"community", title:"Community & Support Lead", dept:"Community & Support", location:"Hybrid – Atlanta, GA", type:"Full-time", level:"Mid", datePosted:"2025-08-27",
-        description:"Be the voice for drivers. Build community programs and fast, human support.",
-        responsibilities:["Create helpful guides, FAQs, and feedback channels.","Run Zooms/AMAs; partner with drivers for feature input.","Measure satisfaction and close the loop with product."],
-        requirements:["Community or CX leadership at a consumer app.","Empathy and crisp communication.","Bonus: gig driving experience."]},
-      { id:"partnerships", title:"Partnerships Manager (Affiliates & Sponsors)", dept:"Partnerships", location:"Remote (USA)", type:"Full-time", level:"Mid–Senior", datePosted:"2025-08-27",
-        description:"Grow responsible partner programs (tax, auto parts, insurance) that help drivers save.",
-        responsibilities:["Source, negotiate, and manage affiliate/sponsor relationships.","Ensure compliance (CJ policies, privacy, transparent UX).","Report performance and ROI."],
-        requirements:["Partner/BD or affiliate track record.","Comfort with legal/compliance basics.","Clear communicator and closer."]},
-      { id:"ops-intern", title:"Ops Intern (Fall/Winter)", dept:"Internships", location:"Remote (USA)", type:"Internship", level:"Intern", datePosted:"2025-08-27",
-        description:"Help with research, QA, and light ops to keep the team shipping.",
-        responsibilities:["Support launches, QA features, document processes.","Assist with data clean-up and light analytics."],
-        requirements:["Strong curiosity and follow-through.","Clear writing and organization."]}
-    ]; -->
-
     /* ---------- Helpers ---------- */
     const els = {
       list: document.getElementById("jobsList"),
@@ -564,7 +521,7 @@ Best,
       els.count.textContent = `${results.length} role${results.length!==1?'s':''}`;
       updateURL();
 
-      // Toggle handlers (flip icon, keep label width stable)
+      // Toggle handlers
       els.list.querySelectorAll(".toggle").forEach(btn=>{
         btn.addEventListener("click", ()=>{
           const card = btn.closest(".job__card");
@@ -625,13 +582,30 @@ Best,
       sr.reveal("#open-roles .filters, #open-roles .jobs__grid");
       sr.reveal("#values .card");
     }
+
+    /* Safe, minimal theme toggler (works alongside main.js if present) */
+    (function(){
+      const key = "gw_theme";
+      const body = document.body;
+      const btn = document.getElementById("iconMS");
+      const saved = localStorage.getItem(key);
+      if(saved === "dark") body.classList.add("dark-theme");
+      if(saved === "light") body.classList.remove("dark-theme");
+
+      if(btn && !btn.dataset.bound){
+        btn.dataset.bound = "1";
+        btn.addEventListener("click", ()=>{
+          body.classList.toggle("dark-theme");
+          localStorage.setItem(key, body.classList.contains("dark-theme") ? "dark" : "light");
+        });
+      }
+    })();
   </script>
 
-  <!-- Main JS -->
+  <!-- Main JS (your site’s script) -->
   <script src="assets/js/main.js"></script>
 </body>
 </html>
-
 
 
 
