@@ -30,12 +30,12 @@
   <!-- Schema -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Gigways",
-    "url": "https://gigways.com",
-    "logo": "https://gigways.com/assets/img/App.png",
-    "sameAs": [
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Gigways",
+    "url":"https://gigways.com",
+    "logo":"https://gigways.com/assets/img/App.png",
+    "sameAs":[
       "https://www.linkedin.com/company/gigways",
       "https://www.instagram.com/gigways",
       "https://twitter.com/gigways"
@@ -44,14 +44,13 @@
   </script>
 
   <style>
-    /* ——— Local page tweaks (keeps your global design system intact) ——— */
+    /* ---- Local page tweaks: respects your global design system ---- */
     :root{
       --card-bg: rgba(255,255,255,.06);
       --card-bd: rgba(255,255,255,.14);
       --input-bg: rgba(255,255,255,.08);
       --input-bd: rgba(255,255,255,.30);
       --input-bd-hover: rgba(255,255,255,.44);
-      --ring: #22d3ee;
       --ring-soft: rgba(34,211,238,.28);
       --button-grad: linear-gradient(90deg,#6ee7ff,#22d3ee);
       --button-text: #062a33;
@@ -69,7 +68,7 @@
     .btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.75rem 1rem; border:2px solid #0f172a; border-radius:999px; background:#fff; color:#0f172a; text-decoration:none; font-weight:700; transition:.15s ease }
     .btn:hover{ transform:translateY(-1px); background:var(--third-color); color:#fff }
     .btn--primary{ background:var(--button-grad); border-color:transparent; color:var(--button-text) }
-    .btn--primary:hover{ filter:brightness(.97); transform:translateY(-1px) }
+    .btn--primary:hover{ filter:brightness(.97) }
 
     /* Featured grid */
     .partners__grid{ display:grid; gap:1.25rem; margin-top:2rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); color:black }
@@ -86,26 +85,31 @@
     .field{ position:relative }
     .icon{ position:absolute; left:.85rem; top:50%; transform:translateY(-50%); font-size:1.05rem; opacity:.9; pointer-events:none }
 
-    .input,.textarea,.file{ width:100%; border-radius:12px; border:2px solid var(--input-bd); background:var(--input-bg); color:inherit; padding:.9rem 1rem .9rem 2.35rem; transition:.15s ease }
+    .input,.textarea,.file{
+      width:100%; border-radius:12px; border:2px solid var(--input-bd);
+      background:var(--input-bg); color:inherit; padding:.9rem 1rem .9rem 2.35rem; transition:.15s ease
+    }
     .textarea{ min-height:140px; resize:vertical }
     .input:hover,.textarea:hover,.file:hover{ border-color:var(--input-bd-hover); background:rgba(255,255,255,.10) }
     .input:focus,.textarea:focus,.file:focus{ outline:none; border-color:#fff; box-shadow:0 0 0 3px var(--ring-soft); background:rgba(255,255,255,.12) }
-    .input[aria-invalid="true"],.textarea[aria-invalid="true"]{ border-color:var(--err) }
-    .error{ color:var(--err); font-size:.85rem; min-height:1.1rem }
-    .hint{ font-size:.83rem; opacity:.7 }
-    .counter{ font-size:.78rem; opacity:.7; text-align:right }
 
-    .btn-primary{ width:100%; display:inline-flex; align-items:center; justify-content:center; gap:.6rem; padding:1rem 1.1rem; border-radius:999px; border:0; background:var(--button-grad); color:var(--button-text); font-weight:700; cursor:pointer; transition:.15s ease }
+    .error{ color:var(--err); font-size:.85rem; min-height:1.1rem }
+    .hint,.counter{ font-size:.83rem; opacity:.7 }
+    .counter{ text-align:right }
+
+    .btn-primary{
+      width:100%; display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
+      padding:1rem 1.1rem; border-radius:999px; border:0; background:var(--button-grad); color:var(--button-text); font-weight:700; cursor:pointer; transition:.15s ease
+    }
     .btn-primary:hover{ filter:brightness(.97); transform:translateY(-1px) }
     .btn-primary[disabled]{ opacity:.7; cursor:not-allowed }
-
     .status{ min-height:1.25rem; margin-top:.75rem; font-size:.95rem }
     .status.ok{ color:var(--ok) } .status.err{ color:var(--err) }
     .spinner{ width:16px; height:16px; border:2px solid rgba(0,0,0,.2); border-top-color:rgba(0,0,0,.5); border-radius:50%; animation:spin .8s linear infinite }
     @keyframes spin{ to{ transform:rotate(360deg) } }
 
-    /* Keep the high-contrast white visuals for the form */
-    #partner-card.card{ background:#fff!important; border:1.5px solid #e5e7eb!important; color:#0b0f12 }
+    /* High-contrast white visuals for the form card */
+    #partner-card{ background:#fff!important; border:1.5px solid #e5e7eb!important; color:#0b0f12 }
     #partner-card .input,#partner-card .textarea,#partner-card .file{
       background:#fff!important; color:#0b0f12!important; border:2px solid rgba(17,24,39,.88)!important; border-radius:12px; box-shadow:0 1px 2px rgba(0,0,0,.06)
     }
@@ -115,8 +119,8 @@
     #partner-card .input:focus,#partner-card .textarea:focus,#partner-card .file:focus{
       outline:none; border-color:#0891b2!important; box-shadow:0 0 0 3px rgba(34,211,238,.28),0 0 0 1.5px rgba(17,24,39,.95) inset; background:#fff!important
     }
-    #partner-card .input[aria-invalid="true"],#partner-card .textarea[aria-invalid="true"]{ border-color:#ef4444!important; box-shadow:0 0 0 2px rgba(239,68,68,.15) }
-      /* Partner type pill switch */
+
+    /* Partner type switch */
     .type-switch{ display:flex; flex-wrap:wrap; gap:.5rem }
     .type-btn{ padding:.5rem .85rem; border:1.5px solid #0f172a; background:#fff; color:#0f172a; border-radius:999px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:.45rem }
     .type-btn:hover{ transform:translateY(-1px) }
@@ -126,7 +130,8 @@
     .fieldset{ border:1.5px solid #e5e7eb; border-radius:14px; padding:1rem; margin:.75rem 0 1rem; background:#fff }
     .fieldset legend{ padding:0 .5rem; font-weight:700 }
     .hidden{ display:none }
-      /* Car Ads image thumbnails */
+
+    /* Car Ads image thumbnails */
     #car_img_preview.thumbs{ display:grid; grid-template-columns:repeat(auto-fill,minmax(90px,1fr)); gap:.5rem; margin-top:.5rem }
     #car_img_preview.thumbs img{ width:100%; height:90px; object-fit:cover; border-radius:10px; border:1.5px solid #e5e7eb }
   </style>
@@ -200,19 +205,19 @@
           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
           <input type="hidden" id="partner_type_input" name="partner_type" value="affiliate">
 
-          <!-- 1) PARTNER TYPE SWITCH -->
+          <!-- Partner Type -->
           <div class="form__group">
             <label class="label">Partner Type *</label>
             <div class="type-switch" role="tablist" aria-label="Partner type">
               <button class="type-btn active" data-type="affiliate" role="tab" aria-selected="true"><i class="bx bx-link"></i> Affiliate</button>
-              <button class="type-btn" data-type="inapp" role="tab" aria-selected="false"><i class="bx bx-rectangle"></i> In‑app Ads/Banners</button>
+              <button class="type-btn" data-type="inapp" role="tab" aria-selected="false"><i class="bx bx-rectangle"></i> In-app Ads/Banners</button>
               <button class="type-btn" data-type="carads" role="tab" aria-selected="false"><i class="bx bx-car"></i> Car Ads (Rooftop/Decals)</button>
               <button class="type-btn" data-type="perks" role="tab" aria-selected="false"><i class="bx bx-gift"></i> Driver Perks/Discounts</button>
               <button class="type-btn" data-type="api" role="tab" aria-selected="false"><i class="bx bx-code-alt"></i> API/Data</button>
             </div>
           </div>
 
-          <!-- 2) BASIC INFO (always shown) -->
+          <!-- Basic info -->
           <div class="form__grid">
             <div class="form__group">
               <label class="label" for="name">Your Name *</label>
@@ -244,7 +249,6 @@
             </div>
           </div>
 
-          <!-- 3) TYPE-SPECIFIC FIELDS -->
           <!-- Affiliate -->
           <fieldset id="fs-affiliate" class="fieldset">
             <legend>Affiliate Details</legend>
@@ -282,9 +286,9 @@
             </div>
           </fieldset>
 
-          <!-- In‑app Ads/Banners -->
+          <!-- In-app Ads/Banners -->
           <fieldset id="fs-inapp" class="fieldset hidden">
-            <legend>In‑app Ads / Banners</legend>
+            <legend>In-app Ads / Banners</legend>
             <div class="form__grid">
               <div class="form__group">
                 <label class="label" for="inapp_placement">Placement *</label>
@@ -372,7 +376,7 @@
                 <label class="label" for="perk_redemption">Redemption Method</label>
                 <div class="field">
                   <i class="bx bx-badge-check icon"></i>
-                  <input class="input" id="perk_redemption" name="perk_redemption" type="text" placeholder="Code, link, in‑store, app‑only">
+                  <input class="input" id="perk_redemption" name="perk_redemption" type="text" placeholder="Code, link, in-store, app-only">
                 </div>
               </div>
             </div>
@@ -380,7 +384,7 @@
               <label class="label" for="perk_scope">Geography / Limits</label>
               <div class="field">
                 <i class="bx bx-world icon"></i>
-                <input class="input" id="perk_scope" name="perk_scope" type="text" placeholder="US‑only, ATL metro, first 5k redemptions, etc.">
+                <input class="input" id="perk_scope" name="perk_scope" type="text" placeholder="US-only, ATL metro, first 5k redemptions, etc.">
               </div>
             </div>
           </fieldset>
@@ -413,7 +417,7 @@
             </div>
           </fieldset>
 
-          <!-- 4) BRIEF (always shown) -->
+          <!-- Brief -->
           <div class="form__group">
             <label class="label" for="message">Brief *</label>
             <div class="field">
@@ -422,7 +426,7 @@
             </div>
           </div>
 
-          <!-- 5) CONSENT + SUBMIT -->
+          <!-- Consent + Submit -->
           <label class="label" style="display:flex;align-items:center;gap:.55rem;margin:.5rem 0 1rem">
             <input type="checkbox" name="consent" required style="width:18px;height:18px">
             <span>I agree to be contacted and accept the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
@@ -472,74 +476,95 @@
   <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
   <script>
     (function(){
-      const $ = s => document.querySelector(s);
+      const $  = s => document.querySelector(s);
       const $$ = s => Array.from(document.querySelectorAll(s));
-      const form = document.querySelector('#my-form');
-      const status = document.querySelector('#my-form-status');
-      const btn = document.querySelector('#my-form-button');
-      const spin = document.querySelector('#btn-spin');
-      const btnText = document.querySelector('#btn-text');
-      const partnerTypeInput = document.querySelector('#partner_type_input');
+
+      const form    = $('#my-form');
+      const status  = $('#my-form-status');
+      const btn     = $('#my-form-button');
+      const spin    = $('#btn-spin');
+      const btnText = $('#btn-text');
+      const typeInput = $('#partner_type_input');
+
+      const fsMap = { affiliate:'#fs-affiliate', inapp:'#fs-inapp', carads:'#fs-carads', perks:'#fs-perks', api:'#fs-api' };
 
       function setType(type){
-        partnerTypeInput.value = type;
+        typeInput.value = type;
         $$('.type-btn').forEach(b=>{
-          const on = b.getAttribute('data-type')===type;
+          const on = b.dataset.type===type;
           b.classList.toggle('active', on);
           b.setAttribute('aria-selected', on ? 'true' : 'false');
         });
+        // show fieldset
         $$('#partner-card .fieldset').forEach(fs=>fs.classList.add('hidden'));
-        const map = {affiliate:'#fs-affiliate', inapp:'#fs-inapp', carads:'#fs-carads', perks:'#fs-perks', api:'#fs-api'};
-        const targetSel = map[type];
-        if (targetSel) document.querySelector(targetSel).classList.remove('hidden');
+        const target = document.querySelector(fsMap[type]);
+        if (target) target.classList.remove('hidden');
+        // toggle required
         $$('#partner-card [class^="req-"]').forEach(el=> el.required=false);
         $$('#partner-card .req-'+type).forEach(el=> el.required=true);
       }
-      $$('.type-btn').forEach(b=> b.addEventListener('click',()=> setType(b.getAttribute('data-type'))));
+
+      // type switch (event delegation)
+      document.querySelector('.type-switch').addEventListener('click', e=>{
+        const btn = e.target.closest('.type-btn'); if (!btn) return;
+        setType(btn.dataset.type);
+      });
+      // init default
       setType('affiliate');
-      const firstTypeBtn = document.querySelector('.type-btn');
-      if(firstTypeBtn) firstTypeBtn.focus();
+      const firstType = document.querySelector('.type-btn'); if (firstType) firstType.focus();
+
       // Car Ads image previews
       const carImgInput = $('#car_images');
-      const carImgPrev = $('#car_img_preview');
-      const carImgErr = $('#car_img_err');
-      if (carImgInput) {
+      const carImgPrev  = $('#car_img_preview');
+      const carImgErr   = $('#car_img_err');
+
+      if (carImgInput){
         carImgInput.addEventListener('change', ()=>{
-          if (carImgErr) carImgErr.textContent='';
-          if (carImgPrev) carImgPrev.innerHTML='';
+          carImgErr.textContent=''; carImgPrev.innerHTML='';
           const files = Array.from(carImgInput.files||[]);
-          const MAX_FILES = 5, MAX_SIZE = 8*1024*1024; // 8MB each
-          if (files.length > MAX_FILES) { if (carImgErr) carImgErr.textContent=`Please select up to ${MAX_FILES} images.`; carImgInput.value=''; return; }
-          for (const f of files){ if (f.size > MAX_SIZE){ if (carImgErr) carImgErr.textContent='Each image must be under 8MB.'; carImgInput.value=''; return; } }
-          files.forEach(f=>{ const img = new Image(); img.alt = f.name; img.src = URL.createObjectURL(f); carImgPrev && carImgPrev.appendChild(img); });
+          const MAX_FILES = 5, MAX_SIZE = 8*1024*1024;
+          if (files.length > MAX_FILES){ carImgErr.textContent=`Please select up to ${MAX_FILES} images.`; carImgInput.value=''; return; }
+          if (files.some(f=>f.size>MAX_SIZE)){ carImgErr.textContent='Each image must be under 8MB.'; carImgInput.value=''; return; }
+          files.forEach(f=>{
+            const img = new Image();
+            img.alt = f.name;
+            img.src = URL.createObjectURL(f);
+            carImgPrev.appendChild(img);
+          });
         });
       }
 
-      function validEmail(v){ return v.includes('@') && v.includes('.'); }
-      function validate(){
-        const name = document.querySelector('#name').value.trim();
-        const email = document.querySelector('#email').value.trim();
-        const company = document.querySelector('#company').value.trim();
-        if(!name||!validEmail(email)||!company) return false;
-        const visibleReq = Array.from(document.querySelectorAll('#partner-card .fieldset:not(.hidden) [required]'));
-        if (visibleReq.some(el=>!String((el.value||'')).trim())) return false;
-        const msg = document.querySelector('#message').value.trim();
-        return !!msg;
-      }
-
+      // Submit
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
         status.className='status'; status.textContent='';
-        if(!validate()){ status.className='status err'; status.textContent='Please complete the required fields.'; return; }
+
+        // Ensure dynamic required fields are applied before validity check
+        const curType = typeInput.value; setType(curType);
+        if (!form.checkValidity()){
+          status.className='status err'; status.textContent='Please complete the required fields.';
+          form.reportValidity();
+          return;
+        }
+
         btn.disabled=true; spin.style.display='inline-block'; btnText.textContent='Sending…';
         try{
           const res = await fetch(form.action,{ method:'POST', body:new FormData(form), headers:{Accept:'application/json'} });
-          if(res.ok){ form.reset(); status.className='status ok'; status.textContent='Thanks! We’ll get back to you shortly.'; window.scrollTo({top: document.getElementById('partner-card').offsetTop - 20, behavior:'smooth'}); }
-          else { status.className='status err'; status.textContent='Oops, please try again.'; }
-        }catch{ status.className='status err'; status.textContent='Network error. Please retry.'; }
-        finally{ btn.disabled=false; spin.style.display='none'; btnText.textContent='Send'; }
+          if(res.ok){
+            form.reset(); setType(curType); // keep visible section selection
+            status.className='status ok'; status.textContent='Thanks! We’ll get back to you shortly.';
+            window.scrollTo({ top: document.getElementById('partner-card').offsetTop - 20, behavior:'smooth' });
+          }else{
+            status.className='status err'; status.textContent='Oops, please try again.';
+          }
+        }catch{
+          status.className='status err'; status.textContent='Network error. Please retry.';
+        }finally{
+          btn.disabled=false; spin.style.display='none'; btnText.textContent='Send';
+        }
       });
 
+      // subtle entrance
       if (window.ScrollReveal) ScrollReveal().reveal('#partner-card',{ distance:'20px', duration:600, origin:'bottom', easing:'ease-out', opacity:0 });
     })();
   </script>
