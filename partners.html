@@ -42,111 +42,18 @@
     ]
   }
   </script>
-
-  <style>
-    /* ---- Local page tweaks: respects your global design system ---- */
-    :root{
-      --card-bg: rgba(255,255,255,.06);
-      --card-bd: rgba(255,255,255,.14);
-      --input-bg: rgba(255,255,255,.08);
-      --input-bd: rgba(255,255,255,.30);
-      --input-bd-hover: rgba(255,255,255,.44);
-      --ring-soft: rgba(34,211,238,.28);
-      --button-grad: linear-gradient(90deg,#6ee7ff,#22d3ee);
-      --button-text: #062a33;
-      --ok:#22c55e; --err:#ef4444;
-    }
-
-    .container{ max-width:1040px; margin:0 auto; padding:0 1rem }
-    .section{ padding:4.5rem 1rem 3rem }
-    .section-title{ text-align:center; font-size:clamp(1.6rem,2vw+1rem,2.4rem); margin:0 }
-    .section-subtitle{ text-align:center; opacity:.85; max-width:720px; margin:.5rem auto 1.5rem }
-
-    /* Hero */
-    .partners-hero{ padding-top:5rem }
-    .cta-row{ display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap }
-    .btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.75rem 1rem; border:2px solid #0f172a; border-radius:999px; background:#fff; color:#0f172a; text-decoration:none; font-weight:700; transition:.15s ease }
-    .btn:hover{ transform:translateY(-1px); background:var(--third-color); color:#fff }
-    .btn--primary{ background:var(--button-grad); border-color:transparent; color:var(--button-text) }
-    .btn--primary:hover{ filter:brightness(.97) }
-
-    /* Featured grid */
-    .partners__grid{ display:grid; gap:1.25rem; margin-top:2rem; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); color:black }
-    .partner__card{ background:#fff; border:1.5px solid #e5e7eb; border-radius:16px; padding:1.25rem; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,.06); transition:.15s ease }
-    .partner__card:hover{ transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,0,0,.10); border-color:#cbd5e1 }
-    .partner__card img{ max-width:120px; display:block; margin:0 auto .75rem }
-
-    /* Card + form */
-    .card{ background:var(--card-bg); border:1px solid var(--card-bd); border-radius:16px; padding:1.25rem; box-shadow:0 10px 28px rgba(0,0,0,.16) }
-    .form__grid{ display:grid; gap:1rem; grid-template-columns:1fr 1fr }
-    @media (max-width:860px){ .form__grid{ grid-template-columns:1fr } }
-    .form__group{ display:flex; flex-direction:column; gap:.45rem; position:relative }
-    .label{ font-size:.95rem; opacity:.95 }
-    .field{ position:relative }
-    .icon{ position:absolute; left:.85rem; top:50%; transform:translateY(-50%); font-size:1.05rem; opacity:.9; pointer-events:none }
-
-    .input,.textarea,.file{
-      width:100%; border-radius:12px; border:2px solid var(--input-bd);
-      background:var(--input-bg); color:inherit; padding:.9rem 1rem .9rem 2.35rem; transition:.15s ease
-    }
-    .textarea{ min-height:140px; resize:vertical }
-    .input:hover,.textarea:hover,.file:hover{ border-color:var(--input-bd-hover); background:rgba(255,255,255,.10) }
-    .input:focus,.textarea:focus,.file:focus{ outline:none; border-color:#fff; box-shadow:0 0 0 3px var(--ring-soft); background:rgba(255,255,255,.12) }
-
-    .error{ color:var(--err); font-size:.85rem; min-height:1.1rem }
-    .hint,.counter{ font-size:.83rem; opacity:.7 }
-    .counter{ text-align:right }
-
-    .btn-primary{
-      width:100%; display:inline-flex; align-items:center; justify-content:center; gap:.6rem;
-      padding:1rem 1.1rem; border-radius:999px; border:0; background:var(--button-grad); color:var(--button-text); font-weight:700; cursor:pointer; transition:.15s ease
-    }
-    .btn-primary:hover{ filter:brightness(.97); transform:translateY(-1px) }
-    .btn-primary[disabled]{ opacity:.7; cursor:not-allowed }
-    .status{ min-height:1.25rem; margin-top:.75rem; font-size:.95rem }
-    .status.ok{ color:var(--ok) } .status.err{ color:var(--err) }
-    .spinner{ width:16px; height:16px; border:2px solid rgba(0,0,0,.2); border-top-color:rgba(0,0,0,.5); border-radius:50%; animation:spin .8s linear infinite }
-    @keyframes spin{ to{ transform:rotate(360deg) } }
-
-    /* High-contrast white visuals for the form card */
-    #partner-card{ background:#fff!important; border:1.5px solid #e5e7eb!important; color:#0b0f12 }
-    #partner-card .input,#partner-card .textarea,#partner-card .file{
-      background:#fff!important; color:#0b0f12!important; border:2px solid rgba(17,24,39,.88)!important; border-radius:12px; box-shadow:0 1px 2px rgba(0,0,0,.06)
-    }
-    #partner-card .input::placeholder,#partner-card .textarea::placeholder{ color:#6b7280 }
-    #partner-card .label{ color:#0b0f12 } #partner-card .icon{ color:#111827; opacity:.9 }
-    #partner-card .input:hover,#partner-card .textarea:hover,#partner-card .file:hover{ border-color:#0f172a!important }
-    #partner-card .input:focus,#partner-card .textarea:focus,#partner-card .file:focus{
-      outline:none; border-color:#0891b2!important; box-shadow:0 0 0 3px rgba(34,211,238,.28),0 0 0 1.5px rgba(17,24,39,.95) inset; background:#fff!important
-    }
-
-    /* Partner type switch */
-    .type-switch{ display:flex; flex-wrap:wrap; gap:.5rem }
-    .type-btn{ padding:.5rem .85rem; border:1.5px solid #0f172a; background:#fff; color:#0f172a; border-radius:999px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:.45rem }
-    .type-btn:hover{ transform:translateY(-1px) }
-    .type-btn.active{ background:var(--button-grad); border-color:transparent; color:var(--button-text) }
-
-    /* Fieldsets */
-    .fieldset{ border:1.5px solid #e5e7eb; border-radius:14px; padding:1rem; margin:.75rem 0 1rem; background:#fff }
-    .fieldset legend{ padding:0 .5rem; font-weight:700 }
-    .hidden{ display:none }
-
-    /* Car Ads image thumbnails */
-    #car_img_preview.thumbs{ display:grid; grid-template-columns:repeat(auto-fill,minmax(90px,1fr)); gap:.5rem; margin-top:.5rem }
-    #car_img_preview.thumbs img{ width:100%; height:90px; object-fit:cover; border-radius:10px; border:1.5px solid #e5e7eb }
-  </style>
 </head>
 <body>
   <div class="bubble-container"></div>
 
-  <header class="l-header">
+ <header class="l-header">
     <nav class="nav bd-grid">
       <div><a href="index.html" class="nav__logo">Gigways</a></div>
       <div class="nav__menu" id="nav-menu">
         <ul class="nav__list">
           <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
           <li class="nav__item"><a href="index.html#preview" class="nav__link">App Preview</a></li>
-          <li class="nav__item"><a href="market.html" class="nav__link">Marketplace</a></li>
+          <li class="nav__item"><a href="market.html" class="nav__link ">Marketplace</a></li>
           <li class="nav__item"><a href="partners.html" class="nav__link active">Partners</a></li>
           <li class="nav__item"><a href="carrers.html" class="nav__link">Careers</a></li>
         </ul>
@@ -443,35 +350,58 @@
     </div>
   </main>
 
-  <footer class="footer">
-    <div class="footer__container">
-      <div class="footer__content">
-        <h2 class="footer__title">Gigways LLC</h2>
-        <p class="footer__description">Making work easier, safer, and more organized for gig workers</p>
-      </div>
-      <div class="footer__content">
-        <h3 class="footer__subtitle">Quick Links</h3>
-        <ul class="footer__links">
-          <li><a href="#home" class="footer__link">Home</a></li>
-          <li><a href="market.html" class="footer__link">Marketplace</a></li>
-          <li><a href="partners.html#forms" class="footer__link">Partners</a></li>
-          <li><a href="carrers.html" class="footer__link">Carrers</a></li>
-          <li><a href="privacy-policy.html" class="footer__link">Privacy Policy</a></li>
-          <li><a href="backer.html" class="footer__link">Early Backer</a></li>
-        </ul>
-      </div>
-      <div class="footer__content">
-        <h3 class="footer__subtitle">Connect With Us</h3>
-        <div class="footer__social">
-          <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon"><i class="bx bxl-facebook"></i></a>
-          <a href="https://x.com/i/flow/single_sign_on" class="footer__icon"><i class="bx bxl-twitter"></i></a>
-          <a href="https://www.instagram.com/" class="footer__icon"><i class="bx bxl-instagram"></i></a>
-          <a href="mailto:support@gigways.com" class="footer__icon"><i class="bx bxs-envelope"></i></a>
+<!--===== FOOTER =====-->
+    <footer class="footer">
+      <div class="footer__container">
+        <div class="footer__content">
+          <h2 class="footer__title">Gigways LLC</h2>
+          <p class="footer__description">
+            Making work easier, safer, and more organized for gig workers
+          </p>
+        </div>
+        <div class="footer__content">
+          <h3 class="footer__subtitle">Quick Links</h3>
+          <ul class="footer__links">
+            <li><a href="#home" class="footer__link">Home</a></li>
+            <li><a href="market.html" class="footer__link">Marketplace</a></li>
+            <li><a href="partners.html#forms" class="footer__link">Partners</a></li>
+            <li><a href="carrers.html" class="footer__link">Carrers</a></li>
+            <li>
+              <a href="privacy-policy.html" class="footer__link"
+                >Privacy Policy</a
+              >
+            </li>
+             <li><a href="backer.html" class="footer__link">Early Backer</a></li>
+            <li><a href="faq.html" class="footer__link">FAQ Support</a></li>
+          </ul>
+        </div>
+        <div class="footer__content">
+          <h3 class="footer__subtitle">Connect With Us</h3>
+          <div class="footer__social">
+            <a
+              href="https://www.facebook.com/profile.php?id=61574801146211"
+              class="footer__icon"
+              ><i class="bx bxl-facebook"></i
+            ></a>
+            <a href="https://x.com/i/flow/single_sign_on" class="footer__icon"
+              ><i class="bx bxl-twitter"></i
+            ></a>
+            <a
+              href="https://www.instagram.com/"
+              class="footer__icon"
+              ><i class="bx bxl-instagram"></i
+            ></a>
+            <a href="mailto:Support@gigways.com" class="footer__icon"
+              ><i class="bx bxs-envelope"></i
+            ></a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="footer__bottom"><p class="footer__copy">© Gigways LLC 2025. All rights reserved.</p></div>
-  </footer>
+      <div class="footer__bottom">
+        <p class="footer__copy">© Gigways LLC 2025. All rights reserved.</p>
+      </div>
+    </footer>
+
 
   <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
   <script>
