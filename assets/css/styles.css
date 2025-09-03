@@ -968,3 +968,136 @@ button { cursor: pointer; }
 #open-roles{ color: inherit; }
 #open-roles :is(h1,h2,h3,h4,p,li,span,.job__title,.job__meta,.job__card p,.job__body li,.badge,.bx){ color: inherit !important; }
 #open-roles a:not(.btn){ color: inherit !important; }
+
+/* =========================
+   BACKERS PAGE (scoped)
+   ========================= */
+#backers {
+  padding-top: calc(var(--header-height) + 1.5rem);
+  max-width: var(--page-max);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+#backers .backer-container {
+  background: #fff;
+  color: var(--second-color);
+  border-radius: 16px;
+  padding: 2.25rem;
+  margin: 1.25rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.dark-theme #backers .backer-container {
+  background: var(--glass);
+  border-color: var(--glass-bd);
+  box-shadow: var(--shadow-md);
+}
+
+#backers h1 {
+  font-size: clamp(2rem, 1.2rem + 2vw, 2.6rem);
+  color: var(--third-color);
+  text-align: center;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+#backers h2 {
+  font-size: 1.5rem;
+  color: var(--second-color);
+  margin: 1.25rem 0 .5rem;
+}
+
+#backers p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-align: center;
+  max-width: 80ch;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--text-color-light);
+}
+
+/* Cards */
+#backers .tier-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.dark-theme #backers .tier-card {
+  background: rgba(255,255,255,.06);
+  border-color: var(--glass-bd);
+}
+
+#backers .tier-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-color);
+}
+
+#backers .tier-card .left-side,
+#backers .tier-card .right-side {
+  width: 8px;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 12px;
+  background: var(--button-grad);
+  opacity: .9;
+}
+
+#backers .tier-card .left-side { left: 0; border-radius: 14px 0 0 14px; }
+#backers .tier-card .right-side { right: 0; border-radius: 0 14px 14px 0; }
+
+#backers .tier-card-content { flex-grow: 1; padding: 0 1rem; }
+
+#backers .tier-card h3 {
+  font-size: 1.35rem;
+  color: var(--second-color);
+  text-align: center;
+  margin-bottom: .5rem;
+  font-weight: 700;
+}
+
+#backers .tier-card ul { list-style: none; padding: 0; }
+#backers .tier-card li {
+  font-size: 1.05rem;
+  color: var(--second-color);
+  margin-bottom: .45rem;
+}
+
+/* VIP Diamond */
+#backers .vip-diamond-tier {
+  border: 3px solid var(--third-color);
+  padding: 1.4rem;
+  margin-top: 1rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(143,122,91,.10), rgba(191,168,137,.08));
+}
+
+.dark-theme #backers .vip-diamond-tier {
+  background: linear-gradient(135deg, rgba(210,190,166,.16), rgba(183,158,134,.12));
+  border-color: var(--accent-color);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #backers .backer-container {
+    padding: 1.25rem;
+    margin: .75rem;
+  }
+  #backers h1 { font-size: 2rem; }
+  #backers h2 { font-size: 1.25rem; }
+  #backers p { font-size: .95rem; }
+}
+
