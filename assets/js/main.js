@@ -1,32 +1,38 @@
-/*===== MENU SHOW =====*/
+/*===============================
+=            MAIN JS            =
+===============================*/
+
+/*===== MENU SHOW (MOBILE) =====*/
 const showMenu = (toggleId, navId) => {
-  const toggle = document.getElementById(toggleId),
-    nav = document.getElementById(navId);
+  const toggle = document.getElementById(toggleId);
+  const nav = document.getElementById(navId);
 
   if (toggle && nav) {
     toggle.addEventListener("click", () => {
       nav.classList.toggle("show");
+      toggle.setAttribute("aria-expanded", nav.classList.contains("show"));
     });
   }
 };
 showMenu("nav-toggle", "nav-menu");
 
-/*===== ACTIVE AND REMOVE MENU =====*/
+/*===== ACTIVE LINK + CLOSE MOBILE MENU =====*/
 const navLinks = document.querySelectorAll(".nav__link");
 
 function linkAction() {
-  // Active link
   navLinks.forEach((n) => n.classList.remove("active"));
   this.classList.add("active");
 
-  // Remove menu mobile
   const navMenu = document.getElementById("nav-menu");
-  navMenu.classList.remove("show");
+  navMenu && navMenu.classList.remove("show");
+
+  const toggle = document.getElementById("nav-toggle");
+  toggle && toggle.setAttribute("aria-expanded", "false");
 }
 
 navLinks.forEach((n) => n.addEventListener("click", linkAction));
 
-/*===== SCROLL REVEAL ANIMATION =====*/
+/*===== SCROLL REVEAL =====*/
 const sr = ScrollReveal({
   origin: "top",
   distance: "80px",
@@ -58,42 +64,47 @@ sr.reveal(".contact__input", { interval: 200 });
 sr.reveal(".contact__button", { delay: 400 });
 sr.reveal(".contact__info-item", { interval: 200 });
 
-/*===== THEME TOGGLE =====*/
-const themeButton = document.getElementById("iconMS");
-const darkTheme = "dark-theme";
-const iconTheme = "assets/img/sun.png";
-const iconDark = "assets/img/moon.png";
+/*===== THEME (NO FLASH) =====
+  - Applies theme ASAP on load (before paint if you also add the small <head> script)
+  - Keeps html + body in sync
+*/
+(function initTheme() {
+  const themeButton = document.getElementById("iconMS");
+  if (!themeButton) return;
 
-// Previously selected theme (if user selected)
-const selectedTheme = localStorage.getItem("selected-theme");
-const selectedIcon = localStorage.getItem("selected-icon");
+  const darkTheme = "dark-theme";
+  const iconTheme = "assets/img/sun.png";
+  const iconDark = "assets/img/moon.png";
 
-// Validate if user previously chose a theme
-if (selectedTheme) {
-  document.body.classList[selectedTheme === "dark" ? "add" : "remove"](
-    darkTheme
-  );
-  themeButton.src = selectedIcon === "sun" ? iconTheme : iconDark;
-}
+  const root = document.documentElement;
 
-// Activate / deactivate the theme with the button
-themeButton.addEventListener("click", () => {
-  // Toggle the dark theme class
-  document.body.classList.toggle(darkTheme);
+  // Apply saved theme
+  const selectedTheme = localStorage.getItem("selected-theme"); // "dark" | "light"
+  const selectedIcon = localStorage.getItem("selected-icon");   // "sun" | "moon"
 
-  // Toggle the icon
-  themeButton.src = themeButton.src.includes("moon.png") ? iconTheme : iconDark;
+  const applyTheme = (isDark) => {
+    root.classList.toggle(darkTheme, isDark);
+    document.body.classList.toggle(darkTheme, isDark);
+  };
 
-  // Save theme and icon to localStorage
-  localStorage.setItem(
-    "selected-theme",
-    document.body.classList.contains(darkTheme) ? "dark" : "light"
-  );
-  localStorage.setItem(
-    "selected-icon",
-    themeButton.src.includes("sun.png") ? "sun" : "moon"
-  );
-});
+  if (selectedTheme === "dark") applyTheme(true);
+  else applyTheme(false);
+
+  // Apply saved icon
+  if (selectedIcon === "sun") themeButton.src = iconTheme;
+  else themeButton.src = iconDark;
+
+  // Toggle theme on click
+  themeButton.addEventListener("click", () => {
+    const isDark = !root.classList.contains(darkTheme);
+    applyTheme(isDark);
+
+    themeButton.src = isDark ? iconTheme : iconDark;
+
+    localStorage.setItem("selected-theme", isDark ? "dark" : "light");
+    localStorage.setItem("selected-icon", isDark ? "sun" : "moon");
+  });
+})();
 
 /*===== FORM SUBMISSION =====*/
 const form = document.getElementById("my-form");
@@ -104,9 +115,10 @@ if (form) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    // Change button text while submitting
-    formButton.innerHTML = "<span>Sending...</span>";
-    formButton.disabled = true;
+    if (formButton) {
+      formButton.innerHTML = "<span>Sending...</span>";
+      formButton.disabled = true;
+    }
 
     const data = new FormData(form);
 
@@ -114,39 +126,35 @@ if (form) {
       const response = await fetch(form.action, {
         method: form.method,
         body: data,
-        headers: {
-          Accept: "application/json",
-        },
+        headers: { Accept: "application/json" },
       });
 
       if (response.ok) {
-        formStatus.innerHTML =
-          "Thanks for your message! We'll be in touch soon.";
+        if (formStatus) formStatus.innerHTML = "Thanks for your message! We'll be in touch soon.";
         form.reset();
 
-        // Auto-hide the status message after 5 seconds
         setTimeout(() => {
-          formStatus.innerHTML = "";
+          if (formStatus) formStatus.innerHTML = "";
         }, 5000);
       } else {
-        const json = await response.json();
-        if (json.errors) {
-          formStatus.innerHTML = json.errors
-            .map((error) => error.message)
-            .join(", ");
-        } else {
-          formStatus.innerHTML =
-            "Oops! There was a problem submitting your form.";
+        const json = await response.json().catch(() => null);
+
+        if (formStatus) {
+          if (json && json.errors) {
+            formStatus.innerHTML = json.errors.map((e) => e.message).join(", ");
+          } else {
+            formStatus.innerHTML = "Oops! There was a problem submitting your form.";
+          }
         }
       }
     } catch (error) {
-      formStatus.innerHTML = "Oops! There was a problem submitting your form.";
+      if (formStatus) formStatus.innerHTML = "Oops! There was a problem submitting your form.";
     }
 
-    // Reset button
-    formButton.innerHTML =
-      '<span>Send Message</span><i class="bx bx-send"></i>';
-    formButton.disabled = false;
+    if (formButton) {
+      formButton.innerHTML = '<span>Send Message</span><i class="bx bx-send"></i>';
+      formButton.disabled = false;
+    }
   }
 
   form.addEventListener("submit", handleSubmit);
@@ -163,14 +171,13 @@ function scrollActive() {
     const sectionTop = current.offsetTop - 50;
     const sectionId = current.getAttribute("id");
 
+    const link = document.querySelector(".nav__link[href*=" + sectionId + "]");
+    if (!link) return;
+
     if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-      document
-        .querySelector(".nav__link[href*=" + sectionId + "]")
-        .classList.add("active");
+      link.classList.add("active");
     } else {
-      document
-        .querySelector(".nav__link[href*=" + sectionId + "]")
-        .classList.remove("active");
+      link.classList.remove("active");
     }
   });
 }
@@ -195,11 +202,8 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    lazyImages.forEach((image) => {
-      imageObserver.observe(image);
-    });
+    lazyImages.forEach((image) => imageObserver.observe(image));
   } else {
-    // Fallback for browsers that don't support Intersection Observer
     lazyImages.forEach((image) => {
       if (image.dataset.src) {
         image.src = image.dataset.src;
@@ -212,27 +216,33 @@ document.addEventListener("DOMContentLoaded", function () {
 /*===== BUBBLE BACKGROUND GENERATION =====*/
 document.addEventListener("DOMContentLoaded", function () {
   const bubbleContainer = document.querySelector(".bubble-container");
-  const bubbleCount = 30; // adjust number of bubbles as desired
+  if (!bubbleContainer) return;
+
+  const bubbleCount = 30;
+
+  // Clear old bubbles (prevents duplicates if the script runs twice)
+  bubbleContainer.innerHTML = "";
 
   for (let i = 0; i < bubbleCount; i++) {
     const bubble = document.createElement("div");
     bubble.classList.add("bubble");
-    // Random size between 20px and 80px
+
     const size = Math.floor(Math.random() * 60) + 20;
     bubble.style.width = `${size}px`;
     bubble.style.height = `${size}px`;
-    // Random horizontal starting position
+
     bubble.style.left = Math.floor(Math.random() * 100) + "%";
-    // Random animation duration between 6s and 12s
+
     const duration = Math.floor(Math.random() * 6) + 6;
     bubble.style.animationDuration = `${duration}s`;
-    // Random animation delay to avoid uniformity
+
     bubble.style.animationDelay = Math.random() * 5 + "s";
+
     bubbleContainer.appendChild(bubble);
   }
 });
 
-/*===== SLIDER FUNCTIONALITY =====*/
+/*===== SLIDER FUNCTIONALITY (SAFE) =====*/
 (function () {
   const sliderWrapper = document.querySelector(".slider-wrapper");
   const sliderTrack = document.querySelector(".slider-track");
@@ -241,12 +251,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const nextBtn = document.querySelector(".next-btn");
   const indicatorsContainer = document.querySelector(".indicators");
 
+  // If slider is not on this page, exit cleanly
+  if (!sliderWrapper || !sliderTrack || !slides.length || !prevBtn || !nextBtn || !indicatorsContainer) return;
+
   const totalSlides = slides.length;
   const groupSize = 3;
   const groupCount = Math.ceil(totalSlides / groupSize);
   let currentGroup = 0;
 
-  // Build indicator dots for each group
   function buildIndicators() {
     indicatorsContainer.innerHTML = "";
     for (let i = 0; i < groupCount; i++) {
@@ -261,22 +273,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Update slider by translating the slider track to show the current group
   function updateSlider() {
     const wrapperWidth = sliderWrapper.clientWidth;
-    sliderTrack.style.transform = `translateX(-${
-      currentGroup * wrapperWidth
-    }px)`;
+    sliderTrack.style.transform = `translateX(-${currentGroup * wrapperWidth}px)`;
 
-    // Update active indicator dot
-    const dots = document.querySelectorAll(".dot");
+    const dots = indicatorsContainer.querySelectorAll(".dot");
     dots.forEach((dot, i) => {
-      if (i === currentGroup) dot.classList.add("active");
-      else dot.classList.remove("active");
+      dot.classList.toggle("active", i === currentGroup);
     });
   }
 
-  // Navigation controls
   prevBtn.addEventListener("click", () => {
     currentGroup = currentGroup > 0 ? currentGroup - 1 : groupCount - 1;
     updateSlider();
@@ -287,36 +293,16 @@ document.addEventListener("DOMContentLoaded", function () {
     updateSlider();
   });
 
-  // Auto-slide every 3 seconds
-  setInterval(() => {
-    nextBtn.click();
-  }, 3000);
+  // Auto slide (pause if user prefers reduced motion)
+  const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let autoTimer = null;
 
-  // Update on window resize
+  if (!prefersReduced) {
+    autoTimer = setInterval(() => nextBtn.click(), 3000);
+  }
+
   window.addEventListener("resize", updateSlider);
 
-  // Initialize
   buildIndicators();
   updateSlider();
 })();
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const bubbleContainer = document.querySelector(".bubble-container");
-//   // add z-index to bubble container
-//   bubbleContainer.style.zIndex = 9;
-//   const bubbleCount = 20;
-//   for (let i = 0; i < bubbleCount; i++) {
-//     const bubble = document.createElement("div");
-//     bubble.classList.add("bubble");
-//     const size = Math.floor(Math.random() * 50) + 20;
-//     bubble.style.width = size + "px";
-//     // add color
-//     bubble.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-//     bubble.style.height = size + "px";
-//     bubble.style.left = Math.random() * 100 + "%";
-//     bubble.style.top = Math.random() * 100 + "%";
-//     bubble.style.animationDuration = Math.random() * 4 + 8 + "s";
-//     bubble.style.animationDelay = Math.random() * 5 + "s";
-//     bubbleContainer.appendChild(bubble);
-//   }
-// });
