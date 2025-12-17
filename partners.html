@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Gigways | Car Advertising Partners</title>
-  <meta name="description" content="Launch magnetic-backed vinyl car sticker campaigns with Gigways. Advertiser onboarding for driver opt-in placements only.">
-  <meta name="keywords" content="Gigways car advertising, magnetic-backed vinyl, removable car sticker ads, gig driver advertising">
+  <meta name="description" content="Run vehicle advertising campaigns with Gigways. Advertiser onboarding for opt-in driver placements with creative + rollout coordination.">
+  <meta name="keywords" content="Gigways car advertising, vehicle advertising, driver-based ads, car sticker ads">
   <meta name="author" content="Gigways Team">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Gigways | Car Advertising Partners">
-  <meta property="og:description" content="Magnetic-backed vinyl car sticker campaigns only. Advertiser-first onboarding. Driver opt-in and privacy-minded.">
+  <meta property="og:description" content="Run vehicle advertising campaigns with Gigways. Advertiser-first onboarding, driver opt-in placements, privacy-minded.">
   <meta property="og:image" content="https://gigways.com/assets/img/App.png">
   <meta property="og:url" content="https://gigways.com/partners.html">
   <meta property="og:type" content="website">
@@ -20,12 +21,64 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Gigways | Car Advertising Partners">
-  <meta name="twitter:description" content="Run magnetic-backed vinyl car sticker campaigns with Gigways.">
+  <meta name="twitter:description" content="Run vehicle advertising campaigns with Gigways.">
   <meta name="twitter:image" content="https://gigways.com/assets/img/App.png">
 
   <link rel="icon" href="assets/img/App.png">
   <link rel="stylesheet" href="assets/css/styles.css">
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet">
+
+  <!-- Ad Type styles (inline so you don't have to touch styles.css) -->
+  <style>
+    .adtype-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:.75rem;
+      margin-top:.55rem;
+    }
+    .adtype-btn{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.92);
+      border-radius: 14px;
+      padding: .85rem .9rem;
+      font-weight: 600;
+      letter-spacing: .2px;
+      cursor: pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:.5rem;
+      transition: transform .08s ease, background .12s ease, border-color .12s ease, opacity .12s ease;
+      user-select:none;
+      width: 100%;
+      min-height: 52px;
+      text-align:center;
+    }
+    .adtype-btn:hover{ transform: translateY(-1px); }
+    .adtype-btn.selected{
+      background: rgba(216,198,175,.95);
+      color: #121212;
+      border-color: rgba(216,198,175,.95);
+    }
+    .adtype-btn.disabled{
+      opacity:.35;
+      cursor:not-allowed;
+      transform:none !important;
+    }
+    .adtype-soon{
+      font-size:.78rem;
+      font-weight:700;
+      padding:.15rem .45rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,.22);
+      color: rgba(255,255,255,.9);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    @media (max-width: 420px){
+      .adtype-grid{ grid-template-columns: 1fr; }
+    }
+  </style>
 
   <!-- Schema -->
   <script type="application/ld+json">
@@ -37,8 +90,6 @@
     "logo":"https://gigways.com/assets/img/App.png"
   }
   </script>
-
-
 </head>
 
 <body>
@@ -69,58 +120,88 @@
       <div class="hero-card">
         <div class="hero-top">
           <div class="hero-badge"><i class="bx bx-briefcase-alt-2"></i><span>For advertisers</span></div>
-          <div class="hero-badge"><i class="bx bx-badge-check"></i><span>Magnetic-backed vinyl only</span></div>
+          <div class="hero-badge"><i class="bx bx-badge-check"></i><span>Vehicle ad placements</span></div>
           <div class="hero-badge"><i class="bx bx-user-check"></i><span>Driver opt-in</span></div>
           <div class="hero-badge"><i class="bx bx-lock-alt"></i><span>Privacy-minded</span></div>
         </div>
 
+        <!-- ✅ Tight lead (no repetition) -->
         <p class="hero-lead">
-          Partner with Gigways to run real vehicle campaigns using <strong>magnetic-backed vinyl stickers</strong>—
-          removable, driver-friendly, and high-visibility. You send your <strong>logo/images</strong> and campaign details,
-          and <strong>we’ll design the creative</strong> for approval.
+          Put your brand in motion with opt-in vehicle advertising powered by Gigways drivers.
+          Send your <strong>logo/images</strong> and campaign goals — we’ll handle <strong>creative proofing</strong> and help coordinate rollout logistics.
         </p>
 
-        <div class="hero-cta">
-          <a class="primary" href="#forms"><i class="bx bx-send"></i><span>Submit a Brief</span></a>
-          <a class="secondary" href="#pricingWrap"><i class="bx bx-dollar"></i><span>Choose Pricing</span></a>
-        </div>
-
-        <div class="hero-bullets" role="list">
-          <div class="hero-pill" role="listitem">
-            <i class="bx bx-car"></i>
-            <div>
-              <h3>Removable & brand-safe</h3>
-              <p>No wraps, no permanent adhesives. Magnetic-backed vinyl only.</p>
-            </div>
-          </div>
+        <!-- ✅ Reduced to 3 bullets (less repetitive) -->
+        <div class="hero-bullets" role="list" style="margin-top:1rem;">
           <div class="hero-pill" role="listitem">
             <i class="bx bx-map"></i>
             <div>
-              <h3>City-based rollouts</h3>
-              <p>Launch in one city, then expand by region and number of cars.</p>
+              <h3>Launch by city</h3>
+              <p>Start in one market, then expand by region, duration, and car count.</p>
             </div>
           </div>
+
           <div class="hero-pill" role="listitem">
-            <i class="bx bx-image-alt"></i>
+            <i class="bx bx-paint"></i>
             <div>
-              <h3>You send images</h3>
-              <p>Send logo/images + brand style. We design and send proofs.</p>
+              <h3>Proof-first creative</h3>
+              <p>We design a clean proof from your assets before anything moves forward.</p>
             </div>
           </div>
+
           <div class="hero-pill" role="listitem">
             <i class="bx bx-package"></i>
             <div>
-              <h3>Production + logistics</h3>
-              <p>We coordinate printing, magnetic backing, and distribution planning.</p>
+              <h3>Rollout support</h3>
+              <p>We help coordinate production and distribution planning so launches stay smooth.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ✅ Availability note (one line only) -->
+        <p class="hero-lead" style="margin-top:.8rem; opacity:.80; font-size:.95rem;">
+          Available now: removable magnetic-backed vinyl and Vinyl Decals. Coming soon: wraps, and rooftop formats.
+        </p>
+
+        <!-- ✅ Why choose (compact + not repeating the above) -->
+        <div style="margin-top:1.05rem;">
+          <div class="pricing-title" style="margin-bottom:.6rem;">
+            <h2>Why choose Gigways?</h2>
+            <p>Campaigns powered by active gig drivers — built for fast pilots and reliable scaling.</p>
+          </div>
+
+          <div class="hero-bullets" role="list">
+            <div class="hero-pill" role="listitem">
+              <i class="bx bx-tachometer"></i>
+              <div>
+                <h3>High activity, real visibility</h3>
+                <p>Placements run on real gig routes for consistent street-level exposure.</p>
+              </div>
+            </div>
+
+            <div class="hero-pill" role="listitem">
+              <i class="bx bx-layer"></i>
+              <div>
+                <h3>Simple pilots → easy scaling</h3>
+                <p>One workflow from 5 cars to 500 — grow by market when you’re ready.</p>
+              </div>
+            </div>
+
+            <div class="hero-pill" role="listitem">
+              <i class="bx bx-check-circle"></i>
+              <div>
+                <h3>Opt-in + brand-safe</h3>
+                <p>Drivers choose to participate, keeping campaigns respectful and controlled.</p>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Chooseable pricing -->
-        <div id="pricingWrap" aria-label="Choose a pricing plan">
+        <div id="pricingWrap" aria-label="Choose a pricing plan" style="margin-top:1.1rem;">
           <div class="pricing-title">
             <h2>Choose a pricing plan</h2>
-            <p>Click a plan below. Then enter # of cars to see your estimate.</p>
+            <p>Select a duration, then enter # of cars to see your estimate.</p>
           </div>
 
           <div class="plan-grid" id="planGrid">
@@ -187,246 +268,272 @@
     </div>
   </section>
 
-  
+  <main class="section" id="forms">
+    <div class="container">
+      <h2 class="section-title">Send a Car Advertising Brief</h2>
 
- <main class="section" id="forms">
-  <div class="container">
-    <h2 class="section-title">Send a Car Advertising Brief</h2>
-    <p class="section-subtitle small-note">
-      This form is for <strong>advertisers</strong> who want to partner with Gigways to run
-      <strong>magnetic-backed vinyl</strong> car campaigns.
-      Share your cities, cars, and timeline — then upload your <strong>logo/images</strong>. We’ll design and send proofs for approval.
-    </p>
+      <!-- ✅ Shorter subtitle (no repetition) -->
+      <p class="section-subtitle small-note">
+        Tell us your market, car count, dates, and brand goals. Upload your <strong>logo/images</strong> if available — we’ll follow up with next steps.
+      </p>
 
-    <div class="brief-layout">
-      <!-- LEFT: modern "How it works" panel -->
-      <aside class="brief-aside" aria-label="How it works">
-        <div class="brief-aside__card">
-          <div class="brief-aside__badges">
-            <span class="brief-badge"><i class="bx bx-badge-check"></i> Advertiser onboarding</span>
-            <span class="brief-badge"><i class="bx bx-lock-alt"></i> Driver opt-in</span>
-          </div>
-
-          <h3 class="brief-aside__title">How it works</h3>
-
-          <ol class="brief-steps">
-            <li>
-              <span class="brief-step__icon"><i class="bx bx-message-rounded-detail"></i></span>
-              <div>
-                <b>Send your brief</b>
-                <p>Cities, car count, and timeline.</p>
-              </div>
-            </li>
-            <li>
-              <span class="brief-step__icon"><i class="bx bx-paint"></i></span>
-              <div>
-                <b>We design</b>
-                <p>Upload logo/images — we’ll create a clean proof.</p>
-              </div>
-            </li>
-            <li>
-              <span class="brief-step__icon"><i class="bx bx-check-shield"></i></span>
-              <div>
-                <b>Approve + launch</b>
-                <p>Print + rollout coordination. Magnetic-backed vinyl only.</p>
-              </div>
-            </li>
-          </ol>
-
-          <div class="brief-aside__note">
-            <i class="bx bx-shield-quarter"></i>
-            <div>
-              <b>Magnetic-backed vinyl only</b>
-              <p>Vinyl printed + applied to magnetic backing. Removable. No wraps.</p>
-            </div>
-          </div>
-        </div>
-      </aside>
-
-      <!-- RIGHT: your form card -->
-      <div class="card" id="partner-card">
-        <form id="my-form" action="https://formspree.io/f/mzboyvbe" method="POST" enctype="multipart/form-data" aria-describedby="my-form-status">
-          <input type="hidden" name="_subject" value="Gigways Magnetic-Backed Vinyl Car Advertising">
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-          <input type="hidden" name="partner_type" value="car_ads_magnetic_backed_vinyl_only">
-
-          <!-- Contact block -->
-          <div class="form-block">
-            <div class="form-block__head">
-              <h3 class="form-block__title"><i class="bx bx-user"></i> Contact</h3>
-              <p class="form-block__sub">Who should we follow up with?</p>
+      <div class="brief-layout">
+        <!-- LEFT: modern "How it works" panel -->
+        <aside class="brief-aside" aria-label="How it works">
+          <div class="brief-aside__card">
+            <div class="brief-aside__badges">
+              <span class="brief-badge"><i class="bx bx-badge-check"></i> Advertiser onboarding</span>
+              <span class="brief-badge"><i class="bx bx-lock-alt"></i> Driver opt-in</span>
             </div>
 
-            <div class="form__grid">
-              <div class="form__group">
-                <label class="label" for="name">Your Name *</label>
-                <div class="field">
-                  <i class="bx bx-user icon"></i>
-                  <input class="input" id="name" name="name" type="text" placeholder="Full name" required autocomplete="name">
-                </div>
-              </div>
+            <h3 class="brief-aside__title">How it works</h3>
 
-              <div class="form__group">
-                <label class="label" for="email">Email *</label>
-                <div class="field">
-                  <i class="bx bx-at icon"></i>
-                  <input class="input" id="email" name="email" type="email" placeholder="you@company.com" required autocomplete="email" inputmode="email">
+            <ol class="brief-steps">
+              <li>
+                <span class="brief-step__icon"><i class="bx bx-message-rounded-detail"></i></span>
+                <div>
+                  <b>Submit your brief</b>
+                  <p>Cities, car count, and timeline.</p>
                 </div>
-              </div>
+              </li>
+              <li>
+                <span class="brief-step__icon"><i class="bx bx-paint"></i></span>
+                <div>
+                  <b>Creative proof</b>
+                  <p>We design a proof from your assets for approval.</p>
+                </div>
+              </li>
+              <li>
+                <span class="brief-step__icon"><i class="bx bx-check-shield"></i></span>
+                <div>
+                  <b>Coordinate rollout</b>
+                  <p>After approval, we align production and launch logistics.</p>
+                </div>
+              </li>
+            </ol>
 
-              <div class="form__group">
-                <label class="label" for="company">Company *</label>
-                <div class="field">
-                  <i class="bx bx-buildings icon"></i>
-                  <input class="input" id="company" name="company" type="text" placeholder="Company / brand" required autocomplete="organization">
-                </div>
-              </div>
-
-              <div class="form__group">
-                <label class="label" for="website">Website</label>
-                <div class="field">
-                  <i class="bx bx-globe icon"></i>
-                  <input class="input" id="website" name="website" type="url" placeholder="https://example.com" inputmode="url" autocomplete="url">
-                </div>
+            <div class="brief-aside__note">
+              <i class="bx bx-shield-quarter"></i>
+              <div>
+                <b>Availability</b>
+                <p>Removable formats are available now. Wraps and rooftop formats will roll out later.</p>
               </div>
             </div>
           </div>
+        </aside>
 
-          <!-- Campaign details -->
-          <fieldset id="fs-carads" class="fieldset fieldset--modern">
-            <legend><span class="legend-pill"><i class="bx bx-car"></i> Campaign Details</span></legend>
+        <!-- RIGHT: your form card -->
+        <div class="card" id="partner-card">
+          <form id="my-form" action="https://formspree.io/f/mzboyvbe" method="POST" enctype="multipart/form-data" aria-describedby="my-form-status">
+            <input type="hidden" name="_subject" value="Gigways Vehicle Advertising Brief">
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+            <input type="hidden" name="partner_type" value="vehicle_ads">
 
-            <div class="fieldset-note">
-              Magnetic-backed vinyl stickers only (vinyl printed + applied to magnetic backing).
-              <strong>No rooftop signs.</strong> <strong>No permanent wraps.</strong>
-            </div>
-
-            <div class="form__grid">
-              <div class="form__group">
-                <label class="label" for="car_geo">Cities/Regions *</label>
-                <div class="field">
-                  <i class="bx bx-map icon"></i>
-                  <input class="input" id="car_geo" name="car_geo" type="text" placeholder="Atlanta, Dallas, Nationwide" required>
-                </div>
+            <!-- Contact block -->
+            <div class="form-block">
+              <div class="form-block__head">
+                <h3 class="form-block__title"><i class="bx bx-user"></i> Contact</h3>
+                <p class="form-block__sub">Who should we follow up with?</p>
               </div>
 
-              <div class="form__group">
-                <label class="label" for="car_count"># of Cars *</label>
-                <div class="field">
-                  <i class="bx bx-car icon"></i>
-                  <input class="input" id="car_count" name="car_count" type="number" min="1" placeholder="e.g., 25" required>
-                </div>
-                <!-- <p class="mini-note">Tip: pricing updates automatically above when you change cars or plan.</p> -->
-              </div>
-            </div>
-
-            <!-- Timeline start/end -->
-            <div class="form__grid" style="margin-top:.75rem;">
-              <div class="form__group">
-                <label class="label" for="start_date">Start Date *</label>
-                <div class="field">
-                  <i class="bx bx-calendar icon"></i>
-                  <input class="input" id="start_date" name="start_date" type="date" required>
-                </div>
-              </div>
-
-              <div class="form__group">
-                <label class="label" for="end_date">End Date *</label>
-                <div class="field">
-                  <i class="bx bx-calendar-check icon"></i>
-                  <input class="input" id="end_date" name="end_date" type="date" required>
-                </div>
-              </div>
-            </div>
-
-            <div class="form__grid" style="margin-top:.75rem;">
-              <div class="form__group">
-                <label class="label" for="car_logistics">Logistics / Notes (optional)</label>
-                <div class="field">
-                  <i class="bx bx-package icon"></i>
-                  <input class="input" id="car_logistics" name="car_logistics" type="text" placeholder="Rollout notes, delivery preference, constraints">
-                </div>
-              </div>
-
-              <div class="form__group">
-                <label class="label" for="brand_style">Brand style (optional)</label>
-                <div class="field">
-                  <i class="bx bx-palette icon"></i>
-                  <input class="input" id="brand_style" name="brand_style" type="text" placeholder="Modern, bold, minimal, colors, examples…">
-                </div>
-              </div>
-            </div>
-
-            <!-- Upload (modern) -->
-            <div class="upload-box">
-              <div class="upload-box__top">
-                <div class="upload-box__title">
-                  <i class="bx bx-images"></i>
-                  <div>
-                    <b>Upload Logo / Images</b>
-                    <span>Optional — submit without files if needed</span>
+              <div class="form__grid">
+                <div class="form__group">
+                  <label class="label" for="name">Your Name *</label>
+                  <div class="field">
+                    <i class="bx bx-user icon"></i>
+                    <input class="input" id="name" name="name" type="text" placeholder="Full name" required autocomplete="name">
                   </div>
                 </div>
 
-                <label class="upload-btn" for="car_images">
-                  <i class="bx bx-upload"></i> Choose files
-                </label>
-              </div>
+                <div class="form__group">
+                  <label class="label" for="email">Email *</label>
+                  <div class="field">
+                    <i class="bx bx-at icon"></i>
+                    <input class="input" id="email" name="email" type="email" placeholder="you@company.com" required autocomplete="email" inputmode="email">
+                  </div>
+                </div>
 
-              <input class="file file-hidden" id="car_images" name="car_images" type="file" accept="image/*" multiple>
+                <div class="form__group">
+                  <label class="label" for="company">Company *</label>
+                  <div class="field">
+                    <i class="bx bx-buildings icon"></i>
+                    <input class="input" id="company" name="company" type="text" placeholder="Company / brand" required autocomplete="organization">
+                  </div>
+                </div>
 
-              <div class="upload-box__meta">
-                <span class="hint">Up to 5 images • max 8MB each • PNG/JPG/WEBP</span>
-                <span class="error" id="car_img_err"></span>
-              </div>
-
-              <div id="car_img_preview" class="thumbs"></div>
-            </div>
-          </fieldset>
-
-          <!-- Brief -->
-          <div class="form-block form-block--brief">
-            <div class="form-block__head">
-              <h3 class="form-block__title"><i class="bx bx-edit-alt"></i> Brief *</h3>
-              <p class="form-block__sub">What are you promoting + what does success look like?</p>
-            </div>
-
-            <div class="form__group">
-              <label class="label" for="message">Brief *</label>
-              <div class="field">
-                <i class="bx bx-file icon"></i>
-                <textarea class="textarea" id="message" name="message" required maxlength="1200"
-                  placeholder></textarea>
-              </div>
-
-              <div class="hint hint-row" style="display:flex;justify-content:space-between;gap:1rem;">
-                <!-- <span>Tip: add your landing page link.</span> -->
-                <span id="msg_counter" class="counter">0 / 1200</span>
+                <div class="form__group">
+                  <label class="label" for="website">Website</label>
+                  <div class="field">
+                    <i class="bx bx-globe icon"></i>
+                    <input class="input" id="website" name="website" type="url" placeholder="https://example.com" inputmode="url" autocomplete="url">
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Consent + Submit -->
-          <div class="form-footer">
-            <label class="label consent-row">
-              <input type="checkbox" name="consent" required style="width:18px;height:18px">
-              <span>I agree to be contacted and accept the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
-            </label>
+            <!-- Campaign details -->
+            <fieldset id="fs-carads" class="fieldset fieldset--modern">
+              <legend><span class="legend-pill"><i class="bx bx-car"></i> Campaign Details</span></legend>
 
-            <button type="submit" id="my-form-button" class="btn-primary">
-              <i class="bx bx-send"></i>
-              <span id="btn-text">Send</span>
-              <span id="btn-spin" class="spinner" style="display:none"></span>
-            </button>
+              <div class="fieldset-note">
+                Select your preferred placement format below. Availability varies by market and rollout phase.
+              </div>
 
-            <p id="my-form-status" class="status" role="status" aria-live="polite"></p>
-          </div>
-        </form>
+              <!-- Type of Advertisement -->
+              <div class="form__group" style="margin-top:.9rem;">
+                <label class="label">Type of Advertisement *</label>
+
+                <!-- submitted value -->
+                <input type="hidden" id="ad_type" name="ad_type" value="magnetic_ads">
+
+                <div class="adtype-grid" id="adTypeGrid" role="list">
+                  <button type="button" class="adtype-btn selected" data-ad-type="magnetic_ads" role="listitem">
+                    Magnetic+Vinyl Ads
+                  </button>
+                  <button type="button" class="adtype-btn" data-ad-type="vinyl_decals" role="listitem">
+                    Vinyl Decals 
+                  </button>
+
+                  <button type="button" class="adtype-btn disabled" disabled aria-disabled="true" role="listitem">
+                    Partial Wraps <span class="adtype-soon">Soon</span>
+                  </button>
+
+                  <button type="button" class="adtype-btn disabled" disabled aria-disabled="true" role="listitem">
+                    Full Wraps <span class="adtype-soon">Soon</span>
+                  </button>
+
+                  <button type="button" class="adtype-btn disabled" disabled aria-disabled="true" role="listitem">
+                    Rooftop Digital <span class="adtype-soon">Soon</span>
+                  </button>
+
+                  <button type="button" class="adtype-btn disabled" disabled aria-disabled="true" role="listitem">
+                    Rooftop Static <span class="adtype-soon">Soon</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form__grid">
+                <div class="form__group">
+                  <label class="label" for="car_geo">Cities/Regions *</label>
+                  <div class="field">
+                    <i class="bx bx-map icon"></i>
+                    <input class="input" id="car_geo" name="car_geo" type="text" placeholder="Atlanta, Dallas, Nationwide" required>
+                  </div>
+                </div>
+
+                <div class="form__group">
+                  <label class="label" for="car_count"># of Cars *</label>
+                  <div class="field">
+                    <i class="bx bx-car icon"></i>
+                    <input class="input" id="car_count" name="car_count" type="number" min="1" placeholder="e.g., 25" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Timeline start/end -->
+              <div class="form__grid" style="margin-top:.75rem;">
+                <div class="form__group">
+                  <label class="label" for="start_date">Start Date *</label>
+                  <div class="field">
+                    <i class="bx bx-calendar icon"></i>
+                    <input class="input" id="start_date" name="start_date" type="date" required>
+                  </div>
+                </div>
+
+                <div class="form__group">
+                  <label class="label" for="end_date">End Date *</label>
+                  <div class="field">
+                    <i class="bx bx-calendar-check icon"></i>
+                    <input class="input" id="end_date" name="end_date" type="date" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form__grid" style="margin-top:.75rem;">
+                <div class="form__group">
+                  <label class="label" for="car_logistics">Logistics / Notes (optional)</label>
+                  <div class="field">
+                    <i class="bx bx-package icon"></i>
+                    <input class="input" id="car_logistics" name="car_logistics" type="text" placeholder="Rollout notes, delivery preference, constraints">
+                  </div>
+                </div>
+
+                <div class="form__group">
+                  <label class="label" for="brand_style">Brand style (optional)</label>
+                  <div class="field">
+                    <i class="bx bx-palette icon"></i>
+                    <input class="input" id="brand_style" name="brand_style" type="text" placeholder="Modern, bold, minimal, colors, examples…">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Upload (modern) -->
+              <div class="upload-box">
+                <div class="upload-box__top">
+                  <div class="upload-box__title">
+                    <i class="bx bx-images"></i>
+                    <div>
+                      <b>Upload Logo / Images</b>
+                      <span>Optional — submit without files if needed</span>
+                    </div>
+                  </div>
+
+                  <label class="upload-btn" for="car_images">
+                    <i class="bx bx-upload"></i> Choose files
+                  </label>
+                </div>
+
+                <input class="file file-hidden" id="car_images" name="car_images" type="file" accept="image/*" multiple>
+
+                <div class="upload-box__meta">
+                  <span class="hint">Up to 5 images • max 8MB each • PNG/JPG/WEBP</span>
+                  <span class="error" id="car_img_err"></span>
+                </div>
+
+                <div id="car_img_preview" class="thumbs"></div>
+              </div>
+            </fieldset>
+
+            <!-- Brief -->
+            <div class="form-block form-block--brief">
+              <div class="form-block__head">
+                <h3 class="form-block__title"><i class="bx bx-edit-alt"></i> Brief *</h3>
+                <p class="form-block__sub">What are you promoting + what does success look like?</p>
+              </div>
+
+              <div class="form__group">
+                <label class="label" for="message">Brief *</label>
+                <div class="field">
+                  <i class="bx bx-file icon"></i>
+                  <textarea class="textarea" id="message" name="message" required maxlength="1200" placeholder></textarea>
+                </div>
+
+                <div class="hint hint-row" style="display:flex;justify-content:space-between;gap:1rem;">
+                  <span id="msg_counter" class="counter">0 / 1200</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Consent + Submit -->
+            <div class="form-footer">
+              <label class="label consent-row">
+                <input type="checkbox" name="consent" required style="width:18px;height:18px">
+                <span>I agree to be contacted and accept the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+              </label>
+
+              <button type="submit" id="my-form-button" class="btn-primary">
+                <i class="bx bx-send"></i>
+                <span id="btn-text">Send</span>
+                <span id="btn-spin" class="spinner" style="display:none"></span>
+              </button>
+
+              <p id="my-form-status" class="status" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</main>
-
+  </main>
 
   <!-- Sticky mini summary -->
   <aside id="stickySummary" class="sticky-summary hidden" aria-live="polite">
@@ -445,7 +552,7 @@
     </div>
   </aside>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (unchanged) -->
   <footer class="footer">
     <div class="footer__container">
       <div class="footer__content">
@@ -496,10 +603,8 @@
       const btnText = $('#btn-text');
 
       const carsEl  = $('#car_count');
-      const geoEl   = $('#car_geo');
       const startEl = $('#start_date');
       const endEl   = $('#end_date');
-      const logisticsEl = $('#car_logistics');
 
       const estimateText  = $('#estimateText');
       const estimatePrice = $('#estimatePrice');
@@ -508,6 +613,27 @@
       const monthsHidden = $('#campaign_months');
       const rateHidden = $('#campaign_rate');
       const totalHidden = $('#campaign_est_total');
+
+      // Ad type
+      const adTypeHidden = $('#ad_type');
+      const adTypeButtons = $$('#adTypeGrid .adtype-btn');
+
+      function setAdType(type){
+        if (!adTypeHidden) return;
+        adTypeHidden.value = type;
+
+        adTypeButtons.forEach(b=>{
+          const isSelected = b.dataset.adType === type;
+          b.classList.toggle('selected', isSelected);
+        });
+      }
+
+      adTypeButtons.forEach(btnEl=>{
+        btnEl.addEventListener('click', ()=>{
+          if (btnEl.disabled || btnEl.classList.contains('disabled')) return;
+          setAdType(btnEl.dataset.adType);
+        });
+      });
 
       // Sticky
       const sticky = $('#stickySummary');
@@ -602,7 +728,6 @@
           `<strong>${tier}</strong> • <strong>${cars} cars</strong> • <strong>${monthLabel(months)}</strong><br>` +
           `Rate: <strong>${formatMoney(rate)}</strong> ${perLabel}`;
 
-        // timeline hint if dates exist
         const sd = parseDate(startEl?.value);
         const ed = parseDate(endEl?.value);
         if (sd && ed){
@@ -614,7 +739,6 @@
         rateHidden.value = rate;
         totalHidden.value = total;
 
-        // Sticky summary
         if (sticky && !stickyDismissed){
           sticky.classList.remove('hidden');
           stickyLine.textContent = `${cars} cars • ${monthLabel(months)} • ${tier}`;
@@ -623,7 +747,6 @@
         }
       }
 
-      // Clicking plan cards
       planCards.forEach(card=>{
         card.addEventListener('click', ()=>{
           const months = parseInt(card.dataset.months, 10);
@@ -632,7 +755,6 @@
         });
       });
 
-      // Update on inputs
       carsEl?.addEventListener('input', updatePricing);
       startEl?.addEventListener('change', updatePricing);
       endEl?.addEventListener('change', updatePricing);
@@ -668,7 +790,6 @@
         });
       }
 
-      // Timeline validation: end >= start
       function validateTimeline(){
         const sd = parseDate(startEl?.value);
         const ed = parseDate(endEl?.value);
@@ -681,12 +802,17 @@
       startEl?.addEventListener('change', validateTimeline);
       endEl?.addEventListener('change', validateTimeline);
 
-      // Submit
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
         status.className='status'; status.textContent='';
 
         validateTimeline();
+
+        if (!adTypeHidden || !adTypeHidden.value){
+          status.className='status err';
+          status.textContent='Please select a Type of Advertisement.';
+          return;
+        }
 
         if (!form.checkValidity()){
           status.className='status err';
@@ -705,8 +831,8 @@
 
           if(res.ok){
             form.reset();
-            // keep default plan as 1 month selected
             setSelectedCard(1);
+            setAdType('magnetic_ads');
             updatePricing();
 
             if (carImgPrev) carImgPrev.innerHTML='';
@@ -727,11 +853,12 @@
         }
       });
 
-      // ScrollReveal
       if (window.ScrollReveal){
         ScrollReveal().reveal('.hero-card',{ distance:'18px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
         ScrollReveal().reveal('#partner-card',{ distance:'20px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
       }
+
+      setAdType(adTypeHidden?.value || 'magnetic_ads');
     })();
   </script>
 
