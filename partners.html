@@ -242,6 +242,32 @@
     }
     .btn-ghost:hover{ transform: translateY(-1px); }
 
+    /* ✅ FIX: prevent global a:hover rules from hiding CTA text/icons */
+    .btn-solid,
+    .btn-solid:hover,
+    .btn-solid:focus,
+    .btn-solid:active{
+      color: var(--gw-accentText) !important;
+      text-decoration: none !important;
+    }
+    .btn-solid i,
+    .btn-solid:hover i{
+      color: var(--gw-accentText) !important;
+    }
+    .btn-solid:hover{ opacity: .95; }
+
+    .btn-ghost,
+    .btn-ghost:hover,
+    .btn-ghost:focus,
+    .btn-ghost:active{
+      color: var(--gw-text) !important;
+      text-decoration: none !important;
+    }
+    .btn-ghost i,
+    .btn-ghost:hover i{
+      color: var(--gw-text) !important;
+    }
+
     /* Bullets */
     .hero-bullets{ margin-top: 1rem; }
     .hero-pill{
@@ -250,9 +276,13 @@
       background: rgba(255,255,255,.04);
       padding: .85rem .9rem;
       color: var(--gw-text);
+      display:flex;
+      gap:.7rem;
+      align-items:flex-start;
     }
     .hero-pill h3{ margin:0; font-size: 1rem; color: var(--gw-text); }
     .hero-pill p{ margin:.25rem 0 0; color: var(--gw-sub); line-height:1.45; }
+    .hero-pill i{ font-size:1.35rem; margin-top:.05rem; opacity:.95; }
 
     /* Ad type grid */
     .adtype-grid{
@@ -316,8 +346,22 @@
       box-shadow: 0 12px 34px rgba(0,0,0,.14);
       color: var(--gw-text);
     }
-    .pricing-aside__title{ color: var(--gw-text); }
-    .pricing-aside__sub{ opacity:.85; color: var(--gw-sub); }
+    .pricing-aside__title{ color: var(--gw-text); margin:0; }
+    .pricing-aside__sub{ opacity:.85; color: var(--gw-sub); margin:.35rem 0 0; }
+
+    .pricing-aside__pill{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.35rem .6rem;
+      border-radius:999px;
+      border:1px solid var(--gw-border);
+      background:rgba(255,255,255,.04);
+      color: var(--gw-text);
+      font-weight:900;
+      font-size:.82rem;
+      white-space:nowrap;
+    }
 
     .fleet-note{
       margin-top:.65rem;
@@ -329,6 +373,7 @@
       opacity:.95;
       color: var(--gw-text);
     }
+
     .estimate-banner.aside-estimate{
       border-radius: var(--gw-radius);
       border: 1px solid var(--gw-border);
@@ -336,7 +381,19 @@
       padding: .95rem;
       color: var(--gw-text);
     }
-    .estimate-banner.aside-estimate .right .price{ font-size: 1.45rem; font-weight: 950; }
+
+    /* ✅ CRITICAL FIX: styles.css hides `.price` globally. */
+    .estimate-price{
+      display:block !important;
+      font-size:1.45rem;
+      font-weight:950;
+      color:var(--third-color);
+    }
+    #stickySummary .estimate-price{
+      display:inline-block !important;
+      font-weight:1000;
+      color:var(--third-color);
+    }
 
     /* ✅ NICE FAQ ACCORDION (theme-safe) */
     .faq-wrap{
@@ -469,7 +526,7 @@
         <ul class="nav__list">
           <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
           <li class="nav__item"><a href="index.html#about" class="nav__link">About</a></li>
-                    <li class="nav__item"><a href="partners.html" class="nav__link active">Car Advertising</a></li>
+          <li class="nav__item"><a href="partners.html" class="nav__link active">Car Advertising</a></li>
           <li class="nav__item"><a href="market.html" class="nav__link">Marketplace</a></li>
           <li class="nav__item"><a href="careers.html" class="nav__link">Careers</a></li>
         </ul>
@@ -563,12 +620,13 @@
         <!-- Pricing Aside -->
         <aside class="pricing-aside" aria-label="Pricing & estimate">
           <div class="pricing-aside__card" id="pricingWrap" aria-label="Choose a pricing plan">
-            <div class="pricing-aside__head">
+            <div class="pricing-aside__head" style="display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;flex-wrap:wrap;">
               <div>
                 <h3 class="pricing-aside__title"><i class="bx bx-dollar-circle"></i> Pricing estimate</h3>
                 <p class="pricing-aside__sub">Choose duration + package, then enter cars to preview a non-binding estimate.</p>
               </div>
-              <span class="pricing-aside__pill"><i class="bx bx-badge-check"></i> 5% off 10+ cars</span>
+              <!-- ✅ UPDATED PILL -->
+              <span class="pricing-aside__pill"><i class="bx bx-badge-check"></i> 5% off 10+ • 10% off 25+</span>
             </div>
 
             <div class="plan-grid" id="planGrid">
@@ -603,8 +661,9 @@
               </label>
             </div>
 
+            <!-- ✅ UPDATED NOTE -->
             <div class="fleet-note" id="fleetNote" aria-live="polite">
-              <b>Fleet discount:</b> 5% off monthly subtotal for <b>10+ vehicles</b> (auto-applied).
+              <b>Fleet discounts:</b> <b>5%</b> off monthly subtotal for <b>10–24 vehicles</b>, and <b>10%</b> off for <b>25+ vehicles</b> (auto-applied).
             </div>
 
             <div class="estimate-banner aside-estimate" aria-live="polite" style="margin-top:.9rem;">
@@ -613,7 +672,7 @@
                 <div class="sub" id="estimateText">Choose a plan + enter number of cars to preview pricing.</div>
               </div>
               <div class="right">
-                <div class="price" id="estimatePrice">$0</div>
+                <div class="estimate-price" id="estimatePrice">$0</div>
                 <div class="meta" id="estimateMeta">Final pricing confirmed after review.</div>
               </div>
 
@@ -621,6 +680,8 @@
               <input type="hidden" id="campaign_rate" name="ratePerCarPerMonth" value="">
               <input type="hidden" id="campaign_est_total" name="campaignTotal" value="">
               <input type="hidden" id="campaign_fleet_discount" name="fleetDiscountApplied" value="false">
+              <!-- ✅ NEW: capture the discount rate applied (0, 0.05, 0.10) -->
+              <input type="hidden" id="campaign_fleet_discount_rate" name="fleetDiscountRate" value="0">
             </div>
 
             <p class="hero-lead" style="margin-top:.85rem; opacity:.85; font-size:.95rem;">
@@ -749,24 +810,6 @@
                 </div>
               </div>
 
-              <!-- <div class="form__grid" style="margin-top:.75rem;">
-                <div class="form__group">
-                  <label class="label" for="car_logistics">Logistics / constraints (optional)</label>
-                  <div class="field">
-                    <i class="bx bx-package icon"></i>
-                    <input class="input" id="car_logistics" name="car_logistics" type="text" placeholder="Delivery needs, rollout timing, restrictions, etc.">
-                  </div>
-                </div>
-
-                <div class="form__group">
-                  <label class="label" for="brand_style">Brand style (optional)</label>
-                  <div class="field">
-                    <i class="bx bx-palette icon"></i>
-                    <input class="input" id="brand_style" name="brand_style" type="text" placeholder="Bold, minimal, modern — include color notes or examples">
-                  </div>
-                </div>
-              </div> -->
-
               <div class="upload-box">
                 <div class="upload-box__top">
                   <div class="upload-box__title">
@@ -832,122 +875,116 @@
       </div>
 
       <!-- ✅ FAQ -->
-<section class="section" id="faq" aria-label="Car advertising FAQs">
-  <h2 class="section-title">FAQs</h2>
+      <section class="section" id="faq" aria-label="Car advertising FAQs">
+        <h2 class="section-title">FAQs</h2>
 
-  <div class="faq-wrap">
-    <div class="faq-grid">
-      <div class="faq-left">
+        <div class="faq-wrap">
+          <div class="faq-grid">
+            <div class="faq-left">
 
-        <details class="faq-item" open>
-          <summary>
-            <span class="faq-q"><i class="bx bx-dollar-circle"></i>How does pricing work?</span>
-            <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
-          </summary>
-          <div class="faq-a">
-            <p>
-              Pricing is based on <strong>campaign duration, number of vehicles, market coverage,</strong> 
-              and the ad format you choose.  
-              Estimates shown are <strong>preliminary</strong>. Final pricing is confirmed after your campaign brief
-              and rollout details are reviewed.
-            </p>
-          </div>
-        </details>
+              <details class="faq-item" open>
+                <summary>
+                  <span class="faq-q"><i class="bx bx-dollar-circle"></i>How does pricing work?</span>
+                  <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
+                </summary>
+                <div class="faq-a">
+                  <p>
+                    Pricing is based on <strong>campaign duration, number of vehicles, market coverage,</strong>
+                    and the ad format you choose.
+                    Estimates shown are <strong>preliminary</strong>. Final pricing is confirmed after your campaign brief
+                    and rollout details are reviewed.
+                  </p>
+                </div>
+              </details>
 
-        <details class="faq-item">
-          <summary>
-            <span class="faq-q"><i class="bx bx-check-shield"></i>How do you ensure driver reliability and brand safety?</span>
-            <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
-          </summary>
-          <div class="faq-a">
-            <p>
-              All drivers are <strong>opt-in</strong> and managed through our app-based system.
-              Drivers must complete required tasks, follow placement guidelines, and submit proof
-              throughout the campaign. Non-compliant drivers are removed.
-            </p>
-          </div>
-        </details>
+              <details class="faq-item">
+                <summary>
+                  <span class="faq-q"><i class="bx bx-check-shield"></i>How do you ensure driver reliability and brand safety?</span>
+                  <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
+                </summary>
+                <div class="faq-a">
+                  <p>
+                    All drivers are <strong>opt-in</strong> and managed through our app-based system.
+                    Drivers must complete required tasks, follow placement guidelines, and submit proof
+                    throughout the campaign. Non-compliant drivers are removed.
+                  </p>
+                </div>
+              </details>
 
-        <details class="faq-item">
-          <summary>
-            <span class="faq-q"><i class="bx bx-camera"></i>Do you provide proof or reporting?</span>
-            <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
-          </summary>
-          <div class="faq-a">
-            <p>
-              Yes. Drivers use our app to submit <strong>installation photos, weekly photo check-ins,</strong>
-              and basic activity confirmations until the campaign ends.
-              Mileage and task completion are tracked to ensure active exposure.
-            </p>
-          </div>
-        </details>
+              <details class="faq-item">
+                <summary>
+                  <span class="faq-q"><i class="bx bx-camera"></i>Do you provide proof or reporting?</span>
+                  <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
+                </summary>
+                <div class="faq-a">
+                  <p>
+                    Yes. Drivers use our app to submit <strong>installation photos, weekly photo check-ins,</strong>
+                    and basic activity confirmations until the campaign ends.
+                    Mileage and task completion are tracked to ensure active exposure.
+                  </p>
+                </div>
+              </details>
 
-        <details class="faq-item">
-          <summary>
-            <span class="faq-q"><i class="bx bx-line-chart"></i>What kind of tracking is included?</span>
-            <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
-          </summary>
-          <div class="faq-a">
-            <p>
-              Our system tracks <strong>driver participation, mileage ranges, and weekly task completion</strong>.
-              For advertiser performance, we recommend adding your own tracking such as
-              a QR code, custom landing page, promo code, or call tracking number.
-            </p>
-          </div>
-        </details>
+              <details class="faq-item">
+                <summary>
+                  <span class="faq-q"><i class="bx bx-line-chart"></i>What kind of tracking is included?</span>
+                  <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
+                </summary>
+                <div class="faq-a">
+                  <p>
+                    Our system tracks <strong>driver participation, mileage ranges, and weekly task completion</strong>.
+                    For advertiser performance, we recommend adding your own tracking such as
+                    a QR code, custom landing page, promo code, or call tracking number.
+                  </p>
+                </div>
+              </details>
 
-      </div>
+            </div>
 
-      <div class="faq-right">
-        <div class="faq-sidecard">
-          <h3><i class="bx bx-rocket"></i> Quick launch checklist</h3>
-          <p>Include these details to launch faster and avoid revisions.</p>
+            <div class="faq-right">
+              <div class="faq-sidecard">
+                <h3><i class="bx bx-rocket"></i> Quick launch checklist</h3>
+                <p>Include these details to launch faster and avoid revisions.</p>
 
-          <div class="mini">
-            <div class="faq-mini">
-              <i class="bx bx-map"></i>
-              <div>
-                <b>Target locations</b>
-                <span>Cities, routes, or neighborhoods you want covered.</span>
+                <div class="mini">
+                  <div class="faq-mini">
+                    <i class="bx bx-map"></i>
+                    <div>
+                      <b>Target locations</b>
+                      <span>Cities, routes, or neighborhoods you want covered.</span>
+                    </div>
+                  </div>
+
+                  <div class="faq-mini">
+                    <i class="bx bx-image"></i>
+                    <div>
+                      <b>Creative assets</b>
+                      <span>Logo, colors, messaging, and any brand rules.</span>
+                    </div>
+                  </div>
+
+                  <div class="faq-mini">
+                    <i class="bx bx-check-square"></i>
+                    <div>
+                      <b>Tracking method</b>
+                      <span>QR code, URL, promo code, or call tracking (optional).</span>
+                    </div>
+                  </div>
+
+                  <div class="faq-mini">
+                    <i class="bx bx-calendar"></i>
+                    <div>
+                      <b>Campaign timeline</b>
+                      <span>Start date and length (1–3+ months).</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div class="faq-mini">
-              <i class="bx bx-image"></i>
-              <div>
-                <b>Creative assets</b>
-                <span>Logo, colors, messaging, and any brand rules.</span>
-              </div>
-            </div>
-
-            <div class="faq-mini">
-              <i class="bx bx-check-square"></i>
-              <div>
-                <b>Tracking method</b>
-                <span>QR code, URL, promo code, or call tracking (optional).</span>
-              </div>
-            </div>
-
-            <div class="faq-mini">
-              <i class="bx bx-calendar"></i>
-              <div>
-                <b>Campaign timeline</b>
-                <span>Start date and length (1–3+ months).</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="cta-row" style="margin-top: .9rem;">
-            <a class="btn-solid" href="#forms"><i class="bx bx-send"></i> Send a Brief</a>
-            <a class="btn-ghost" href="#pricingWrap"><i class="bx bx-dollar-circle"></i> Get Estimate</a>
           </div>
         </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
+      </section>
 
     </div>
   </main>
@@ -960,7 +997,7 @@
     </div>
     <div class="row">
       <span id="stickyLine">Choose plan + cars</span>
-      <span class="price" id="stickyPrice">$0</span>
+      <span class="estimate-price" id="stickyPrice">$0</span>
     </div>
     <div class="meta" id="stickyMeta">Non-binding estimate. Final pricing confirmed after review.</div>
     <div class="actions">
@@ -1048,18 +1085,14 @@
         return null;
       }
 
-      // ✅ FIX: set section text + GW UI + AdType + FAQ vars on theme change
       function applyThemeVars(){
         const bg = getEffectiveBg();
         const isLight = bg ? (relLum(bg) > 0.6) : false;
         const root = document.documentElement.style;
 
-        // ✅ page-wide readable text (section titles/subtitles/etc)
         if (isLight){
           root.setProperty('--page-text', '#121212');
           root.setProperty('--page-sub', 'rgba(18,18,18,.78)');
-
-          // ✅ GW vars flip too
           root.setProperty('--gw-text', '#121212');
           root.setProperty('--gw-sub', 'rgba(18,18,18,.78)');
           root.setProperty('--gw-card', 'rgba(0,0,0,.03)');
@@ -1068,7 +1101,6 @@
         } else {
           root.setProperty('--page-text', 'rgba(255,255,255,.92)');
           root.setProperty('--page-sub', 'rgba(255,255,255,.78)');
-
           root.setProperty('--gw-text', 'rgba(255,255,255,.92)');
           root.setProperty('--gw-sub', 'rgba(255,255,255,.78)');
           root.setProperty('--gw-card', 'rgba(255,255,255,.06)');
@@ -1076,12 +1108,10 @@
           root.setProperty('--gw-soft', 'rgba(0,0,0,.10)');
         }
 
-        // --- Ad type vars ---
         if (isLight){
           root.setProperty('--adtype-text', '#121212');
           root.setProperty('--adtype-bg', 'rgba(0,0,0,.03)');
           root.setProperty('--adtype-border', 'rgba(0,0,0,.12)');
-
           root.setProperty('--adtype-text-disabled', '#121212');
           root.setProperty('--adtype-bg-disabled', 'rgba(0,0,0,.02)');
           root.setProperty('--adtype-border-disabled', 'rgba(0,0,0,.10)');
@@ -1089,7 +1119,6 @@
           root.setProperty('--adtype-text', 'rgba(255,255,255,.92)');
           root.setProperty('--adtype-bg', 'rgba(255,255,255,.06)');
           root.setProperty('--adtype-border', 'rgba(255,255,255,.10)');
-
           root.setProperty('--adtype-text-disabled', 'rgba(255,255,255,.92)');
           root.setProperty('--adtype-bg-disabled', 'rgba(255,255,255,.06)');
           root.setProperty('--adtype-border-disabled', 'rgba(255,255,255,.10)');
@@ -1098,7 +1127,6 @@
         root.setProperty('--adtype-bg-selected', 'rgba(216,198,175,.95)');
         root.setProperty('--adtype-border-selected', 'rgba(216,198,175,.95)');
 
-        // --- FAQ vars ---
         if (isLight){
           root.setProperty('--faq-bg', 'rgba(0,0,0,.03)');
           root.setProperty('--faq-border', 'rgba(0,0,0,.12)');
@@ -1129,9 +1157,7 @@
         themeIcon.addEventListener('click', () => setTimeout(applyThemeVars, 0));
       }
 
-      // -----------------------------
       // Pricing helpers
-      // -----------------------------
       function formatMoney(n){
         const num = Number(n);
         if (!isFinite(num)) return '$0';
@@ -1143,14 +1169,18 @@
       }
       function monthLabel(months){ return `${months} month${months > 1 ? 's' : ''}`; }
 
+      // ✅ UPDATED PRICING (matches your object)
       const PRICING = {
-        full: { 1: 600, 2: 575, 3: 550 },
-        half: { 1: 350, 2: 335, 3: 320 }
+        full: { 1: 575, 2: 525, 3: 475 },
+        half: { 1: 375, 2: 325, 3: 275 }
       };
-      const FLEET_DISCOUNT_RATE = 0.05;
-      const FLEET_MIN_VEHICLES = 10;
 
-      // DOM refs
+      // ✅ UPDATED FLEET DISCOUNTS: 10–24 => 5%, 25+ => 10%
+      const FLEET_DISCOUNTS = [
+        { minVehicles: 25, discount: 0.10 },
+        { minVehicles: 10, discount: 0.05 }
+      ];
+
       const form    = $('#my-form');
       const status  = $('#my-form-status');
       const btn     = $('#my-form-button');
@@ -1169,6 +1199,7 @@
       const rateHidden   = $('#campaign_rate');
       const totalHidden  = $('#campaign_est_total');
       const fleetHidden  = $('#campaign_fleet_discount');
+      const fleetRateHidden = $('#campaign_fleet_discount_rate');
 
       const packageHidden = $('#ad_type');
       const packageButtons = $$('#adTypeGrid .adtype-btn');
@@ -1264,6 +1295,15 @@
       endEl?.addEventListener('change', ()=>{ validateTimeline(); updatePricing(); });
       carsEl?.addEventListener('input', updatePricing);
 
+      function getFleetDiscountRate(cars){
+        const n = parseInt(cars, 10);
+        if (!isFinite(n) || n < 1) return 0;
+        for (const tier of FLEET_DISCOUNTS){
+          if (n >= tier.minVehicles) return tier.discount;
+        }
+        return 0;
+      }
+
       function computePricing({ packageType, months, numberOfCars }){
         const pkg = (packageType === 'half' || packageType === 'full') ? packageType : 'full';
         const m = parseInt(months, 10);
@@ -1280,17 +1320,24 @@
         if (!rate) return { error: 'Pricing configuration missing for this selection.' };
 
         const monthlySubtotal = rate * cars;
-        const fleetApplied = cars >= FLEET_MIN_VEHICLES;
-        const fleetDiscountAmount = fleetApplied ? (monthlySubtotal * FLEET_DISCOUNT_RATE) : 0;
+
+        const fleetRate = getFleetDiscountRate(cars);
+        const fleetApplied = fleetRate > 0;
+        const fleetDiscountAmount = fleetApplied ? (monthlySubtotal * fleetRate) : 0;
+
         const finalMonthlyTotal = monthlySubtotal - fleetDiscountAmount;
         const campaignTotal = finalMonthlyTotal * m;
 
         return {
           packageType: pkg, months: m, numberOfCars: cars,
           ratePerCarPerMonth: rate,
-          monthlySubtotal, fleetDiscountAmount,
-          finalMonthlyTotal, campaignTotal,
-          fleetApplied, error: ''
+          monthlySubtotal,
+          fleetRate,
+          fleetDiscountAmount,
+          finalMonthlyTotal,
+          campaignTotal,
+          fleetApplied,
+          error: ''
         };
       }
 
@@ -1310,6 +1357,7 @@
           if (rateHidden) rateHidden.value = '';
           if (totalHidden) totalHidden.value = '';
           if (fleetHidden) fleetHidden.value = 'false';
+          if (fleetRateHidden) fleetRateHidden.value = '0';
           if (sticky && !stickyDismissed) sticky.classList.add('hidden');
           return;
         }
@@ -1317,6 +1365,7 @@
         if (rateHidden) rateHidden.value = String(result.ratePerCarPerMonth);
         if (totalHidden) totalHidden.value = String(result.campaignTotal);
         if (fleetHidden) fleetHidden.value = String(!!result.fleetApplied);
+        if (fleetRateHidden) fleetRateHidden.value = String(result.fleetRate);
 
         const pkgLabel = (result.packageType === 'full')
           ? 'Full Magnetic Vinyl Wrap'
@@ -1324,9 +1373,10 @@
 
         estimatePrice.textContent = formatMoney(result.campaignTotal);
 
+        const discountPct = Math.round(result.fleetRate * 100);
         const discountLine = result.fleetApplied
-          ? `Fleet discount (5%): <strong>- ${formatMoney(result.fleetDiscountAmount)}</strong>`
-          : `Fleet discount: <strong>${formatMoney(0)}</strong> (applies at ${FLEET_MIN_VEHICLES}+ cars)`;
+          ? `Fleet discount (${discountPct}%): <strong>- ${formatMoney(result.fleetDiscountAmount)}</strong>`
+          : `Fleet discount: <strong>${formatMoney(0)}</strong> (5% at 10–24 cars, 10% at 25+ cars)`;
 
         estimateText.innerHTML =
           `<strong>${pkgLabel}</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(result.months)}</strong><br>` +
@@ -1345,12 +1395,15 @@
           sticky.classList.remove('hidden');
           stickyLine.textContent = `${pkgLabel} • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
           stickyPrice.textContent = formatMoney(result.campaignTotal);
-          const fleet = result.fleetApplied ? ` • 5% fleet discount applied` : ` • fleet discount at ${FLEET_MIN_VEHICLES}+ cars`;
-          stickyMeta.textContent = `Rate: ${formatMoney(result.ratePerCarPerMonth)} per car / month${fleet}.`;
+
+          const fleetInfo = result.fleetApplied
+            ? ` • ${Math.round(result.fleetRate*100)}% fleet discount applied`
+            : ` • fleet discounts: 5% at 10–24, 10% at 25+`;
+
+          stickyMeta.textContent = `Rate: ${formatMoney(result.ratePerCarPerMonth)} per car / month${fleetInfo}.`;
         }
       }
 
-      // Upload preview
       const carImgInput = $('#car_images');
       const carImgPrev  = $('#car_img_preview');
       const carImgErr   = $('#car_img_err');
@@ -1383,7 +1436,6 @@
         });
       }
 
-      // Submit
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
         status.className='status'; status.textContent='';
