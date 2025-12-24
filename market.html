@@ -4,490 +4,880 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Gigways Marketplace | Driver Essentials & Gear</title>
-  <meta name="description" content="Shop the Gigways Marketplace — rooftop ad toppers, delivery bags, branded gear, and future tech like Gigways Glass. Everything drivers need in one place." />
-  <meta name="keywords" content="Gigways Marketplace, driver gear, gig driver essentials, rooftop ads, food bags, smart glasses, Gigways merch" />
+  <!-- ✅ SEO -->
+  <title>Gigways Marketplace | Insurance, Taxes & Driver Benefits</title>
+  <meta
+    name="description"
+    content="A gig-driver marketplace for car insurance, life insurance, tax filing, and driver tools—powered by trusted partners and affiliate offers."
+  />
   <meta name="author" content="Gigways Team" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://gigways.com/market" />
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Gigways Marketplace | Driver Essentials & Gear" />
-  <meta property="og:description" content="Explore the Gigways Marketplace — shop driver essentials, branded gear, and future tech like Gigways Glass." />
+  <meta
+    name="keywords"
+    content="gig driver insurance, rideshare insurance, delivery driver insurance, car insurance quotes, life insurance, 1099 tax filing, gig worker taxes, mileage tracking, gig driver benefits, roadside assistance"
+  />
+
+  <!-- ✅ Social Sharing -->
+  <meta property="og:title" content="Gigways Marketplace | Insurance, Taxes & Driver Benefits" />
+  <meta property="og:description" content="Compare insurance, file taxes, and access benefits for gig workers through trusted partners." />
   <meta property="og:image" content="https://gigways.com/assets/img/App.png" />
   <meta property="og:url" content="https://gigways.com/market" />
   <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Gigways Marketplace" />
+  <meta property="og:site_name" content="Gigways" />
 
-  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Gigways Marketplace | Driver Essentials & Gear" />
-  <meta name="twitter:description" content="Shop driver essentials and Gigways gear — from rooftop toppers to branded T-shirts and future Gigways Glass." />
+  <meta name="twitter:title" content="Gigways Marketplace | Insurance, Taxes & Driver Benefits" />
+  <meta name="twitter:description" content="Compare insurance, file taxes, and access benefits for gig workers through trusted partners." />
   <meta name="twitter:image" content="https://gigways.com/assets/img/App.png" />
 
   <link rel="icon" href="assets/img/App.png" />
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
 
-  
+  <!-- ✅ Structured Data (Services) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Gigways Marketplace",
+    "url": "https://gigways.com/market",
+    "description": "Insurance, tax filing, and benefits marketplace for gig drivers via partners and affiliates.",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gigways.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Marketplace", "item": "https://gigways.com/market" }
+      ]
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "Gig Driver Services",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "item": { "@type": "Service", "name": "Car Insurance (Gig/Rideshare)" } },
+        { "@type": "ListItem", "position": 2, "item": { "@type": "Service", "name": "Life Insurance" } },
+        { "@type": "ListItem", "position": 3, "item": { "@type": "Service", "name": "Tax Filing (1099)" } },
+        { "@type": "ListItem", "position": 4, "item": { "@type": "Service", "name": "Mileage & Expense Tracking" } },
+        { "@type": "ListItem", "position": 5, "item": { "@type": "Service", "name": "Benefits & Discounts" } },
+        { "@type": "ListItem", "position": 6, "item": { "@type": "Service", "name": "Roadside Assistance" } }
+      ]
+    }
+  }
+  </script>
+
+  <!-- ✅ Marketplace page-only CSS (does NOT fight your global .bd-grid) -->
+  <style>
+    /* Full-width section background (your global .section has max-width; override here) */
+    .market.section{
+      max-width: 100%;
+      padding-top: calc(var(--header-height) + 1.25rem);
+      padding-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Pretty backdrop that works on both themes */
+    .market.section::before{
+      content:"";
+      position:absolute;
+      inset:-160px -160px auto -160px;
+      height: 560px;
+      pointer-events:none;
+      background:
+        radial-gradient(closest-side at 15% 35%, rgba(191,168,137,.25), transparent 68%),
+        radial-gradient(closest-side at 70% 15%, rgba(191,168,137,.18), transparent 70%),
+        radial-gradient(closest-side at 45% 85%, rgba(0,0,0,.06), transparent 70%);
+      opacity: .9;
+      filter: blur(2px);
+    }
+    .dark-theme .market.section::before{ opacity: .55; }
+
+    /* Local container (instead of bd-grid) */
+    .mk-container{
+      width: min(var(--page-max), 100%);
+      margin-inline: auto;
+      padding-inline: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero card */
+    .mk-hero{
+      border-radius: 22px;
+      border: 1px solid var(--glass-bd);
+      background: var(--glass);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      box-shadow: var(--shadow-1);
+      padding: 1.1rem;
+    }
+
+    .mk-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .mk-title{
+      margin: 0;
+      font-size: clamp(1.65rem, 2.5vw, 2.35rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--second-color);
+    }
+    .mk-sub{
+      margin: .35rem 0 0;
+      color: var(--text-color-light);
+      max-width: 58ch;
+      line-height: 1.5;
+    }
+
+    .mk-kicker{
+      display:inline-flex;
+      gap: .5rem;
+      align-items:center;
+      padding: .35rem .65rem;
+      border-radius: 999px;
+      border: 1px solid var(--chip-bd);
+      background: var(--chip-bg);
+      font-weight: 800;
+      font-size: .85rem;
+      color: var(--second-color);
+      white-space: nowrap;
+    }
+
+    .mk-disclosure{
+      margin-top: .85rem;
+      border-radius: 16px;
+      border: 1px solid var(--glass-bd);
+      background: rgba(0,0,0,.03);
+      padding: .85rem .95rem;
+      color: var(--text-color-light);
+      line-height: 1.45;
+    }
+    .dark-theme .mk-disclosure{
+      background: rgba(255,255,255,.06);
+    }
+
+    /* Stats */
+    .mk-stats{
+      margin-top: .9rem;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: .7rem;
+    }
+    @media (max-width: 900px){ .mk-stats{ grid-template-columns: 1fr; } }
+
+    .mk-stat{
+      border-radius: 16px;
+      border: 1px solid var(--glass-bd);
+      background: rgba(255,255,255,.55);
+      padding: .85rem .9rem;
+      display:flex;
+      gap: .7rem;
+      align-items:flex-start;
+      box-shadow: var(--shadow-sm);
+    }
+    .dark-theme .mk-stat{ background: rgba(0,0,0,.35); }
+    .mk-stat i{ font-size: 1.3rem; margin-top:.05rem; }
+    .mk-stat b{ display:block; color: var(--second-color); }
+    .mk-stat span{ display:block; color: var(--text-color-light); font-size: .92rem; margin-top:.1rem; line-height:1.3; }
+
+    /* Sticky search/filter bar */
+    .mk-bar{
+      margin-top: 1rem;
+      position: sticky;
+      top: calc(var(--header-height) + .5rem);
+      z-index: 5;
+      border-radius: 18px;
+      border: 1px solid var(--glass-bd);
+      background: var(--glass);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      box-shadow: var(--shadow-1);
+      padding: .85rem;
+      display:grid;
+      gap: .75rem;
+    }
+
+    .mk-search{
+      display:flex;
+      align-items:center;
+      gap: .65rem;
+      border-radius: 999px;
+      border: 1px solid var(--glass-bd);
+      background: rgba(255,255,255,.55);
+      padding: .85rem .95rem;
+    }
+    .dark-theme .mk-search{ background: rgba(0,0,0,.35); }
+    .mk-search i{ font-size: 1.2rem; opacity: .9; }
+    .mk-search input{
+      all: unset;
+      width: 100%;
+      color: var(--second-color);
+      font-size: 1rem;
+    }
+    .mk-search input::placeholder{ color: var(--text-color-light); }
+
+    .mk-chips{
+      display:flex;
+      gap:.5rem;
+      overflow:auto hidden;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: .1rem;
+    }
+    .mk-chips::-webkit-scrollbar{ height: 6px; }
+    .mk-chips::-webkit-scrollbar-thumb{ background: rgba(0,0,0,.18); border-radius: 999px; }
+    .dark-theme .mk-chips::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.18); }
+
+    .mk-chip{
+      border: 1px solid var(--chip-bd);
+      background: var(--chip-bg);
+      color: var(--second-color);
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: transform .14s ease, box-shadow .14s ease, filter .14s ease;
+    }
+    .mk-chip:hover{ transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    .mk-chip.active{
+      background: var(--button-grad);
+      border-color: transparent;
+      color: #fff;
+      box-shadow: var(--shadow-md);
+      filter: saturate(1.05);
+    }
+
+    /* Service grid */
+    .mk-grid{
+      margin-top: 1rem;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    @media (max-width: 980px){ .mk-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 640px){ .mk-grid{ grid-template-columns: 1fr; } }
+
+    /* Service card */
+    .svc{
+      border-radius: 20px;
+      border: 1px solid var(--glass-bd);
+      background:
+        radial-gradient(900px 240px at 18% -10%, rgba(191,168,137,.22), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.45));
+      box-shadow: var(--shadow-1);
+      padding: 1rem;
+      display:grid;
+      gap: .75rem;
+      min-height: 230px;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      position: relative;
+      overflow:hidden;
+    }
+    .dark-theme .svc{
+      background:
+        radial-gradient(900px 240px at 18% -10%, rgba(191,168,137,.12), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.52), rgba(0,0,0,.34));
+    }
+    .svc:hover{ transform: translateY(-4px); box-shadow: var(--shadow-2); border-color: rgba(191,168,137,.55); }
+
+    .svc__top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap: 1rem;
+    }
+
+    .svc__iconTitle{
+      display:flex;
+      gap: .75rem;
+      align-items:center;
+      min-width: 0;
+    }
+
+    .svc__icon{
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display:grid;
+      place-items:center;
+      border: 1px solid var(--glass-bd);
+      background: rgba(0,0,0,.03);
+      box-shadow: var(--shadow-sm);
+      flex: 0 0 auto;
+    }
+    .dark-theme .svc__icon{ background: rgba(255,255,255,.06); }
+    .svc__icon i{ font-size: 1.45rem; }
+
+    .svc__titleWrap{ min-width: 0; }
+    .svc__title{
+      margin:0;
+      font-size: 1.08rem;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      color: var(--second-color);
+      line-height: 1.2;
+    }
+    .svc__sub{
+      margin: .2rem 0 0;
+      color: var(--text-color-light);
+      line-height: 1.45;
+      font-size: .96rem;
+    }
+
+    .svc__badge{
+      font-size: .78rem;
+      font-weight: 900;
+      padding: .25rem .6rem;
+      border-radius: 999px;
+      border: 1px solid var(--chip-bd);
+      background: var(--chip-bg);
+      white-space: nowrap;
+      color: var(--second-color);
+    }
+
+    .svc__chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap: .45rem;
+      list-style:none;
+      margin: 0;
+      padding: 0;
+    }
+    .svc__chips li{
+      font-size: .8rem;
+      padding: .22rem .6rem;
+      border-radius: 999px;
+      border: 1px solid var(--glass-bd);
+      background: rgba(255,255,255,.55);
+      color: var(--text-color-light);
+    }
+    .dark-theme .svc__chips li{ background: rgba(255,255,255,.06); }
+
+    .svc__actions{
+      margin-top: .15rem;
+      display:flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+    }
+
+    /* Better “soft button” */
+    .btn--soft{
+      background: rgba(0,0,0,.03);
+      border: 1px solid var(--glass-bd);
+      color: var(--second-color);
+    }
+    .dark-theme .btn--soft{
+      background: rgba(255,255,255,.06);
+    }
+
+    /* Modal */
+    .modal{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      display:grid;
+      place-items:center;
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .18s ease;
+      z-index: 1000;
+      padding: 1rem;
+    }
+    .modal[aria-hidden="false"]{ opacity: 1; pointer-events:auto; }
+    .modal__dialog{
+      width: min(760px, 96vw);
+      border-radius: 22px;
+      border: 1px solid var(--glass-bd);
+      background: var(--glass);
+      backdrop-filter: blur(14px) saturate(140%);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      box-shadow: 0 22px 55px rgba(0,0,0,.45);
+      padding: 1rem;
+      position: relative;
+      color: var(--second-color);
+    }
+    .modal__close{
+      position:absolute;
+      top: 12px;
+      right: 12px;
+      border:none;
+      background: transparent;
+      font-size: 1.7rem;
+      color: var(--second-color);
+      border-radius: 12px;
+      padding: .2rem .35rem;
+    }
+    .modal__close:hover{ background: rgba(0,0,0,.06); }
+    .dark-theme .modal__close:hover{ background: rgba(255,255,255,.08); }
+    .modal__content .modal__list{ margin: 0; padding-left: 1.1rem; }
+    .modal__content .modal__list li{ margin: .25rem 0; color: var(--text-color-light); }
+
+    /* Small helper: focus states */
+    .mk-search:focus-within,
+    .mk-chip:focus-visible,
+    .btn:focus-visible,
+    button:focus-visible{
+      outline: 3px solid rgba(191,168,137,.35);
+      outline-offset: 2px;
+    }
+  </style>
 </head>
+
 <body>
-  <!-- Bubble Background Animation -->
   <div class="bubble-container"></div>
 
   <!-- ===== HEADER ===== -->
   <header class="l-header">
     <nav class="nav bd-grid">
       <div><a href="index.html" class="nav__logo">Gigways</a></div>
+
       <div class="nav__menu" id="nav-menu">
         <ul class="nav__list">
           <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
           <li class="nav__item"><a href="index.html#about" class="nav__link">About</a></li>
-          <li class="nav__item"><a href="market.html" class="nav__link active">Marketplace</a></li>
           <li class="nav__item"><a href="partners.html" class="nav__link">Car Advertising</a></li>
+          <li class="nav__item"><a href="market.html" class="nav__link active" aria-current="page">Marketplace</a></li>
           <li class="nav__item"><a href="careers.html" class="nav__link">Careers</a></li>
         </ul>
       </div>
-      <div class="theme"><img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" /></div>
+
+      <div class="theme">
+        <img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" />
+      </div>
       <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
     </nav>
   </header>
 
   <!-- ===== MAIN ===== -->
   <main class="l-main">
-    <!-- ===== HERO ===== -->
-    <section class="market hero section" id="market">
-      <div class="bd-grid hero__grid">
-        <div class="market__actions">
-          <label class="market__search" for="marketSearch">
-            <i class="bx bx-search" aria-hidden="true"></i>
-            <input type="search" id="marketSearch" placeholder="Search gear (e.g. rooftop, bag, mount)" aria-label="Search products" />
-          </label>
+    <section class="market section" id="market">
+      <div class="mk-container">
+
+        <!-- HERO -->
+        <div class="mk-hero">
+          <div class="mk-head">
+            <div>
+              <span class="mk-kicker"><i class="bx bx-store"></i> Driver-first marketplace</span>
+              <h1 class="mk-title" style="margin-top:.55rem;">Gigways Services Marketplace</h1>
+              <p class="mk-sub">Insurance, taxes, benefits, and tools — built around gig-driver life.</p>
+            </div>
+          </div>
+
+          <div class="mk-disclosure">
+            <strong>Partner / Affiliate disclosure:</strong>
+            Some links on this page are partner or affiliate links. If you choose a service through them,
+            Gigways may earn a commission at no extra cost to you.
+          </div>
+
+          <div class="mk-stats" aria-label="Marketplace highlights">
+            <div class="mk-stat">
+              <i class="bx bx-check-shield" aria-hidden="true"></i>
+              <div><b>Driver-first picks</b><span>Focused on gig work realities</span></div>
+            </div>
+            <div class="mk-stat">
+              <i class="bx bx-timer" aria-hidden="true"></i>
+              <div><b>Fast comparisons</b><span>Get started in minutes</span></div>
+            </div>
+            <div class="mk-stat">
+              <i class="bx bx-link-external" aria-hidden="true"></i>
+              <div><b>Trusted partners</b><span>Offers via affiliates & partners</span></div>
+            </div>
+          </div>
+
+          <!-- Search + Chips (sticky) -->
+          <div class="mk-bar" style="margin-top: 1rem;">
+            <label class="mk-search" for="marketSearch">
+              <i class="bx bx-search" aria-hidden="true"></i>
+              <input
+                type="search"
+                id="marketSearch"
+                placeholder="Search: car insurance, life, taxes, mileage, roadside..."
+                aria-label="Search services"
+                autocomplete="off"
+              />
+            </label>
+
+            <div class="mk-chips" role="tablist" aria-label="Filter services">
+              <button class="mk-chip active" role="tab" aria-selected="true" data-filter="all">All</button>
+              <button class="mk-chip" role="tab" aria-selected="false" data-filter="insurance">Insurance</button>
+              <button class="mk-chip" role="tab" aria-selected="false" data-filter="taxes">Taxes</button>
+              <button class="mk-chip" role="tab" aria-selected="false" data-filter="benefits">Benefits</button>
+              <button class="mk-chip" role="tab" aria-selected="false" data-filter="tools">Tools</button>
+              <button class="mk-chip" role="tab" aria-selected="false" data-filter="support">Support</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SERVICES -->
+        <div class="mk-grid" id="serviceGrid" style="margin-top: 1rem;">
+
+          <!-- Car Insurance -->
+          <article class="svc service__card"
+            data-category="insurance"
+            data-name="Car Insurance Gig Rideshare Delivery Quote Compare Coverage"
+          >
+            <div class="svc__top">
+              <div class="svc__iconTitle">
+                <div class="svc__icon" aria-hidden="true"><i class="bx bx-car"></i></div>
+                <div class="svc__titleWrap">
+                  <h3 class="svc__title">Car Insurance (Gig / Rideshare)</h3>
+                  <p class="svc__sub">Compare quotes that match how you drive for work.</p>
+                </div>
+              </div>
+              <span class="svc__badge">Most used</span>
+            </div>
+
+            <ul class="svc__chips" aria-label="Highlights">
+              <li>Quote comparison</li><li>Gig-use options</li><li>Start fast</li>
+            </ul>
+
+            <div class="svc__actions">
+              <a class="btn btn--primary" href=""><i class="bx bx-shield"></i> Get Quotes</a>
+              <button class="btn btn--soft quick-view" data-modal="auto"><i class="bx bx-info-circle"></i> Details</button>
+            </div>
+          </article>
+
+          <!-- Life Insurance -->
+          <article class="svc service__card"
+            data-category="insurance"
+            data-name="Life Insurance Term Life Family Protection Compare Plans"
+          >
+            <div class="svc__top">
+              <div class="svc__iconTitle">
+                <div class="svc__icon" aria-hidden="true"><i class="bx bx-heart"></i></div>
+                <div class="svc__titleWrap">
+                  <h3 class="svc__title">Life Insurance</h3>
+                  <p class="svc__sub">Protect your people with coverage that fits your budget.</p>
+                </div>
+              </div>
+              <span class="svc__badge">Protection</span>
+            </div>
+
+            <ul class="svc__chips" aria-label="Highlights">
+              <li>Term & options</li><li>Plan compare</li><li>Partner offers</li>
+            </ul>
+
+            <div class="svc__actions">
+              <a class="btn btn--primary" href=""><i class="bx bx-check-shield"></i> Compare Plans</a>
+              <button class="btn btn--soft quick-view" data-modal="life"><i class="bx bx-info-circle"></i> Details</button>
+            </div>
+          </article>
+
+          <!-- Tax Filing -->
+          <article class="svc service__card"
+            data-category="taxes"
+            data-name="Tax Filing 1099 Gig Worker Deductions Mileage Expenses"
+          >
+            <div class="svc__top">
+              <div class="svc__iconTitle">
+                <div class="svc__icon" aria-hidden="true"><i class="bx bx-receipt"></i></div>
+                <div class="svc__titleWrap">
+                  <h3 class="svc__title">Tax Filing (1099)</h3>
+                  <p class="svc__sub">File smarter with deductions built around gig work.</p>
+                </div>
+              </div>
+              <span class="svc__badge">Tax time</span>
+            </div>
+
+            <ul class="svc__chips" aria-label="Highlights">
+              <li>1099 support</li><li>Deductions</li><li>Guided flow</li>
+            </ul>
+
+            <div class="svc__actions">
+              <a class="btn btn--primary" href=""><i class="bx bx-lock-open-alt"></i> Start Filing</a>
+              <button class="btn btn--soft quick-view" data-modal="tax"><i class="bx bx-info-circle"></i> Details</button>
+            </div>
+          </article>
+
+<!-- Health Insurance -->
+<article class="svc service__card"
+  data-category="insurance"
+  data-name="Health Insurance Gig Worker Individual Family Medical Coverage"
+>
+  <div class="svc__top">
+    <div class="svc__iconTitle">
+      <div class="svc__icon" aria-hidden="true">
+        <i class="bx bx-plus-medical"></i>
+      </div>
+      <div class="svc__titleWrap">
+        <h3 class="svc__title">Health Insurance</h3>
+        <p class="svc__sub">Medical coverage options built for gig workers.</p>
+      </div>
+    </div>
+    <span class="svc__badge">Essential</span>
+  </div>
+
+  <ul class="svc__chips" aria-label="Highlights">
+    <li>Individual & family plans</li>
+    <li>Self-employed friendly</li>
+    <li>Compare coverage & cost</li>
+  </ul>
+
+  <div class="svc__actions">
+    <a class="btn btn--primary" href="">
+      <i class="bx bx-heart-circle"></i> View Plans
+    </a>
+    <button class="btn btn--soft quick-view" data-modal="health">
+      <i class="bx bx-info-circle"></i> Details
+    </button>
+  </div>
+</article>
+
+
+<!-- Legal Services -->
+<article class="svc service__card"
+  data-category="support"
+  data-name="Legal Help Traffic Tickets Accidents Disputes Gig Drivers"
+>
+  <div class="svc__top">
+    <div class="svc__iconTitle">
+      <div class="svc__icon" aria-hidden="true">
+        <i class="bx bx-shield-quarter"></i>
+      </div>
+      <div class="svc__titleWrap">
+        <h3 class="svc__title">Legal Help</h3>
+        <p class="svc__sub">Support for tickets, accidents, and driver disputes.</p>
+      </div>
+    </div>
+    <span class="svc__badge">Protection</span>
+  </div>
+
+  <ul class="svc__chips" aria-label="Highlights">
+    <li>Traffic ticket help</li>
+    <li>Accident guidance</li>
+    <li>Dispute support</li>
+  </ul>
+
+  <div class="svc__actions">
+    <a class="btn btn--primary" href="">
+      <i class="bx bx-gavel"></i> Get Legal Help
+    </a>
+    <button class="btn btn--soft quick-view" data-modal="legal">
+      <i class="bx bx-info-circle"></i> Details
+    </button>
+  </div>
+</article>
+
+
+          <!-- Roadside -->
+          <article class="svc service__card"
+            data-category="support"
+            data-name="Roadside Assistance Tow Jump Start Lockout Flat Tire"
+          >
+            <div class="svc__top">
+              <div class="svc__iconTitle">
+                <div class="svc__icon" aria-hidden="true"><i class="bx bx-map-pin"></i></div>
+                <div class="svc__titleWrap">
+                  <h3 class="svc__title">Roadside Assistance</h3>
+                  <p class="svc__sub">Help when work can’t stop: tow, tire, lockout, more.</p>
+                </div>
+              </div>
+              <span class="svc__badge">Support</span>
+            </div>
+
+            <ul class="svc__chips" aria-label="Highlights">
+              <li>Tow & tire</li><li>Jump start</li><li>Lockout</li>
+            </ul>
+
+            <div class="svc__actions">
+              <a class="btn btn--primary" href=""><i class="bx bx-link-external"></i> Compare</a>
+              <button class="btn btn--soft quick-view" data-modal="roadside"><i class="bx bx-info-circle"></i> Details</button>
+            </div>
+          </article>
+
         </div>
       </div>
 
-      <!-- Chips -->
-      <div class="bd-grid">
-        <div class="market__chips" role="tablist" aria-label="Filter products">
-          <button class="chip active" data-filter="all" role="tab" aria-selected="true">All</button>
-          <button class="chip" data-filter="ads" role="tab">Ads & Accessories</button>
-          <button class="chip" data-filter="essentials" role="tab">Driver Essentials</button>
-          <button class="chip" data-filter="tech" role="tab">Tech Gear</button>
-          <button class="chip" data-filter="merch" role="tab">Merch</button>
+      <!-- MODAL -->
+      <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="false">
+        <div class="modal__dialog" role="document">
+          <button class="modal__close" id="modalClose" aria-label="Close"><i class="bx bx-x"></i></button>
+          <div class="modal__content" id="modalContent"></div>
         </div>
-      </div>
-
-      <!-- Grid -->
-      <div class="market__grid bd-grid" id="productGrid">
-        <!-- 1 Rooftop Topper -->
-        <article class="product__card" data-id="roof-01" data-name="Rooftop Ad Topper" data-price="99.99" data-category="ads">
-          <div class="product__media">
-            <span class="ribbon hot">HOT</span>
-            <img loading="lazy" src="assets/img/sale.png" alt="Rooftop Ad Topper with strong magnets" class="product__img" />
-          </div>
-          <div class="product__body">
-            <h3 class="product__title">Rooftop Ad Topper</h3>
-            <p class="product__desc">Strong magnets · Vinyl-ready surface · DIY install</p>
-            <div class="product__meta">
-              <div class="price"><span class="price__current">$99.99</span></div>
-              <div class="rating" aria-label="Rated 5 out of 5">
-                <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
-              </div>
-            </div>
-          </div>
-          <div class="product__cta">
-            <button class="btn add-to-cart" data-id="roof-01" data-name="Rooftop Ad Topper" data-price="99.99"><i class='bx bx-cart'></i> Add to Cart</button>
-            <button class="btn btn--ghost quick-view" data-modal="roof-01">Quick View</button>
-          </div>
-          <ul class="product__badges"><li>Free shipping over $75</li><li>2-min install</li></ul>
-        </article>
-
-        <!-- 2 Insulated Food Bag -->
-        <article class="product__card" data-id="bag-01" data-name="Insulated Food Bag (LED)" data-price="29.99" data-category="essentials">
-          <div class="product__media">
-            <span class="ribbon new">NEW</span>
-            <img loading="lazy" src="assets/img/sale.png" alt="Insulated delivery bag with interior LED" class="product__img" />
-          </div>
-          <div class="product__body">
-            <h3 class="product__title">Insulated Food Bag</h3>
-            <p class="product__desc">Keeps food hot and fresh — perfect for pizza delivery.</p>
-            <div class="product__meta">
-              <div class="price"><span class="price__current">$29.99</span></div>
-              <div class="rating" aria-label="Rated 5 out of 5">
-                <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
-              </div>
-            </div>
-          </div>
-          <div class="product__cta">
-            <button class="btn add-to-cart" data-id="bag-01" data-name="Insulated Food Bag (LED)" data-price="29.99"><i class='bx bx-cart'></i> Add to Cart</button>
-            <button class="btn btn--ghost quick-view" data-modal="bag-01">Quick View</button>
-          </div>
-          <ul class="product__badges"><li>Water-resistant</li><li>1-year warranty</li></ul>
-        </article>
-
-        <!-- 3 Gigways Glass -->
-        <article class="product__card" data-id="glass-01" data-name="Gigways Glass" data-price="0" data-category="tech">
-          <div class="product__media">
-            <span class="ribbon soon">COMING SOON</span>
-            <img loading="lazy" src="assets/img/sale.png" alt="Gigways smart glasses render" class="product__img" />
-          </div>
-          <div class="product__body">
-            <h3 class="product__title">Gigways Glass</h3>
-            <p class="product__desc">Smart assist for orders · On-device privacy</p>
-            <div class="product__meta">
-              <div class="price"><span class="price__current">Waitlist</span></div>
-              <div class="rating" aria-label="No rating yet">
-                <i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i>
-              </div>
-            </div>
-          </div>
-          <div class="product__cta">
-            <button class="btn notify-btn" data-product="Gigways Glass"><i class='bx bx-bell'></i> Notify Me</button>
-            <button class="btn btn--ghost quick-view" data-modal="glass-01">Details</button>
-          </div>
-          <ul class="product__badges"><li>Join early testers</li></ul>
-        </article>
-
-        <!-- 4 Gigways T-Shirt -->
-        <article class="product__card" data-id="tee-01" data-name="Gigways T-Shirt" data-price="25.00" data-category="merch">
-          <div class="product__media">
-            <img loading="lazy" src="assets/img/sale.png" alt="Black Gigways T-shirt" class="product__img" />
-          </div>
-          <div class="product__body">
-            <h3 class="product__title">Gigways T-Shirt</h3>
-            <p class="product__desc">Premium cotton · Classic fit · Black</p>
-            <div class="product__meta">
-              <div class="price"><span class="price__current">$25.00</span></div>
-              <div class="rating" aria-label="Rated 4.9 out of 5">
-                <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i>
-              </div>
-            </div>
-          </div>
-          <div class="product__cta">
-            <button class="btn add-to-cart" data-id="tee-01" data-name="Gigways T-Shirt" data-price="25.00"><i class='bx bx-cart'></i> Add to Cart</button>
-            <button class="btn btn--ghost quick-view" data-modal="tee-01">Quick View</button>
-          </div>
-          <ul class="product__badges"><li>Fast ship</li></ul>
-        </article>
-
-        <!-- 5 Magnetic Phone Mount -->
-        <article class="product__card" data-id="mount-01" data-name="Magnetic Phone Mount" data-price="19.99" data-category="essentials">
-          <div class="product__media">
-            <span class="ribbon best">BEST VALUE</span>
-            <img loading="lazy" src="assets/img/sale.png" alt="Magnetic car phone mount for dashboards and vents" class="product__img" />
-          </div>
-          <div class="product__body">
-            <h3 class="product__title">Magnetic Phone Mount</h3>
-            <p class="product__desc">Strong hold · 360° swivel · Vent/Dash clip</p>
-            <div class="product__meta">
-              <div class="price"><span class="price__current">$19.99</span></div>
-              <div class="rating" aria-label="Rated 4.6 out of 5">
-                <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bx-star'></i>
-              </div>
-            </div>
-          </div>
-          <div class="product__cta">
-            <button class="btn add-to-cart" data-id="mount-01" data-name="Magnetic Phone Mount" data-price="19.99"><i class='bx bx-cart'></i> Add to Cart</button>
-            <button class="btn btn--ghost quick-view" data-modal="mount-01">Quick View</button>
-          </div>
-          <ul class="product__badges"><li>Universal fit</li></ul>
-        </article>
-
-        <!-- 6 Dual USB Fast Charger -->
-        <article class="product__card" data-id="charger-01" data-name="Dual USB Fast Charger" data-price="14.99" data-category="essentials">
-          <div class="product__media">
-            <img loading="lazy" src="assets/img/sale.png" alt="Dual USB fast car charger 12V" class="product__img" />
-          </div>
-          <div class="product__body">
-            <h3 class="product__title">Dual USB Fast Charger</h3>
-            <p class="product__desc">36W total · Smart IC · Night-glow ring</p>
-            <div class="product__meta">
-              <div class="price"><span class="price__current">$14.99</span></div>
-              <div class="rating" aria-label="Rated 4.5 out of 5">
-                <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bx-star'></i>
-              </div>
-            </div>
-          </div>
-          <div class="product__cta">
-            <button class="btn add-to-cart" data-id="charger-01" data-name="Dual USB Fast Charger" data-price="14.99"><i class='bx bx-cart'></i> Add to Cart</button>
-            <button class="btn btn--ghost quick-view" data-modal="charger-01">Quick View</button>
-          </div>
-          <ul class="product__badges"><li>12–24V compatible</li></ul>
-        </article>
       </div>
     </section>
-
-    <!-- ===== QUICK VIEW MODAL ===== -->
-    <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="false">
-      <div class="modal__dialog" role="document">
-        <button class="modal__close" id="modalClose" aria-label="Close"><i class='bx bx-x'></i></button>
-        <div class="modal__content" id="modalContent"></div>
-      </div>
-    </div>
   </main>
 
-  <!-- ===== CART DRAWER ===== -->
-  <aside class="cart" id="cart" aria-hidden="true">
-    <div class="cart__header">
-      <h3>Cart</h3>
-      <button class="cart__close qtybtn" id="cartClose" aria-label="Close cart"><i class='bx bx-x'></i></button>
-    </div>
-    <div class="cart__items" id="cartItems"></div>
-    <div class="cart__footer">
-      <div class="cart__totals">
-        <div class="cart__line">Items: <strong id="cartCount">0</strong></div>
-        <div class="cart__line">Subtotal: $<strong id="cartTotal">0.00</strong></div>
+  <!--===== FOOTER =====-->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__content">
+        <h2 class="footer__title">Gigways LLC</h2>
+        <p class="footer__description">Making work easier, safer, and more organized for gig workers.</p>
       </div>
-      <button class="btn" id="checkoutBtn"><i class='bx bx-lock'></i> Checkout</button>
-    </div>
-  </aside>
-  <button class="cart__floating btn" id="cartFloating" aria-label="Open cart">
-    <i class='bx bx-cart'></i><span id="cartBadge" class="badge">0</span>
-  </button>
 
-<!--===== FOOTER =====-->
-    <footer class="footer">
-      <div class="footer__container">
-        <div class="footer__content">
-          <h2 class="footer__title">Gigways LLC</h2>
-          <p class="footer__description">
-            Making work easier, safer, and more organized for gig workers
-          </p>
-        </div>
-        <div class="footer__content">
-          <h3 class="footer__subtitle">Quick Links</h3>
-          <ul class="footer__links">
-            <li><a href="#home" class="footer__link">Home</a></li>
-            <li><a href="market.html" class="footer__link">Marketplace</a></li>
-            <li><a href="partners.html#forms" class="footer__link">Partners</a></li>
-            <li><a href="careers.html" class="footer__link">Careers</a></li>
-            <li>
-              <a href="privacy-policy.html" class="footer__link"
-                >Privacy Policy</a
-              >
-            </li>
-             <li><a href="backer.html" class="footer__link">Early Backer</a></li>
-            <li><a href="faq.html" class="footer__link">FAQ Support</a></li>
-          </ul>
-        </div>
-        <div class="footer__content">
-          <h3 class="footer__subtitle">Connect With Us</h3>
-          <div class="footer__social">
-            <a
-              href="https://www.facebook.com/profile.php?id=61574801146211"
-              class="footer__icon"
-              ><i class="bx bxl-facebook"></i
-            ></a>
-            <a href="https://x.com/i/flow/single_sign_on" class="footer__icon"
-              ><i class="bx bxl-twitter"></i
-            ></a>
-            <a
-              href="https://www.instagram.com/"
-              class="footer__icon"
-              ><i class="bx bxl-instagram"></i
-            ></a>
-            <a href="mailto:Support@gigways.com" class="footer__icon"
-              ><i class="bx bxs-envelope"></i
-            ></a>
-          </div>
-        </div>
+      <div class="footer__content">
+        <h3 class="footer__subtitle">Quick Links</h3>
+        <ul class="footer__links">
+          <li><a href="index.html" class="footer__link">Home</a></li>
+          <li><a href="market.html" class="footer__link">Marketplace</a></li>
+          <li><a href="partners.html#forms" class="footer__link">Car Advertising</a></li>
+          <li><a href="careers.html" class="footer__link">Careers</a></li>
+          <li><a href="privacy-policy.html" class="footer__link">Privacy Policy</a></li>
+          <li><a href="faq.html" class="footer__link">FAQ Support</a></li>
+        </ul>
       </div>
-      <div class="footer__bottom">
-        <p class="footer__copy">© Gigways LLC 2025. All rights reserved.</p>
-      </div>
-    </footer>
 
+      <div class="footer__content">
+        <h3 class="footer__subtitle">Connect With Us</h3>
+        <div class="footer__social">
+          <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon" aria-label="Facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="https://x.com/i/flow/single_sign_on" class="footer__icon" aria-label="X"><i class="bx bxl-twitter"></i></a>
+          <a href="https://www.instagram.com/" class="footer__icon" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="mailto:Support@gigways.com" class="footer__icon" aria-label="Email"><i class="bx bxs-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">© Gigways LLC 2025. All rights reserved.</p>
+    </div>
+  </footer>
 
   <!-- LIBS -->
   <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
 
-  <!-- MARKETPLACE JS -->
+  <!-- ✅ Marketplace JS (Search + Filter + Modal) -->
   <script>
   (function(){
     const $ = (s,sc=document)=>sc.querySelector(s);
     const $$ = (s,sc=document)=>Array.from(sc.querySelectorAll(s));
 
-    const grid = $('#productGrid');
-    const cards = $$('.product__card', grid);
-    const chips = $$('.chip');
+    const grid = $('#serviceGrid');
+    const cards = $$('.service__card', grid);
+    const chips = $$('.mk-chip');
     const search = $('#marketSearch');
 
     const modal = $('#modal');
     const modalContent = $('#modalContent');
     const modalClose = $('#modalClose');
 
-    const cartBtn = $('#cartFloating');
-    const cartClose = $('#cartClose');
-    const cart = $('#cart');
-    const cartItemsEl = $('#cartItems');
-    const cartTotalEl = $('#cartTotal');
-    const cartBadge = $('#cartBadge');
-    const cartCount = $('#cartCount');
-    const checkoutBtn = $('#checkoutBtn');
+    let state = { q:'', filter:'all' };
 
-    let state = { q:'', cat:'all' };
-    let cartItems = JSON.parse(localStorage.getItem('gw_cart')||'[]');
-
-    // --- Filtering ---
     function apply(){
       const q = state.q.trim().toLowerCase();
       cards.forEach(c=>{
         const name = (c.dataset.name||'').toLowerCase();
-        const cat = c.dataset.category||'all';
-        c.style.display = (!q || name.includes(q)) && (state.cat==='all' || cat===state.cat) ? '' : 'none';
+        const cat = (c.dataset.category||'').toLowerCase();
+        const text = (c.textContent||'').toLowerCase();
+        const matchesText = !q || name.includes(q) || text.includes(q);
+        const matchesCat = (state.filter==='all') || (cat===state.filter);
+        c.style.display = (matchesText && matchesCat) ? '' : 'none';
       });
     }
+
     const debounce = (fn,ms=150)=>{ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a),ms); }; };
     const applyDebounced = debounce(apply,150);
 
-    chips.forEach(ch=> ch.addEventListener('click',()=>{
-      chips.forEach(x=>{ x.classList.remove('active'); x.setAttribute('aria-selected','false'); });
-      ch.classList.add('active'); ch.setAttribute('aria-selected','true');
-      state.cat = ch.dataset.filter; apply();
+    chips.forEach(ch => ch.addEventListener('click',()=>{
+      chips.forEach(x=>{
+        x.classList.remove('active');
+        x.setAttribute('aria-selected','false');
+      });
+      ch.classList.add('active');
+      ch.setAttribute('aria-selected','true');
+      state.filter = ch.dataset.filter || 'all';
+      apply();
     }));
-    if(search) search.addEventListener('input', e=>{ state.q = e.target.value; applyDebounced(); });
-    apply();
 
-    // Build Add-to-Cart button payload with image
-    function buildItemFromCard(card){
-      const id = card.dataset.id;
-      const name = card.dataset.name;
-      const price = Number(card.dataset.price);
-      const img = card.querySelector('img')?.getAttribute('src') || '';
-      return { id, name, price, img, qty: 1 };
-    }
+    if(search) search.addEventListener('input', (e)=>{
+      state.q = e.target.value;
+      applyDebounced();
+    });
 
-    // --- Modal ---
+    const details = {
+      auto: {
+        title: "Car Insurance (Gig / Rideshare)",
+        body: "Compare insurance options based on your driving use. Always confirm gig/rideshare coverage details with the provider.",
+        bullets: ["Compare quotes in minutes", "Filter for gig-use where available", "Choose coverage that matches your work style"]
+      },
+      life: {
+        title: "Life Insurance",
+        body: "Compare life insurance plan types and pricing through partners. Eligibility and rates vary.",
+        bullets: ["Term and other options", "Budget-friendly comparisons", "Coverage built for real life"]
+      },
+      tax: {
+        title: "Tax Filing (1099)",
+        body: "Tax tools and partners designed for self-employed gig income and deductions.",
+        bullets: ["1099-friendly workflow", "Deduction checklist mindset", "Keep records organized year-round"]
+      },
+healths: {
+  title: "Health Insurance",
+  body: "Compare health insurance options that fit gig work (individual plans, family coverage, and budget-friendly choices). Availability and pricing vary by state.",
+  bullets: ["Individual & family plans", "Compare monthly costs", "Coverage that fits gig work"]
+},
+
+legal: {
+  title: "Legal Help (Tickets, Accidents, Disputes)",
+  body: "Get help with traffic tickets, accident support, and driver disputes. Options vary by state—always confirm what’s covered before you pay.",
+  bullets: ["Traffic ticket help", "Accident guidance", "Dispute support"]
+},
+
+      roadside: {
+        title: "Roadside Assistance",
+        body: "Compare roadside options so you can keep moving when issues hit on shift.",
+        bullets: ["Tow, tire help, jump start", "Lockout support", "Plan options through partners"]
+      }
+    };
+
     document.addEventListener('click', (e)=>{
       const qv = e.target.closest('.quick-view');
-      if(qv){
-        const card = qv.closest('.product__card');
-        const imgTag = card.querySelector('img');
-        const imgSrc = imgTag?.getAttribute('src') || '';
-        const imgAlt = imgTag?.getAttribute('alt') || '';
-        const title = card.querySelector('.product__title').textContent;
-        const desc = card.querySelector('.product__desc')?.textContent || '';
-        const priceText = card.querySelector('.price__current')?.textContent || '';
-        const priceValue = card.dataset.price || '0';
+      if(!qv) return;
 
-        modalContent.innerHTML = `
-          <div class="bd-grid" style="grid-template-columns:1fr 1fr;gap:1rem;align-items:center;">
-            <div><img src="${imgSrc}" alt="${imgAlt}" style="max-width:100%;height:auto;display:block;border-radius:14px;background:rgba(0,0,0,.04)"/></div>
-            <div>
-              <h3 style="margin:.25rem 0 0; font-size:1.2rem">${title}</h3>
-              <p style="opacity:.85;margin:.35rem 0 1rem;">${desc}</p>
-              <div style="font-weight:800;margin-bottom:1rem;">${priceText}</div>
-              <button class="btn add-to-cart"
-                data-id="${card.dataset.id}"
-                data-name="${card.dataset.name}"
-                data-price="${priceValue}"
-                data-img="${imgSrc}">
-                <i class='bx bx-cart'></i> Add to Cart
-              </button>
-            </div>
-          </div>`;
-        modal.setAttribute('aria-hidden','false'); modal.setAttribute('aria-modal','true');
-      }
+      const key = qv.dataset.modal;
+      const d = details[key];
+      if(!d) return;
+
+      modalContent.innerHTML = `
+        <div style="display:grid; gap:.75rem;">
+          <h3 style="margin:0; font-size:1.25rem;">${d.title}</h3>
+          <p style="margin:0; opacity:.9; line-height:1.55;">${d.body}</p>
+          <ul class="modal__list">
+            ${(d.bullets||[]).map(b=>`<li>${b}</li>`).join('')}
+          </ul>
+          <div style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.2rem;">
+            <button class="btn btn--primary" id="modalCloseBtn"><i class="bx bx-check"></i> Got it</button>
+          </div>
+        </div>
+      `;
+
+      modal.setAttribute('aria-hidden','false');
+      modal.setAttribute('aria-modal','true');
+      modalClose.focus();
     });
-    modalClose.addEventListener('click', ()=>{ modal.setAttribute('aria-hidden','true'); modal.setAttribute('aria-modal','false'); });
-    modal.addEventListener('click', (e)=>{ if(e.target===modal) modalClose.click(); });
 
-    // --- Cart ---
-    function openCart(){ cart.setAttribute('aria-hidden','false'); }
-    function closeCart(){ cart.setAttribute('aria-hidden','true'); }
-    const money = n => Number(n).toFixed(2);
-    const save = () => localStorage.setItem('gw_cart', JSON.stringify(cartItems));
-
-    function render(){
-      cartItemsEl.innerHTML = cartItems.map((it,idx)=>{
-        const rowTotal = it.price * it.qty;
-        return `
-        <div class="cart__row" role="row">
-          <img class="cart__thumb" src="${it.img || 'assets/img/sale.png'}" alt="${it.name}" />
-          <div role="cell">
-            <div class="cart__row-title">${it.name}</div>
-            <div class="cart__meta">$${money(it.price)} each · <strong>$${money(rowTotal)}</strong></div>
-          </div>
-          <div class="cart__qty" role="cell">
-            <button class="qtybtn" data-act="dec" data-idx="${idx}" aria-label="Decrease quantity">-</button>
-            <span aria-live="polite">${it.qty}</span>
-            <button class="qtybtn" data-act="inc" data-idx="${idx}" aria-label="Increase quantity">+</button>
-            <button class="qtybtn" data-act="rm" data-idx="${idx}" aria-label="Remove item"><i class='bx bx-trash'></i></button>
-          </div>
-        </div>`;
-      }).join('');
-
-      const total = cartItems.reduce((s,i)=> s + (i.price*i.qty), 0);
-      const count = cartItems.reduce((s,i)=> s + i.qty, 0);
-      cartTotalEl.textContent = money(total);
-      cartBadge.textContent = count;
-      if (cartCount) cartCount.textContent = count;
-      save();
+    function closeModal(){
+      modal.setAttribute('aria-hidden','true');
+      modal.setAttribute('aria-modal','false');
     }
 
-    function upsert(item){
-      const i = cartItems.findIndex(x=>x.id===item.id);
-      if(i>-1){
-        cartItems[i].qty += item.qty;
-        // backfill image if previously missing
-        if(!cartItems[i].img && item.img) cartItems[i].img = item.img;
-      } else {
-        cartItems.push(item);
-      }
-      render(); openCart();
-    }
-
-    document.addEventListener('click', (e)=>{
-      // Add to cart (from card or modal)
-      const add = e.target.closest('.add-to-cart');
-      if(add){
-        const id = add.dataset.id;
-        const name = add.dataset.name;
-        const price = Number(add.dataset.price);
-        let img = add.dataset.img;
-        if(!img){
-          const card = e.target.closest('.product__card');
-          img = card?.querySelector('img')?.getAttribute('src') || '';
-        }
-        upsert({ id, name, price, img, qty: 1 });
-      }
-
-      // Quantity controls
-      const btn = e.target.closest('.qtybtn');
-      if(btn){
-        const idx = Number(btn.dataset.idx);
-        const act = btn.dataset.act;
-        if(Number.isInteger(idx) && cartItems[idx]){
-          if(act==='inc') cartItems[idx].qty++;
-          if(act==='dec') cartItems[idx].qty = Math.max(1, cartItems[idx].qty-1);
-          if(act==='rm') cartItems.splice(idx,1);
-          render();
-        }
-      }
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+    document.addEventListener('click', (e)=>{ if(e.target?.id==="modalCloseBtn") closeModal(); });
+    document.addEventListener('keydown', (e)=>{
+      if(e.key==='Escape' && modal.getAttribute('aria-hidden')==='false') closeModal();
     });
 
-    cartBtn.addEventListener('click', openCart);
-    cartClose.addEventListener('click', closeCart);
-    checkoutBtn.addEventListener('click', ()=>{
-      if(!cartItems.length){ alert('Your cart is empty.'); return; }
-      alert('Checkout not configured yet. Map items to Stripe Prices or Payment Links.');
-    });
+    apply();
 
-    render();
-
-    // Subtle reveals
     const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if(window.ScrollReveal && !prefersReduced){
-      const sr = ScrollReveal({ distance:"20px", duration:650, easing:"ease-out", interval:80 });
-      sr.reveal(".market__search");
-      sr.reveal(".chip", { interval: 40 });
-      sr.reveal(".product__card", { interval: 60 });
+      const sr = ScrollReveal({ distance:"18px", duration:650, easing:"ease-out", interval:70 });
+      sr.reveal(".mk-hero");
+      sr.reveal(".svc", { interval: 70 });
     }
   })();
   </script>
 
-  <!-- Site JS -->
   <script src="assets/js/main.js"></script>
 </body>
 </html>
-
-
-
