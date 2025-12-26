@@ -29,7 +29,7 @@
       rel="stylesheet"
     />
 
-    <style>
+  <style>
       /* Toast */
       .toast {
         position: fixed;
@@ -50,37 +50,50 @@
         display: block;
       }
 
-      /* ✅ FINAL FIX — BIG IMAGE, NO CUT, NO LIMITS */
+      /* ===== CAR ADS — CLEAN, BALANCED, LARGE IMAGE ===== */
+
+      #car-ads .about__container {
+        grid-template-columns: 1.1fr 1.4fr; /* balanced, not floating */
+        align-items: center;
+        gap: 2.5rem;
+      }
+
       #car-ads .gallery-card {
         width: 100%;
-        max-width: none;        /* REMOVED LIMIT */
         margin: 0;
         padding: 0;
         background: none;
         border: none;
-        box-shadow: none;
-        overflow: visible;
       }
 
       #car-ads .gallery-stage {
         width: 100%;
-        overflow: visible;
-        background: none;
-        border: none;
+        display: block; /* remove flex-centering weirdness */
       }
 
       #car-ads .gallery-stage img {
         width: 100%;
-        height: auto;           /* NATURAL HEIGHT */
-        max-height: none;       /* REMOVED LIMIT */
-        object-fit: contain;    /* NO CROPPING */
+        max-width: 1700px; /* BIG but controlled */
+        height: auto;
+        object-fit: contain;
         display: block;
       }
 
-      @media (min-width: 768px) {
+      /* Desktop refinement */
+      @media (min-width: 1200px) {
+        #car-ads .gallery-stage img {
+          max-width: 1900px;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 768px) {
         #car-ads .about__container {
-          grid-template-columns: 1.2fr 1fr;
-          align-items: center;
+          grid-template-columns: 1fr;
+        }
+
+        #car-ads .gallery-stage img {
+          max-width: 100%;
         }
       }
     </style>
@@ -295,59 +308,6 @@
           </div>
         </div>
       </section>
-
-      <!-- ===== TESTIMONIALS =====
-      <section class="testimonials section" id="testimonials">
-        <h2 class="section-title">What Users Say</h2>
-
-        <div class="testimonials__container bd-grid">
-          <div class="testimonial__card">
-            <div class="testimonial__content">
-              <p class="testimonial__text">
-                "Gigways keeps everything in one place—miles, hours, expenses, and earnings. Smart Scheduling reminds me to take breaks
-                so I don’t run myself into the ground."
-              </p>
-            </div>
-            <div class="testimonial__user">
-              <div class="testimonial__avatar"><i class="bx bxs-user-circle"></i></div>
-              <div class="testimonial__info">
-                <h3 class="testimonial__name">Prabesh C.</h3>
-                <p class="testimonial__role">Rideshare Driver</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial__card">
-            <div class="testimonial__content">
-              <p class="testimonial__text">
-                "The Driver Density Map helps me plan where to go without wasting time. It’s a game-changer when I want to stay efficient."
-              </p>
-            </div>
-            <div class="testimonial__user">
-              <div class="testimonial__avatar"><i class="bx bxs-user-circle"></i></div>
-              <div class="testimonial__info">
-                <h3 class="testimonial__name">Dhan S.</h3>
-                <p class="testimonial__role">Delivery Driver</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial__card">
-            <div class="testimonial__content">
-              <p class="testimonial__text">
-                "Private Trips is perfect for me—if I need a trusted friend to help with a pickup or parcel drop, it’s easy to coordinate without dealing with strangers."
-              </p>
-            </div>
-            <div class="testimonial__user">
-              <div class="testimonial__avatar"><i class="bx bxs-user-circle"></i></div>
-              <div class="testimonial__info">
-                <h3 class="testimonial__name">Maya R.</h3>
-                <p class="testimonial__role">Courier & Part-Time Driver</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> -->
 
       <!--===== FAQ =====-->
       <section class="features section" id="faq">
