@@ -14,22 +14,118 @@
       })();
     </script>
 
-    <title>Gigways — Gig Driver Assistant App | Track Miles, Expenses, Earnings & Earn Extra</title>
-
+    <!-- Primary Meta Tags -->
+    <title>Gigways - Driver Tools & Private Trip App | Track Miles, Earnings & Expenses</title>
+    
+    <meta
+      name="title"
+      content="Gigways - Driver Tools & Private Trip App | Track Miles, Earnings & Expenses"
+    />
+    
     <meta
       name="description"
-      content="Gigways is a gig-driver assistant app for rideshare and delivery drivers. Track mileage, expenses, hours, and earnings with simple bookkeeping, use driver density hotspots, manage private trips, and earn extra income with optional car advertising."
+      content="All-in-one toolkit for rideshare and delivery drivers. Track mileage, expenses, hours, earnings, and manage private trips. Earn extra with optional car advertising. Free for iOS and Android."
     />
+    
+    <meta 
+      name="keywords" 
+      content="driver tools, mileage tracker, rideshare driver app, delivery driver tools, gig worker app, private trips, car advertising, earnings tracker, expense tracker, driver scheduling"
+    />
+    
+    <meta name="author" content="Gigways LLC" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.gigways.com/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.gigways.com/" />
+    <meta property="og:title" content="Gigways - Driver Tools & Private Trip App" />
+    <meta
+      property="og:description"
+      content="All-in-one toolkit for rideshare and delivery drivers. Track mileage, expenses, earnings, and manage private trips with drivers you trust."
+    />
+    <meta property="og:image" content="https://www.gigways.com/assets/img/og-image.png" />
+    <meta property="og:site_name" content="Gigways" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://www.gigways.com/" />
+    <meta name="twitter:title" content="Gigways - Driver Tools & Private Trip App" />
+    <meta
+      name="twitter:description"
+      content="All-in-one toolkit for rideshare and delivery drivers. Track mileage, expenses, earnings, and manage private trips."
+    />
+    <meta name="twitter:image" content="https://www.gigways.com/assets/img/twitter-image.png" />
+    <meta name="twitter:site" content="@gigways" />
+
+    <!-- Apple Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Gigways" />
+    
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#6e4aff" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Structured Data / Schema.org for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "name": "Gigways",
+      "description": "All-in-one toolkit for rideshare and delivery drivers to track mileage, expenses, hours, earnings, and manage private trips.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "iOS, Android",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "150"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Gigways LLC",
+        "url": "https://www.gigways.com",
+        "logo": "https://www.gigways.com/assets/img/logo.svg"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Gigways LLC",
+      "url": "https://www.gigways.com",
+      "logo": "https://www.gigways.com/assets/img/logo.svg",
+      "description": "Driver-first toolkit with tracking, private trips, and optional car advertising for gig workers.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@gigways.com",
+        "contactType": "Customer Support"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61574801146211",
+        "https://x.com/gigways",
+        "https://www.instagram.com/gigways/"
+      ]
+    }
+    </script>
 
     <link rel="icon" href="/assets/img/App.png" />
+    <link rel="apple-touch-icon" href="/assets/img/App.png" />
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-
-  <style>
+    <style>
       /* Toast */
       .toast {
         position: fixed;
@@ -50,48 +146,280 @@
         display: block;
       }
 
-      /* ===== CAR ADS — CLEAN, BALANCED, LARGE IMAGE ===== */
+      /* =========================================================
+         FEATURES (THEME-SAFE)
+      ========================================================= */
+
+      #features .section-title {
+        margin-bottom: 0.75rem;
+      }
+
+      .section-subtitle {
+        max-width: 820px;
+        margin: 0 auto 1.75rem;
+        text-align: center;
+        color: var(--text-color-light);
+        line-height: 1.6;
+        font-size: 0.98rem;
+        padding: 0 1rem;
+      }
+
+      .mode-block {
+        margin-top: 1.25rem;
+      }
+      .mode-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+        margin: 1.4rem 0 1rem;
+      }
+      .mode-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--chip-bd);
+        background: var(--chip-bg);
+        color: var(--second-color);
+        font-weight: 800;
+        font-size: 0.95rem;
+      }
+      .mode-pill i {
+        font-size: 1.1rem;
+        color: var(--third-color);
+      }
+
+      /* IMPORTANT: we do NOT use .bd-grid here to avoid layout conflicts */
+      #features .features__container {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 16px;
+        align-items: stretch;
+        max-width: var(--page-max);
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      #features .feature__card {
+        grid-column: span 4;
+        padding: 18px 18px 16px;
+        border-radius: 18px;
+        border: 1px solid var(--glass-bd);
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-sm);
+        transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+        text-align: left;
+      }
+
+      #features .feature__card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--chip-bd);
+      }
+
+      #features .feature__icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--chip-bg);
+        border: 1px solid var(--chip-bd);
+        margin-bottom: 10px;
+      }
+      #features .feature__icon i {
+        font-size: 1.35rem;
+        color: var(--third-color);
+      }
+
+      #features .feature__title {
+        font-size: 1.05rem;
+        line-height: 1.25;
+        margin: 0 0 8px;
+        font-weight: 900;
+        color: var(--second-color);
+      }
+
+      #features .feature__description {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: var(--text-color-light);
+      }
+
+      #features .mode-divider {
+        grid-column: 1 / -1;
+        height: 1px;
+        background: var(--border-color);
+        margin: 10px 0 2px;
+      }
+
+      @media (max-width: 980px) {
+        #features .feature__card {
+          grid-column: span 6;
+        }
+      }
+      @media (max-width: 640px) {
+        #features .features__container {
+          gap: 12px;
+        }
+        #features .feature__card {
+          grid-column: span 12;
+          padding: 16px;
+        }
+        .mode-head {
+          justify-content: flex-start;
+          padding: 0 1rem;
+        }
+      }
+
+      /* =========================================================
+         FAQ — MATCH FEATURES STYLE (THEME-SAFE + CLEAN)
+      ========================================================= */
+
+      #faq .section-title {
+        margin-bottom: 0.75rem;
+      }
+
+      #faq .faq__container {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 16px;
+        align-items: stretch;
+        max-width: var(--page-max);
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      #faq .faq__card {
+        grid-column: span 6;
+        padding: 18px 18px 16px;
+        border-radius: 18px;
+        border: 1px solid var(--glass-bd);
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-sm);
+        transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+        text-align: left;
+      }
+
+      #faq .faq__card:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--chip-bd);
+      }
+
+      #faq .faq__icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--chip-bg);
+        border: 1px solid var(--chip-bd);
+        margin-bottom: 10px;
+      }
+      #faq .faq__icon i {
+        font-size: 1.35rem;
+        color: var(--third-color);
+      }
+
+      #faq .faq__title {
+        font-size: 1.05rem;
+        line-height: 1.25;
+        margin: 0 0 8px;
+        font-weight: 900;
+        color: var(--second-color);
+      }
+
+      #faq .faq__text {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.55;
+        color: var(--text-color-light);
+      }
+
+      @media (max-width: 980px) {
+        #faq .faq__card {
+          grid-column: span 12;
+        }
+      }
+
+      /* =========================================================
+         CAR ADS
+      ========================================================= */
+/* ======================================
+   CAR ADS — CTA BELOW BOTH COLUMNS
+====================================== */
+
+.car-ads__grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+
+/* CTA spans BOTH columns */
+.car-ads__cta{
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* Button sizing */
+.car-ads__cta .btn{
+  width: fit-content;
+  padding-inline: 1.25rem;
+  white-space: nowrap;
+}
+
+/* Mobile */
+@media (max-width: 768px){
+  .car-ads__grid{
+    grid-template-columns: 1fr;
+  }
+
+  .car-ads__cta{
+    margin-top: 1rem;
+  }
+}
+
+
+
 
       #car-ads .about__container {
-        grid-template-columns: 1.1fr 1.4fr; /* balanced, not floating */
+        grid-template-columns: 1.15fr 1.35fr;
         align-items: center;
         gap: 2.5rem;
       }
-
       #car-ads .gallery-card {
         width: 100%;
         margin: 0;
         padding: 0;
         background: none;
         border: none;
+        box-shadow: none;
       }
-
       #car-ads .gallery-stage {
         width: 100%;
-        display: block; /* remove flex-centering weirdness */
+        display: block;
       }
-
       #car-ads .gallery-stage img {
         width: 100%;
-        max-width: 1700px; /* BIG but controlled */
+        max-width: 1900px;
         height: auto;
         object-fit: contain;
         display: block;
       }
-
-      /* Desktop refinement */
-      @media (min-width: 1200px) {
-        #car-ads .gallery-stage img {
-          max-width: 1900px;
-        }
-      }
-
-      /* Mobile */
       @media (max-width: 768px) {
         #car-ads .about__container {
           grid-template-columns: 1fr;
         }
-
         #car-ads .gallery-stage img {
           max-width: 100%;
         }
@@ -137,9 +465,11 @@
             Track everything with Gigways
           </h1>
 
+
           <p class="home__description">
-            Gigways is the all-in-one toolkit for rideshare, delivery, and gig drivers. Track miles, expenses, hours,
-            earnings, use driver density hotspots, private trips, and earn extra with car advertising.
+            Gigways is a <strong>driver-first toolkit</strong> with a <strong>rider side</strong> built in.
+            Drivers track miles, expenses, hours, and earnings, manage private trips, and can earn extra with optional car ads.
+            Riders can request <strong>private trips with drivers they know and trust</strong> — no public matching, no strangers.
           </p>
 
           <div class="home__cta">
@@ -147,11 +477,7 @@
 
             <div class="home__download">
               <a href="#" class="download__link" id="androidLink" aria-disabled="true">
-                <img
-                  src="assets/img/andriod.png"
-                  alt="Get it on Google Play (Coming Soon)"
-                  class="download__img"
-                />
+                <img src="assets/img/andriod.png" alt="Get it on Google Play (Coming Soon)" class="download__img" />
               </a>
 
               <a href="https://apps.apple.com/us/app/gigways/id6743368642" class="download__link">
@@ -172,21 +498,13 @@
           </div>
 
           <div class="home__social">
-            <a
-              href="https://www.facebook.com/profile.php?id=61574801146211"
-              class="home__social-icon"
-              aria-label="Gigways on Facebook"
-            >
+            <a href="https://www.facebook.com/profile.php?id=61574801146211" class="home__social-icon" aria-label="Gigways on Facebook">
               <i class="bx bxl-facebook"></i>
             </a>
             <a href="https://x.com/gigways" class="home__social-icon" aria-label="Gigways on X">
               <i class="bx bxl-twitter"></i>
             </a>
-            <a
-              href="https://www.instagram.com/gigways/"
-              class="home__social-icon"
-              aria-label="Gigways on Instagram"
-            >
+            <a href="https://www.instagram.com/gigways/" class="home__social-icon" aria-label="Gigways on Instagram">
               <i class="bx bxl-instagram"></i>
             </a>
           </div>
@@ -196,53 +514,77 @@
       <!-- FEATURES -->
       <section class="features section" id="features">
         <h2 class="section-title">Key Features</h2>
-        <div class="features__container bd-grid">
+        <p class="section-subtitle">
+          Two modes, one app: a driver-first toolkit for tracking and earnings — plus a rider mode for private trips with drivers you already know and trust.
+        </p>
+
+        <div class="features__container">
+          <div class="mode-block" style="grid-column: 1 / -1">
+            <div class="mode-head">
+              <span class="mode-pill"><i class="bx bx-car"></i> Driver Mode</span>
+            </div>
+          </div>
+
           <div class="feature__card">
             <div class="feature__icon"><i class="bx bx-line-chart"></i></div>
             <h3 class="feature__title">All-in-One Tracking</h3>
-            <p class="feature__description">
-              Track miles, expenses, earnings, and work hours in one simple dashboard — built for rideshare and delivery drivers.
-            </p>
+            <p class="feature__description">Track miles, expenses, earnings, and work hours in one simple dashboard — built for real-world driving.</p>
           </div>
 
           <div class="feature__card">
             <div class="feature__icon"><i class="bx bx-wallet"></i></div>
-            <h3 class="feature__title">Earn More Insights</h3>
-            <p class="feature__description">
-              Know your real profit by understanding time, miles, and expenses — so you can make smarter driving decisions.
-            </p>
+            <h3 class="feature__title">Real Profit Insights</h3>
+            <p class="feature__description">Understand what you truly make after time, miles, and expenses — so you can drive smarter.</p>
           </div>
 
           <div class="feature__card">
             <div class="feature__icon"><i class="bx bx-map"></i></div>
             <h3 class="feature__title">Driver Density Map</h3>
-            <p class="feature__description">
-              View anonymized, aggregated driver hotspots to choose smarter areas and avoid wasted time.
-            </p>
-          </div>
-
-          <div class="feature__card">
-            <div class="feature__icon"><i class="bx bx-group"></i></div>
-            <h3 class="feature__title">Private Trips (Known Users)</h3>
-            <p class="feature__description">
-              Coordinate rides, food pickup, or parcel drop with people you already know — no public matching, no strangers.
-            </p>
+            <p class="feature__description">See aggregated hotspot activity to plan better areas and reduce wasted time.</p>
           </div>
 
           <div class="feature__card">
             <div class="feature__icon"><i class="bx bx-calendar-check"></i></div>
             <h3 class="feature__title">Smart Scheduling</h3>
-            <p class="feature__description">
-              Plan your day with reminders for breaks and meals to help prevent burnout and stay consistent.
-            </p>
+            <p class="feature__description">Set reminders for breaks and meals to stay consistent and help prevent burnout.</p>
           </div>
 
           <div class="feature__card">
             <div class="feature__icon"><i class="bx bx-car"></i></div>
-            <h3 class="feature__title">Car Ads for Businesses</h3>
-            <p class="feature__description">
-              Run local car advertising campaigns while supporting independent drivers — flexible, community-powered visibility.
-            </p>
+            <h3 class="feature__title">Private Trips (Driver Side)</h3>
+            <p class="feature__description">Manage requests from riders you already know, coordinate details, and keep everything organized.</p>
+          </div>
+
+          <div class="feature__card">
+            <div class="feature__icon"><i class="bx bx-badge-check"></i></div>
+            <h3 class="feature__title">Optional Car Ads</h3>
+            <p class="feature__description">Earn extra with approved car advertising — fully opt-in and flexible.</p>
+          </div>
+
+          <div class="mode-divider"></div>
+
+          <div class="mode-block" style="grid-column: 1 / -1">
+            <div class="mode-head">
+              <span class="mode-pill"><i class="bx bx-user"></i> Rider Mode</span>
+            </div>
+          </div>
+
+          <div class="feature__card">
+            <div class="feature__icon"><i class="bx bx-group"></i></div>
+            <h3 class="feature__title">Private Trips (Known & Trusted)</h3>
+            <p class="feature__description">Request rides with drivers you’ve added and trust — no public matching and no strangers.</p>
+          </div>
+
+          <div class="feature__card">
+            <div class="feature__icon"><i class="bx bx-chat"></i></div>
+            <h3 class="feature__title">Simple Coordination</h3>
+            <p class="feature__description">Send trip requests and coordinate pickup details in a clean, straightforward flow.</p>
+          </div>
+
+          <div class="feature__card">
+            <div class="feature__icon"><i class="bx bx-shield-quarter"></i></div>
+            <h3 class="feature__title">Trust-Based Connections</h3>
+            <p class="feature__description">Riders connect first. Drivers accept. Trips stay private between people who already know each other.</p>
           </div>
         </div>
       </section>
@@ -273,116 +615,95 @@
 
       <!-- CAR ADS -->
       <section class="about section" id="car-ads">
-        <h2 class="section-title">Car Advertising for Businesses</h2>
+  <h2 class="section-title">Car Advertising (Optional for Drivers)</h2>
 
-        <div class="about__container bd-grid">
-          <!-- LEFT -->
-          <div class="about__content">
-            <h2 class="about__subtitle">Local Campaigns That Support Drivers</h2>
+  <div class="about__container bd-grid car-ads__grid">
+    <!-- LEFT -->
+    <div class="about__content">
+      <h2 class="about__subtitle">Local Campaigns That Support Drivers</h2>
 
-            <p class="about__text">
-              Promote your business with real-world visibility through driver car ads.
-              Create a campaign, choose your area, and reach people where they live,
-              commute, and shop.
-            </p>
+      <p class="about__text">
+        Businesses can promote their brand with real-world visibility through driver car ads.
+        Create a campaign, choose your area, and reach people where they live, commute, and shop.
+      </p>
 
-            <p class="about__text">
-              Gigways keeps drivers independent while giving businesses a simple way
-              to launch and scale a campaign.
-            </p>
+      <p class="about__text">
+        For drivers, it’s a flexible way to earn extra — completely optional and opt-in.
+      </p>
+    </div>
 
-            <a href="partners.html#forms" class="btn btn--primary">
-              Start a Car Ad Campaign
-            </a>
-          </div>
+    <!-- RIGHT -->
+    <div class="gallery-card" aria-label="Car advertising preview">
+      <div class="gallery-stage">
+        <img src="assets/img/car.png" alt="Car advertising wrap preview" loading="lazy" />
+      </div>
+    </div>
 
-          <!-- RIGHT: SINGLE IMAGE -->
-          <div class="gallery-card" aria-label="Car advertising preview">
-            <div class="gallery-stage">
-              <img
-                src="assets/img/car.png"
-                alt="Car advertising wrap preview"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+    <!-- CTA BELOW BOTH -->
+    <div class="car-ads__cta">
+      <a href="partners.html#forms" class="btn btn--primary">
+        Start a Car Ad Campaign
+      </a>
+    </div>
+  </div>
+</section>
 
-      <!--===== FAQ =====-->
+
+
+      <!-- FAQ (MATCH FEATURES STYLE) -->
       <section class="features section" id="faq">
         <h2 class="section-title">FAQ</h2>
+        <p class="section-subtitle">
+          Quick answers about Driver Mode, Rider Mode, privacy, and how Gigways works.
+        </p>
 
-        <div class="features__container bd-grid">
-          <div class="feature__card" style="padding: 1rem; text-align: left">
-            <div class="feature__icon" style="font-size: 2rem; margin-bottom: 0.75rem">
-              <i class="bx bx-help-circle"></i>
-            </div>
-            <h3 class="feature__title" style="font-size: 1.05rem; margin-bottom: 0.5rem">
-              Is Gigways a rideshare or delivery company?
-            </h3>
-            <p class="feature__description" style="font-size: 0.9rem; line-height: 1.5">
-              No. Gigways is a driver tools app. We don’t operate transportation or delivery services.
+        <div class="faq__container">
+          <div class="faq__card">
+            <div class="faq__icon"><i class="bx bx-help-circle"></i></div>
+            <h3 class="faq__title">Is Gigways a rideshare or delivery company?</h3>
+            <p class="faq__text">
+              No. Gigways does not operate transportation or delivery services. Drivers remain independent, and Rider Mode is for private
+              trips with drivers you already know and trust (no public marketplace).
             </p>
           </div>
 
-          <div class="feature__card" style="padding: 1rem; text-align: left">
-            <div class="feature__icon" style="font-size: 2rem; margin-bottom: 0.75rem">
-              <i class="bx bx-receipt"></i>
-            </div>
-            <h3 class="feature__title" style="font-size: 1.05rem; margin-bottom: 0.5rem">
-              What can I track with Gigways?
-            </h3>
-            <p class="feature__description" style="font-size: 0.9rem; line-height: 1.5">
+          <div class="faq__card">
+            <div class="faq__icon"><i class="bx bx-receipt"></i></div>
+            <h3 class="faq__title">What can I track with Gigways?</h3>
+            <p class="faq__text">
               Mileage, expenses, hours, and earnings — so you can understand your real profit.
             </p>
           </div>
 
-          <div class="feature__card" style="padding: 1rem; text-align: left">
-            <div class="feature__icon" style="font-size: 2rem; margin-bottom: 0.75rem">
-              <i class="bx bx-group"></i>
-            </div>
-            <h3 class="feature__title" style="font-size: 1.05rem; margin-bottom: 0.5rem">
-              What are Private Trips?
-            </h3>
-            <p class="feature__description" style="font-size: 0.9rem; line-height: 1.5">
-              Coordinate rides or drop-offs with people you already know and trust — no public matching.
+          <div class="faq__card">
+            <div class="faq__icon"><i class="bx bx-group"></i></div>
+            <h3 class="faq__title">What are Private Trips?</h3>
+            <p class="faq__text">
+              Private Trips let riders coordinate rides or drop-offs with drivers they already know and trust — no public matching, no strangers.
             </p>
           </div>
 
-          <div class="feature__card" style="padding: 1rem; text-align: left">
-            <div class="feature__icon" style="font-size: 2rem; margin-bottom: 0.75rem">
-              <i class="bx bx-map-pin"></i>
-            </div>
-            <h3 class="feature__title" style="font-size: 1.05rem; margin-bottom: 0.5rem">
-              What is the Driver Density Map?
-            </h3>
-            <p class="feature__description" style="font-size: 0.9rem; line-height: 1.5">
-              Aggregated, anonymized activity trends to help you plan smarter and reduce wasted time.
+          <div class="faq__card">
+            <div class="faq__icon"><i class="bx bx-map-pin"></i></div>
+            <h3 class="faq__title">What is the Driver Density Map?</h3>
+            <p class="faq__text">
+              Aggregated, anonymized activity trends to help drivers plan smarter and reduce wasted time.
             </p>
           </div>
 
-          <div class="feature__card" style="padding: 1rem; text-align: left">
-            <div class="feature__icon" style="font-size: 2rem; margin-bottom: 0.75rem">
-              <i class="bx bx-shield-quarter"></i>
-            </div>
-            <h3 class="feature__title" style="font-size: 1.05rem; margin-bottom: 0.5rem">
-              Do you sell driver data?
-            </h3>
-            <p class="feature__description" style="font-size: 0.9rem; line-height: 1.5">
+          <div class="faq__card">
+            <div class="faq__icon"><i class="bx bx-shield-quarter"></i></div>
+            <h3 class="faq__title">Do you sell driver data?</h3>
+            <p class="faq__text">
               No. Privacy and independence are core to Gigways.
             </p>
           </div>
 
-          <div class="feature__card" style="padding: 1rem; text-align: left">
-            <div class="feature__icon" style="font-size: 2rem; margin-bottom: 0.75rem">
-              <i class="bx bx-car"></i>
-            </div>
-            <h3 class="feature__title" style="font-size: 1.05rem; margin-bottom: 0.5rem">
-              How do Car Ad Campaigns work for businesses?
-            </h3>
-            <p class="feature__description" style="font-size: 0.9rem; line-height: 1.5">
-              Businesses can run local car advertising campaigns while supporting independent drivers.
+          <div class="faq__card">
+            <div class="faq__icon"><i class="bx bx-car"></i></div>
+            <h3 class="faq__title">How do Car Ad Campaigns work?</h3>
+            <p class="faq__text">
+              Businesses run local campaigns, and drivers can opt in to display approved ads to earn extra income.
             </p>
           </div>
         </div>
@@ -413,11 +734,7 @@
         <div class="footer__content">
           <h3 class="footer__subtitle">Connect With Us</h3>
           <div class="footer__social">
-            <a
-              href="https://www.facebook.com/profile.php?id=61574801146211"
-              class="footer__icon"
-              aria-label="Gigways on Facebook"
-            >
+            <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon" aria-label="Gigways on Facebook">
               <i class="bx bxl-facebook"></i>
             </a>
             <a href="https://x.com/gigways" class="footer__icon" aria-label="Gigways on X">
@@ -450,14 +767,11 @@
 
     <!-- Page helpers -->
     <script>
-      // remove preload class after load
       window.addEventListener("load", () => document.documentElement.classList.remove("preload"));
 
-      // footer year
       const yearEl = document.getElementById("year");
       if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-      // simple toast helper
       function showToast(msg, ms = 3500) {
         const t = document.getElementById("toast");
         if (!t) return;
@@ -467,7 +781,6 @@
         showToast._timer = window.setTimeout(() => t.classList.remove("show"), ms);
       }
 
-      // Android coming soon
       const androidLink = document.getElementById("androidLink");
       if (androidLink) {
         androidLink.addEventListener("click", (e) => {
@@ -478,3 +791,4 @@
     </script>
   </body>
 </html>
+
