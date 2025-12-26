@@ -4,6 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- ✅ NO-FLASH: run BEFORE any CSS so first paint is already themed -->
+  <script>
+    (function () {
+      const root = document.documentElement;
+      root.classList.add("preload");
+      const t = localStorage.getItem("selected-theme"); // "dark" | "light"
+      if (t === "dark") root.classList.add("dark-theme");
+    })();
+  </script>
+
   <!-- ✅ SEO -->
   <title>Car Advertising & Vehicle Wrap Campaigns | Gigways</title>
   <meta name="description" content="Affordable, reliable car advertising with opt-in gig drivers. Launch full or half magnetic vinyl wrap campaigns by city, get proof-first creative, and scale from 5 to 500+ cars with Gigways." />
@@ -99,8 +109,21 @@
   }
   </script>
 
-  <!-- ✅ Page-only Modern UI + Theme-safe FAQ & AdType + FIXED SECTION TEXT COLORS -->
+  <!-- ✅ Page-only Modern UI + Theme-safe FAQ & AdType + NO-FLASH protections -->
   <style>
+    /* Disable transitions during first paint to prevent flicker */
+    .preload *,
+    .preload *::before,
+    .preload *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+    .preload body,
+    .preload .l-header,
+    .preload .nav__menu {
+      transition: none !important;
+    }
+
     :root{
       --gw-card: rgba(255,255,255,.06);
       --gw-border: rgba(255,255,255,.12);
@@ -111,11 +134,11 @@
       --gw-accentText: #121212;
       --gw-radius: 18px;
 
-      /* ✅ NEW: global readable text vars for ANY section in this page */
+      /* ✅ Page readable text (default = dark-ish UI overlay; works in dark-theme too) */
       --page-text: rgba(255,255,255,.92);
       --page-sub: rgba(255,255,255,.78);
 
-      /* AdType defaults (JS overrides based on bg) */
+      /* AdType defaults */
       --adtype-text: rgba(255,255,255,.92);
       --adtype-bg: rgba(255,255,255,.06);
       --adtype-border: rgba(255,255,255,.10);
@@ -126,7 +149,7 @@
       --adtype-bg-selected: rgba(216,198,175,.95);
       --adtype-border-selected: rgba(216,198,175,.95);
 
-      /* FAQ defaults (JS overrides based on bg) */
+      /* FAQ defaults */
       --faq-bg: rgba(255,255,255,.05);
       --faq-border: rgba(255,255,255,.12);
       --faq-text: rgba(255,255,255,.92);
@@ -136,9 +159,36 @@
       --faq-shadow: rgba(0,0,0,.12);
     }
 
+    /* If your LIGHT theme is active (no .dark-theme), flip page-only vars so text is readable */
+    html:not(.dark-theme){
+      --page-text: #121212;
+      --page-sub: rgba(18,18,18,.78);
+
+      --gw-text: #121212;
+      --gw-sub: rgba(18,18,18,.78);
+      --gw-card: rgba(0,0,0,.03);
+      --gw-border: rgba(0,0,0,.12);
+      --gw-soft: rgba(0,0,0,.03);
+
+      --adtype-text: #121212;
+      --adtype-bg: rgba(0,0,0,.03);
+      --adtype-border: rgba(0,0,0,.12);
+      --adtype-text-disabled: #121212;
+      --adtype-bg-disabled: rgba(0,0,0,.02);
+      --adtype-border-disabled: rgba(0,0,0,.10);
+
+      --faq-bg: rgba(0,0,0,.03);
+      --faq-border: rgba(0,0,0,.12);
+      --faq-text: #121212;
+      --faq-sub: rgba(18,18,18,.78);
+      --faq-panel: rgba(0,0,0,.03);
+      --faq-chip: rgba(255,255,255,.85);
+      --faq-shadow: rgba(0,0,0,.10);
+    }
+
     .container{ max-width: 1120px; }
 
-    /* ✅ FIX: ensure section titles/subtitles never go "blank" in white theme */
+    /* ✅ Ensure titles/subtitles never go blank */
     body, .section, main, .container{ color: var(--page-text); }
     .section-title{ color: var(--page-text) !important; }
     .section-subtitle, .small-note{ color: var(--page-sub) !important; }
@@ -242,7 +292,7 @@
     }
     .btn-ghost:hover{ transform: translateY(-1px); }
 
-    /* ✅ FIX: prevent global a:hover rules from hiding CTA text/icons */
+    /* Prevent global a:hover from changing CTA text */
     .btn-solid,
     .btn-solid:hover,
     .btn-solid:focus,
@@ -382,7 +432,7 @@
       color: var(--gw-text);
     }
 
-    /* ✅ CRITICAL FIX: styles.css hides `.price` globally. */
+    /* styles.css hides `.price` globally; keep estimate visible */
     .estimate-price{
       display:block !important;
       font-size:1.45rem;
@@ -395,7 +445,7 @@
       color:var(--third-color);
     }
 
-    /* ✅ NICE FAQ ACCORDION (theme-safe) */
+    /* FAQ */
     .faq-wrap{
       margin-top: .9rem;
       border-radius: var(--gw-radius);
@@ -507,7 +557,6 @@
     .faq-mini b{ display:block; font-size:.92rem; color: var(--faq-text); }
     .faq-mini span{ display:block; margin-top:.15rem; font-size:.88rem; color: var(--faq-sub); line-height:1.3; }
 
-    /* Focus states */
     a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible{
       outline: 3px solid rgba(216,198,175,.65);
       outline-offset: 2px;
@@ -519,19 +568,28 @@
 <body>
   <div class="bubble-container"></div>
 
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- HEADER -->
   <header class="l-header">
     <nav class="nav bd-grid">
       <div><a href="index.html" class="nav__logo">Gigways</a></div>
+
       <div class="nav__menu" id="nav-menu">
         <ul class="nav__list">
           <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
           <li class="nav__item"><a href="index.html#about" class="nav__link">About</a></li>
           <li class="nav__item"><a href="partners.html" class="nav__link active">Car Advertising</a></li>
-          <li class="nav__item"><a href="market.html" class="nav__link">Marketplace</a></li>
+          <li class="nav__item"><a href="market.html" class="nav__link" aria-current="page">Marketplace</a></li>
           <li class="nav__item"><a href="careers.html" class="nav__link">Careers</a></li>
         </ul>
       </div>
-      <div class="theme"><img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" /></div>
+
+      <div class="theme">
+        <img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" />
+      </div>
+
       <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
     </nav>
   </header>
@@ -625,10 +683,10 @@
                 <h3 class="pricing-aside__title"><i class="bx bx-dollar-circle"></i> Pricing estimate</h3>
                 <p class="pricing-aside__sub">Choose duration + package, then enter cars to preview a non-binding estimate.</p>
               </div>
-              <!-- ✅ UPDATED PILL -->
               <span class="pricing-aside__pill"><i class="bx bx-badge-check"></i> 5% off 10+ • 10% off 25+</span>
             </div>
 
+            <!-- ✅ UPDATED: 1–6 months -->
             <div class="plan-grid" id="planGrid">
               <label class="plan-card selected" data-months="1">
                 <input class="plan-radio" type="radio" name="plan" value="1" checked>
@@ -659,9 +717,38 @@
                 <h3>Lower cost / longer impact</h3>
                 <div class="plan-row"><span>Great for scaling</span><b>Auto-estimate</b></div>
               </label>
+
+              <label class="plan-card" data-months="4">
+                <input class="plan-radio" type="radio" name="plan" value="4">
+                <div class="top">
+                  <span class="plan-badge"><i class="bx bx-calendar"></i> 4 Months</span>
+                  <span class="plan-pill">Extended</span>
+                </div>
+                <h3>More repetition</h3>
+                <div class="plan-row"><span>Better recall</span><b>Auto-estimate</b></div>
+              </label>
+
+              <label class="plan-card" data-months="5">
+                <input class="plan-radio" type="radio" name="plan" value="5">
+                <div class="top">
+                  <span class="plan-badge"><i class="bx bx-calendar"></i> 5 Months</span>
+                  <span class="plan-pill">Sustained</span>
+                </div>
+                <h3>Strong presence</h3>
+                <div class="plan-row"><span>Great for local</span><b>Auto-estimate</b></div>
+              </label>
+
+              <label class="plan-card" data-months="6">
+                <input class="plan-radio" type="radio" name="plan" value="6">
+                <div class="top">
+                  <span class="plan-badge"><i class="bx bx-calendar"></i> 6 Months</span>
+                  <span class="plan-pill">Best long-run</span>
+                </div>
+                <h3>Lowest monthly cost</h3>
+                <div class="plan-row"><span>Best value</span><b>Auto-estimate</b></div>
+              </label>
             </div>
 
-            <!-- ✅ UPDATED NOTE -->
             <div class="fleet-note" id="fleetNote" aria-live="polite">
               <b>Fleet discounts:</b> <b>5%</b> off monthly subtotal for <b>10–24 vehicles</b>, and <b>10%</b> off for <b>25+ vehicles</b> (auto-applied).
             </div>
@@ -680,7 +767,6 @@
               <input type="hidden" id="campaign_rate" name="ratePerCarPerMonth" value="">
               <input type="hidden" id="campaign_est_total" name="campaignTotal" value="">
               <input type="hidden" id="campaign_fleet_discount" name="fleetDiscountApplied" value="false">
-              <!-- ✅ NEW: capture the discount rate applied (0, 0.05, 0.10) -->
               <input type="hidden" id="campaign_fleet_discount_rate" name="fleetDiscountRate" value="0">
             </div>
 
@@ -874,7 +960,7 @@
         </div>
       </div>
 
-      <!-- ✅ FAQ -->
+      <!-- FAQ -->
       <section class="section" id="faq" aria-label="Car advertising FAQs">
         <h2 class="section-title">FAQs</h2>
 
@@ -975,7 +1061,7 @@
                     <i class="bx bx-calendar"></i>
                     <div>
                       <b>Campaign timeline</b>
-                      <span>Start date and length (1–3+ months).</span>
+                      <span>Start date and length (1–6 months).</span>
                     </div>
                   </div>
                 </div>
@@ -1043,118 +1129,11 @@
 
   <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
 
+  <!-- ✅ Page JS (pricing + form). NO applyThemeVars = NO flicker -->
   <script>
     (function(){
       const $ = s => document.querySelector(s);
       const $$ = s => Array.from(document.querySelectorAll(s));
-
-      // -----------------------------
-      // Theme helpers
-      // -----------------------------
-      function parseRgba(str){
-        const m = String(str).match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([0-9.]+))?\)/i);
-        if (!m) return null;
-        return { r:+m[1], g:+m[2], b:+m[3], a:(m[4]===undefined?1:+m[4]) };
-      }
-
-      function relLum({r,g,b}){
-        const srgb = [r,g,b].map(v=>{
-          v/=255;
-          return (v<=0.03928) ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4);
-        });
-        return 0.2126*srgb[0] + 0.7152*srgb[1] + 0.0722*srgb[2];
-      }
-
-      function getEffectiveBg(){
-        const candidates = [
-          document.documentElement,
-          document.body,
-          document.querySelector('.partners-hero'),
-          document.querySelector('.hero-card'),
-          document.querySelector('main'),
-          document.querySelector('.container'),
-          document.querySelector('#faq'),
-          document.querySelector('.faq-wrap')
-        ].filter(Boolean);
-
-        for (const el of candidates){
-          const bg = parseRgba(getComputedStyle(el).backgroundColor);
-          if (bg && bg.a !== 0) return bg;
-        }
-        return null;
-      }
-
-      function applyThemeVars(){
-        const bg = getEffectiveBg();
-        const isLight = bg ? (relLum(bg) > 0.6) : false;
-        const root = document.documentElement.style;
-
-        if (isLight){
-          root.setProperty('--page-text', '#121212');
-          root.setProperty('--page-sub', 'rgba(18,18,18,.78)');
-          root.setProperty('--gw-text', '#121212');
-          root.setProperty('--gw-sub', 'rgba(18,18,18,.78)');
-          root.setProperty('--gw-card', 'rgba(0,0,0,.03)');
-          root.setProperty('--gw-border', 'rgba(0,0,0,.12)');
-          root.setProperty('--gw-soft', 'rgba(0,0,0,.03)');
-        } else {
-          root.setProperty('--page-text', 'rgba(255,255,255,.92)');
-          root.setProperty('--page-sub', 'rgba(255,255,255,.78)');
-          root.setProperty('--gw-text', 'rgba(255,255,255,.92)');
-          root.setProperty('--gw-sub', 'rgba(255,255,255,.78)');
-          root.setProperty('--gw-card', 'rgba(255,255,255,.06)');
-          root.setProperty('--gw-border', 'rgba(255,255,255,.12)');
-          root.setProperty('--gw-soft', 'rgba(0,0,0,.10)');
-        }
-
-        if (isLight){
-          root.setProperty('--adtype-text', '#121212');
-          root.setProperty('--adtype-bg', 'rgba(0,0,0,.03)');
-          root.setProperty('--adtype-border', 'rgba(0,0,0,.12)');
-          root.setProperty('--adtype-text-disabled', '#121212');
-          root.setProperty('--adtype-bg-disabled', 'rgba(0,0,0,.02)');
-          root.setProperty('--adtype-border-disabled', 'rgba(0,0,0,.10)');
-        } else {
-          root.setProperty('--adtype-text', 'rgba(255,255,255,.92)');
-          root.setProperty('--adtype-bg', 'rgba(255,255,255,.06)');
-          root.setProperty('--adtype-border', 'rgba(255,255,255,.10)');
-          root.setProperty('--adtype-text-disabled', 'rgba(255,255,255,.92)');
-          root.setProperty('--adtype-bg-disabled', 'rgba(255,255,255,.06)');
-          root.setProperty('--adtype-border-disabled', 'rgba(255,255,255,.10)');
-        }
-        root.setProperty('--adtype-text-selected', '#121212');
-        root.setProperty('--adtype-bg-selected', 'rgba(216,198,175,.95)');
-        root.setProperty('--adtype-border-selected', 'rgba(216,198,175,.95)');
-
-        if (isLight){
-          root.setProperty('--faq-bg', 'rgba(0,0,0,.03)');
-          root.setProperty('--faq-border', 'rgba(0,0,0,.12)');
-          root.setProperty('--faq-text', '#121212');
-          root.setProperty('--faq-sub', 'rgba(18,18,18,.78)');
-          root.setProperty('--faq-panel', 'rgba(0,0,0,.03)');
-          root.setProperty('--faq-chip', 'rgba(255,255,255,.85)');
-          root.setProperty('--faq-shadow', 'rgba(0,0,0,.10)');
-        } else {
-          root.setProperty('--faq-bg', 'rgba(255,255,255,.05)');
-          root.setProperty('--faq-border', 'rgba(255,255,255,.12)');
-          root.setProperty('--faq-text', 'rgba(255,255,255,.92)');
-          root.setProperty('--faq-sub', 'rgba(255,255,255,.78)');
-          root.setProperty('--faq-panel', 'rgba(0,0,0,.10)');
-          root.setProperty('--faq-chip', 'rgba(255,255,255,.04)');
-          root.setProperty('--faq-shadow', 'rgba(0,0,0,.12)');
-        }
-      }
-
-      applyThemeVars();
-
-      const themeObserver = new MutationObserver(() => applyThemeVars());
-      themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class','data-theme','style'] });
-      themeObserver.observe(document.body, { attributes: true, attributeFilter: ['class','data-theme','style'] });
-
-      const themeIcon = document.getElementById('iconMS');
-      if (themeIcon){
-        themeIcon.addEventListener('click', () => setTimeout(applyThemeVars, 0));
-      }
 
       // Pricing helpers
       function formatMoney(n){
@@ -1168,13 +1147,12 @@
       }
       function monthLabel(months){ return `${months} month${months > 1 ? 's' : ''}`; }
 
-      // ✅ UPDATED PRICING (matches your object)
+      // ✅ UPDATED: 1–6 months for FULL and HALF
       const PRICING = {
-        full: { 1: 575, 2: 525, 3: 475 },
-        half: { 1: 375, 2: 325, 3: 275 }
+        full: { 1: 575, 2: 525, 3: 475, 4: 450, 5: 425, 6: 400 },
+        half: { 1: 375, 2: 350, 3: 325, 4: 300, 5: 275, 6: 250 }
       };
 
-      // ✅ UPDATED FLEET DISCOUNTS: 10–24 => 5%, 25+ => 10%
       const FLEET_DISCOUNTS = [
         { minVehicles: 25, discount: 0.10 },
         { minVehicles: 10, discount: 0.05 }
@@ -1308,11 +1286,12 @@
         const m = parseInt(months, 10);
         const cars = parseInt(numberOfCars, 10);
 
-        const isValidMonths = (m === 1 || m === 2 || m === 3);
+        // ✅ UPDATED: 1–6 months
+        const isValidMonths = (m >= 1 && m <= 6);
         const isValidCars = isFinite(cars) && cars >= 1;
 
         if (!isValidMonths || !isValidCars){
-          return { error: !isValidMonths ? 'Select a valid duration (1–3 months).' : 'Enter a valid number of cars (1+).' };
+          return { error: !isValidMonths ? 'Select a valid duration (1–6 months).' : 'Enter a valid number of cars (1+).' };
         }
 
         const rate = PRICING[pkg]?.[m];
@@ -1492,5 +1471,12 @@
   </script>
 
   <script src="assets/js/main.js"></script>
+
+  <!-- ✅ Remove preload AFTER everything loads (prevents transition flash) -->
+  <script>
+    window.addEventListener("load", () => {
+      document.documentElement.classList.remove("preload");
+    });
+  </script>
 </body>
 </html>
