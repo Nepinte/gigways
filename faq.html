@@ -3,12 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- NO-FLASH / NO-FLICKER PATCH (matches your site) -->
+    <script>
+      (function () {
+        const root = document.documentElement;
+        root.classList.add("preload");
+        const t = localStorage.getItem("selected-theme");
+        if (t === "dark") root.classList.add("dark-theme");
+      })();
+    </script>
+
+    <link rel="icon" href="/assets/img/App.png" />
+    <link rel="apple-touch-icon" href="/assets/img/App.png" />
     <link rel="stylesheet" href="assets/css/styles.css" />
-    <link rel="icon" href="assets/img/App.png" />
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+
     <title>FAQ - Gigways</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
     <style>
-      /* Base layout (honors your design system tokens) */
+      /* =========================================================
+         FIX FOR "PAGE MOVES" WHEN FILTERING
+         The jump happens because grid items change height,
+         and the browser may re-anchor scroll position.
+         We stabilize by:
+         1) locking a minimum height for the FAQ area
+         2) preventing scroll anchoring on the FAQ list
+         3) keeping the scrollbar always present
+      ========================================================= */
+      html {
+        overflow-y: scroll;         /* keeps scrollbar always -> prevents width shift */
+        overflow-anchor: none;      /* prevents scroll anchoring jumps (supported browsers) */
+      }
+
       body {
         font-family: var(--body-font);
         background-color: var(--first-color);
@@ -16,261 +47,964 @@
         line-height: 1.6;
         overflow-x: hidden;
       }
-      .l-header {
-        position: fixed; top: 0; left: 0; width: 100%;
-        background-color: var(--first-color);
-        box-shadow: 0 2px 10px rgba(0,0,0,.1);
-        z-index: 100;
-      }
-      .nav { display:flex; justify-content:space-between; align-items:center; padding:10px 20px; max-width:1024px; margin:0 auto; }
-      .nav__logo { font-size:1.5rem; font-weight:700; color:var(--second-color); }
-      main { padding-top:80px; max-width:1024px; margin:0 auto; }
-      .faq-container {
-        background:#fff; border-radius:8px; padding:40px; margin:20px;
-        box-shadow:0 4px 15px rgba(0,0,0,.1);
+
+      /* Main container */
+      main {
+        padding-top: 88px;
+        max-width: var(--page-max);
+        margin: 0 auto;
+        padding-inline: 1rem;
       }
 
-      /* -------- Fancy main topic / hero -------- */
-      .faq-hero { text-align:center; margin-bottom:24px; position:relative; padding-top:6px; }
+      .faq-wrap {
+        border-radius: 18px;
+        border: 1px solid var(--glass-bd);
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-sm);
+        padding: 28px;
+        margin: 16px auto 28px;
+      }
+
+      /* Hero */
+      .faq-hero {
+        text-align: center;
+        margin-bottom: 22px;
+        position: relative;
+        padding-top: 6px;
+      }
+
       .faq-hero__icon {
-        width:56px; height:56px; margin:0 auto 8px auto; color:var(--third-color);
-        display:grid; place-items:center; border-radius:50%;
-        background: radial-gradient(120% 120% at 50% 0%, rgba(100,160,255,0.18), rgba(84,107,171,0.08) 45%, rgba(0,0,0,0) 60%);
+        width: 56px;
+        height: 56px;
+        margin: 0 auto 10px auto;
+        display: grid;
+        place-items: center;
+        border-radius: 16px;
+        border: 1px solid var(--chip-bd);
+        background: var(--chip-bg);
+        color: var(--third-color);
+        box-shadow: var(--shadow-sm);
       }
+
       .title-gradient {
-        font-size:2.25rem; line-height:1.15; margin:6px 0 8px 0;
-        background: linear-gradient(90deg, var(--third-color), var(--accent-color));
-        -webkit-background-clip:text; background-clip:text; color:transparent; letter-spacing:-0.3px;
+        font-size: 2.25rem;
+        line-height: 1.12;
+        margin: 6px 0 8px 0;
+        background: var(--button-grad);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        letter-spacing: -0.5px;
+        font-weight: 900;
       }
-      .subhead { text-align:center; font-size:.95rem; margin-bottom:12px; opacity:.85; }
+
+      .subhead {
+        text-align: center;
+        font-size: 0.98rem;
+        margin-bottom: 10px;
+        color: var(--text-color-light);
+      }
+
       .faq-hero__pills {
-        display:inline-flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:8px 0 12px 0;
+        display: inline-flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 10px 0 6px 0;
       }
+
       .pill {
-        font-size:0.78rem; padding:6px 10px; border-radius:999px;
-        border:1px solid rgba(0,0,0,0.08);
-        background: linear-gradient(0deg, rgba(0,0,0,0.02), rgba(0,0,0,0.02));
-        color:var(--second-color); white-space:nowrap;
+        font-size: 0.8rem;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--chip-bd);
+        background: var(--chip-bg);
+        color: var(--second-color);
+        white-space: nowrap;
+        font-weight: 700;
       }
+
       .divider-gradient {
-        height:4px; width:min(320px, 60%); margin:10px auto 0 auto; border-radius:999px;
-        background: linear-gradient(90deg, rgba(84,107,171,0), var(--third-color), var(--accent-color), rgba(100,160,255,0));
-        box-shadow: 0 6px 18px rgba(84,107,171,0.25);
-      }
-      .dark-theme .faq-hero__icon {
-        background: radial-gradient(120% 120% at 50% 0%, rgba(100,160,255,0.24), rgba(84,107,171,0.14) 45%, rgba(0,0,0,0) 60%);
-      }
-      .dark-theme .pill {
-        border-color: rgba(255,255,255,0.08);
-        background: linear-gradient(0deg, rgba(255,255,255,0.04), rgba(255,255,255,0.04));
+        height: 3px;
+        width: min(340px, 60%);
+        margin: 12px auto 0 auto;
+        border-radius: 999px;
+        background: var(--button-grad);
+        opacity: 0.95;
+        box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
       }
 
-      /* Search Bar */
-      .faq-search { margin: 8px auto 24px auto; max-width: 500px; position: relative; }
+      /* Controls row */
+      .faq-controls {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin: 18px auto 16px auto;
+        max-width: 980px;
+      }
+
+      .faq-search {
+        position: relative;
+      }
+
       .faq-search input {
-        width:100%; padding:12px 14px; border:1px solid rgba(0,0,0,.1); border-radius:8px; font-size:1rem; outline:none;
+        width: 100%;
+        padding: 12px 44px 12px 14px;
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+        font-size: 1rem;
+        outline: none;
+        background: var(--first-color);
+        color: var(--second-color);
+        transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+          background-color var(--transition-fast), color var(--transition-fast);
       }
-      .faq-search input:focus { border-color: var(--third-color); box-shadow:0 0 0 2px rgba(84,107,171,0.2); }
 
-      /* Accordion */
-      details { background:#fafafa; border:1px solid rgba(0,0,0,.06); border-radius:10px; padding:14px 16px; margin-bottom:12px; }
+      .faq-search input:focus {
+        border-color: var(--third-color);
+        box-shadow: 0 0 0 3px rgba(143, 122, 91, 0.18);
+      }
+
+      .faq-search .search-icon {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-color-light);
+        pointer-events: none;
+        display: grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+      }
+
+      .controls-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .chip {
+        border: 1px solid var(--chip-bd);
+        background: var(--chip-bg);
+        color: var(--second-color);
+        border-radius: 999px;
+        padding: 8px 10px;
+        font-size: 0.84rem;
+        font-weight: 800;
+        cursor: pointer;
+        user-select: none;
+        transition: transform 140ms ease, box-shadow 140ms ease, background-color var(--transition-fast);
+      }
+
+      .chip:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .chip[aria-pressed="true"] {
+        background: var(--button-grad);
+        color: #fff;
+        border-color: rgba(0, 0, 0, 0.06);
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .mini-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 14px;
+        padding: 10px 12px;
+        min-height: 42px;
+        border: 1px solid var(--border-color);
+        background: transparent;
+        color: var(--second-color);
+        font-weight: 800;
+        cursor: pointer;
+        transition: transform 140ms ease, box-shadow 140ms ease, background-color var(--transition-fast);
+      }
+
+      .mini-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-sm);
+        background: rgba(0, 0, 0, 0.04);
+      }
+
+      .mini-btn.primary {
+        background: var(--button-grad);
+        color: #fff;
+        border-color: rgba(0, 0, 0, 0.06);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+      }
+
+      .mini-btn.primary:hover {
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+      }
+
+      /* Accordion cards */
+      .faq-list {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 14px;
+        margin-top: 8px;
+
+        /* prevents scroll anchoring jumps when items hide/show */
+        overflow-anchor: none;
+
+        /* keeps the area stable so the page doesn’t “snap” upward */
+        min-height: 680px;
+      }
+
+      .faq-item {
+        grid-column: span 6;
+        border-radius: 18px;
+        border: 1px solid var(--glass-bd);
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-sm);
+        padding: 14px 14px 12px;
+        transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      }
+
+      .faq-item:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--chip-bd);
+      }
+
+      details {
+        border: none;
+        background: transparent;
+      }
+
       summary {
-        cursor:pointer; font-weight:600; display:flex; justify-content:space-between; align-items:center; color:var(--second-color);
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        color: var(--second-color);
+        font-weight: 900;
+        letter-spacing: -0.2px;
+        outline: none;
       }
-      summary::-webkit-details-marker{display:none;}
-      .arrow { transition:transform .25s ease; margin-left:12px; }
-      details[open] .arrow { transform:rotate(90deg); }
-      .answer { margin-top:10px; color:var(--second-color); }
-      .answer p { margin-bottom:10px; }
 
-      /* No results state */
-      .no-results { text-align:center; font-size:0.95rem; color:#888; margin-top:20px; display:none; }
+      summary::-webkit-details-marker {
+        display: none;
+      }
 
-      /* Footer */
-      .footer { background-color:var(--second-color); color:var(--first-color); padding:20px; text-align:center; margin-top:40px; }
-      .footer p { font-size:0.9rem; }
+      summary:focus-visible {
+        box-shadow: 0 0 0 3px rgba(143, 122, 91, 0.2);
+        border-radius: 12px;
+        padding: 6px;
+        margin: -6px;
+      }
+
+      .q {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .q-badge {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        border: 1px solid var(--chip-bd);
+        background: var(--chip-bg);
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        color: var(--third-color);
+        font-weight: 900;
+      }
+
+      .arrow {
+        transition: transform 0.18s ease;
+        color: var(--text-color-light);
+        margin-top: 2px;
+        flex: 0 0 auto;
+      }
+
+      details[open] .arrow {
+        transform: rotate(90deg);
+      }
+
+      .answer {
+        margin-top: 10px;
+        color: var(--second-color);
+        line-height: 1.75;
+      }
+
+      .answer p {
+        margin: 0 0 10px 0;
+      }
+
+      .answer a {
+        color: var(--third-color);
+        font-weight: 800;
+      }
+
+      .answer a:hover {
+        color: var(--accent-color);
+      }
+
+      .meta {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .tag {
+        font-size: 0.78rem;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--chip-bd);
+        background: var(--chip-bg);
+        color: var(--second-color);
+        font-weight: 800;
+      }
+
+      /* Search highlight */
+      mark {
+        background: rgba(191, 168, 137, 0.22);
+        color: inherit;
+        padding: 0 0.12em;
+        border-radius: 6px;
+      }
+
+      /* No results */
+      .no-results {
+        text-align: center;
+        font-size: 0.98rem;
+        color: var(--text-color-light);
+        margin-top: 16px;
+        display: none;
+      }
+
+      /* Support card */
+      .support-card {
+        margin-top: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--glass-bd);
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-sm);
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .support-card .support-text {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .support-card .support-text strong {
+        font-weight: 900;
+        letter-spacing: -0.2px;
+      }
+
+      .support-card .support-text span {
+        color: var(--text-color-light);
+        font-size: 0.92rem;
+      }
 
       /* Responsive */
+      @media (max-width: 980px) {
+        .faq-item {
+          grid-column: span 12;
+        }
+        .faq-list {
+          min-height: 820px;
+        }
+      }
+
       @media (max-width: 600px) {
-        .faq-container { padding:20px; margin:10px; }
-        .title-gradient { font-size:1.9rem; }
+        .faq-wrap {
+          padding: 18px;
+        }
+        .title-gradient {
+          font-size: 1.9rem;
+        }
+        .faq-list {
+          min-height: 900px;
+        }
       }
     </style>
   </head>
+
   <body>
-    <!-- Header -->
+    <div class="bubble-container"></div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- HEADER -->
     <header class="l-header">
-      <nav class="nav">
-        <a href="index.html" class="nav__logo">Gigways</a>
+      <nav class="nav bd-grid">
+        <div><a href="index.html" class="nav__logo">Gigways</a></div>
       </nav>
     </header>
 
-    <!-- Main -->
     <main>
-      <div class="faq-container">
-        <!-- Hero / main topic -->
+      <section class="faq-wrap">
+        <!-- Hero -->
         <div class="faq-hero">
           <div class="faq-hero__icon" aria-hidden="true">
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" role="img" aria-hidden="true">
-              <path d="M7 7h10v6H9l-2 2V7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M7 17h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" role="img" aria-hidden="true">
+              <path
+                d="M7 7h10v6H9l-2 2V7z"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path d="M7 17h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
             </svg>
           </div>
-          <h1 class="title-gradient">Frequently Asked Questions</h1>
-          <p class="subhead">Quick answers about Gigways features, privacy, and driver tools.</p>
+
+          <h1 class="title-gradient">Gigways FAQ</h1>
+          <p class="subhead">Driver-first tracking + private trips with people you already know. Here’s how it works.</p>
+
           <div class="faq-hero__pills">
-            <span class="pill">Drivers first</span>
-            <span class="pill">Privacy by design</span>
-            <span class="pill">Made for gig work</span>
+            <span class="pill">Driver Mode</span>
+            <span class="pill">Rider Mode</span>
+            <span class="pill">Privacy</span>
+            <span class="pill">Car Ads</span>
           </div>
+
           <div class="divider-gradient" aria-hidden="true"></div>
         </div>
 
-        <!-- Search bar -->
-        <div class="faq-search">
-          <input type="text" id="faqSearch" placeholder="Search FAQs..." />
+        <!-- Controls -->
+        <div class="faq-controls">
+          <div class="faq-search">
+            <input
+              type="text"
+              id="faqSearch"
+              placeholder="Search questions (miles, private trips, ads, taxes…)"
+              autocomplete="off"
+            />
+            <span class="search-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.6" />
+                <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+            </span>
+          </div>
+
+          <div class="controls-actions">
+            <div class="filters" role="group" aria-label="FAQ categories">
+              <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+              <button class="chip" type="button" data-filter="driver" aria-pressed="false">Driver Mode</button>
+              <button class="chip" type="button" data-filter="rider" aria-pressed="false">Rider Mode</button>
+              <button class="chip" type="button" data-filter="privacy" aria-pressed="false">Privacy</button>
+              <button class="chip" type="button" data-filter="ads" aria-pressed="false">Car Ads</button>
+              <button class="chip" type="button" data-filter="business" aria-pressed="false">Business</button>
+              <button class="chip" type="button" data-filter="account" aria-pressed="false">Account</button>
+            </div>
+
+            <div class="actions">
+              <button class="mini-btn" id="closeAll" type="button">Close all</button>
+              <button class="mini-btn primary" id="openAll" type="button">Open all</button>
+            </div>
+          </div>
         </div>
 
-        <!-- FAQ list (25 items) -->
-        <div id="faqList">
-          <details>
-            <summary>1) What is Gigways? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Gigways is a wellness and productivity app for gig drivers. Track miles, expenses, hours, and trips, and use tools like <strong>Focus</strong> and <strong>Driver Density Forecasts</strong>.</p></div>
-          </details>
+        <!-- FAQ list -->
+        <div class="faq-list" id="faqList">
+          <!-- 1 -->
+          <div class="faq-item" data-tags="driver,account">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">1</span><span class="q-text">What is Gigways?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>
+                  Gigways is a <strong>driver-first toolkit</strong> built to help gig workers track
+                  <strong>miles, expenses, hours, and earnings</strong> — and manage <strong>private trips</strong> with people
+                  they already know and trust.
+                </p>
+                <div class="meta"><span class="tag">Driver Mode</span><span class="tag">Rider Mode</span></div>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>2) Who can use Gigways? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Any gig driver — rideshare (Uber, Lyft), delivery (DoorDash, Uber Eats, Grubhub), shopping (Instacart), and more.</p></div>
-          </details>
+          <!-- 2 -->
+          <div class="faq-item" data-tags="driver">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">2</span><span class="q-text">What can I track in Driver Mode?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>
+                  Track <strong>mileage</strong>, <strong>expenses</strong>, <strong>work hours</strong>, and
+                  <strong>earnings</strong> so you can understand your real profit and drive smarter.
+                </p>
+                <div class="meta"><span class="tag">Mileage</span><span class="tag">Expenses</span><span class="tag">Earnings</span></div>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>3) How does the Focus feature work? <span class="arrow">▶</span></summary>
-            <div class="answer"><p><strong>Focus</strong> lets you pick or join rest days. It shows popular rest times, sends reminders, and supports recovery. 100% optional.</p></div>
-          </details>
+          <!-- 3 -->
+          <div class="faq-item" data-tags="driver">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">3</span><span class="q-text">Does Gigways connect to Uber/Lyft/DoorDash?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>No. Gigways is <strong>independent</strong>. You stay in control, and your gig platform accounts are not connected.</p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>4) What is the Driver Density Forecast? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>A map showing real-time and forecasted driver concentrations (by city, ZIP, or 5-mile grids) with Red = high, Green = low.</p></div>
-          </details>
+          <!-- 4 -->
+          <div class="faq-item" data-tags="driver">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">4</span><span class="q-text">How accurate is mileage tracking?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>Accuracy depends on device settings. Allow location access, and prevent battery optimization from restricting the app.</p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>5) How is driver density calculated? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>We combine anonymized, consented activity with time-of-day & population rules. All users see consistent estimates. No personal locations are exposed.</p></div>
-          </details>
+          <!-- 5 -->
+          <div class="faq-item" data-tags="driver,account">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">5</span><span class="q-text">Can I export mileage and expense reports?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>
+                  Yes. Export options depend on your app version. If you don’t see export, email
+                  <a href="mailto:support@gigways.com">support@gigways.com</a>.
+                </p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>6) Does Gigways help with taxes? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Yes — mileage and expense tracking are built in. Inside the app, we also provide partner tax-filing options to make filing easier.</p></div>
-          </details>
+          <!-- 6 -->
+          <div class="faq-item" data-tags="driver">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">6</span><span class="q-text">Can Gigways help me understand real profit?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>Yes. Track miles, time, and expenses to see what you make after costs.</p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>7) Is my data secure? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Yes. We use encryption, strict security practices, and privacy-by-design. We never sell your personal information.</p></div>
-          </details>
+          <!-- 7 -->
+          <div class="faq-item" data-tags="driver">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">7</span><span class="q-text">What is Smart Scheduling?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>Set reminders for breaks and meals to stay consistent and reduce burnout.</p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>8) Can I control location and motion tracking? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Yes. These are off by default and only enabled with your consent. You can disable permissions anytime via device or app settings.</p></div>
-          </details>
+          <!-- 8 -->
+          <div class="faq-item" data-tags="driver,privacy">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">8</span><span class="q-text">What is the Driver Density Map?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>It shows aggregated trends to help drivers plan smarter areas and reduce wasted time.</p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>9) Where is Gigways available? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Currently in the United States.</p></div>
-          </details>
+          <!-- 9 -->
+          <div class="faq-item" data-tags="rider,privacy">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">9</span><span class="q-text">What are Private Trips?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>Private Trips are rides with drivers you already know and trust — no public matching and no strangers.</p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>10) Which devices are supported? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>iOS and Android smartphones running recent OS versions.</p></div>
-          </details>
+          <!-- 10 -->
+          <div class="faq-item" data-tags="driver,rider">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">10</span><span class="q-text">How do drivers manage Private Trips?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>Drivers can receive requests, coordinate details, and keep private trips organized.</p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>11) How accurate is mileage tracking? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>It’s tuned for reliable capture with low battery drain. Keep permissions granted and exclude Gigways from aggressive battery savers.</p></div>
-          </details>
+          <!-- 11 -->
+          <div class="faq-item" data-tags="rider">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">11</span><span class="q-text">How do riders and drivers connect?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>Riders connect first. Drivers accept. Trips stay private between people who already know each other.</p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>12) Can I export my data? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Yes. Export mileage and expense reports in the app or request via <a href="mailto:support@gigways.com">support@gigways.com</a>.</p></div>
-          </details>
+          <!-- 12 -->
+          <div class="faq-item" data-tags="rider">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">12</span><span class="q-text">Does Gigways set prices or handle payments for Private Trips?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>Gigways is a toolkit. Drivers are independent, and payment arrangements are handled between driver and rider.</p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>13) How do I delete my account or data? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Request deletion in the app or by emailing support. We remove identifiable data unless law requires retention (e.g., tax compliance).</p></div>
-          </details>
+          <!-- 13 -->
+          <div class="faq-item" data-tags="privacy">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">13</span><span class="q-text">Do you sell driver data?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer"><p><strong>No.</strong> We don’t sell your personal data.</p></div>
+            </details>
+          </div>
 
-          <details><summary>14) Will Gigways affect my gig platform accounts? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>No. Gigways is independent. Focus and Density are planning tools only and don’t connect to Uber, Lyft, etc.</p></div>
-          </details>
+          <!-- 14 -->
+          <div class="faq-item" data-tags="privacy,account">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">14</span><span class="q-text">Can I control location permissions?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer"><p>Yes. You can enable/disable permissions anytime in your phone settings.</p></div>
+            </details>
+          </div>
 
-          <details><summary>15) I found a bug — how do I report it? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Email steps, screenshots, and your device model to <a href="mailto:support@gigways.com">support@gigways.com</a>. We’ll respond quickly.</p></div>
-          </details>
+          <!-- 15 -->
+          <div class="faq-item" data-tags="account,privacy">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">15</span><span class="q-text">How do I delete my account or data?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>Email <a href="mailto:support@gigways.com">support@gigways.com</a> and we’ll guide you through the steps.</p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>16) Can teams or fleets use Gigways? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Yes. Fleet and group tools are planned. Contact us if you want early access.</p></div>
-          </details>
+          <!-- 16 -->
+          <div class="faq-item" data-tags="account">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">16</span><span class="q-text">Where is Gigways available?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer"><p>Check the App Store / Google Play listing for the latest supported regions.</p></div>
+            </details>
+          </div>
 
-          <details><summary>17) Does Gigways work offline? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Basic tracking continues offline. Data syncs automatically once your phone reconnects to the internet.</p></div>
-          </details>
+          <!-- 17 -->
+          <div class="faq-item" data-tags="account">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">17</span><span class="q-text">Which devices are supported?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer"><p>iOS and Android on recent OS versions. Keep your device updated for best results.</p></div>
+            </details>
+          </div>
 
-          <details><summary>18) How does Focus protect my privacy? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Focus only shows aggregated rest trends. We never display an individual driver’s choices or personal details.</p></div>
-          </details>
+          <!-- 18 -->
+          <div class="faq-item" data-tags="account">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">18</span><span class="q-text">I found a bug — how do I report it?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>Email <a href="mailto:support@gigways.com">support@gigways.com</a> with steps and screenshots.</p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>19) How often is the Driver Density Forecast updated? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Current activity updates frequently, and forecasts project 15-, 30-, and 60-minute windows ahead.</p></div>
-          </details>
+          <!-- 19 -->
+          <div class="faq-item" data-tags="ads,driver">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">19</span><span class="q-text">What are Car Ads in Gigways?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>Opt-in ad campaigns where drivers can display approved ads and earn extra income, while businesses get local visibility.</p>
+              </div>
+            </details>
+          </div>
 
-          <details><summary>20) How do I contact support? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Email: <a href="mailto:support@gigways.com">support@gigways.com</a><br/>Phone: 470-530-9251</p></div>
-          </details>
+          <!-- 20 -->
+          <div class="faq-item" data-tags="ads,driver">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">20</span><span class="q-text">How much can drivers earn from car ads?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer"><p>Earnings vary by campaign, region, and requirements.</p></div>
+            </details>
+          </div>
 
-          <!-- Cars ads + affiliates -->
-          <details><summary>21) What are Gigways Rooftop Car Ads? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Gigways Rooftop Ads let drivers place branded decals or rooftop toppers on their cars. Drivers earn extra while brands get on-road visibility.</p></div>
-          </details>
+          <!-- 21 -->
+          <div class="faq-item" data-tags="ads,driver">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">21</span><span class="q-text">Do I have to do car ads to use Gigways?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer"><p>No. Car ads are optional. Tracking and private trips work without ads.</p></div>
+            </details>
+          </div>
 
-          <details><summary>22) How much can drivers earn from car ads? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Earnings vary by campaign and region. Compensation is typically a flat monthly rate or by campaign, designed to be fair after printing/setup costs.</p></div>
-          </details>
+          <!-- 22 -->
+          <div class="faq-item" data-tags="ads,business">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">22</span><span class="q-text">How can a business start a car ad campaign?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer"><p>Visit <a href="partners.html#forms">partners.html#forms</a> and submit the campaign form.</p></div>
+            </details>
+          </div>
 
-          <details><summary>23) Do drivers install the rooftop ads themselves? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Most decals/toppers are simple to install with our instructions. In some locations, pickup or install partners may be available.</p></div>
-          </details>
+          <!-- 23 -->
+          <div class="faq-item" data-tags="ads,business">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">23</span><span class="q-text">What types of businesses are a good fit for car ads?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer"><p>Local brands: restaurants, gyms, retail, services, events, and new openings.</p></div>
+            </details>
+          </div>
 
-          <details><summary>24) What affiliate partners does Gigways work with? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Driver-focused partners like tax filing (e.g., FreeTaxUSA), auto parts (e.g., AutoZone, NAPA), insurance (e.g., eHealth), and maintenance shops. Offers appear in-app as partner perks/discounts.</p></div>
-          </details>
+          <!-- 24 -->
+          <div class="faq-item" data-tags="ads,business,privacy">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">24</span><span class="q-text">Do businesses get access to driver personal data?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer"><p>No. Campaigns run without sharing driver personal data.</p></div>
+            </details>
+          </div>
 
-          <details><summary>25) How do affiliate offers work inside the app? <span class="arrow">▶</span></summary>
-            <div class="answer"><p>Tapping a partner link opens their official site/WebView. If you complete a purchase or service, the partner pays a small commission to Gigways—often with a discount for you.</p></div>
-          </details>
+          <!-- 25 -->
+          <div class="faq-item" data-tags="account">
+            <details>
+              <summary>
+                <span class="q"><span class="q-badge" aria-hidden="true">25</span><span class="q-text">How do I contact support?</span></span>
+                <span class="arrow" aria-hidden="true">▶</span>
+              </summary>
+              <div class="answer">
+                <p>Email <a href="mailto:support@gigways.com">support@gigways.com</a> and include your device model and screenshots if possible.</p>
+              </div>
+            </details>
+          </div>
         </div>
 
         <p id="noResults" class="no-results">No matching questions found.</p>
-      </div>
+
+        <div class="support-card">
+          <div class="support-text">
+            <strong>Still stuck?</strong>
+            <span>Send us a message and we’ll help you out.</span>
+          </div>
+          <a class="mini-btn primary" href="mailto:support@gigways.com" style="text-decoration: none">Email Support</a>
+        </div>
+      </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <p>© 2025 Gigways LLC. All rights reserved.</p>
-    </footer>
-
-    <!-- FAQ search logic -->
     <script>
+      // Remove preload class (no-flicker patch)
+      window.addEventListener("load", () => document.documentElement.classList.remove("preload"));
+
+      // ===== FAQ Filtering + Search + Highlighting =====
       const searchInput = document.getElementById("faqSearch");
       const faqList = document.getElementById("faqList");
-      const faqs = faqList.getElementsByTagName("details");
+      const items = Array.from(faqList.querySelectorAll(".faq-item"));
       const noResults = document.getElementById("noResults");
+      const chips = Array.from(document.querySelectorAll(".chip"));
+      const openAllBtn = document.getElementById("openAll");
+      const closeAllBtn = document.getElementById("closeAll");
 
-      searchInput.addEventListener("input", function () {
-        const filter = searchInput.value.toLowerCase().trim();
-        let visibleCount = 0;
+      let activeFilter = "all";
 
-        for (let i = 0; i < faqs.length; i++) {
-          const summary = faqs[i].querySelector("summary").innerText.toLowerCase();
-          const answer = faqs[i].querySelector(".answer").innerText.toLowerCase();
-          const match = summary.includes(filter) || answer.includes(filter);
-          faqs[i].style.display = match ? "" : "none";
+      // ✅ Keep scroll position stable when filtering (extra guard)
+      function withStableScroll(fn) {
+        const y = window.scrollY;
+        fn();
+        window.scrollTo({ top: y, left: 0, behavior: "auto" });
+      }
 
-          // auto-open matches if user typed something
-          if (filter && match) { faqs[i].open = true; }
-          else if (!filter) { faqs[i].open = false; } // reset to collapsed when search cleared
+      function escapeRegExp(str) {
+        return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      }
 
-          if (match) visibleCount++;
-        }
+      function clearHighlights(el) {
+        const marks = el.querySelectorAll("mark");
+        marks.forEach((m) => {
+          const text = document.createTextNode(m.textContent);
+          m.parentNode.replaceChild(text, m);
+          m.parentNode.normalize();
+        });
+      }
 
-        noResults.style.display = visibleCount === 0 ? "block" : "none";
+      function highlight(el, term) {
+        if (!term) return;
+
+        const safe = escapeRegExp(term);
+        const re = new RegExp(`(${safe})`, "gi");
+
+        const targets = el.querySelectorAll(".q-text, .answer");
+        targets.forEach((t) => {
+          clearHighlights(t);
+
+          const walker = document.createTreeWalker(t, NodeFilter.SHOW_TEXT, null);
+          const textNodes = [];
+          while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+          textNodes.forEach((node) => {
+            const val = node.nodeValue;
+            if (!val || !re.test(val)) return;
+
+            const frag = document.createDocumentFragment();
+            let lastIdx = 0;
+
+            val.replace(re, (match, _g1, offset) => {
+              if (offset > lastIdx) frag.appendChild(document.createTextNode(val.slice(lastIdx, offset)));
+              const mark = document.createElement("mark");
+              mark.textContent = match;
+              frag.appendChild(mark);
+              lastIdx = offset + match.length;
+            });
+
+            if (lastIdx < val.length) frag.appendChild(document.createTextNode(val.slice(lastIdx)));
+            node.parentNode.replaceChild(frag, node);
+          });
+        });
+      }
+
+      function matchesFilter(item) {
+        if (activeFilter === "all") return true;
+        const tags = (item.getAttribute("data-tags") || "")
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
+        return tags.includes(activeFilter);
+      }
+
+      function matchesSearch(item, q) {
+        if (!q) return true;
+        const text = item.innerText.toLowerCase();
+        return text.includes(q.toLowerCase());
+      }
+
+      function apply() {
+        const q = searchInput.value.trim();
+        let visible = 0;
+
+        items.forEach((item) => {
+          item.querySelectorAll(".q-text, .answer").forEach(clearHighlights);
+
+          const ok = matchesFilter(item) && matchesSearch(item, q);
+          item.style.display = ok ? "" : "none";
+
+          const d = item.querySelector("details");
+          if (ok) {
+            visible++;
+            highlight(item, q);
+            if (q) d.open = true;
+          } else {
+            d.open = false;
+          }
+        });
+
+        noResults.style.display = visible === 0 ? "block" : "none";
+      }
+
+      searchInput.addEventListener("input", () => withStableScroll(apply));
+
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          withStableScroll(() => {
+            chips.forEach((c) => c.setAttribute("aria-pressed", "false"));
+            chip.setAttribute("aria-pressed", "true");
+            activeFilter = chip.getAttribute("data-filter") || "all";
+            apply();
+          });
+        });
       });
+
+      openAllBtn.addEventListener("click", () => {
+        withStableScroll(() => {
+          items.forEach((item) => {
+            if (item.style.display === "none") return;
+            item.querySelector("details").open = true;
+          });
+        });
+      });
+
+      closeAllBtn.addEventListener("click", () => {
+        withStableScroll(() => {
+          items.forEach((item) => (item.querySelector("details").open = false));
+        });
+      });
+
+      apply();
     </script>
   </body>
 </html>
