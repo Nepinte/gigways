@@ -62,372 +62,433 @@
         { "@type": "ListItem", "position": 1, "item": { "@type": "Service", "name": "Car Insurance (Gig/Rideshare)" } },
         { "@type": "ListItem", "position": 2, "item": { "@type": "Service", "name": "Life Insurance" } },
         { "@type": "ListItem", "position": 3, "item": { "@type": "Service", "name": "Tax Filing (1099)" } },
-        { "@type": "ListItem", "position": 4, "item": { "@type": "Service", "name": "Mileage & Expense Tracking" } },
-        { "@type": "ListItem", "position": 5, "item": { "@type": "Service", "name": "Benefits & Discounts" } },
+        { "@type": "ListItem", "position": 4, "item": { "@type": "Service", "name": "Health Insurance" } },
+        { "@type": "ListItem", "position": 5, "item": { "@type": "Service", "name": "Legal Help" } },
         { "@type": "ListItem", "position": 6, "item": { "@type": "Service", "name": "Roadside Assistance" } }
       ]
     }
   }
   </script>
 
-  <!-- ✅ Marketplace page-only CSS (does NOT fight your global .bd-grid) -->
   <style>
-    /* Full-width section background (your global .section has max-width; override here) */
-    .market.section{
+    /* Keep scrollbar to prevent layout shift */
+    html { overflow-y: scroll; }
+
+    .market.section {
       max-width: 100%;
-      padding-top: calc(var(--header-height) + 1.25rem);
-      padding-bottom: 3rem;
+      padding-top: calc(var(--header-height) + 2rem);
+      padding-bottom: 4rem;
       position: relative;
-      overflow: hidden;
+
+      /* ✅ FIX:
+         Sticky elements (like .mk-bar) break/act weird when ANY parent has overflow hidden/auto/scroll.
+         This is what caused the “Details going under the footer” behavior while scrolling.
+      */
+      overflow: visible;
+
+      background: linear-gradient(to bottom, rgba(191, 168, 137, 0.03) 0%, transparent 50%);
     }
 
-    /* Pretty backdrop that works on both themes */
-    .market.section::before{
-      content:"";
-      position:absolute;
-      inset:-160px -160px auto -160px;
-      height: 560px;
-      pointer-events:none;
-      background:
-        radial-gradient(closest-side at 15% 35%, rgba(191,168,137,.25), transparent 68%),
-        radial-gradient(closest-side at 70% 15%, rgba(191,168,137,.18), transparent 70%),
-        radial-gradient(closest-side at 45% 85%, rgba(0,0,0,.06), transparent 70%);
-      opacity: .9;
-      filter: blur(2px);
+    .dark-theme .market.section {
+      background: linear-gradient(to bottom, rgba(191, 168, 137, 0.08) 0%, transparent 50%);
     }
-    .dark-theme .market.section::before{ opacity: .55; }
 
-    /* Local container (instead of bd-grid) */
-    .mk-container{
-      width: min(var(--page-max), 100%);
+    .market.section::before {
+      content: "";
+      position: absolute;
+      top: -200px;
+      left: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(191, 168, 137, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .market.section::after {
+      content: "";
+      position: absolute;
+      bottom: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(143, 122, 91, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .mk-container {
+      width: min(1200px, 100%);
       margin-inline: auto;
-      padding-inline: 1rem;
+      padding-inline: 1.5rem;
       position: relative;
       z-index: 1;
     }
 
-    /* Hero card */
-    .mk-hero{
-      border-radius: 22px;
+    /* Hero */
+    .mk-hero {
+      border-radius: 24px;
       border: 1px solid var(--glass-bd);
       background: var(--glass);
-      backdrop-filter: blur(12px) saturate(140%);
-      -webkit-backdrop-filter: blur(12px) saturate(140%);
-      box-shadow: var(--shadow-1);
-      padding: 1.1rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-lg);
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    .mk-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 1rem;
+    .mk-hero::before {
+      content: "";
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(191, 168, 137, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .mk-hero > * { position: relative; z-index: 1; }
+
+    .mk-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.5rem;
       flex-wrap: wrap;
     }
 
-    .mk-title{
-      margin: 0;
-      font-size: clamp(1.65rem, 2.5vw, 2.35rem);
-      line-height: 1.1;
+    .mk-title {
+      margin: 0.5rem 0 0.75rem;
+      font-size: clamp(1.85rem, 3vw, 2.65rem);
+      line-height: 1.15;
       letter-spacing: -0.02em;
       color: var(--second-color);
-    }
-    .mk-sub{
-      margin: .35rem 0 0;
-      color: var(--text-color-light);
-      max-width: 58ch;
-      line-height: 1.5;
+      font-weight: 900;
     }
 
-    .mk-kicker{
-      display:inline-flex;
-      gap: .5rem;
-      align-items:center;
-      padding: .35rem .65rem;
+    .mk-sub {
+      margin: 0;
+      color: var(--text-color-light);
+      max-width: 60ch;
+      line-height: 1.6;
+      font-size: 1.05rem;
+    }
+
+    .mk-kicker {
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+      padding: 0.5rem 1rem;
       border-radius: 999px;
+      background: var(--button-grad);
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: white;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(143, 122, 91, 0.3);
+    }
+
+    .mk-kicker i { font-size: 1.1rem; }
+
+    .mk-disclosure {
+      margin-top: 1.5rem;
+      border-radius: 16px;
       border: 1px solid var(--chip-bd);
       background: var(--chip-bg);
-      font-weight: 800;
-      font-size: .85rem;
-      color: var(--second-color);
-      white-space: nowrap;
+      padding: 1rem 1.25rem;
+      color: var(--text-color-light);
+      line-height: 1.6;
+      font-size: 0.95rem;
     }
 
-    .mk-disclosure{
-      margin-top: .85rem;
-      border-radius: 16px;
-      border: 1px solid var(--glass-bd);
-      background: rgba(0,0,0,.03);
-      padding: .85rem .95rem;
-      color: var(--text-color-light);
-      line-height: 1.45;
-    }
-    .dark-theme .mk-disclosure{
-      background: rgba(255,255,255,.06);
-    }
+    .mk-disclosure strong { color: var(--second-color); }
 
     /* Stats */
-    .mk-stats{
-      margin-top: .9rem;
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: .7rem;
+    .mk-stats {
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
     }
-    @media (max-width: 900px){ .mk-stats{ grid-template-columns: 1fr; } }
 
-    .mk-stat{
+    .mk-stat {
       border-radius: 16px;
       border: 1px solid var(--glass-bd);
-      background: rgba(255,255,255,.55);
-      padding: .85rem .9rem;
-      display:flex;
-      gap: .7rem;
-      align-items:flex-start;
+      background: rgba(255, 255, 255, 0.4);
+      padding: 1.25rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
       box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .dark-theme .mk-stat{ background: rgba(0,0,0,.35); }
-    .mk-stat i{ font-size: 1.3rem; margin-top:.05rem; }
-    .mk-stat b{ display:block; color: var(--second-color); }
-    .mk-stat span{ display:block; color: var(--text-color-light); font-size: .92rem; margin-top:.1rem; line-height:1.3; }
 
-    /* Sticky search/filter bar */
-    .mk-bar{
-      margin-top: 1rem;
+    .dark-theme .mk-stat { background: rgba(255, 255, 255, 0.06); }
+
+    .mk-stat:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    .mk-stat i { font-size: 1.5rem; color: var(--third-color); margin-top: 0.1rem; }
+
+    .mk-stat b { display: block; color: var(--second-color); font-size: 1.05rem; margin-bottom: 0.25rem; }
+
+    .mk-stat span { display: block; color: var(--text-color-light); font-size: 0.95rem; line-height: 1.4; }
+
+    /* Search + filters */
+    .mk-bar {
+      margin-bottom: 2rem;
       position: sticky;
-      top: calc(var(--header-height) + .5rem);
-      z-index: 5;
-      border-radius: 18px;
+      top: calc(var(--header-height) + 0.5rem);
+      z-index: 10;
+      border-radius: 20px;
       border: 1px solid var(--glass-bd);
       background: var(--glass);
-      backdrop-filter: blur(12px) saturate(140%);
-      -webkit-backdrop-filter: blur(12px) saturate(140%);
-      box-shadow: var(--shadow-1);
-      padding: .85rem;
-      display:grid;
-      gap: .75rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-md);
+      padding: 1rem;
     }
 
-    .mk-search{
-      display:flex;
-      align-items:center;
-      gap: .65rem;
-      border-radius: 999px;
+    .mk-search {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-radius: 16px;
       border: 1px solid var(--glass-bd);
-      background: rgba(255,255,255,.55);
-      padding: .85rem .95rem;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 1rem 1.25rem;
+      transition: all 0.2s ease;
     }
-    .dark-theme .mk-search{ background: rgba(0,0,0,.35); }
-    .mk-search i{ font-size: 1.2rem; opacity: .9; }
-    .mk-search input{
-      all: unset;
-      width: 100%;
-      color: var(--second-color);
-      font-size: 1rem;
-    }
-    .mk-search input::placeholder{ color: var(--text-color-light); }
 
-    .mk-chips{
-      display:flex;
-      gap:.5rem;
-      overflow:auto hidden;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: .1rem;
-    }
-    .mk-chips::-webkit-scrollbar{ height: 6px; }
-    .mk-chips::-webkit-scrollbar-thumb{ background: rgba(0,0,0,.18); border-radius: 999px; }
-    .dark-theme .mk-chips::-webkit-scrollbar-thumb{ background: rgba(255,255,255,.18); }
+    .dark-theme .mk-search { background: rgba(255, 255, 255, 0.08); }
 
-    .mk-chip{
+    .mk-search:focus-within {
+      border-color: var(--third-color);
+      box-shadow: 0 0 0 3px rgba(143, 122, 91, 0.15);
+    }
+
+    .mk-search i { font-size: 1.3rem; color: var(--third-color); }
+
+    .mk-search input { all: unset; width: 100%; color: var(--second-color); font-size: 1rem; }
+
+    .mk-search input::placeholder { color: var(--text-color-light); }
+
+    .mk-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+
+    .mk-chip {
       border: 1px solid var(--chip-bd);
       background: var(--chip-bg);
       color: var(--second-color);
-      padding: .55rem .9rem;
       border-radius: 999px;
+      padding: 0.55rem 0.8rem;
+      font-size: 0.85rem;
       font-weight: 800;
-      white-space: nowrap;
-      transition: transform .14s ease, box-shadow .14s ease, filter .14s ease;
-    }
-    .mk-chip:hover{ transform: translateY(-1px); box-shadow: var(--shadow-sm); }
-    .mk-chip.active{
-      background: var(--button-grad);
-      border-color: transparent;
-      color: #fff;
-      box-shadow: var(--shadow-md);
-      filter: saturate(1.05);
+      cursor: pointer;
+      user-select: none;
+      transition: transform 140ms ease, box-shadow 140ms ease, background-color var(--transition-fast);
     }
 
-    /* Service grid */
-    .mk-grid{
-      margin-top: 1rem;
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-    @media (max-width: 980px){ .mk-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 640px){ .mk-grid{ grid-template-columns: 1fr; } }
+    .mk-chip:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    .mk-chip[aria-pressed="true"] { background: var(--button-grad); color: #fff; border-color: rgba(0,0,0,0.06); }
 
-    /* Service card */
-    .svc{
+    /* Grid */
+    .mk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) { .mk-grid { grid-template-columns: 1fr; } }
+
+    /* Cards */
+    .svc {
       border-radius: 20px;
       border: 1px solid var(--glass-bd);
-      background:
-        radial-gradient(900px 240px at 18% -10%, rgba(191,168,137,.22), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.45));
-      box-shadow: var(--shadow-1);
-      padding: 1rem;
-      display:grid;
-      gap: .75rem;
-      min-height: 230px;
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-      position: relative;
-      overflow:hidden;
-    }
-    .dark-theme .svc{
-      background:
-        radial-gradient(900px 240px at 18% -10%, rgba(191,168,137,.12), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.52), rgba(0,0,0,.34));
-    }
-    .svc:hover{ transform: translateY(-4px); box-shadow: var(--shadow-2); border-color: rgba(191,168,137,.55); }
-
-    .svc__top{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap: 1rem;
-    }
-
-    .svc__iconTitle{
-      display:flex;
-      gap: .75rem;
-      align-items:center;
-      min-width: 0;
-    }
-
-    .svc__icon{
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      display:grid;
-      place-items:center;
-      border: 1px solid var(--glass-bd);
-      background: rgba(0,0,0,.03);
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       box-shadow: var(--shadow-sm);
-      flex: 0 0 auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      min-height: 280px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .dark-theme .svc__icon{ background: rgba(255,255,255,.06); }
-    .svc__icon i{ font-size: 1.45rem; }
 
-    .svc__titleWrap{ min-width: 0; }
-    .svc__title{
-      margin:0;
-      font-size: 1.08rem;
+    .svc::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--button-grad);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .svc:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--chip-bd); }
+    .svc:hover::before { opacity: 1; }
+
+    .svc__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+
+    .svc__iconTitle { display: flex; gap: 1rem; align-items: flex-start; flex: 1; min-width: 0; }
+
+    .svc__icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: grid; place-items: center;
+      background: var(--button-grad);
+      box-shadow: 0 4px 12px rgba(143, 122, 91, 0.25);
+      flex-shrink: 0;
+    }
+
+    .svc__icon i { font-size: 1.6rem; color: white; }
+    .svc__titleWrap { flex: 1; min-width: 0; }
+
+    .svc__title {
+      margin: 0;
+      font-size: 1.15rem;
       font-weight: 900;
       letter-spacing: -0.01em;
       color: var(--second-color);
-      line-height: 1.2;
-    }
-    .svc__sub{
-      margin: .2rem 0 0;
-      color: var(--text-color-light);
-      line-height: 1.45;
-      font-size: .96rem;
+      line-height: 1.3;
     }
 
-    .svc__badge{
-      font-size: .78rem;
-      font-weight: 900;
-      padding: .25rem .6rem;
+    .svc__sub { margin: 0.4rem 0 0; color: var(--text-color-light); line-height: 1.5; font-size: 0.95rem; }
+
+    .svc__badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: var(--chip-bg);
+      border: 1px solid var(--chip-bd);
+      color: var(--third-color);
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .svc__chips { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
+
+    .svc__chips li {
+      font-size: 0.8rem;
+      padding: 0.35rem 0.75rem;
       border-radius: 999px;
       border: 1px solid var(--chip-bd);
       background: var(--chip-bg);
-      white-space: nowrap;
-      color: var(--second-color);
-    }
-
-    .svc__chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap: .45rem;
-      list-style:none;
-      margin: 0;
-      padding: 0;
-    }
-    .svc__chips li{
-      font-size: .8rem;
-      padding: .22rem .6rem;
-      border-radius: 999px;
-      border: 1px solid var(--glass-bd);
-      background: rgba(255,255,255,.55);
       color: var(--text-color-light);
-    }
-    .dark-theme .svc__chips li{ background: rgba(255,255,255,.06); }
-
-    .svc__actions{
-      margin-top: .15rem;
-      display:flex;
-      gap: .6rem;
-      flex-wrap: wrap;
+      font-weight: 600;
     }
 
-    /* Better “soft button” */
-    .btn--soft{
-      background: rgba(0,0,0,.03);
+    .svc__actions { margin-top: auto; display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .btn--primary { background: var(--button-grad); color: white; box-shadow: 0 4px 12px rgba(143, 122, 91, 0.25); }
+    .btn--primary:hover { box-shadow: 0 6px 16px rgba(143, 122, 91, 0.35); transform: translateY(-1px); }
+
+    .btn--soft { background: var(--chip-bg); border: 1px solid var(--chip-bd); color: var(--second-color); }
+    .btn--soft:hover { background: rgba(191, 168, 137, 0.18); border-color: var(--accent-color); }
+
+    .mk-empty {
+      margin-top: 1.25rem;
+      border-radius: 18px;
       border: 1px solid var(--glass-bd);
-      color: var(--second-color);
-    }
-    .dark-theme .btn--soft{
-      background: rgba(255,255,255,.06);
+      background: var(--glass);
+      padding: 1.25rem;
+      color: var(--text-color-light);
+      display: none;
     }
 
     /* Modal */
-    .modal{
+    .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.55);
-      display:grid;
-      place-items:center;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      display: grid;
+      place-items: center;
       opacity: 0;
-      pointer-events:none;
-      transition: opacity .18s ease;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
       z-index: 1000;
       padding: 1rem;
     }
-    .modal[aria-hidden="false"]{ opacity: 1; pointer-events:auto; }
-    .modal__dialog{
-      width: min(760px, 96vw);
-      border-radius: 22px;
+
+    .modal[aria-hidden="false"] { opacity: 1; pointer-events: auto; }
+
+    .modal__dialog {
+      width: min(600px, 100%);
+      border-radius: 24px;
       border: 1px solid var(--glass-bd);
       background: var(--glass);
-      backdrop-filter: blur(14px) saturate(140%);
-      -webkit-backdrop-filter: blur(14px) saturate(140%);
-      box-shadow: 0 22px 55px rgba(0,0,0,.45);
-      padding: 1rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      padding: 2rem;
       position: relative;
       color: var(--second-color);
+      transform: scale(0.95);
+      transition: transform 0.3s ease;
     }
-    .modal__close{
-      position:absolute;
-      top: 12px;
-      right: 12px;
-      border:none;
-      background: transparent;
-      font-size: 1.7rem;
-      color: var(--second-color);
-      border-radius: 12px;
-      padding: .2rem .35rem;
-    }
-    .modal__close:hover{ background: rgba(0,0,0,.06); }
-    .dark-theme .modal__close:hover{ background: rgba(255,255,255,.08); }
-    .modal__content .modal__list{ margin: 0; padding-left: 1.1rem; }
-    .modal__content .modal__list li{ margin: .25rem 0; color: var(--text-color-light); }
 
-    /* Small helper: focus states */
-    .mk-search:focus-within,
-    .mk-chip:focus-visible,
-    .btn:focus-visible,
-    button:focus-visible{
-      outline: 3px solid rgba(191,168,137,.35);
-      outline-offset: 2px;
+    .modal[aria-hidden="false"] .modal__dialog { transform: scale(1); }
+
+    .modal__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      border: none;
+      background: var(--chip-bg);
+      font-size: 1.5rem;
+      color: var(--second-color);
+      border-radius: 10px;
+      padding: 0.4rem 0.6rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: grid;
+      place-items: center;
+    }
+
+    .modal__close:hover { background: var(--chip-bd); transform: rotate(90deg); }
+
+    .modal__content h3 { margin: 0 0 1rem; font-size: 1.5rem; font-weight: 900; color: var(--second-color); }
+    .modal__content p { margin: 0 0 1rem; line-height: 1.6; color: var(--text-color-light); }
+    .modal__list { margin: 1rem 0; padding-left: 0; list-style: none; }
+
+    .modal__list li {
+      position: relative;
+      margin: 0.75rem 0;
+      color: var(--text-color-light);
+      line-height: 1.6;
+      padding-left: 1.8rem;
+    }
+
+    .modal__list li::before { content: "✓"; position: absolute; left: 0; color: var(--third-color); font-weight: 900; }
+
+    @media (max-width: 768px) {
+      .mk-container { padding-inline: 1rem; }
+      .mk-hero { padding: 1.5rem; }
+      .mk-title { font-size: 1.85rem; }
+      .mk-stats { grid-template-columns: 1fr; }
+      .svc { padding: 1.25rem; }
+      .modal__dialog { padding: 1.5rem; }
     }
   </style>
 </head>
@@ -435,7 +496,10 @@
 <body>
   <div class="bubble-container"></div>
 
-  <!-- ===== HEADER ===== -->
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- HEADER -->
   <header class="l-header">
     <nav class="nav bd-grid">
       <div><a href="index.html" class="nav__logo">Gigways</a></div>
@@ -453,11 +517,12 @@
       <div class="theme">
         <img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" />
       </div>
+
       <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
     </nav>
   </header>
 
-  <!-- ===== MAIN ===== -->
+  <!-- MAIN -->
   <main class="l-main">
     <section class="market section" id="market">
       <div class="mk-container">
@@ -466,59 +531,57 @@
         <div class="mk-hero">
           <div class="mk-head">
             <div>
-              <span class="mk-kicker"><i class="bx bx-store"></i> Driver-first marketplace</span>
-              <h1 class="mk-title" style="margin-top:.55rem;">Gigways Services Marketplace</h1>
-              <p class="mk-sub">Insurance, taxes, benefits, and tools — built around gig-driver life.</p>
+              <span class="mk-kicker"><i class="bx bx-store"></i> Driver-First Marketplace</span>
+              <h1 class="mk-title">Services Built for Gig Workers</h1>
+              <p class="mk-sub">Insurance, taxes, benefits, and tools designed around the realities of gig driving.</p>
             </div>
           </div>
 
           <div class="mk-disclosure">
-            <strong>Partner / Affiliate disclosure:</strong>
-            Some links on this page are partner or affiliate links. If you choose a service through them,
-            Gigways may earn a commission at no extra cost to you.
+            <strong>Partner & Affiliate Disclosure:</strong>
+            Some links on this page are partner or affiliate links. If you choose a service through them, Gigways may earn a commission at no extra cost to you.
           </div>
 
           <div class="mk-stats" aria-label="Marketplace highlights">
             <div class="mk-stat">
               <i class="bx bx-check-shield" aria-hidden="true"></i>
-              <div><b>Driver-first picks</b><span>Focused on gig work realities</span></div>
+              <div><b>Driver-First Picks</b><span>Focused on gig work realities</span></div>
             </div>
             <div class="mk-stat">
               <i class="bx bx-timer" aria-hidden="true"></i>
-              <div><b>Fast comparisons</b><span>Get started in minutes</span></div>
+              <div><b>Fast Comparisons</b><span>Get started in minutes</span></div>
             </div>
             <div class="mk-stat">
               <i class="bx bx-link-external" aria-hidden="true"></i>
-              <div><b>Trusted partners</b><span>Offers via affiliates & partners</span></div>
+              <div><b>Trusted Partners</b><span>Offers via affiliates & partners</span></div>
             </div>
           </div>
+        </div>
 
-          <!-- Search + Chips (sticky) -->
-          <div class="mk-bar" style="margin-top: 1rem;">
-            <label class="mk-search" for="marketSearch">
-              <i class="bx bx-search" aria-hidden="true"></i>
-              <input
-                type="search"
-                id="marketSearch"
-                placeholder="Search: car insurance, life, taxes, mileage, roadside..."
-                aria-label="Search services"
-                autocomplete="off"
-              />
-            </label>
+        <!-- Search Bar + Filters -->
+        <div class="mk-bar">
+          <label class="mk-search" for="marketSearch">
+            <i class="bx bx-search" aria-hidden="true"></i>
+            <input
+              type="search"
+              id="marketSearch"
+              placeholder="Search services: insurance, taxes, legal help..."
+              aria-label="Search services"
+              autocomplete="off"
+            />
+          </label>
 
-            <!-- <div class="mk-chips" role="tablist" aria-label="Filter services">
-              <button class="mk-chip active" role="tab" aria-selected="true" data-filter="all">All</button>
-              <button class="mk-chip" role="tab" aria-selected="false" data-filter="insurance">Insurance</button>
-              <button class="mk-chip" role="tab" aria-selected="false" data-filter="taxes">Taxes</button>
-              <button class="mk-chip" role="tab" aria-selected="false" data-filter="benefits">Benefits</button>
-              <button class="mk-chip" role="tab" aria-selected="false" data-filter="tools">Tools</button>
-              <button class="mk-chip" role="tab" aria-selected="false" data-filter="support">Support</button>
-            </div> -->
+          <div class="mk-filters" role="group" aria-label="Service categories">
+            <button class="mk-chip" type="button" data-filter="all" aria-pressed="true">All</button>
+            <button class="mk-chip" type="button" data-filter="insurance" aria-pressed="false">Insurance</button>
+            <button class="mk-chip" type="button" data-filter="taxes" aria-pressed="false">Taxes</button>
+            <button class="mk-chip" type="button" data-filter="support" aria-pressed="false">Support</button>
+            <button class="mk-chip" type="button" data-filter="tools" aria-pressed="false">Tools</button>
           </div>
         </div>
 
         <!-- SERVICES -->
-        <div class="mk-grid" id="serviceGrid" style="margin-top: 1rem;">
+        <div class="mk-grid" id="serviceGrid">
 
           <!-- Car Insurance -->
           <article class="svc service__card"
@@ -529,11 +592,11 @@
               <div class="svc__iconTitle">
                 <div class="svc__icon" aria-hidden="true"><i class="bx bx-car"></i></div>
                 <div class="svc__titleWrap">
-                  <h3 class="svc__title">Car Insurance (Gig / Rideshare)</h3>
+                  <h3 class="svc__title">Car Insurance</h3>
                   <p class="svc__sub">Compare quotes that match how you drive for work.</p>
                 </div>
               </div>
-              <span class="svc__badge">Most used</span>
+              <span class="svc__badge">Popular</span>
             </div>
 
             <ul class="svc__chips" aria-label="Highlights">
@@ -541,8 +604,8 @@
             </ul>
 
             <div class="svc__actions">
-              <a class="btn btn--primary" href=""><i class="bx bx-shield"></i> Get Quotes</a>
-              <button class="btn btn--soft quick-view" data-modal="auto"><i class="bx bx-info-circle"></i> Details</button>
+              <a class="btn btn--primary" href="#" rel="nofollow sponsored"><i class="bx bx-shield"></i> Get Quotes</a>
+              <button class="btn btn--soft quick-view" type="button" data-modal="auto"><i class="bx bx-info-circle"></i> Details</button>
             </div>
           </article>
 
@@ -567,8 +630,8 @@
             </ul>
 
             <div class="svc__actions">
-              <a class="btn btn--primary" href=""><i class="bx bx-check-shield"></i> Compare Plans</a>
-              <button class="btn btn--soft quick-view" data-modal="life"><i class="bx bx-info-circle"></i> Details</button>
+              <a class="btn btn--primary" href="#" rel="nofollow sponsored"><i class="bx bx-check-shield"></i> Compare Plans</a>
+              <button class="btn btn--soft quick-view" type="button" data-modal="life"><i class="bx bx-info-circle"></i> Details</button>
             </div>
           </article>
 
@@ -585,7 +648,7 @@
                   <p class="svc__sub">File smarter with deductions built around gig work.</p>
                 </div>
               </div>
-              <span class="svc__badge">Tax time</span>
+              <span class="svc__badge">Tax Time</span>
             </div>
 
             <ul class="svc__chips" aria-label="Highlights">
@@ -593,132 +656,145 @@
             </ul>
 
             <div class="svc__actions">
-              <a class="btn btn--primary" href=""><i class="bx bx-lock-open-alt"></i> Start Filing</a>
-              <button class="btn btn--soft quick-view" data-modal="tax"><i class="bx bx-info-circle"></i> Details</button>
+              <a class="btn btn--primary" href="#" rel="nofollow sponsored"><i class="bx bx-lock-open-alt"></i> Start Filing</a>
+              <button class="btn btn--soft quick-view" type="button" data-modal="tax"><i class="bx bx-info-circle"></i> Details</button>
             </div>
           </article>
 
-<!-- Health Insurance -->
-<article class="svc service__card"
-  data-category="insurance"
-  data-name="Health Insurance Gig Worker Individual Family Medical Coverage"
->
-  <div class="svc__top">
-    <div class="svc__iconTitle">
-      <div class="svc__icon" aria-hidden="true">
-        <i class="bx bx-plus-medical"></i>
-      </div>
-      <div class="svc__titleWrap">
-        <h3 class="svc__title">Health Insurance</h3>
-        <p class="svc__sub">Medical coverage options built for gig workers.</p>
-      </div>
-    </div>
-    <span class="svc__badge">Essential</span>
-  </div>
-
-  <ul class="svc__chips" aria-label="Highlights">
-    <li>Individual & family plans</li>
-    <li>Self-employed friendly</li>
-    <li>Compare coverage & cost</li>
-  </ul>
-
-  <div class="svc__actions">
-    <a class="btn btn--primary" href="">
-      <i class="bx bx-heart-circle"></i> View Plans
-    </a>
-    <button class="btn btn--soft quick-view" data-modal="health">
-      <i class="bx bx-info-circle"></i> Details
-    </button>
-  </div>
-</article>
-
-
-<!-- Legal Services -->
-<article class="svc service__card"
-  data-category="support"
-  data-name="Legal Help Traffic Tickets Accidents Disputes Gig Drivers"
->
-  <div class="svc__top">
-    <div class="svc__iconTitle">
-      <div class="svc__icon" aria-hidden="true">
-        <i class="bx bx-shield-quarter"></i>
-      </div>
-      <div class="svc__titleWrap">
-        <h3 class="svc__title">Legal Help</h3>
-        <p class="svc__sub">Support for tickets, accidents, and driver disputes.</p>
-      </div>
-    </div>
-    <span class="svc__badge">Protection</span>
-  </div>
-
-  <ul class="svc__chips" aria-label="Highlights">
-    <li>Traffic ticket help</li>
-    <li>Accident guidance</li>
-    <li>Dispute support</li>
-  </ul>
-
-  <div class="svc__actions">
-    <a class="btn btn--primary" href="">
-      <i class="bx bx-gavel"></i> Get Legal Help
-    </a>
-    <button class="btn btn--soft quick-view" data-modal="legal">
-      <i class="bx bx-info-circle"></i> Details
-    </button>
-  </div>
-</article>
-
-
-          <!-- Roadside -->
+          <!-- Health Insurance -->
           <article class="svc service__card"
-            data-category="support"
-            data-name="Roadside Assistance Tow Jump Start Lockout Flat Tire"
+            data-category="insurance"
+            data-name="Health Insurance Gig Worker Individual Family Medical Coverage"
           >
             <div class="svc__top">
               <div class="svc__iconTitle">
-                <div class="svc__icon" aria-hidden="true"><i class="bx bx-map-pin"></i></div>
+                <div class="svc__icon" aria-hidden="true"><i class="bx bx-plus-medical"></i></div>
                 <div class="svc__titleWrap">
-                  <h3 class="svc__title">Roadside Assistance</h3>
-                  <p class="svc__sub">Help when work can’t stop: tow, tire, lockout, more.</p>
+                  <h3 class="svc__title">Health Insurance</h3>
+                  <p class="svc__sub">Medical coverage options built for gig workers.</p>
                 </div>
               </div>
-              <span class="svc__badge">Support</span>
+              <span class="svc__badge">Essential</span>
             </div>
 
             <ul class="svc__chips" aria-label="Highlights">
-              <li>Tow & tire</li><li>Jump start</li><li>Lockout</li>
+              <li>Individual & family plans</li><li>Self-employed friendly</li><li>Compare cost</li>
             </ul>
 
             <div class="svc__actions">
-              <a class="btn btn--primary" href=""><i class="bx bx-link-external"></i> Compare</a>
-              <button class="btn btn--soft quick-view" data-modal="roadside"><i class="bx bx-info-circle"></i> Details</button>
+              <a class="btn btn--primary" href="#" rel="nofollow sponsored"><i class="bx bx-heart-circle"></i> View Plans</a>
+              <button class="btn btn--soft quick-view" type="button" data-modal="health"><i class="bx bx-info-circle"></i> Details</button>
+            </div>
+          </article>
+
+          <!-- Legal Services -->
+          <article class="svc service__card"
+            data-category="support"
+            data-name="Legal Help Traffic Tickets Accidents Disputes Gig Drivers"
+          >
+            <div class="svc__top">
+              <div class="svc__iconTitle">
+                <div class="svc__icon" aria-hidden="true"><i class="bx bx-shield-quarter"></i></div>
+                <div class="svc__titleWrap">
+                  <h3 class="svc__title">Legal Help</h3>
+                  <p class="svc__sub">Support for tickets, accidents, and driver disputes.</p>
+                </div>
+              </div>
+              <span class="svc__badge">Protection</span>
+            </div>
+
+            <ul class="svc__chips" aria-label="Highlights">
+              <li>Ticket help</li><li>Accident guidance</li><li>Dispute support</li>
+            </ul>
+
+            <div class="svc__actions">
+              <a class="btn btn--primary" href="#" rel="nofollow sponsored"><i class="bx bx-gavel"></i> Get Legal Help</a>
+              <button class="btn btn--soft quick-view" type="button" data-modal="legal"><i class="bx bx-info-circle"></i> Details</button>
+            </div>
+          </article>
+
+          <!-- Roadside Assistance -->
+          <article class="svc service__card"
+            data-category="support"
+            data-name="Roadside Assistance Tow Battery Flat Tire Lockout"
+          >
+            <div class="svc__top">
+              <div class="svc__iconTitle">
+                <div class="svc__icon" aria-hidden="true"><i class="bx bx-wrench"></i></div>
+                <div class="svc__titleWrap">
+                  <h3 class="svc__title">Roadside Assistance</h3>
+                  <p class="svc__sub">Tow, jump start, flat tire help, and lockout support.</p>
+                </div>
+              </div>
+              <span class="svc__badge">On-Call</span>
+            </div>
+
+            <ul class="svc__chips" aria-label="Highlights">
+              <li>Towing</li><li>Battery</li><li>Flat tire</li>
+            </ul>
+
+            <div class="svc__actions">
+              <a class="btn btn--primary" href="#" rel="nofollow sponsored"><i class="bx bx-phone-call"></i> View Options</a>
+              <button class="btn btn--soft quick-view" type="button" data-modal="roadside"><i class="bx bx-info-circle"></i> Details</button>
+            </div>
+          </article>
+
+          <!-- Driver Tools -->
+          <article class="svc service__card"
+            data-category="tools"
+            data-name="Driver Tools Mileage Tracking Expense Tracking Profit Calculator"
+          >
+            <div class="svc__top">
+              <div class="svc__iconTitle">
+                <div class="svc__icon" aria-hidden="true"><i class="bx bx-line-chart"></i></div>
+                <div class="svc__titleWrap">
+                  <h3 class="svc__title">Driver Tools</h3>
+                  <p class="svc__sub">Track miles, expenses, and see your real profit.</p>
+                </div>
+              </div>
+              <span class="svc__badge">In App</span>
+            </div>
+
+            <ul class="svc__chips" aria-label="Highlights">
+              <li>Mileage</li><li>Expenses</li><li>Profit insights</li>
+            </ul>
+
+            <div class="svc__actions">
+              <a class="btn btn--primary" href="index.html#download"><i class="bx bx-download"></i> Get the App</a>
+              <button class="btn btn--soft quick-view" type="button" data-modal="tools"><i class="bx bx-info-circle"></i> Details</button>
             </div>
           </article>
 
         </div>
-      </div>
 
-      <!-- MODAL -->
-      <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="false">
-        <div class="modal__dialog" role="document">
-          <button class="modal__close" id="modalClose" aria-label="Close"><i class="bx bx-x"></i></button>
-          <div class="modal__content" id="modalContent"></div>
+        <div class="mk-empty" id="emptyState">
+          No services match your search/filter. Try “insurance” or clear filters.
         </div>
       </div>
     </section>
   </main>
 
-  <!--===== FOOTER =====-->
+  <!-- MODALS -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Service details">
+    <div class="modal__dialog" role="document">
+      <button class="modal__close" type="button" aria-label="Close">×</button>
+      <div class="modal__content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer__container">
       <div class="footer__content">
         <h2 class="footer__title">Gigways LLC</h2>
-        <p class="footer__description">Making work easier, safer, and more organized for gig workers.</p>
+        <p class="footer__description">Making work easier, safer, and more organized for gig workers</p>
       </div>
 
       <div class="footer__content">
         <h3 class="footer__subtitle">Quick Links</h3>
         <ul class="footer__links">
           <li><a href="index.html" class="footer__link">Home</a></li>
+          <li><a href="index.html#features" class="footer__link">Features</a></li>
           <li><a href="market.html" class="footer__link">Marketplace</a></li>
           <li><a href="partners.html#forms" class="footer__link">Car Advertising</a></li>
           <li><a href="careers.html" class="footer__link">Careers</a></li>
@@ -730,154 +806,188 @@
       <div class="footer__content">
         <h3 class="footer__subtitle">Connect With Us</h3>
         <div class="footer__social">
-          <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon" aria-label="Facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="https://x.com/i/flow/single_sign_on" class="footer__icon" aria-label="X"><i class="bx bxl-twitter"></i></a>
-          <a href="https://www.instagram.com/" class="footer__icon" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="mailto:Support@gigways.com" class="footer__icon" aria-label="Email"><i class="bx bxs-envelope"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon" aria-label="Gigways on Facebook">
+            <i class="bx bxl-facebook"></i>
+          </a>
+          <a href="https://x.com/gigways" class="footer__icon" aria-label="Gigways on X">
+            <i class="bx bxl-twitter"></i>
+          </a>
+          <a href="https://www.instagram.com/gigways/" class="footer__icon" aria-label="Gigways on Instagram">
+            <i class="bx bxl-instagram"></i>
+          </a>
+          <a href="mailto:Support@gigways.com" class="footer__icon" aria-label="Email support">
+            <i class="bx bxs-envelope"></i>
+          </a>
         </div>
       </div>
     </div>
 
     <div class="footer__bottom">
-      <p class="footer__copy">© Gigways LLC 2025. All rights reserved.</p>
+      <p class="footer__copy">© Gigways LLC <span id="year"></span>. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- LIBS -->
-  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
-
-  <!-- ✅ Marketplace JS (Search + Filter + Modal) -->
   <script>
-  (function(){
-    const $ = (s,sc=document)=>sc.querySelector(s);
-    const $$ = (s,sc=document)=>Array.from(sc.querySelectorAll(s));
+    (function () {
+      const root = document.documentElement;
+      root.classList.add("preload");
+      const t = localStorage.getItem("selected-theme");
+      if (t === "dark") root.classList.add("dark-theme");
+      window.addEventListener("load", () => root.classList.remove("preload"));
+    })();
 
-    const grid = $('#serviceGrid');
-    const cards = $$('.service__card', grid);
-    const chips = $$('.mk-chip');
-    const search = $('#marketSearch');
+    // Footer year
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    const modal = $('#modal');
-    const modalContent = $('#modalContent');
-    const modalClose = $('#modalClose');
+    // Mobile nav toggle
+    const navMenu = document.getElementById("nav-menu");
+    const navToggle = document.getElementById("nav-toggle");
+    if (navToggle && navMenu) navToggle.addEventListener("click", () => navMenu.classList.toggle("show"));
+    document.querySelectorAll(".nav__link").forEach((a) =>
+      a.addEventListener("click", () => navMenu && navMenu.classList.remove("show"))
+    );
 
-    let state = { q:'', filter:'all' };
+    // Theme toggle
+    const themeButton = document.getElementById("iconMS");
+    const root = document.documentElement;
 
-    function apply(){
-      const q = state.q.trim().toLowerCase();
-      cards.forEach(c=>{
-        const name = (c.dataset.name||'').toLowerCase();
-        const cat = (c.dataset.category||'').toLowerCase();
-        const text = (c.textContent||'').toLowerCase();
-        const matchesText = !q || name.includes(q) || text.includes(q);
-        const matchesCat = (state.filter==='all') || (cat===state.filter);
-        c.style.display = (matchesText && matchesCat) ? '' : 'none';
+    function setTheme(mode) {
+      if (mode === "dark") root.classList.add("dark-theme");
+      else root.classList.remove("dark-theme");
+      localStorage.setItem("selected-theme", mode);
+    }
+
+    function syncThemeIcon() {
+      if (!themeButton) return;
+      const isDark = root.classList.contains("dark-theme");
+      themeButton.src = isDark ? "assets/img/sun.png" : "assets/img/moon.png";
+    }
+
+    if (themeButton) {
+      syncThemeIcon();
+      themeButton.addEventListener("click", () => {
+        const isDark = root.classList.contains("dark-theme");
+        setTheme(isDark ? "light" : "dark");
+        syncThemeIcon();
       });
     }
 
-    const debounce = (fn,ms=150)=>{ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a),ms); }; };
-    const applyDebounced = debounce(apply,150);
+    // Marketplace search + category filter
+    const searchInput = document.getElementById("marketSearch");
+    const serviceGrid = document.getElementById("serviceGrid");
+    const services = Array.from(serviceGrid.querySelectorAll(".service__card"));
+    const chips = Array.from(document.querySelectorAll(".mk-chip"));
+    const emptyState = document.getElementById("emptyState");
 
-    chips.forEach(ch => ch.addEventListener('click',()=>{
-      chips.forEach(x=>{
-        x.classList.remove('active');
-        x.setAttribute('aria-selected','false');
+    let activeFilter = "all";
+
+    function applyFilters() {
+      const q = (searchInput?.value || "").trim().toLowerCase();
+      let visible = 0;
+
+      services.forEach((card) => {
+        const category = (card.getAttribute("data-category") || "").toLowerCase();
+        const name = (card.getAttribute("data-name") || "").toLowerCase();
+
+        const okCategory = activeFilter === "all" ? true : category === activeFilter;
+        const okSearch = q ? name.includes(q) : true;
+
+        const ok = okCategory && okSearch;
+        card.style.display = ok ? "" : "none";
+        if (ok) visible++;
       });
-      ch.classList.add('active');
-      ch.setAttribute('aria-selected','true');
-      state.filter = ch.dataset.filter || 'all';
-      apply();
-    }));
 
-    if(search) search.addEventListener('input', (e)=>{
-      state.q = e.target.value;
-      applyDebounced();
+      if (emptyState) emptyState.style.display = visible === 0 ? "block" : "none";
+    }
+
+    if (searchInput) searchInput.addEventListener("input", applyFilters);
+
+    chips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        chips.forEach((c) => c.setAttribute("aria-pressed", "false"));
+        chip.setAttribute("aria-pressed", "true");
+        activeFilter = chip.getAttribute("data-filter") || "all";
+        applyFilters();
+      });
     });
 
-    const details = {
+    // Modal logic
+    const modal = document.getElementById("modal");
+    const modalContent = document.getElementById("modalContent");
+    const modalCloseBtn = modal?.querySelector(".modal__close");
+
+    const MODAL_DATA = {
       auto: {
-        title: "Car Insurance (Gig / Rideshare)",
-        body: "Compare insurance options based on your driving use. Always confirm gig/rideshare coverage details with the provider.",
-        bullets: ["Compare quotes in minutes", "Filter for gig-use where available", "Choose coverage that matches your work style"]
+        title: "Car Insurance (Gig-Friendly)",
+        p: "If you drive for rideshare or delivery, your personal policy may not cover every working situation. Compare options designed for how you drive.",
+        list: ["Compare quotes fast", "Look for rideshare/delivery endorsements", "Choose coverage that matches your work schedule"]
       },
       life: {
         title: "Life Insurance",
-        body: "Compare life insurance plan types and pricing through partners. Eligibility and rates vary.",
-        bullets: ["Term and other options", "Budget-friendly comparisons", "Coverage built for real life"]
+        p: "Coverage that protects your family if something happens. Compare term options and monthly costs.",
+        list: ["Term coverage options", "Simple comparisons", "Budget-friendly choices"]
       },
       tax: {
         title: "Tax Filing (1099)",
-        body: "Tax tools and partners designed for self-employed gig income and deductions.",
-        bullets: ["1099-friendly workflow", "Deduction checklist mindset", "Keep records organized year-round"]
+        p: "Gig drivers often have deductions like mileage and expenses. Tax tools can help organize your filing.",
+        list: ["1099 support", "Deductions guidance", "Guided filing steps"]
       },
-healths: {
-  title: "Health Insurance",
-  body: "Compare health insurance options that fit gig work (individual plans, family coverage, and budget-friendly choices). Availability and pricing vary by state.",
-  bullets: ["Individual & family plans", "Compare monthly costs", "Coverage that fits gig work"]
-},
-
-legal: {
-  title: "Legal Help (Tickets, Accidents, Disputes)",
-  body: "Get help with traffic tickets, accident support, and driver disputes. Options vary by state—always confirm what’s covered before you pay.",
-  bullets: ["Traffic ticket help", "Accident guidance", "Dispute support"]
-},
-
+      health: {
+        title: "Health Insurance",
+        p: "Independent workers still need coverage. Compare plans and pick what fits your needs and budget.",
+        list: ["Individual & family plans", "Compare costs", "Check network coverage"]
+      },
+      legal: {
+        title: "Legal Help",
+        p: "Support for common driver issues like tickets, disputes, and accidents.",
+        list: ["Ticket guidance", "Accident help", "Dispute support"]
+      },
       roadside: {
         title: "Roadside Assistance",
-        body: "Compare roadside options so you can keep moving when issues hit on shift.",
-        bullets: ["Tow, tire help, jump start", "Lockout support", "Plan options through partners"]
+        p: "When your car stops, your income stops. Roadside services help you get moving again.",
+        list: ["Tow assistance", "Jump start", "Flat tire / lockout help"]
+      },
+      tools: {
+        title: "Driver Tools",
+        p: "Gigways helps you track miles and expenses, so you can understand profit after costs.",
+        list: ["Mileage tracking", "Expense tracking", "Profit insights"]
       }
     };
 
-    document.addEventListener('click', (e)=>{
-      const qv = e.target.closest('.quick-view');
-      if(!qv) return;
-
-      const key = qv.dataset.modal;
-      const d = details[key];
-      if(!d) return;
+    function openModal(key) {
+      if (!modal || !modalContent) return;
+      const data = MODAL_DATA[key];
+      if (!data) return;
 
       modalContent.innerHTML = `
-        <div style="display:grid; gap:.75rem;">
-          <h3 style="margin:0; font-size:1.25rem;">${d.title}</h3>
-          <p style="margin:0; opacity:.9; line-height:1.55;">${d.body}</p>
-          <ul class="modal__list">
-            ${(d.bullets||[]).map(b=>`<li>${b}</li>`).join('')}
-          </ul>
-          <div style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top:.2rem;">
-            <button class="btn btn--primary" id="modalCloseBtn"><i class="bx bx-check"></i> Got it</button>
-          </div>
-        </div>
+        <h3>${data.title}</h3>
+        <p>${data.p}</p>
+        <ul class="modal__list">${data.list.map((x) => `<li>${x}</li>`).join("")}</ul>
+        <p style="margin-top:1rem;"><strong>Tip:</strong> Always review coverage details and confirm what’s included before purchasing.</p>
       `;
 
-      modal.setAttribute('aria-hidden','false');
-      modal.setAttribute('aria-modal','true');
-      modalClose.focus();
-    });
-
-    function closeModal(){
-      modal.setAttribute('aria-hidden','true');
-      modal.setAttribute('aria-modal','false');
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      modalCloseBtn?.focus();
     }
 
-    modalClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
-    document.addEventListener('click', (e)=>{ if(e.target?.id==="modalCloseBtn") closeModal(); });
-    document.addEventListener('keydown', (e)=>{
-      if(e.key==='Escape' && modal.getAttribute('aria-hidden')==='false') closeModal();
+    function closeModal() {
+      if (!modal) return;
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".quick-view").forEach((btn) => {
+      btn.addEventListener("click", () => openModal(btn.getAttribute("data-modal")));
     });
 
-    apply();
+    modalCloseBtn?.addEventListener("click", closeModal);
+    modal?.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+    window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-    const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    if(window.ScrollReveal && !prefersReduced){
-      const sr = ScrollReveal({ distance:"18px", duration:650, easing:"ease-out", interval:70 });
-      sr.reveal(".mk-hero");
-      sr.reveal(".svc", { interval: 70 });
-    }
-  })();
+    // Initial render
+    applyFilters();
   </script>
-
-  <script src="assets/js/main.js"></script>
 </body>
 </html>
