@@ -1,0 +1,2666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vinyl Designer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --first-color:#FFFAFA;
+      --second-color:#121212;
+
+      --third-color:#8F7A5B;
+      --accent-color:#BFA889;
+      --text-color-light:#7E7A74;
+      --border-color:rgba(0,0,0,.1);
+
+      --glass:rgba(255,255,255,.65);
+      --glass-bd:rgba(0,0,0,.12);
+
+      --shadow-sm:0 4px 16px rgba(0,0,0,.08);
+      --shadow-md:0 10px 30px rgba(0,0,0,.12);
+
+      --button-grad:linear-gradient(135deg,var(--third-color),var(--accent-color));
+      --button-text:#fff;
+
+      --body-font:'Poppins',sans-serif;
+      --normal-font-size:.98rem;
+      --small-font-size:.86rem;
+
+      --ring:rgba(191,168,137,.28);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth; scrollbar-gutter: stable;}
+    body{
+      font-family:var(--body-font);
+      font-size:var(--normal-font-size);
+      color:var(--second-color);
+      background:var(--first-color);
+      min-height:100vh;
+      padding:18px;
+      line-height:1.6;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-140px -140px auto -140px;
+      height:520px;
+      background:
+        radial-gradient(closest-side at 20% 30%, rgba(191,168,137,.22), transparent 70%),
+        radial-gradient(closest-side at 70% 20%, rgba(191,168,137,.16), transparent 68%),
+        radial-gradient(closest-side at 40% 75%, rgba(0,0,0,.06), transparent 70%);
+      filter: blur(2px);
+      opacity:.9;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .container{max-width:1400px;margin:0 auto}
+
+    .header{
+      background:var(--glass);
+      border:1px solid var(--glass-bd);
+      border-radius:22px;
+      padding:18px 22px;
+      box-shadow:var(--shadow-md);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      margin-bottom:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .header::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(circle at 20% 10%,rgba(191,168,137,.22),transparent 55%),
+        radial-gradient(circle at 80% 20%,rgba(143,122,91,.18),transparent 60%),
+        radial-gradient(circle at 40% 90%,rgba(191,168,137,.16),transparent 60%);
+      pointer-events:none;
+      z-index:0;
+    }
+    .header > *{ position:relative; z-index:1; }
+
+    .header h1{
+      font-size:1.55rem;
+      font-weight:900;
+      letter-spacing:-.02em;
+      margin-bottom:6px;
+      color:var(--second-color);
+    }
+    .header h1 span{ color:var(--third-color); }
+    .header p{
+      color:var(--text-color-light);
+      font-size:var(--small-font-size);
+      line-height:1.55;
+    }
+
+    .workspace{
+      display:grid;
+      grid-template-columns:340px 1fr;
+      gap:16px;
+      min-height:600px;
+      align-items:stretch;
+    }
+
+    .sidebar{
+      background:var(--glass);
+      border:1px solid var(--glass-bd);
+      border-radius:22px;
+      padding:16px;
+      box-shadow:var(--shadow-md);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      position: sticky;
+      top: 18px;
+      height: calc(100vh - 36px);
+      overflow: hidden;
+    }
+
+    .canvas-area{
+      background:var(--glass);
+      border:1px solid var(--glass-bd);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:var(--shadow-md);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      display:flex;
+      flex-direction:column;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .tab-buttons{display:flex;gap:10px;margin-bottom:14px}
+    .tab-btn{
+      flex:1;
+      padding:12px;
+      border:1px solid var(--border-color);
+      border-radius:14px;
+      background:rgba(255,255,255,.55);
+      color:var(--second-color);
+      font-weight:900;
+      cursor:pointer;
+      transition:.15s ease;
+      font-size:13px;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .tab-btn.active{
+      background:var(--button-grad);
+      border-color:transparent;
+      color:#fff;
+      box-shadow:0 14px 34px rgba(0,0,0,.18);
+    }
+
+    .tab-content{
+      display:none;
+      height: calc(100% - 52px);
+      overflow:auto;
+      padding-right:6px;
+      overscroll-behavior:contain;
+    }
+    .tab-content.active{display:block;animation:fadeIn .18s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+    .section{margin-bottom:14px}
+    .section-title{
+      font-size:12px;
+      font-weight:900;
+      text-transform:uppercase;
+      color:var(--text-color-light);
+      margin:10px 0 10px;
+      letter-spacing:.5px;
+    }
+
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      padding:10px;
+      border:1px solid var(--border-color);
+      border-radius:14px;
+      background:rgba(255,255,255,.55);
+    }
+    .field label{font-size:12px;color:var(--text-color-light);font-weight:900}
+    .field input[type="number"]{
+      width:100%;
+      border:none;
+      outline:none;
+      font-size:14px;
+      font-weight:900;
+      background:transparent;
+      color:var(--second-color);
+    }
+
+    .apply-row{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+      align-items:center;
+      margin-top:10px;
+    }
+    .preset{
+      padding:12px 12px;
+      border:1px solid var(--border-color);
+      border-radius:14px;
+      background:rgba(255,255,255,.55);
+      font-weight:900;
+      font-size:13px;
+      color:var(--second-color);
+      cursor:pointer;
+      outline:none;
+    }
+
+    .mini{font-size:12px;color:var(--text-color-light);line-height:1.35;margin-top:8px}
+
+    .upload-zone{
+      border:1px dashed color-mix(in srgb, var(--border-color) 70%, transparent 30%);
+      border-radius:16px;
+      padding:20px 14px;
+      text-align:center;
+      cursor:pointer;
+      transition:.15s ease;
+      background:rgba(255,255,255,.45);
+    }
+    .upload-zone:hover{border-color:rgba(191,168,137,.7);background:rgba(191,168,137,.08)}
+    .upload-zone.dragover{border-color:rgba(191,168,137,.8);background:rgba(191,168,137,.14);transform:scale(1.01)}
+    input[type="file"]{display:none}
+
+    .control-group{margin-bottom:14px}
+    .control-label{
+      display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;
+      font-size:13px;font-weight:900;color:var(--second-color);
+    }
+    .control-value{color:var(--third-color);font-weight:900}
+
+    input[type="range"]{
+      width:100%;
+      height:6px;
+      border-radius:999px;
+      background:rgba(0,0,0,.12);
+      outline:none;
+      -webkit-appearance:none;
+      cursor:pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb{
+      -webkit-appearance:none;
+      width:18px;height:18px;border-radius:50%;
+      background:var(--button-grad);
+      box-shadow:0 10px 22px rgba(0,0,0,.20);
+      border:1px solid rgba(0,0,0,.06);
+    }
+
+    textarea{
+      width:100%;
+      padding:12px;
+      border:1px solid var(--border-color);
+      border-radius:14px;
+      font-size:14px;
+      font-family:inherit;
+      resize:vertical;
+      min-height:90px;
+      outline:none;
+      transition:.15s ease;
+      background:rgba(255,255,255,.55);
+      color:var(--second-color);
+    }
+    textarea:focus{
+      border-color:rgba(191,168,137,.75);
+      box-shadow:0 0 0 3px var(--ring);
+    }
+
+    .color-input{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px;
+      border:1px solid var(--border-color);
+      border-radius:14px;
+      cursor:pointer;
+      background:rgba(255,255,255,.55);
+      transition:.15s ease;
+      color:var(--second-color);
+    }
+    .color-input:hover{border-color:rgba(191,168,137,.75)}
+
+    .swatch{
+      width:40px;height:40px;border:none;border-radius:12px;cursor:pointer;background:#fff;padding:0;
+      border:1px solid rgba(0,0,0,.10);
+      box-shadow:0 8px 16px rgba(0,0,0,.08);
+    }
+
+    .btn{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:14px;
+      font-size:14px;
+      font-weight:900;
+      cursor:pointer;
+      transition:.15s ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      user-select:none;
+      min-height:46px;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn:disabled{opacity:.65;cursor:not-allowed;transform:none}
+
+    .btn-primary{
+      background:var(--button-grad);
+      color:var(--button-text);
+      box-shadow:0 16px 34px rgba(0,0,0,.18);
+      border:1px solid rgba(0,0,0,.06);
+    }
+    .btn-secondary{
+      background:rgba(255,255,255,.55);
+      color:var(--second-color);
+      border:1px solid var(--border-color);
+      box-shadow:var(--shadow-sm);
+    }
+    .btn-outline{
+      background:rgba(255,255,255,.55);
+      color:var(--second-color);
+      border:1px solid var(--border-color);
+      box-shadow:var(--shadow-sm);
+    }
+
+    .btn-group{display:grid;gap:10px;margin-top:12px}
+    .merge-downloads{display:none;gap:10px;margin-top:10px}
+    .merge-downloads .btn{ padding:12px 10px; font-size:13px; border-radius:14px; }
+    .merge-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+
+    .layers{
+      border:1px solid var(--border-color);
+      border-radius:16px;
+      background:rgba(255,255,255,.55);
+      overflow:hidden;
+    }
+    .layer-item{
+      display:grid;
+      grid-template-columns:54px 1fr 36px;
+      gap:10px;
+      align-items:center;
+      padding:10px;
+      border-top:1px solid rgba(0,0,0,.06);
+      cursor:pointer;
+      transition:.12s ease;
+    }
+    .layer-item:first-child{border-top:none}
+    .layer-item:hover{ background:rgba(191,168,137,.08); }
+    .layer-item.active{ background:rgba(191,168,137,.14); }
+
+    .thumb{
+      width:54px;height:40px;border-radius:12px;
+      background:rgba(0,0,0,.04);
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.06);
+      display:grid;place-items:center;
+    }
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .thumb .t{font-weight:900;color:var(--third-color);font-size:16px}
+
+    .layer-meta .name{font-size:13px;font-weight:900;color:var(--second-color)}
+    .layer-meta .sub{font-size:12px;color:var(--text-color-light);margin-top:2px}
+
+    .trash{
+      width:34px;height:34px;border-radius:12px;
+      border:1px solid rgba(0,0,0,.10);
+      background:rgba(255,255,255,.55);
+      cursor:pointer;
+      display:grid;place-items:center;
+      transition:.12s ease;
+    }
+    .trash:hover{border-color:rgba(239,68,68,.55);background:rgba(239,68,68,.08)}
+
+    .canvas-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:12px;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .canvas-title{
+      font-size:1.05rem;
+      font-weight:1000;
+      color:var(--second-color);
+      letter-spacing:-.01em;
+    }
+    .header-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+    .mini-btn{
+      padding:10px 12px;
+      border:1px solid var(--border-color);
+      border-radius:12px;
+      background:rgba(255,255,255,.55);
+      color:var(--second-color);
+      font-weight:900;
+      cursor:pointer;
+      transition:.15s ease;
+      font-size:13px;
+      box-shadow:var(--shadow-sm);
+    }
+    .mini-btn:disabled{opacity:.55;cursor:not-allowed}
+    .mini-btn:hover{transform:translateY(-1px); box-shadow:var(--shadow-md); border-color:rgba(191,168,137,.65)}
+
+    .panel-switch{display:flex;gap:10px;flex-wrap:wrap}
+    .panel-btn{
+      padding:10px 14px;
+      border:1px solid var(--border-color);
+      border-radius:12px;
+      background:rgba(255,255,255,.55);
+      color:var(--second-color);
+      font-weight:900;
+      cursor:pointer;
+      transition:.15s ease;
+      font-size:13px;
+      box-shadow:var(--shadow-sm);
+    }
+    .panel-btn:hover{border-color:rgba(191,168,137,.7); transform:translateY(-1px)}
+    .panel-btn.active{
+      border-color:transparent;
+      background:var(--button-grad);
+      color:#fff;
+      box-shadow:0 16px 34px rgba(0,0,0,.18);
+    }
+
+    .outside-toolbar{
+      display:none;
+      gap:8px;
+      align-items:center;
+      justify-content:center;
+      padding:10px;
+      border-radius:999px;
+      background:var(--glass);
+      border:1px solid var(--glass-bd);
+      box-shadow:var(--shadow-md);
+      margin:0 auto 14px auto;
+      width:max-content;
+      user-select:none;
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+    }
+    .canvas-area.has-selection .outside-toolbar{display:flex}
+
+    .toolbtn{
+      width:34px;height:34px;border-radius:12px;
+      border:1px solid var(--border-color);
+      background:rgba(255,255,255,.55);
+      display:grid;place-items:center;
+      cursor:pointer;
+      font-size:14px;font-weight:900;
+      user-select:none;
+      transition:.12s ease;
+      color:var(--second-color);
+    }
+    .toolbtn:hover{ background:rgba(191,168,137,.10); border-color:rgba(191,168,137,.65) }
+    .toolbtn.danger:hover{ background:rgba(239,68,68,.10); border-color:rgba(239,68,68,.55) }
+
+    .canvas-wrapper{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.03);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:18px;
+      padding:34px;
+      position:relative;
+      min-height:520px;
+    }
+
+    .stage{
+      width:min(980px, 100%);
+      height:min(560px, 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      gap:18px;
+    }
+
+    .canvas-frame{
+      background:#fff;
+      position:relative;
+      overflow:hidden;
+      border-radius:12px;
+      box-shadow:0 20px 60px rgba(0,0,0,.15);
+      cursor:default;
+      overscroll-behavior:contain;
+      width:100%;
+      height:100%;
+      max-width:none;
+      border:3px dashed rgba(191,168,137,.85);
+    }
+    .canvas-frame.has-any{ cursor:move; }
+    .canvas-frame.focus{
+      outline:4px solid rgba(191,168,137,.55);
+      outline-offset:6px;
+    }
+
+    .arch-outline{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      display:none;
+    }
+    .arch-outline svg{ width:100%; height:100%; display:block; }
+    .arch-outline path{
+      fill:none;
+      stroke: rgba(191,168,137,.95);
+      stroke-width: 6;
+      stroke-dasharray: 14 12;
+      vector-effect: non-scaling-stroke;
+      transform-box: fill-box;
+      transform-origin: 50% 50%;
+    }
+
+    .canvas-frame.arch{
+      border-radius:0;
+      border:none;
+    }
+    .canvas-frame.arch .arch-outline{ display:block; }
+
+    .layer-wrap{
+      position:absolute;top:50%;left:50%;
+      transform-origin:center;display:none;
+      user-select:none;-webkit-user-drag:none;pointer-events:auto;
+    }
+    .layer-wrap.selected{
+      outline:3px solid rgba(191,168,137,.55);
+      outline-offset:8px;
+      border-radius:10px
+    }
+
+    .layer-img{
+      display:block;
+      max-width:none;
+      user-select:none;
+      -webkit-user-drag:none;
+      pointer-events:none;
+    }
+
+    .layer-textbox{
+      white-space:pre-wrap;
+      text-align:center;
+      font-weight:900;
+      pointer-events:none;
+      border-radius:12px;
+      border:1px solid rgba(191,168,137,.55);
+      padding:12px 20px;
+      box-shadow:0 10px 24px rgba(0,0,0,.12);
+      max-width:720px;
+      color:#121212;
+      background:rgba(255,255,255,.85);
+    }
+
+    .empty-state{
+      position:absolute;inset:0;
+      display:none;flex-direction:column;
+      align-items:center;justify-content:center;
+      color:var(--text-color-light);
+      pointer-events:none
+    }
+
+    /* pills for flip buttons */
+    .pillrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .pill{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:12px 12px;border-radius:14px;
+      border:1px solid var(--border-color);
+      background:rgba(255,255,255,.55);
+      font-weight:900;
+      cursor:pointer;
+      user-select:none;
+      transition:.12s ease;
+      flex:1;
+      min-width:140px;
+    }
+    .pill.on{
+      background:rgba(191,168,137,.18);
+      border-color:rgba(191,168,137,.75);
+      box-shadow:0 10px 22px rgba(0,0,0,.08);
+    }
+
+    @media (max-width:1024px){
+      .workspace{grid-template-columns:1fr}
+      .sidebar{position:relative;top:auto;height:auto;overflow:visible;}
+      .tab-content{height:auto;overflow:visible;padding-right:0;}
+    }
+    @media (max-width:768px){
+      body{padding:10px}
+      .header h1{font-size:1.25rem}
+      .canvas-wrapper{padding:18px}
+      .stage{height:min(520px,100%)}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- SVG clip defs: we transform these PATHS per panel independently -->
+  <svg width="0" height="0" style="position:absolute; left:-9999px; top:-9999px;">
+    <defs>
+      <clipPath id="clipArchFront" clipPathUnits="objectBoundingBox">
+        <path id="clipPathFront" d="M0 1 L1 1 L1 0 C0.65 0, 0.30 0.46, 0 1 Z"></path>
+      </clipPath>
+
+      <clipPath id="clipArchRear" clipPathUnits="objectBoundingBox">
+        <path id="clipPathRear" d="M0 1 L1 1 C0.70 0.46, 0.35 0, 0 0 L0 1 Z"></path>
+      </clipPath>
+    </defs>
+  </svg>
+
+  <div class="container">
+    <div class="header">
+      <h1>🚗 <span>Vinyl</span> Designer</h1>
+      <p>
+        <b>Mouse wheel:</b> Zoom • <b>Shift + wheel:</b> Rotate • <b>Drag:</b> Move selected layer
+        <br><b>Arch:</b> rotation/flip apply to the <b>current edit panel only</b>.
+        <br><b>Mixed:</b> you can set <b>Front Regular + Rear Arch</b> or <b>Front Arch + Rear Regular</b>.
+      </p>
+    </div>
+
+    <div class="workspace">
+      <div class="sidebar" id="sidebar">
+        <div class="tab-buttons">
+          <button class="tab-btn active" data-tab="design">✨ Design</button>
+          <button class="tab-btn" data-tab="text">📝 Text</button>
+        </div>
+
+        <div class="tab-content active" id="design-tab">
+
+          <div class="section">
+            <div class="section-title">Frame Category</div>
+            <select class="preset" id="frameTypeSelect" aria-label="Frame Category">
+              <option value="regular" selected>Regular (Both Panels)</option>
+              <option value="arch">Arch (Both Panels)</option>
+              <option value="mixedFRRA">Mixed: Front Regular + Rear Arch</option>
+              <option value="mixedFAR R">Mixed: Front Arch + Rear Regular</option>
+            </select>
+            <div class="mini" id="frameTypeInfo">
+              Regular = both rectangle. Arch = both curved. Mixed = one regular + one arch.
+            </div>
+          </div>
+
+          <!-- Arch controls (per edit panel) -->
+          <div class="section" id="archControls" style="display:none;">
+            <div class="section-title">Arch Controls (Per Edit Panel)</div>
+
+            <div class="mini" id="archWhichPanel" style="margin-top:-2px;">
+              Editing: <b>Front</b>
+            </div>
+
+            <div class="control-group" style="margin-top:10px;">
+              <div class="control-label">
+                <span>Rotate Arch Shape</span>
+                <span class="control-value" id="archRotateValue">0°</span>
+              </div>
+              <input type="range" id="archRotateRange" min="0" max="360" value="0">
+              <div class="mini">Rotates the <b>frame shape</b> only (clip + outline + export). Artwork stays as-is.</div>
+
+              <div class="pillrow">
+                <div class="pill" id="flipHBtn">↔ Flip Arch</div>
+                <div class="pill" id="flipVBtn">↕ Flip Upside</div>
+              </div>
+
+              <div class="pillrow" style="margin-top:10px">
+                <div class="pill" id="resetArchBtn" style="flex:1;">Reset Arch (This Panel)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Vinyl Size (inches)</div>
+
+            <div class="grid2">
+              <div class="field">
+                <label>Height (H)</label>
+                <input type="number" id="hIn" min="1" step="0.01" value="18">
+              </div>
+              <div class="field">
+                <label>Width (W)</label>
+                <input type="number" id="wIn" min="1" step="0.01" value="36">
+              </div>
+            </div>
+
+            <div class="apply-row">
+              <select class="preset" id="presetSelect">
+                <option value="">Presets (H×W)</option>
+              </select>
+
+              <button class="btn btn-secondary" id="applySizeBtn" style="width:auto;padding:12px 16px;">
+                ✅ Apply
+              </button>
+            </div>
+
+            <div class="mini" id="sizeInfo"></div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Upload Images (Multiple)</div>
+            <div class="upload-zone" id="uploadZone">
+              <div style="font-size:34px;margin-bottom:6px;">🖼️</div>
+              <div style="font-size:14px;margin-bottom:6px;font-weight:900;color:var(--second-color);">Click or drag images here</div>
+              <div style="font-size:12px;color:var(--text-color-light);">Supports JPG, PNG, WebP</div>
+            </div>
+            <input type="file" id="fileInput" accept="image/*" multiple>
+            <div class="mini" id="uploadInfo"></div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Frame Background</div>
+            <div class="color-input" id="frameBgRow">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <button class="swatch" id="frameBgSwatch" type="button" aria-label="Frame background color"></button>
+                <div style="font-size:12px;font-weight:900;color:var(--text-color-light);">Background</div>
+              </div>
+              <div style="font-size:12px;font-weight:900;color:var(--text-color-light);" id="frameBgValue">#FFFFFF</div>
+            </div>
+            <div class="mini">HEX-only picker</div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Layers</div>
+            <div class="layers" id="layerList"></div>
+            <div class="mini">In <b>Merge</b> view: left is Front, right is Rear.</div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Selected Layer</div>
+
+            <div class="control-group">
+              <div class="control-label"><span>Zoom</span><span class="control-value" id="zoomValue">100%</span></div>
+              <input type="range" id="zoomRange" min="30" max="400" value="100">
+            </div>
+
+            <div class="control-group">
+              <div class="control-label"><span>Rotation</span><span class="control-value" id="rotateValue">0°</span></div>
+              <input type="range" id="rotateRange" min="-180" max="180" value="0">
+            </div>
+
+            <div class="btn-group">
+              <button class="btn btn-secondary" id="resetBtn">↻ Reset Selected Layer</button>
+            </div>
+          </div>
+
+          <div class="section" style="margin-top:18px;">
+            <button class="btn btn-primary" id="downloadBtn">
+              <span>⬇</span><span id="downloadLabel">Download JPG</span>
+            </button>
+
+            <div class="merge-downloads" id="mergeDownloadGroup">
+              <button class="btn btn-primary" id="downloadBothBtn">⬇⬇ Download Both (Front + Rear)</button>
+              <div class="merge-grid">
+                <button class="btn btn-outline" id="downloadFrontBtn">⬇ Front JPG</button>
+                <button class="btn btn-outline" id="downloadRearBtn">⬇ Rear JPG</button>
+              </div>
+            </div>
+
+            <div class="mini">Print at <b>100%</b>. Inches apply to export size.</div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="text-tab">
+          <div class="section">
+            <div class="section-title">Text</div>
+            <textarea id="textInput" placeholder="Type your text here..."></textarea>
+            <div class="btn-group">
+              <button class="btn btn-primary" id="addTextBtn">➕ Add Text</button>
+              <button class="btn btn-secondary" id="updateTextBtn">✅ Update Selected Text</button>
+              <button class="btn btn-secondary" id="deleteTextLayerBtn">🗑️ Delete Selected Text</button>
+            </div>
+            <div class="mini">Tip: click a text layer on the canvas (or in Layers) to edit it.</div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Text Style</div>
+            <div class="control-group">
+              <div class="control-label"><span>Size</span><span class="control-value" id="textSizeValue">32px</span></div>
+              <input type="range" id="textSizeRange" min="12" max="120" value="32">
+            </div>
+            <div class="control-group">
+              <div class="control-label"><span>Background Opacity</span><span class="control-value" id="bgOpacityValue">90%</span></div>
+              <input type="range" id="bgOpacityRange" min="0" max="100" value="90">
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-title">Colors</div>
+
+            <div class="color-input" id="textColorRow" style="margin-bottom:10px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <button class="swatch" id="textColorSwatch" type="button" aria-label="Text color"></button>
+                <div style="font-size:12px;font-weight:900;color:var(--text-color-light);">Text</div>
+              </div>
+              <div style="font-size:12px;font-weight:900;color:var(--text-color-light);" id="textColorValue">#000000</div>
+            </div>
+
+            <div class="color-input" id="bgColorRow">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <button class="swatch" id="bgColorSwatch" type="button" aria-label="Text background color"></button>
+                <div style="font-size:12px;font-weight:900;color:var(--text-color-light);">Background</div>
+              </div>
+              <div style="font-size:12px;font-weight:900;color:var(--text-color-light);" id="bgColorValue">#FFFFFF</div>
+            </div>
+
+            <div class="mini">All pickers are HEX-only.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="canvas-area" id="canvasArea">
+        <div class="canvas-header">
+          <div class="canvas-title" id="canvasTitle">Front Panel</div>
+
+          <div class="header-actions">
+            <button class="mini-btn" id="undoBtn" title="Undo">↩ Undo</button>
+            <button class="mini-btn" id="redoBtn" title="Redo">↪ Redo</button>
+
+            <div class="panel-switch">
+              <button class="panel-btn active" data-panel="front">Front Panel</button>
+              <button class="panel-btn" data-panel="rear">Rear Panel</button>
+              <button class="panel-btn" data-panel="merge">Merge</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="outside-toolbar" id="outsideToolbar">
+          <div class="toolbtn" id="tb_back"  title="Send to back">⇩</div>
+          <div class="toolbtn" id="tb_down"  title="Backward one">↓</div>
+          <div class="toolbtn" id="tb_up"    title="Forward one">↑</div>
+          <div class="toolbtn" id="tb_front" title="Bring to front">⇧</div>
+          <div class="toolbtn" id="tb_rotL"  title="Rotate left (10°)">⟲</div>
+          <div class="toolbtn" id="tb_rotR"  title="Rotate right (10°)">⟳</div>
+          <div class="toolbtn danger" id="tb_del" title="Delete">🗑️</div>
+        </div>
+
+        <div class="canvas-wrapper">
+          <div class="stage" id="stage">
+            <div class="canvas-frame focus" id="panelFront">
+              <div class="arch-outline" aria-hidden="true">
+                <svg viewBox="0 0 1000 500" preserveAspectRatio="none">
+                  <path id="archPathFront" d="M0 500 L1000 500 L1000 0 C650 0, 300 230, 0 500 Z"></path>
+                </svg>
+              </div>
+
+              <div id="stackFront"></div>
+              <div class="empty-state" id="emptyFront" style="display:flex;">
+                <div style="font-size:56px;margin-bottom:12px;opacity:.5;">🎨</div>
+                <div style="font-size:15px;font-weight:1000;color:var(--second-color);">Upload images or add text</div>
+              </div>
+            </div>
+
+            <div class="canvas-frame" id="panelRear" style="display:none;">
+              <div class="arch-outline" aria-hidden="true">
+                <svg viewBox="0 0 1000 500" preserveAspectRatio="none">
+                  <path id="archPathRear" d="M0 500 L1000 500 C700 230, 350 0, 0 0 L0 500 Z"></path>
+                </svg>
+              </div>
+
+              <div id="stackRear"></div>
+              <div class="empty-state" id="emptyRear" style="display:flex;">
+                <div style="font-size:56px;margin-bottom:12px;opacity:.5;">🎨</div>
+                <div style="font-size:15px;font-weight:1000;color:var(--second-color);">Upload images or add text</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script>
+  /* ============================
+     Small helpers
+     ============================ */
+  function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+
+  function normalizeHex(v){
+    v = (v || '').trim();
+    if (!v) return null;
+    if (!v.startsWith('#')) v = '#' + v;
+    if (/^#[0-9a-fA-F]{3}$/.test(v)){
+      v = '#' + v[1]+v[1] + v[2]+v[2] + v[3]+v[3];
+    }
+    if (!/^#[0-9a-fA-F]{6}$/.test(v)) return null;
+    return v.toUpperCase();
+  }
+
+  function rgbToHex(r,g,b){
+    const h = (n)=> n.toString(16).padStart(2,'0');
+    return ('#' + h(r) + h(g) + h(b)).toUpperCase();
+  }
+  function hexToRgb(hex){
+    let h = (hex || "#FFFFFF").replace("#","").trim();
+    if (h.length === 3) h = h.split("").map(c=>c+c).join("");
+    if (h.length !== 6) h = "FFFFFF";
+    return { r: parseInt(h.slice(0,2),16), g: parseInt(h.slice(2,4),16), b: parseInt(h.slice(4,6),16) };
+  }
+
+  function rgbToHsv(r,g,b){
+    r/=255; g/=255; b/=255;
+    const max=Math.max(r,g,b), min=Math.min(r,g,b);
+    const d=max-min;
+    let h=0;
+    if (d!==0){
+      if (max===r) h=((g-b)/d)%6;
+      else if (max===g) h=(b-r)/d+2;
+      else h=(r-g)/d+4;
+      h*=60;
+      if (h<0) h+=360;
+    }
+    const s = max===0 ? 0 : d/max;
+    const v = max;
+    return {h,s,v};
+  }
+  function hsvToRgb(h,s,v){
+    const c=v*s;
+    const x=c*(1-Math.abs(((h/60)%2)-1));
+    const m=v-c;
+    let r=0,g=0,b=0;
+    if (h>=0 && h<60){ r=c; g=x; b=0; }
+    else if (h<120){ r=x; g=c; b=0; }
+    else if (h<180){ r=0; g=c; b=x; }
+    else if (h<240){ r=0; g=x; b=c; }
+    else if (h<300){ r=x; g=0; b=c; }
+    else { r=c; g=0; b=x; }
+    return { r: Math.round((r+m)*255), g: Math.round((g+m)*255), b: Math.round((b+m)*255) };
+  }
+
+  function uid(){ return 'L' + Math.random().toString(16).slice(2) + Date.now().toString(16); }
+  function normalizeDeg(d){
+    let x = d % 360;
+    if (x > 180) x -= 360;
+    if (x < -180) x += 360;
+    return x;
+  }
+
+  /* ============================
+     HEX-only picker (same)
+     ============================ */
+  class HexOnlyPicker {
+    constructor({anchorEl, initialHex="#FFFFFF", onChange}) {
+      this.anchorEl = anchorEl;
+      this.onChange = onChange;
+      const init = normalizeHex(initialHex) || "#FFFFFF";
+      const {r,g,b} = hexToRgb(init);
+      this.hsv = rgbToHsv(r,g,b);
+
+      this.root = null; this.dot=null; this.sv=null; this.hue=null;
+      this.preview=null; this.hexInput=null;
+
+      this._onDocDown = (e)=>{
+        if (!this.root) return;
+        if (this.root.contains(e.target)) return;
+        if (this.anchorEl.contains(e.target)) return;
+        this.close();
+      };
+      this._onKey = (e)=>{ if (e.key === "Escape") this.close(); };
+    }
+
+    open(){
+      if (this.root) return;
+      this.root = document.createElement('div');
+      this.root.className = 'hexpicker-pop';
+      this.root.style.position = "fixed";
+      this.root.style.zIndex = "9999";
+      this.root.style.width = "320px";
+      this.root.style.background = "#fff";
+      this.root.style.border = "1px solid rgba(0,0,0,.18)";
+      this.root.style.borderRadius = "12px";
+      this.root.style.boxShadow = "0 18px 50px rgba(0,0,0,.18)";
+      this.root.style.overflow = "hidden";
+      this.root.style.userSelect = "none";
+      this.root.innerHTML = `
+        <div style="padding:12px 12px 0 12px;">
+          <div class="hexpicker-sv" tabindex="0" aria-label="Saturation Value" style="
+              width:100%;height:170px;border-radius:8px;position:relative;overflow:hidden;
+              background:red;cursor:crosshair;border:1px solid rgba(0,0,0,.08);">
+            <div class="hexpicker-dot" style="
+              position:absolute;width:14px;height:14px;border-radius:50%;
+              border:2px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.25);
+              transform:translate(-7px,-7px);pointer-events:none;"></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;">
+          <div style="width:28px;height:28px;border-radius:8px;border:1px solid rgba(0,0,0,.12);background:rgba(0,0,0,.03);display:grid;place-items:center;font-size:14px;">✎</div>
+          <div class="hexpicker-preview" style="width:28px;height:28px;border-radius:999px;border:2px solid #fff;outline:1px solid rgba(0,0,0,.18);box-shadow:0 6px 14px rgba(0,0,0,.12);background:#fff;"></div>
+          <input class="hexpicker-hue" type="range" min="0" max="360" value="0" aria-label="Hue" style="
+              flex:1;-webkit-appearance:none;height:10px;border-radius:999px;outline:none;cursor:pointer;
+              background:linear-gradient(to right,#ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000);">
+        </div>
+        <div style="padding:10px 12px 12px 12px;display:grid;gap:10px;">
+          <input class="hexpicker-hex" value="#FFFFFF" aria-label="HEX" style="
+              width:100%;padding:10px 12px;border:1px solid rgba(0,0,0,.18);border-radius:8px;
+              font-weight:900;letter-spacing:.06em;text-transform:uppercase;outline:none;font-size:16px;text-align:center;">
+          <select style="width:100%;padding:10px 12px;border:2px solid #2f6cff22;border-radius:8px;font-weight:900;background:#fff;outline:none;font-size:15px;text-align:center;">
+            <option>HEX</option>
+          </select>
+        </div>
+      `;
+      document.body.appendChild(this.root);
+
+      this.sv = this.root.querySelector('.hexpicker-sv');
+      this.dot = this.root.querySelector('.hexpicker-dot');
+      this.hue = this.root.querySelector('.hexpicker-hue');
+      this.preview = this.root.querySelector('.hexpicker-preview');
+      this.hexInput = this.root.querySelector('.hexpicker-hex');
+
+      const r = this.anchorEl.getBoundingClientRect();
+      const pad = 10;
+      let left = r.left;
+      let top = r.bottom + 8;
+
+      const w = 320, h = 290;
+      if (left + w > window.innerWidth - pad) left = window.innerWidth - pad - w;
+      if (top + h > window.innerHeight - pad) top = r.top - h - 8;
+      left = clamp(left, pad, window.innerWidth - pad - w);
+      top = clamp(top, pad, window.innerHeight - pad - h);
+
+      this.root.style.left = Math.round(left) + 'px';
+      this.root.style.top  = Math.round(top) + 'px';
+
+      this.hue.value = Math.round(this.hsv.h);
+      this._syncUIFromHSV(true);
+
+      this.hue.addEventListener('input', ()=>{
+        this.hsv.h = parseFloat(this.hue.value);
+        this._syncUIFromHSV();
+      });
+
+      const onSV = (clientX, clientY)=>{
+        const rect = this.sv.getBoundingClientRect();
+        const x = clamp(clientX - rect.left, 0, rect.width);
+        const y = clamp(clientY - rect.top, 0, rect.height);
+        this.hsv.s = rect.width ? x / rect.width : 0;
+        this.hsv.v = rect.height ? 1 - (y / rect.height) : 1;
+        this._syncUIFromHSV();
+      };
+
+      let dragging = false;
+      this.sv.addEventListener('mousedown', (e)=>{ dragging=true; onSV(e.clientX, e.clientY); });
+      document.addEventListener('mousemove', (e)=>{ if(dragging) onSV(e.clientX, e.clientY); });
+      document.addEventListener('mouseup', ()=>{ dragging=false; });
+
+      this.hexInput.addEventListener('input', ()=>{
+        const hex = normalizeHex(this.hexInput.value);
+        this.hexInput.style.borderColor = hex ? "rgba(0,0,0,.18)" : "rgba(239,68,68,.65)";
+        if (!hex) return;
+        const {r,g,b} = hexToRgb(hex);
+        this.hsv = rgbToHsv(r,g,b);
+        this.hue.value = Math.round(this.hsv.h);
+        this._syncUIFromHSV(false, true);
+      });
+
+      setTimeout(()=> {
+        document.addEventListener('mousedown', this._onDocDown);
+        document.addEventListener('keydown', this._onKey);
+      }, 0);
+    }
+
+    close(){
+      if (!this.root) return;
+      document.removeEventListener('mousedown', this._onDocDown);
+      document.removeEventListener('keydown', this._onKey);
+      this.root.remove();
+      this.root = null;
+    }
+
+    _syncUIFromHSV(callChange=true, fromHex=false){
+      const hueRgb = hsvToRgb(this.hsv.h, 1, 1);
+      this.sv.style.background = `rgb(${hueRgb.r},${hueRgb.g},${hueRgb.b})`;
+
+      const rect = this.sv.getBoundingClientRect();
+      const w = rect.width || 320;
+      const h = rect.height || 170;
+      const x = this.hsv.s * w;
+      const y = (1 - this.hsv.v) * h;
+      this.dot.style.left = `${x}px`;
+      this.dot.style.top  = `${y}px`;
+
+      const rgb = hsvToRgb(this.hsv.h, this.hsv.s, this.hsv.v);
+      const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+      this.preview.style.background = hex;
+
+      if (!fromHex){
+        this.hexInput.style.borderColor = "rgba(0,0,0,.18)";
+        this.hexInput.value = hex;
+      }
+
+      if (callChange && typeof this.onChange === 'function'){
+        this.onChange(hex);
+      }
+    }
+  }
+
+  /* ============================
+     App
+     ============================ */
+  const PANEL = { FRONT:'front', REAR:'rear', MERGE:'merge' };
+
+  // ✅ NEW: frame modes including mixed
+  const FRAME_MODE = {
+    REGULAR_BOTH: 'regular',
+    ARCH_BOTH: 'arch',
+    MIX_FR_RA: 'mixedFRRA',     // Front regular, Rear arch
+    MIX_FA_RR: 'mixedFARR'      // Front arch, Rear regular
+  };
+
+  const PRESETS_REGULAR = [
+    {h:12,w:24},{h:16,w:36},{h:18,w:36},{h:18,w:40},{h:24,w:24},{h:24,w:36},{h:24,w:40}
+  ];
+  const PRESETS_ARCH = [
+    {h:16,w:36},{h:18,w:36},{h:18,w:40},{h:24,w:40}
+  ];
+
+  let currentView = PANEL.FRONT;
+  let editPanel = PANEL.FRONT;
+
+  let magnetW = 36, magnetH = 18;
+
+  // ✅ NEW: frame mode (regular/arch/mixed)
+  let frameMode = FRAME_MODE.REGULAR_BOTH;
+
+  // ✅ per-panel arch settings (rotate + flip) — applied ONLY to that panel when it is arch
+  const arch = {
+    [PANEL.FRONT]: { rot:0, flipH:false, flipV:false },
+    [PANEL.REAR]:  { rot:0, flipH:false, flipV:false }
+  };
+
+  const state = {
+    [PANEL.FRONT]: { layers: [], selectedId: null, bgColor:"#FFFFFF" },
+    [PANEL.REAR]:  { layers: [], selectedId: null, bgColor:"#FFFFFF" }
+  };
+
+  const lastFrameSize = {
+    [PANEL.FRONT]: { w: 0, h: 0 },
+    [PANEL.REAR]:  { w: 0, h: 0 }
+  };
+
+  const history = [];
+  const redoStack = [];
+  let applyingHistory = false;
+
+  let moving=false, startX=0,startY=0,startLX=0,startLY=0;
+
+  const el = {
+    tabBtns: document.querySelectorAll('.tab-btn'),
+    tabContents: document.querySelectorAll('.tab-content'),
+
+    frameTypeSelect: document.getElementById('frameTypeSelect'),
+    frameTypeInfo: document.getElementById('frameTypeInfo'),
+
+    archControls: document.getElementById('archControls'),
+    archWhichPanel: document.getElementById('archWhichPanel'),
+    archRotateRange: document.getElementById('archRotateRange'),
+    archRotateValue: document.getElementById('archRotateValue'),
+    flipHBtn: document.getElementById('flipHBtn'),
+    flipVBtn: document.getElementById('flipVBtn'),
+    resetArchBtn: document.getElementById('resetArchBtn'),
+
+    hIn: document.getElementById('hIn'),
+    wIn: document.getElementById('wIn'),
+    presetSelect: document.getElementById('presetSelect'),
+    applySizeBtn: document.getElementById('applySizeBtn'),
+    sizeInfo: document.getElementById('sizeInfo'),
+
+    uploadZone: document.getElementById('uploadZone'),
+    fileInput: document.getElementById('fileInput'),
+    uploadInfo: document.getElementById('uploadInfo'),
+
+    layerList: document.getElementById('layerList'),
+
+    frameBgRow: document.getElementById('frameBgRow'),
+    frameBgSwatch: document.getElementById('frameBgSwatch'),
+    frameBgValue: document.getElementById('frameBgValue'),
+
+    zoomRange: document.getElementById('zoomRange'),
+    rotateRange: document.getElementById('rotateRange'),
+    zoomValue: document.getElementById('zoomValue'),
+    rotateValue: document.getElementById('rotateValue'),
+    resetBtn: document.getElementById('resetBtn'),
+
+    textInput: document.getElementById('textInput'),
+    textSizeRange: document.getElementById('textSizeRange'),
+    bgOpacityRange: document.getElementById('bgOpacityRange'),
+    textSizeValue: document.getElementById('textSizeValue'),
+    bgOpacityValue: document.getElementById('bgOpacityValue'),
+
+    textColorRow: document.getElementById('textColorRow'),
+    bgColorRow: document.getElementById('bgColorRow'),
+    textColorSwatch: document.getElementById('textColorSwatch'),
+    bgColorSwatch: document.getElementById('bgColorSwatch'),
+    textColorValue: document.getElementById('textColorValue'),
+    bgColorValue: document.getElementById('bgColorValue'),
+
+    addTextBtn: document.getElementById('addTextBtn'),
+    updateTextBtn: document.getElementById('updateTextBtn'),
+    deleteTextLayerBtn: document.getElementById('deleteTextLayerBtn'),
+
+    downloadBtn: document.getElementById('downloadBtn'),
+    downloadLabel: document.getElementById('downloadLabel'),
+    mergeDownloadGroup: document.getElementById('mergeDownloadGroup'),
+    downloadBothBtn: document.getElementById('downloadBothBtn'),
+    downloadFrontBtn: document.getElementById('downloadFrontBtn'),
+    downloadRearBtn: document.getElementById('downloadRearBtn'),
+
+    canvasTitle: document.getElementById('canvasTitle'),
+    canvasArea: document.getElementById('canvasArea'),
+
+    stage: document.getElementById('stage'),
+    panelFront: document.getElementById('panelFront'),
+    panelRear: document.getElementById('panelRear'),
+    stackFront: document.getElementById('stackFront'),
+    stackRear: document.getElementById('stackRear'),
+    emptyFront: document.getElementById('emptyFront'),
+    emptyRear: document.getElementById('emptyRear'),
+
+    tb_back: document.getElementById('tb_back'),
+    tb_down: document.getElementById('tb_down'),
+    tb_up: document.getElementById('tb_up'),
+    tb_front: document.getElementById('tb_front'),
+    tb_rotL: document.getElementById('tb_rotL'),
+    tb_rotR: document.getElementById('tb_rotR'),
+    tb_del: document.getElementById('tb_del'),
+
+    undoBtn: document.getElementById('undoBtn'),
+    redoBtn: document.getElementById('redoBtn'),
+
+    clipPathFront: document.getElementById('clipPathFront'),
+    clipPathRear: document.getElementById('clipPathRear'),
+    archPathFront: document.getElementById('archPathFront'),
+    archPathRear: document.getElementById('archPathRear'),
+  };
+
+  function s(panelKey=editPanel){ return state[panelKey]; }
+  function frame(panelKey){ return panelKey === PANEL.FRONT ? el.panelFront : el.panelRear; }
+  function stack(panelKey){ return panelKey === PANEL.FRONT ? el.stackFront : el.stackRear; }
+  function empty(panelKey){ return panelKey === PANEL.FRONT ? el.emptyFront : el.emptyRear; }
+
+  function selectedLayer(panelKey=editPanel){
+    const id = s(panelKey).selectedId;
+    return s(panelKey).layers.find(l => l.id === id) || null;
+  }
+  function getLayer(panelKey, id){
+    return s(panelKey).layers.find(l => l.id === id) || null;
+  }
+
+  function panelIsArch(panelKey){
+    if (frameMode === FRAME_MODE.ARCH_BOTH) return true;
+    if (frameMode === FRAME_MODE.REGULAR_BOTH) return false;
+    if (frameMode === FRAME_MODE.MIX_FR_RA) return panelKey === PANEL.REAR; // rear is arch
+    if (frameMode === FRAME_MODE.MIX_FA_RR) return panelKey === PANEL.FRONT; // front is arch
+    return false;
+  }
+
+  function anyArchEnabled(){
+    return panelIsArch(PANEL.FRONT) || panelIsArch(PANEL.REAR);
+  }
+
+  /* ============================
+     Arch transforms (PER PANEL)
+     ============================ */
+  function setArchUIFromPanel(panelKey){
+    const a = arch[panelKey];
+    el.archWhichPanel.innerHTML = `Editing: <b>${panelKey===PANEL.FRONT?'Front':'Rear'}</b>`;
+
+    const deg = ((a.rot % 360) + 360) % 360;
+    el.archRotateRange.value = Math.round(deg);
+    el.archRotateValue.textContent = Math.round(deg) + '°';
+
+    el.flipHBtn.classList.toggle('on', !!a.flipH);
+    el.flipVBtn.classList.toggle('on', !!a.flipV);
+  }
+
+  function applyArchForPanel(panelKey){
+    if (!panelIsArch(panelKey)) {
+      // reset transforms if panel not arch (so outline not rotated when hidden)
+      if (panelKey === PANEL.FRONT){
+        if (el.clipPathFront) el.clipPathFront.removeAttribute('transform');
+        if (el.archPathFront) el.archPathFront.removeAttribute('transform');
+      } else {
+        if (el.clipPathRear) el.clipPathRear.removeAttribute('transform');
+        if (el.archPathRear) el.archPathRear.removeAttribute('transform');
+      }
+      return;
+    }
+
+    const a = arch[panelKey];
+    const deg = ((a.rot % 360) + 360) % 360;
+    const sx = a.flipH ? -1 : 1;
+    const sy = a.flipV ? -1 : 1;
+
+    // objectBoundingBox => center 0.5,0.5
+    const clipT = `translate(0.5 0.5) rotate(${deg}) scale(${sx} ${sy}) translate(-0.5 -0.5)`;
+    // outline viewBox 1000x500 => center 500,250
+    const outlineT = `translate(500 250) rotate(${deg}) scale(${sx} ${sy}) translate(-500 -250)`;
+
+    if (panelKey === PANEL.FRONT){
+      if (el.clipPathFront) el.clipPathFront.setAttribute('transform', clipT);
+      if (el.archPathFront) el.archPathFront.setAttribute('transform', outlineT);
+    } else {
+      if (el.clipPathRear) el.clipPathRear.setAttribute('transform', clipT);
+      if (el.archPathRear) el.archPathRear.setAttribute('transform', outlineT);
+    }
+  }
+
+  function applyArchAll(){
+    applyArchForPanel(PANEL.FRONT);
+    applyArchForPanel(PANEL.REAR);
+
+    // Show controls only if edit panel is arch (and any arch exists)
+    const show = anyArchEnabled() && panelIsArch(editPanel);
+    el.archControls.style.display = show ? 'block' : 'none';
+    if (show) setArchUIFromPanel(editPanel);
+  }
+
+  /* ============================
+     Frame mode application (per panel)
+     ============================ */
+  function applyFrameMode(){
+    // apply per-panel class + clipPath
+    [PANEL.FRONT, PANEL.REAR].forEach(pk=>{
+      const isArch = panelIsArch(pk);
+      const fr = frame(pk);
+
+      fr.classList.toggle('arch', isArch);
+
+      if (isArch){
+        fr.style.clipPath = pk === PANEL.FRONT ? 'url(#clipArchFront)' : 'url(#clipArchRear)';
+      } else {
+        fr.style.clipPath = 'none';
+      }
+    });
+
+    // info label
+    if (frameMode === FRAME_MODE.REGULAR_BOTH){
+      el.frameTypeInfo.textContent = "Regular: both panels rectangle.";
+    } else if (frameMode === FRAME_MODE.ARCH_BOTH){
+      el.frameTypeInfo.textContent = "Arch: both panels curved. Arch controls work per panel.";
+    } else if (frameMode === FRAME_MODE.MIX_FR_RA){
+      el.frameTypeInfo.textContent = "Mixed: Front is Regular, Rear is Arch (controls apply when editing Rear).";
+    } else if (frameMode === FRAME_MODE.MIX_FA_RR){
+      el.frameTypeInfo.textContent = "Mixed: Front is Arch, Rear is Regular (controls apply when editing Front).";
+    }
+
+    fillPresets();
+    fitFrames(true);
+    refitAll();
+    applyArchAll();
+    setTitle();
+    pushHistory();
+  }
+
+  /* ============================
+     Presets: if ANY arch exists, use arch presets (safer)
+     ============================ */
+  function fillPresets(){
+    const list = anyArchEnabled() ? PRESETS_ARCH : PRESETS_REGULAR;
+    el.presetSelect.innerHTML = `<option value="">Presets (H×W)</option>` + list
+      .map(p => `<option value="${p.h}x${p.w}">${p.h}×${p.w}</option>`)
+      .join("");
+  }
+
+  /* ============================
+     History
+     ============================ */
+  function stripLayer(l){
+    if (l.type === 'image'){
+      return {
+        id:l.id,type:l.type,name:l.name,
+        x:l.x,y:l.y,scale:l.scale,rotation:l.rotation,
+        src:l.src,naturalW:l.naturalW,naturalH:l.naturalH
+      };
+    }
+    return {
+      id:l.id,type:l.type,name:l.name,
+      x:l.x,y:l.y,scale:l.scale,rotation:l.rotation,
+      text: {...l.text}
+    };
+  }
+
+  function snapshotState(){
+    return JSON.stringify({
+      magnetW, magnetH, currentView, editPanel, frameMode,
+      arch,
+      lastFrameSize,
+      state: {
+        [PANEL.FRONT]: {
+          selectedId: state[PANEL.FRONT].selectedId,
+          bgColor: state[PANEL.FRONT].bgColor,
+          layers: state[PANEL.FRONT].layers.map(stripLayer)
+        },
+        [PANEL.REAR]: {
+          selectedId: state[PANEL.REAR].selectedId,
+          bgColor: state[PANEL.REAR].bgColor,
+          layers: state[PANEL.REAR].layers.map(stripLayer)
+        }
+      }
+    });
+  }
+
+  function updateUndoRedoButtons(){
+    el.undoBtn.disabled = history.length <= 1;
+    el.redoBtn.disabled = redoStack.length === 0;
+  }
+  function pushHistory(){
+    if (applyingHistory) return;
+    history.push(snapshotState());
+    if (history.length > 60) history.shift();
+    redoStack.length = 0;
+    updateUndoRedoButtons();
+  }
+
+  /* ============================
+     UI text
+     ============================ */
+  function setUploadInfo(){
+    el.uploadInfo.innerHTML = `Uploading to <b>${editPanel === PANEL.FRONT ? "Front Panel" : "Rear Panel"}</b>.`;
+  }
+
+  function setTitle(){
+    const label = (currentView === PANEL.FRONT) ? "Front Panel" :
+                  (currentView === PANEL.REAR)  ? "Rear Panel"  : "Merge";
+    const editLabel = (currentView === PANEL.MERGE) ? ` • editing: ${editPanel === PANEL.FRONT ? "Front" : "Rear"}` : "";
+
+    const frontT = panelIsArch(PANEL.FRONT) ? "Front: Arch" : "Front: Regular";
+    const rearT  = panelIsArch(PANEL.REAR)  ? "Rear: Arch"  : "Rear: Regular";
+    el.canvasTitle.textContent = `${label}${editLabel} • ${magnetH}×${magnetW} in • ${frontT} • ${rearT}`;
+
+    // also controls visibility (only if edit panel is arch)
+    applyArchAll();
+  }
+
+  /* ============================
+     Tabs
+     ============================ */
+  el.tabBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.tabBtns.forEach(b=>b.classList.remove('active'));
+      el.tabContents.forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab + '-tab').classList.add('active');
+    });
+  });
+
+  /* ============================
+     Frame fitting
+     ============================ */
+  function fitFrameToBox(panelEl, boxRect){
+    const ratio = magnetW / magnetH;
+    const maxW = Math.max(100, boxRect.width);
+    const maxH = Math.max(100, boxRect.height);
+
+    let frameW = maxW;
+    let frameH = frameW / ratio;
+
+    if (frameH > maxH){
+      frameH = maxH;
+      frameW = frameH * ratio;
+    }
+
+    panelEl.style.width = Math.round(frameW) + 'px';
+    panelEl.style.height = Math.round(frameH) + 'px';
+  }
+
+  function fitImageBaseToFrame(panelKey, layer){
+    if (!layer || layer.type !== 'image') return;
+    const fr = frame(panelKey).getBoundingClientRect();
+    const natW = layer.naturalW || layer.img?.naturalWidth || 1;
+    const natH = layer.naturalH || layer.img?.naturalHeight || 1;
+    const fit = Math.min(fr.width / natW, fr.height / natH);
+    layer.img.style.width = Math.max(1, Math.round(natW * fit)) + 'px';
+    layer.img.style.height = Math.max(1, Math.round(natH * fit)) + 'px';
+  }
+
+  function rescaleLayersToNewFrame(panelKey, oldW, oldH, newW, newH){
+    if (!oldW || !oldH || !newW || !newH) return;
+    const rx = newW / oldW;
+    const ry = newH / oldH;
+    const rText = (rx + ry) / 2;
+
+    state[panelKey].layers.forEach(l=>{
+      l.x *= rx;
+      l.y *= ry;
+      if (l.type === 'text' && l.text){
+        l.text.fontPx = Math.max(1, Math.round((l.text.fontPx || 32) * rText));
+      }
+    });
+  }
+
+  function fitFrames(forceNoRescale=false){
+    const oldFrontW = lastFrameSize[PANEL.FRONT].w || frame(PANEL.FRONT).getBoundingClientRect().width || 0;
+    const oldFrontH = lastFrameSize[PANEL.FRONT].h || frame(PANEL.FRONT).getBoundingClientRect().height || 0;
+    const oldRearW  = lastFrameSize[PANEL.REAR].w  || frame(PANEL.REAR).getBoundingClientRect().width  || 0;
+    const oldRearH  = lastFrameSize[PANEL.REAR].h  || frame(PANEL.REAR).getBoundingClientRect().height || 0;
+
+    const r = el.stage.getBoundingClientRect();
+    if (currentView === PANEL.MERGE){
+      const gap = 18;
+      const half = { width: Math.max(100, (r.width - gap)/2), height: r.height };
+      fitFrameToBox(el.panelFront, half);
+      fitFrameToBox(el.panelRear, half);
+    } else {
+      fitFrameToBox(el.panelFront, r);
+      fitFrameToBox(el.panelRear, r);
+    }
+
+    const nf = frame(PANEL.FRONT).getBoundingClientRect();
+    const nr = frame(PANEL.REAR).getBoundingClientRect();
+
+    if (!forceNoRescale && !applyingHistory){
+      if (oldFrontW > 0 && oldFrontH > 0) rescaleLayersToNewFrame(PANEL.FRONT, oldFrontW, oldFrontH, nf.width, nf.height);
+      if (oldRearW  > 0 && oldRearH  > 0) rescaleLayersToNewFrame(PANEL.REAR,  oldRearW,  oldRearH,  nr.width, nr.height);
+    }
+
+    lastFrameSize[PANEL.FRONT] = { w: nf.width, h: nf.height };
+    lastFrameSize[PANEL.REAR]  = { w: nr.width, h: nr.height };
+
+    [PANEL.FRONT, PANEL.REAR].forEach(pk=>{
+      state[pk].layers.forEach(l=>{
+        if (l.type === 'image') fitImageBaseToFrame(pk, l);
+      });
+    });
+  }
+
+  /* ============================
+     Render layers
+     ============================ */
+  function renderLayerTransform(layer){
+    layer.wrap.style.transform =
+      `translate(-50%, -50%) translate(${layer.x}px, ${layer.y}px) rotate(${layer.rotation}deg) scale(${layer.scale})`;
+  }
+  function renderTextLayer(layer){
+    const t = layer.text;
+    layer.textEl.textContent = t.value || '';
+    layer.textEl.style.fontSize = (t.fontPx || 32) + 'px';
+    layer.textEl.style.color = t.color || '#000';
+    const rgb = hexToRgb(t.bg || '#fff');
+    layer.textEl.style.background = `rgba(${rgb.r},${rgb.g},${rgb.b},${t.bgOpacity ?? 0.9})`;
+  }
+  function updateEmpty(panelKey){
+    const hasAny = s(panelKey).layers.length > 0;
+    empty(panelKey).style.display = hasAny ? 'none' : 'flex';
+    frame(panelKey).classList.toggle('has-any', hasAny);
+  }
+  function refitAll(){
+    [PANEL.FRONT, PANEL.REAR].forEach(pk=>{
+      state[pk].layers.forEach(l=>{
+        if (l.type === 'text') renderTextLayer(l);
+        renderLayerTransform(l);
+      });
+      updateEmpty(pk);
+    });
+    refreshLayerList();
+    updateUIFromSelection();
+  }
+
+  /* ============================
+     Selection
+     ============================ */
+  function clearSelection(panelKey){
+    state[panelKey].selectedId = null;
+    state[panelKey].layers.forEach(l => l.wrap?.classList.remove('selected'));
+  }
+  function setSelected(panelKey, id){
+    editPanel = panelKey;
+    clearSelection(PANEL.FRONT);
+    clearSelection(PANEL.REAR);
+
+    state[panelKey].selectedId = id;
+    state[panelKey].layers.forEach(l => l.wrap?.classList.toggle('selected', l.id === id));
+
+    el.panelFront.classList.toggle('focus', editPanel === PANEL.FRONT);
+    el.panelRear.classList.toggle('focus', editPanel === PANEL.REAR);
+
+    el.frameBgSwatch.style.background = s(editPanel).bgColor;
+    el.frameBgValue.textContent = s(editPanel).bgColor;
+
+    const layer = selectedLayer(editPanel);
+    if (layer && layer.type === 'text'){
+      el.textInput.value = layer.text.value || "";
+      el.textColorSwatch.style.background = layer.text.color || "#000000";
+      el.textColorValue.textContent = (layer.text.color || "#000000").toUpperCase();
+      el.bgColorSwatch.style.background = layer.text.bg || "#FFFFFF";
+      el.bgColorValue.textContent = (layer.text.bg || "#FFFFFF").toUpperCase();
+    }
+
+    setUploadInfo();
+    setTitle();
+    updateUIFromSelection();
+    refreshLayerList();
+  }
+
+  function updateUIFromSelection(){
+    const layer = selectedLayer(editPanel);
+    el.canvasArea.classList.toggle('has-selection', !!layer);
+
+    if (!layer){
+      el.zoomRange.value = 100;
+      el.rotateRange.value = 0;
+      el.zoomValue.textContent = '100%';
+      el.rotateValue.textContent = '0°';
+      return;
+    }
+    el.zoomRange.value = Math.round(layer.scale * 100);
+    el.rotateRange.value = Math.round(layer.rotation);
+    el.zoomValue.textContent = Math.round(layer.scale * 100) + '%';
+    el.rotateValue.textContent = Math.round(layer.rotation) + '°';
+  }
+
+  /* ============================
+     Layer list
+     ============================ */
+  function refreshLayerList(){
+    el.layerList.innerHTML = '';
+    const list = s(editPanel).layers;
+
+    if (!list.length){
+      const row=document.createElement('div');
+      row.style.padding='12px';
+      row.style.color='var(--text-color-light)';
+      row.style.fontWeight='900';
+      row.style.fontSize='13px';
+      row.textContent='No layers yet.';
+      el.layerList.appendChild(row);
+      return;
+    }
+
+    const uiLayers=[...list].reverse();
+    uiLayers.forEach(layer=>{
+      const row=document.createElement('div');
+      row.className='layer-item'+(layer.id===s(editPanel).selectedId?' active':'');
+
+      const thumb=document.createElement('div');
+      thumb.className='thumb';
+      if(layer.type==='image'){
+        const im=document.createElement('img'); im.src=layer.src; thumb.appendChild(im);
+      } else {
+        const t=document.createElement('div'); t.className='t'; t.textContent='T'; thumb.appendChild(t);
+      }
+
+      const meta=document.createElement('div');
+      meta.className='layer-meta';
+      const nm=document.createElement('div'); nm.className='name';
+      nm.textContent=(layer.type==='text'?'Text':(layer.name||'Image'));
+
+      const sub=document.createElement('div'); sub.className='sub';
+      sub.textContent=`Zoom ${Math.round(layer.scale*100)}% • Rot ${Math.round(layer.rotation)}°`;
+
+      meta.append(nm,sub);
+
+      const del=document.createElement('button');
+      del.className='trash'; del.type='button'; del.textContent='🗑️';
+      del.addEventListener('click',(e)=>{e.stopPropagation();deleteLayer(editPanel, layer.id);});
+
+      row.addEventListener('click',()=>setSelected(editPanel, layer.id));
+      row.append(thumb,meta,del);
+      el.layerList.appendChild(row);
+    });
+
+    updateEmpty(editPanel);
+  }
+
+  function syncDomOrder(panelKey){
+    const st = stack(panelKey);
+    state[panelKey].layers.forEach(layer => layer.wrap && st.appendChild(layer.wrap));
+  }
+
+  function moveLayer(panelKey, layerId, delta){
+    pushHistory();
+    const list = state[panelKey].layers;
+    const i = list.findIndex(l => l.id === layerId);
+    const j = i + delta;
+    if (i === -1 || j < 0 || j >= list.length) return;
+    [list[i], list[j]] = [list[j], list[i]];
+    syncDomOrder(panelKey);
+    refreshLayerList();
+    pushHistory();
+  }
+  function bringToFront(panelKey, layerId){
+    pushHistory();
+    const list = state[panelKey].layers;
+    const i = list.findIndex(l => l.id === layerId);
+    if (i === -1) return;
+    const [layer] = list.splice(i,1);
+    list.push(layer);
+    syncDomOrder(panelKey);
+    refreshLayerList();
+    pushHistory();
+  }
+  function sendToBack(panelKey, layerId){
+    pushHistory();
+    const list = state[panelKey].layers;
+    const i = list.findIndex(l => l.id === layerId);
+    if (i === -1) return;
+    const [layer] = list.splice(i,1);
+    list.unshift(layer);
+    syncDomOrder(panelKey);
+    refreshLayerList();
+    pushHistory();
+  }
+
+  function deleteLayer(panelKey, layerId){
+    pushHistory();
+    const list = state[panelKey].layers;
+    const idx = list.findIndex(l => l.id === layerId);
+    if (idx === -1) return;
+
+    const layer = list[idx];
+    layer.wrap?.remove();
+    list.splice(idx,1);
+
+    const sel = selectedLayer(panelKey);
+    if (!sel || sel.id === layerId) el.textInput.value = "";
+
+    state[panelKey].selectedId = list.length ? list[list.length-1].id : null;
+    if (state[panelKey].selectedId) {
+      setSelected(panelKey, state[panelKey].selectedId);
+    } else {
+      updateEmpty(panelKey);
+      refreshLayerList();
+      updateUIFromSelection();
+    }
+    pushHistory();
+  }
+
+  function withSelected(fn){
+    return (e)=>{
+      e.stopPropagation();
+      const layer = selectedLayer(editPanel);
+      if (!layer) return;
+      fn(editPanel, layer.id);
+    };
+  }
+
+  el.tb_back.addEventListener('click', withSelected(sendToBack));
+  el.tb_down.addEventListener('click', withSelected((p,id)=>moveLayer(p,id,-1)));
+  el.tb_up.addEventListener('click', withSelected((p,id)=>moveLayer(p,id,+1)));
+  el.tb_front.addEventListener('click', withSelected(bringToFront));
+  el.tb_rotL.addEventListener('click', withSelected((p,id)=>{
+    pushHistory();
+    const l=getLayer(p,id);
+    l.rotation=normalizeDeg(l.rotation-10);
+    renderLayerTransform(l); updateUIFromSelection(); refreshLayerList();
+    pushHistory();
+  }));
+  el.tb_rotR.addEventListener('click', withSelected((p,id)=>{
+    pushHistory();
+    const l=getLayer(p,id);
+    l.rotation=normalizeDeg(l.rotation+10);
+    renderLayerTransform(l); updateUIFromSelection(); refreshLayerList();
+    pushHistory();
+  }));
+  el.tb_del.addEventListener('click', withSelected(deleteLayer));
+
+  /* ============================
+     Move/Zoom with wheel
+     ============================ */
+  function screenToLayerLocal(layer, panelKey, clientX, clientY){
+    const r = frame(panelKey).getBoundingClientRect();
+    const cx = r.left + r.width/2 + layer.x;
+    const cy = r.top  + r.height/2 + layer.y;
+    const dx = clientX - cx, dy = clientY - cy;
+    const rad = (layer.rotation * Math.PI) / 180;
+    const cos = Math.cos(-rad), sin = Math.sin(-rad);
+    const ux = dx * cos - dy * sin;
+    const uy = dx * sin + dy * cos;
+    return { x: ux / layer.scale, y: uy / layer.scale };
+  }
+  function localToScreenDelta(layer, localX, localY, scale){
+    const rad = (layer.rotation * Math.PI) / 180;
+    const cos = Math.cos(rad), sin = Math.sin(rad);
+    const sx = localX * scale, sy = localY * scale;
+    return { x: sx * cos - sy * sin, y: sx * sin + sy * cos };
+  }
+
+  function attachWheel(panelKey){
+    frame(panelKey).addEventListener('wheel', (e)=>{
+      if (panelKey !== editPanel) return;
+      if (!s(panelKey).layers.length) return;
+
+      const layer = selectedLayer(panelKey) || s(panelKey).layers[s(panelKey).layers.length-1];
+      if (!layer) return;
+
+      e.preventDefault();
+      setSelected(panelKey, layer.id);
+
+      if (e.shiftKey){
+        pushHistory();
+        layer.rotation = normalizeDeg(layer.rotation + (e.deltaY > 0 ? 5 : -5));
+        el.rotateRange.value = Math.round(layer.rotation);
+        el.rotateValue.textContent = Math.round(layer.rotation) + '°';
+        renderLayerTransform(layer);
+        refreshLayerList();
+        pushHistory();
+        return;
+      }
+
+      pushHistory();
+
+      const zoomFactor = e.deltaY < 0 ? 1.08 : 1/1.08;
+      const local = screenToLayerLocal(layer, panelKey, e.clientX, e.clientY);
+
+      const oldScale = layer.scale;
+      const newScale = clamp(oldScale * zoomFactor, 0.30, 4.00);
+
+      const oldDelta = localToScreenDelta(layer, local.x, local.y, oldScale);
+      const newDelta = localToScreenDelta(layer, local.x, local.y, newScale);
+
+      layer.x += (oldDelta.x - newDelta.x);
+      layer.y += (oldDelta.y - newDelta.y);
+      layer.scale = newScale;
+
+      el.zoomRange.value = Math.round(layer.scale * 100);
+      el.zoomValue.textContent = Math.round(layer.scale * 100) + '%';
+      renderLayerTransform(layer);
+      refreshLayerList();
+
+      pushHistory();
+    }, { passive:false });
+  }
+  attachWheel(PANEL.FRONT);
+  attachWheel(PANEL.REAR);
+
+  el.zoomRange.addEventListener('input', ()=>{
+    const layer = selectedLayer(editPanel); if (!layer) return;
+    pushHistory();
+    layer.scale = parseInt(el.zoomRange.value,10)/100;
+    el.zoomValue.textContent = Math.round(layer.scale*100) + '%';
+    renderLayerTransform(layer);
+    refreshLayerList();
+    pushHistory();
+  });
+  el.rotateRange.addEventListener('input', ()=>{
+    const layer = selectedLayer(editPanel); if (!layer) return;
+    pushHistory();
+    layer.rotation = normalizeDeg(parseInt(el.rotateRange.value,10));
+    el.rotateValue.textContent = Math.round(layer.rotation) + '°';
+    renderLayerTransform(layer);
+    refreshLayerList();
+    pushHistory();
+  });
+  el.resetBtn.addEventListener('click', ()=>{
+    const layer = selectedLayer(editPanel); if (!layer) return;
+    pushHistory();
+    layer.x=0;layer.y=0;layer.scale=1;layer.rotation=0;
+    el.zoomRange.value=100;el.rotateRange.value=0;
+    el.zoomValue.textContent='100%';el.rotateValue.textContent='0°';
+    renderLayerTransform(layer);
+    refreshLayerList();
+    pushHistory();
+  });
+
+  function startMoveDrag(e, panelKey){
+    const layer = selectedLayer(panelKey);
+    if (!layer) return;
+    moving=true;
+    startX=e.clientX; startY=e.clientY;
+    startLX=layer.x; startLY=layer.y;
+    frame(panelKey).style.cursor='grabbing';
+    e.preventDefault();
+  }
+
+  function attachMouse(panelKey){
+    frame(panelKey).addEventListener('mousedown', (e)=>{
+      if (currentView === PANEL.MERGE && editPanel !== panelKey){
+        editPanel = panelKey;
+        el.panelFront.classList.toggle('focus', editPanel === PANEL.FRONT);
+        el.panelRear.classList.toggle('focus', editPanel === PANEL.REAR);
+
+        el.frameBgSwatch.style.background = s(editPanel).bgColor;
+        el.frameBgValue.textContent = s(editPanel).bgColor;
+
+        setUploadInfo(); setTitle(); refreshLayerList(); updateUIFromSelection();
+      }
+
+      if (panelKey !== editPanel) return;
+      if (!s(panelKey).layers.length) return;
+
+      const wrap = e.target.closest?.('.layer-wrap');
+      if (wrap?.dataset?.layerId) setSelected(panelKey, wrap.dataset.layerId);
+      else if (!s(panelKey).selectedId) setSelected(panelKey, s(panelKey).layers[s(panelKey).layers.length - 1].id);
+
+      const layer = selectedLayer(panelKey);
+      if (!layer) return;
+
+      startMoveDrag(e, panelKey);
+    });
+  }
+  attachMouse(PANEL.FRONT);
+  attachMouse(PANEL.REAR);
+
+  document.addEventListener('mousemove', (e)=>{
+    if (!moving) return;
+    const layer = selectedLayer(editPanel);
+    if (!layer) return;
+    layer.x = startLX + (e.clientX - startX);
+    layer.y = startLY + (e.clientY - startY);
+    renderLayerTransform(layer);
+  });
+
+  document.addEventListener('mouseup', ()=>{
+    if (moving){
+      moving = false;
+      frame(editPanel).style.cursor = frame(editPanel).classList.contains('has-any') ? 'move' : 'default';
+      refreshLayerList();
+      pushHistory();
+    }
+  });
+
+  /* ============================
+     Upload
+     ============================ */
+  el.uploadZone.addEventListener('click', () => el.fileInput.click());
+  el.uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); el.uploadZone.classList.add('dragover'); });
+  el.uploadZone.addEventListener('dragleave', () => el.uploadZone.classList.remove('dragover'));
+  el.uploadZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    el.uploadZone.classList.remove('dragover');
+    const files = Array.from(e.dataTransfer.files || []).filter(f => f.type.startsWith('image/'));
+    files.forEach(loadImageFile);
+  });
+  el.fileInput.addEventListener('change', (e) => {
+    const files = Array.from(e.target.files || []).filter(f => f.type.startsWith('image/'));
+    files.forEach(loadImageFile);
+    el.fileInput.value = '';
+  });
+
+  function loadImageFile(file){
+    const reader = new FileReader();
+    reader.onload = (e) => createImageLayer(editPanel, e.target.result, file.name);
+    reader.readAsDataURL(file);
+  }
+
+  function createImageLayer(panelKey, src, name="Image"){
+    pushHistory();
+    const id = uid();
+
+    const wrap = document.createElement('div');
+    wrap.className = 'layer-wrap';
+    wrap.dataset.layerId = id;
+
+    const img = document.createElement('img');
+    img.className = 'layer-img';
+    img.src = src;
+    img.draggable = false;
+
+    wrap.appendChild(img);
+    stack(panelKey).appendChild(wrap);
+
+    const layer = {
+      id, type:'image', name,
+      x:0, y:0, scale:1, rotation:0,
+      src, naturalW:1, naturalH:1,
+      wrap, img
+    };
+
+    wrap.addEventListener('mousedown', () => setSelected(panelKey, id));
+
+    img.onload = () => {
+      layer.naturalW = img.naturalWidth || 1;
+      layer.naturalH = img.naturalHeight || 1;
+
+      fitImageBaseToFrame(panelKey, layer);
+
+      wrap.style.display = 'block';
+      state[panelKey].layers.push(layer);
+
+      renderLayerTransform(layer);
+      setSelected(panelKey, id);
+      updateEmpty(panelKey);
+      refreshLayerList();
+      pushHistory();
+    };
+  }
+
+  function createTextLayer(panelKey, textValue){
+    pushHistory();
+    const id = uid();
+
+    const wrap = document.createElement('div');
+    wrap.className = 'layer-wrap';
+    wrap.dataset.layerId = id;
+
+    const box = document.createElement('div');
+    box.className = 'layer-textbox';
+    wrap.appendChild(box);
+
+    stack(panelKey).appendChild(wrap);
+
+    const layer = {
+      id, type:'text', name:'Text',
+      x:0, y:0, scale:1, rotation:0,
+      wrap, textEl: box,
+      text: {
+        value: textValue || "",
+        fontPx: parseInt(el.textSizeRange.value,10),
+        color: normalizeHex(el.textColorValue.textContent) || "#000000",
+        bg: normalizeHex(el.bgColorValue.textContent) || "#FFFFFF",
+        bgOpacity: parseInt(el.bgOpacityRange.value,10)/100
+      }
+    };
+
+    wrap.addEventListener('mousedown', () => setSelected(panelKey, id));
+
+    wrap.style.display = 'block';
+    state[panelKey].layers.push(layer);
+
+    renderTextLayer(layer);
+    renderLayerTransform(layer);
+
+    setSelected(panelKey, id);
+    updateEmpty(panelKey);
+    refreshLayerList();
+    pushHistory();
+  }
+
+  el.textSizeRange.addEventListener('input', ()=>{ el.textSizeValue.textContent=el.textSizeRange.value+'px'; });
+  el.bgOpacityRange.addEventListener('input', ()=>{ el.bgOpacityValue.textContent=el.bgOpacityRange.value+'%'; });
+
+  el.addTextBtn.addEventListener('click', ()=>{
+    const value = el.textInput.value.trim();
+    if (!value){ alert("Type some text first."); return; }
+    createTextLayer(editPanel, value);
+  });
+
+  el.updateTextBtn.addEventListener('click', ()=>{
+    const layer = selectedLayer(editPanel);
+    if (!layer || layer.type !== 'text'){
+      alert("Select a text layer first (click it in canvas or layers list).");
+      return;
+    }
+    pushHistory();
+    layer.text.value = el.textInput.value;
+    layer.text.fontPx = parseInt(el.textSizeRange.value,10);
+    layer.text.color = normalizeHex(el.textColorValue.textContent) || "#000000";
+    layer.text.bg = normalizeHex(el.bgColorValue.textContent) || "#FFFFFF";
+    layer.text.bgOpacity = parseInt(el.bgOpacityRange.value,10)/100;
+    renderTextLayer(layer);
+    renderLayerTransform(layer);
+    refreshLayerList();
+    pushHistory();
+  });
+
+  el.deleteTextLayerBtn.addEventListener('click', ()=>{
+    const layer = selectedLayer(editPanel);
+    if (!layer || layer.type !== 'text'){ alert("Select a text layer first."); return; }
+    deleteLayer(editPanel, layer.id);
+    el.textInput.value = "";
+  });
+
+  /* ============================
+     Size
+     ============================ */
+  function sanitizeInches(x){
+    const v = parseFloat(x);
+    if (!Number.isFinite(v)) return null;
+    return Math.round(v * 100) / 100;
+  }
+
+  function applyMagnetSize(w, h){
+    magnetW = w; magnetH = h;
+    fitFrames();
+    refitAll();
+    el.sizeInfo.textContent =
+      `Layout locked. Ratio: ${(w/h).toFixed(4)}:1 • Export: ${h}" H × ${w}" W (print 100%)`;
+    setTitle();
+  }
+
+  function handleApplyClick(){
+    const h = sanitizeInches(el.hIn.value);
+    const w = sanitizeInches(el.wIn.value);
+    if (w === null || h === null || w <= 0 || h <= 0){
+      alert("Enter valid inches.");
+      return;
+    }
+    el.wIn.value = w;
+    el.hIn.value = h;
+
+    el.applySizeBtn.disabled = true;
+    el.applySizeBtn.textContent = "Applying…";
+    requestAnimationFrame(()=>{
+      pushHistory();
+      applyMagnetSize(w,h);
+      setTimeout(()=>{
+        el.applySizeBtn.disabled = false;
+        el.applySizeBtn.textContent = "✅ Apply";
+        pushHistory();
+      }, 120);
+    });
+  }
+  el.applySizeBtn.addEventListener('click', handleApplyClick);
+  [el.wIn, el.hIn].forEach(inp => inp.addEventListener('keydown', (e)=>{ if(e.key==='Enter') handleApplyClick(); }));
+
+  el.presetSelect.addEventListener('change', () => {
+    const v = el.presetSelect.value;
+    if (!v) return;
+    const parts = v.split('x').map(Number);
+    const hh = parts[0], ww = parts[1];
+    el.hIn.value = hh; el.wIn.value = ww;
+    handleApplyClick();
+    el.presetSelect.value = "";
+  });
+
+  /* ============================
+     Panel view switching
+     ============================ */
+  function applyViewUI(){
+    if (currentView === PANEL.MERGE){
+      el.panelFront.style.display = 'block';
+      el.panelRear.style.display = 'block';
+      el.mergeDownloadGroup.style.display = 'grid';
+      el.downloadBtn.style.display = 'flex';
+    } else if (currentView === PANEL.FRONT){
+      editPanel = PANEL.FRONT;
+      el.panelFront.style.display = 'block';
+      el.panelRear.style.display = 'none';
+      el.mergeDownloadGroup.style.display = 'none';
+      el.downloadBtn.style.display = 'flex';
+    } else {
+      editPanel = PANEL.REAR;
+      el.panelFront.style.display = 'none';
+      el.panelRear.style.display = 'block';
+      el.mergeDownloadGroup.style.display = 'none';
+      el.downloadBtn.style.display = 'flex';
+    }
+
+    el.panelFront.classList.toggle('focus', editPanel === PANEL.FRONT);
+    el.panelRear.classList.toggle('focus', editPanel === PANEL.REAR);
+
+    applyFrameBg(PANEL.FRONT);
+    applyFrameBg(PANEL.REAR);
+
+    el.frameBgSwatch.style.background = s(editPanel).bgColor;
+    el.frameBgValue.textContent = s(editPanel).bgColor;
+
+    const label = currentView === PANEL.FRONT ? "Download Front JPG"
+                 : currentView === PANEL.REAR  ? "Download Rear JPG"
+                 : "Download JPG";
+    el.downloadLabel.textContent = label;
+
+    setUploadInfo();
+    setTitle();
+  }
+
+  document.querySelectorAll('.panel-btn[data-panel]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      pushHistory();
+      document.querySelectorAll('.panel-btn[data-panel]').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+
+      currentView = btn.dataset.panel;
+
+      applyViewUI();
+      fitFrames();
+      refitAll();
+      pushHistory();
+    });
+  });
+
+  el.panelFront.addEventListener('click', ()=>{
+    if (currentView !== PANEL.MERGE) return;
+    if (editPanel !== PANEL.FRONT) {
+      editPanel = PANEL.FRONT;
+      applyViewUI();
+      refreshLayerList();
+      updateUIFromSelection();
+      pushHistory();
+    }
+  });
+  el.panelRear.addEventListener('click', ()=>{
+    if (currentView !== PANEL.MERGE) return;
+    if (editPanel !== PANEL.REAR) {
+      editPanel = PANEL.REAR;
+      applyViewUI();
+      refreshLayerList();
+      updateUIFromSelection();
+      pushHistory();
+    }
+  });
+
+  /* ============================
+     Frame background (picker)
+     ============================ */
+  let activePicker = null;
+  function openPicker(anchorEl, initialHex, onHex){
+    if (activePicker) activePicker.close();
+    activePicker = new HexOnlyPicker({ anchorEl, initialHex, onChange: (hex)=> onHex(hex) });
+    activePicker.open();
+  }
+
+  function applyFrameBg(panelKey){
+    frame(panelKey).style.background = s(panelKey).bgColor;
+  }
+
+  function setFrameBg(hex){
+    const v = normalizeHex(hex) || "#FFFFFF";
+    pushHistory();
+    s(editPanel).bgColor = v;
+    el.frameBgSwatch.style.background = v;
+    el.frameBgValue.textContent = v;
+    applyFrameBg(editPanel);
+    pushHistory();
+  }
+  el.frameBgRow.addEventListener('click', ()=> openPicker(el.frameBgRow, s(editPanel).bgColor, setFrameBg));
+  el.frameBgSwatch.addEventListener('click', (e)=>{ e.stopPropagation(); openPicker(el.frameBgRow, s(editPanel).bgColor, setFrameBg); });
+
+  function setTextColor(hex){
+    const v = normalizeHex(hex) || "#000000";
+    el.textColorSwatch.style.background = v;
+    el.textColorValue.textContent = v;
+
+    const layer = selectedLayer(editPanel);
+    if (layer && layer.type === 'text'){
+      pushHistory();
+      layer.text.color = v;
+      renderTextLayer(layer);
+      pushHistory();
+    }
+  }
+  el.textColorRow.addEventListener('click', ()=> openPicker(el.textColorRow, el.textColorValue.textContent, setTextColor));
+  el.textColorSwatch.addEventListener('click', (e)=>{ e.stopPropagation(); openPicker(el.textColorRow, el.textColorValue.textContent, setTextColor); });
+
+  function setBgColor(hex){
+    const v = normalizeHex(hex) || "#FFFFFF";
+    el.bgColorSwatch.style.background = v;
+    el.bgColorValue.textContent = v;
+
+    const layer = selectedLayer(editPanel);
+    if (layer && layer.type === 'text'){
+      pushHistory();
+      layer.text.bg = v;
+      renderTextLayer(layer);
+      pushHistory();
+    }
+  }
+  el.bgColorRow.addEventListener('click', ()=> openPicker(el.bgColorRow, el.bgColorValue.textContent, setBgColor));
+  el.bgColorSwatch.addEventListener('click', (e)=>{ e.stopPropagation(); openPicker(el.bgColorRow, el.bgColorValue.textContent, setBgColor); });
+
+  /* ============================
+     Frame category (regular/arch/mixed)
+     ============================ */
+  el.frameTypeSelect.addEventListener('change', ()=>{
+    const v = el.frameTypeSelect.value;
+    pushHistory();
+
+    if (v === FRAME_MODE.REGULAR_BOTH) frameMode = FRAME_MODE.REGULAR_BOTH;
+    else if (v === FRAME_MODE.ARCH_BOTH) frameMode = FRAME_MODE.ARCH_BOTH;
+    else if (v === FRAME_MODE.MIX_FR_RA) frameMode = FRAME_MODE.MIX_FR_RA;
+    else if (v === FRAME_MODE.MIX_FA_RR || v === "mixedFAR R") frameMode = FRAME_MODE.MIX_FA_RR;
+    else frameMode = FRAME_MODE.REGULAR_BOTH;
+
+    // fix typo option value from HTML (we kept your request)
+    if (v === "mixedFAR R") el.frameTypeSelect.value = FRAME_MODE.MIX_FA_RR;
+
+    applyFrameMode();
+  });
+
+  /* ============================
+     Arch control events (ONLY edit panel)
+     ============================ */
+  el.archRotateRange.addEventListener('input', ()=>{
+    if (!panelIsArch(editPanel)) return;
+    pushHistory();
+    arch[editPanel].rot = parseInt(el.archRotateRange.value, 10) || 0;
+    applyArchAll();
+    setTitle();
+    pushHistory();
+  });
+
+  el.flipHBtn.addEventListener('click', ()=>{
+    if (!panelIsArch(editPanel)) return;
+    pushHistory();
+    arch[editPanel].flipH = !arch[editPanel].flipH;
+    applyArchAll();
+    setTitle();
+    pushHistory();
+  });
+
+  el.flipVBtn.addEventListener('click', ()=>{
+    if (!panelIsArch(editPanel)) return;
+    pushHistory();
+    arch[editPanel].flipV = !arch[editPanel].flipV;
+    applyArchAll();
+    setTitle();
+    pushHistory();
+  });
+
+  el.resetArchBtn.addEventListener('click', ()=>{
+    if (!panelIsArch(editPanel)) return;
+    pushHistory();
+    arch[editPanel] = { rot:0, flipH:false, flipV:false };
+    applyArchAll();
+    setTitle();
+    pushHistory();
+  });
+
+  /* ============================
+     Download / Export (per panel)
+     ============================ */
+  function applyArchTransformOnCtx(ctx, panelKey, W, H){
+    const a = arch[panelKey];
+    const deg = ((a.rot%360)+360)%360;
+    const rad = deg*Math.PI/180;
+    const sx = a.flipH ? -1 : 1;
+    const sy = a.flipV ? -1 : 1;
+
+    ctx.translate(W/2, H/2);
+    ctx.rotate(rad);
+    ctx.scale(sx, sy);
+    ctx.translate(-W/2, -H/2);
+  }
+
+  function buildArchPathOnCtx(ctx, panelKey, W, H){
+    if (panelKey === PANEL.FRONT){
+      ctx.moveTo(0, H);
+      ctx.lineTo(W, H);
+      ctx.lineTo(W, 0);
+      ctx.bezierCurveTo(0.65*W, 0, 0.30*W, 0.46*H, 0, H);
+      ctx.closePath();
+    } else {
+      ctx.moveTo(0, H);
+      ctx.lineTo(W, H);
+      ctx.bezierCurveTo(0.70*W, 0.46*H, 0.35*W, 0, 0, 0);
+      ctx.lineTo(0, H);
+      ctx.closePath();
+    }
+  }
+
+  async function renderPanelToCtx(ctx, panelKey, outW, outH){
+    ctx.fillStyle = s(panelKey).bgColor || "#FFFFFF";
+    ctx.fillRect(0,0,outW,outH);
+
+    const fr = frame(panelKey).getBoundingClientRect();
+    const pxX = outW / fr.width;
+    const pxY = outH / fr.height;
+
+    for (const L of s(panelKey).layers){
+      ctx.save();
+      ctx.translate(outW/2, outH/2);
+      ctx.translate(L.x*pxX, L.y*pxY);
+      ctx.rotate((L.rotation*Math.PI)/180);
+      ctx.scale(L.scale, L.scale);
+
+      if (L.type==='image'){
+        const img = await loadImage(L.src);
+        const drawW = (L.img?.width || img.naturalWidth) * pxX;
+        const drawH = (L.img?.height|| img.naturalHeight) * pxY;
+        ctx.drawImage(img, -drawW/2, -drawH/2, drawW, drawH);
+      } else {
+        const t=L.text;
+        const fontPx = (t.fontPx||32) * pxX;
+        ctx.font = `900 ${Math.max(1,Math.round(fontPx))}px 'Poppins', Arial, sans-serif`;
+        ctx.textAlign='center';
+        ctx.textBaseline='middle';
+
+        const lines=(t.value||"").split('\n');
+        const lh = fontPx*1.2;
+        const pad = 20*pxX;
+
+        let maxW=0;
+        lines.forEach(line=>{ maxW=Math.max(maxW, ctx.measureText(line).width); });
+        const bgW=maxW + pad*2;
+        const bgH=lines.length*lh + pad*2;
+
+        const rgb=hexToRgb(t.bg||"#FFFFFF");
+        ctx.fillStyle=`rgba(${rgb.r},${rgb.g},${rgb.b},${t.bgOpacity??0.9})`;
+        roundRect(ctx, -bgW/2, -bgH/2, bgW, bgH, 16*pxX);
+        ctx.fill();
+
+        ctx.fillStyle=t.color||"#000";
+        lines.forEach((line,i)=>{
+          const y = -((lines.length-1)*lh)/2 + i*lh;
+          ctx.fillText(line, 0, y);
+        });
+      }
+
+      ctx.restore();
+    }
+  }
+
+  function roundRect(ctx,x,y,w,h,r){
+    r=Math.max(0,Math.min(r,Math.min(w,h)/2));
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.lineTo(x+w-r,y);
+    ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+    ctx.lineTo(x+w,y+h-r);
+    ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+    ctx.lineTo(x+r,y+h);
+    ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+    ctx.lineTo(x,y+r);
+    ctx.quadraticCurveTo(x,y,x+r,y);
+    ctx.closePath();
+  }
+
+  async function downloadSinglePanel(panelKey){
+    const MAX_W_PX = 6000;
+    const dpi = Math.max(72, Math.floor(MAX_W_PX / magnetW));
+    const outW = Math.round(magnetW * dpi);
+    const outH = Math.round(magnetH * dpi);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = outW;
+    canvas.height = outH;
+    const ctx = canvas.getContext('2d');
+
+    if (panelIsArch(panelKey)){
+      // clip with rotated/flipped arch SHAPE only
+      ctx.save();
+      ctx.beginPath();
+      ctx.save();
+      applyArchTransformOnCtx(ctx, panelKey, outW, outH);
+      buildArchPathOnCtx(ctx, panelKey, outW, outH);
+      ctx.restore();
+      ctx.clip();
+      ctx.restore();
+
+      // render artwork normally
+      await renderPanelToCtx(ctx, panelKey, outW, outH);
+    } else {
+      await renderPanelToCtx(ctx, panelKey, outW, outH);
+    }
+
+    return new Promise((resolve, reject) => {
+      canvas.toBlob((blob)=>{
+        if (!blob) return reject(new Error("Blob failed"));
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `vinyl-${panelKey}-${panelIsArch(panelKey)?'arch':'regular'}-${magnetH}x${magnetW}in-${dpi}dpi-${Date.now()}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        resolve();
+      }, 'image/jpeg', 0.92);
+    });
+  }
+
+  async function handleSingleDownload(){
+    try{ await downloadSinglePanel(editPanel); }
+    catch(err){ console.warn(err); alert("Export failed. Try smaller size or fewer layers."); }
+  }
+  el.downloadBtn.addEventListener('click', handleSingleDownload);
+
+  el.downloadFrontBtn.addEventListener('click', ()=>downloadSinglePanel(PANEL.FRONT).catch(()=>alert("Front export failed.")));
+  el.downloadRearBtn.addEventListener('click', ()=>downloadSinglePanel(PANEL.REAR).catch(()=>alert("Rear export failed.")));
+
+  el.downloadBothBtn.addEventListener('click', async ()=>{
+    try{
+      el.downloadBothBtn.disabled = true;
+      el.downloadBothBtn.textContent = "Preparing…";
+      await downloadSinglePanel(PANEL.FRONT);
+      await new Promise(r=>setTimeout(r, 250));
+      await downloadSinglePanel(PANEL.REAR);
+    } catch(err){
+      console.warn(err);
+      alert("Export failed. Try smaller size or fewer layers.");
+    } finally{
+      el.downloadBothBtn.disabled = false;
+      el.downloadBothBtn.textContent = "⬇⬇ Download Both (Front + Rear)";
+    }
+  });
+
+  /* ============================
+     Image loader for export
+     ============================ */
+  function loadImage(src){
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = async () => { try{ if (img.decode) await img.decode(); } catch{} resolve(img); };
+      img.onerror = reject;
+      img.src = src;
+    });
+  }
+
+  /* ============================
+     Undo / Redo
+     ============================ */
+  function applySnapshot(snapshot){
+    applyingHistory = true;
+    try{
+      const data = JSON.parse(snapshot);
+      magnetW = data.magnetW; magnetH = data.magnetH;
+      currentView = data.currentView; editPanel = data.editPanel;
+      frameMode = data.frameMode || FRAME_MODE.REGULAR_BOTH;
+
+      // arch state
+      if (data.arch && data.arch.front && data.arch.rear){
+        arch.front = { ...arch.front, ...data.arch.front };
+        arch.rear  = { ...arch.rear,  ...data.arch.rear };
+      }
+
+      el.frameTypeSelect.value = frameMode;
+
+      [PANEL.FRONT, PANEL.REAR].forEach(pk=>{
+        stack(pk).innerHTML = '';
+        state[pk].layers.length = 0;
+        state[pk].selectedId = data.state[pk].selectedId;
+        state[pk].bgColor = (normalizeHex(data.state[pk].bgColor) || "#FFFFFF");
+      });
+
+      const rebuild = async (pk)=>{
+        for (const L of data.state[pk].layers){
+          if (L.type === 'image'){
+            await new Promise((res)=>{
+              const wrap = document.createElement('div');
+              wrap.className = 'layer-wrap';
+              wrap.dataset.layerId = L.id;
+
+              const img = document.createElement('img');
+              img.className = 'layer-img';
+              img.src = L.src;
+              img.draggable = false;
+
+              wrap.appendChild(img);
+              stack(pk).appendChild(wrap);
+
+              const layer = {
+                id:L.id, type:'image', name:L.name,
+                x:L.x, y:L.y, scale:L.scale, rotation:L.rotation,
+                src:L.src, naturalW:L.naturalW||1, naturalH:L.naturalH||1,
+                wrap, img
+              };
+
+              wrap.addEventListener('mousedown', () => setSelected(pk, layer.id));
+
+              img.onload = ()=>{
+                layer.naturalW = img.naturalWidth || layer.naturalW;
+                layer.naturalH = img.naturalHeight || layer.naturalH;
+                fitImageBaseToFrame(pk, layer);
+                wrap.style.display = 'block';
+                state[pk].layers.push(layer);
+                renderLayerTransform(layer);
+                res();
+              };
+            });
+          } else {
+            const wrap = document.createElement('div');
+            wrap.className = 'layer-wrap';
+            wrap.dataset.layerId = L.id;
+
+            const box = document.createElement('div');
+            box.className = 'layer-textbox';
+            wrap.appendChild(box);
+
+            stack(pk).appendChild(wrap);
+
+            const layer = {
+              id:L.id, type:'text', name:L.name,
+              x:L.x, y:L.y, scale:L.scale, rotation:L.rotation,
+              wrap, textEl: box,
+              text: {...L.text}
+            };
+
+            wrap.addEventListener('mousedown', () => setSelected(pk, layer.id));
+
+            wrap.style.display = 'block';
+            state[pk].layers.push(layer);
+            renderTextLayer(layer);
+            renderLayerTransform(layer);
+          }
+        }
+      };
+
+      applyFrameMode();
+      fitFrames(true);
+
+      Promise.resolve()
+        .then(()=>rebuild(PANEL.FRONT))
+        .then(()=>rebuild(PANEL.REAR))
+        .then(()=>{
+          applyViewUI();
+          fitFrames(true);
+          refitAll();
+
+          if (state[editPanel].selectedId) setSelected(editPanel, state[editPanel].selectedId);
+          else refreshLayerList();
+        });
+
+    } finally{
+      applyingHistory = false;
+    }
+  }
+
+  el.undoBtn.addEventListener('click', ()=>{
+    if (history.length <= 1) return;
+    const cur = history.pop();
+    redoStack.push(cur);
+    applySnapshot(history[history.length-1]);
+    updateUndoRedoButtons();
+  });
+  el.redoBtn.addEventListener('click', ()=>{
+    if (!redoStack.length) return;
+    const snap = redoStack.pop();
+    history.push(snap);
+    applySnapshot(snap);
+    updateUndoRedoButtons();
+  });
+
+  /* ============================
+     Init
+     ============================ */
+  function init(){
+    el.textSizeValue.textContent = el.textSizeRange.value + 'px';
+    el.bgOpacityValue.textContent = el.bgOpacityRange.value + '%';
+
+    el.hIn.value = magnetH;
+    el.wIn.value = magnetW;
+
+    el.frameBgSwatch.style.background = s(editPanel).bgColor;
+    el.frameBgValue.textContent = s(editPanel).bgColor;
+
+    el.textColorSwatch.style.background = "#000000";
+    el.textColorValue.textContent = "#000000";
+    el.bgColorSwatch.style.background = "#FFFFFF";
+    el.bgColorValue.textContent = "#FFFFFF";
+
+    fillPresets();
+
+    // start in regular both
+    frameMode = FRAME_MODE.REGULAR_BOTH;
+    el.frameTypeSelect.value = frameMode;
+
+    applyFrameBg(PANEL.FRONT);
+    applyFrameBg(PANEL.REAR);
+
+    applyViewUI();
+    fitFrames(true);
+
+    // apply arch transforms (no-op unless arch is on)
+    applyArchAll();
+
+    updateEmpty(PANEL.FRONT);
+    updateEmpty(PANEL.REAR);
+    refreshLayerList();
+    updateUIFromSelection();
+
+    pushHistory();
+
+    window.addEventListener('resize', ()=>{
+      fitFrames();
+      refitAll();
+      pushHistory();
+    });
+  }
+
+  init();
+</script>
+</body>
+</html>
