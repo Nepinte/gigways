@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Door Preview (Arch / Mixed) - Door Move/Zoom + Inner Image Move/Zoom</title>
+  <title>Door Preview (Arch / Mixed) - Separate Front/Rear Upload</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -168,7 +168,7 @@
     .upload-zone{
       border:1px dashed rgba(0,0,0,.18);
       border-radius:16px;
-      padding:16px 12px;
+      padding:14px 12px;
       text-align:center;
       cursor:pointer;
       transition:.15s ease;
@@ -233,18 +233,6 @@
       user-select:none;
       pointer-events:none;
     }
-    .thumb .badge{
-      position:absolute;
-      left:8px;
-      top:8px;
-      font-size:10px;
-      font-weight:1000;
-      padding:4px 8px;
-      border-radius:999px;
-      background:rgba(255,255,255,.78);
-      border:1px solid rgba(0,0,0,.10);
-      color:var(--ink);
-    }
     .thumb .del{
       position:absolute;
       right:8px;
@@ -297,6 +285,7 @@
       position:relative;
       width:min(1080px, 100%);
       height:min(560px, 100%);
+      isolation:isolate;
     }
 
     .car-bg{
@@ -308,6 +297,7 @@
       pointer-events:none;
       user-select:none;
       filter: drop-shadow(0 18px 40px rgba(0,0,0,.18));
+      z-index:0;
     }
 
     .car-error{
@@ -323,25 +313,32 @@
       font-size:12px;
       display:none;
       max-width: 92%;
+      z-index:50;
     }
 
     /* === Door Panels === */
+    /* NOTE: all visual markers removed (no dotted outline, no arch/regular hint, no empty target). */
     .door{
       position:absolute;
       overflow:hidden;
       border-radius:14px;
-      background: rgba(255,255,255,.05);
-      outline: 3px dashed rgba(191,168,137,.65);
-      outline-offset: 2px;
-      transition: outline-color .12s ease, box-shadow .12s ease;
+      background: transparent;           /* no visible panel background */
+      outline: none !important;          /* remove dotted outline */
+      box-shadow: none !important;       /* remove glow */
       touch-action:none;
       cursor: grab;
+      z-index: 10;
+      transform-style: preserve-3d;
     }
     .door:active{ cursor: grabbing; }
+
     .door.selected{
-      outline-color: rgba(191,168,137,.95);
-      box-shadow: 0 18px 50px rgba(0,0,0,.14);
+      outline: none !important;
+      box-shadow: none !important;
     }
+
+    .door.front{ z-index: 20; }
+    .door.rear { z-index: 15; }
 
     .door.front{
       transform: perspective(900px) rotateY(-6deg) rotateX(1deg);
@@ -351,9 +348,6 @@
       transform: perspective(900px) rotateY(-4deg) rotateX(1deg);
       transform-origin:center;
     }
-
-    .door.arch-front { clip-path: url(#clipArchFront); }
-    .door.arch-rear  { clip-path: url(#clipArchRear);  }
 
     /* Relative layer */
     .img-layer{
@@ -376,17 +370,8 @@
       pointer-events:none;
     }
 
-    .empty{
-      position:absolute; inset:0;
-      display:flex; align-items:center; justify-content:center;
-      flex-direction:column;
-      color:rgba(18,18,18,.65);
-      font-weight:1000;
-      text-align:center;
-      padding:8px;
-      pointer-events:none;
-    }
-    .empty .icon{font-size:34px; opacity:.75; margin-bottom:6px}
+    /* Remove empty target visuals completely */
+    .empty{ display:none !important; }
 
     @media (max-width:1024px){
       .layout{grid-template-columns:1fr}
@@ -400,18 +385,6 @@
 </head>
 
 <body>
-
-  <svg width="0" height="0" style="position:absolute; left:-9999px; top:-9999px;">
-    <defs>
-      <clipPath id="clipArchFront" clipPathUnits="objectBoundingBox">
-        <path id="clipPathFront" d="M0 1 L1 1 L1 0 L0.5 0 Z"></path>
-      </clipPath>
-      <clipPath id="clipArchRear" clipPathUnits="objectBoundingBox">
-        <path id="clipPathRear" d="M0 1 L1 1 L0.5 0 L0 0 Z"></path>
-      </clipPath>
-    </defs>
-  </svg>
-
   <div class="container">
     <div class="header">
       <h1>🚗 <span>Magnetic Door</span> Preview</h1>
@@ -423,6 +396,7 @@
 
     <div class="layout">
       <div class="sidebar">
+
         <div class="section">
           <div class="section-title">Frame Category</div>
           <select class="preset" id="frameTypeSelect">
@@ -460,7 +434,7 @@
         </div>
 
         <div class="section" id="archRotateSection">
-          <div class="section-title">Arch Tools (Selected Door Only)</div>
+          <div class="section-title">Arch Tools (Click a door to select)</div>
 
           <div class="control-group" style="margin-top:6px;">
             <div class="control-label" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -479,29 +453,43 @@
           <div class="mini" id="archPanelInfo"></div>
         </div>
 
+        <!-- ✅ FRONT UPLOAD -->
         <div class="section">
-          <div class="section-title">Upload Images</div>
-          <div class="upload-zone" id="uploadZone">
-            <div style="font-size:30px;margin-bottom:6px;">🖼️</div>
-            <div style="font-size:14px;margin-bottom:6px;font-weight:1000;">Click or drag images</div>
-            <div style="font-size:12px;color:var(--muted);">JPG / PNG / WebP • multiple allowed</div>
-            <div class="mini">Click a door to select it, then click a thumbnail to apply.</div>
+          <div class="section-title">Front Upload</div>
+          <div class="upload-zone" id="uploadZoneFront">
+            <div style="font-size:28px;margin-bottom:4px;">🖼️</div>
+            <div style="font-size:14px;margin-bottom:6px;font-weight:1000;">Upload for Front</div>
+            <div style="font-size:12px;color:var(--muted);">Click a thumbnail to apply to Front</div>
           </div>
-          <input type="file" id="imgInput" accept="image/*" multiple>
-          <div class="gallery" id="gallery"></div>
+          <input type="file" id="imgInputFront" accept="image/*" multiple>
+          <div class="gallery" id="galleryFront"></div>
+        </div>
+
+        <!-- ✅ REAR UPLOAD -->
+        <div class="section">
+          <div class="section-title">Rear Upload</div>
+          <div class="upload-zone" id="uploadZoneRear">
+            <div style="font-size:28px;margin-bottom:4px;">🖼️</div>
+            <div style="font-size:14px;margin-bottom:6px;font-weight:1000;">Upload for Rear</div>
+            <div style="font-size:12px;color:var(--muted);">Click a thumbnail to apply to Rear</div>
+          </div>
+          <input type="file" id="imgInputRear" accept="image/*" multiple>
+          <div class="gallery" id="galleryRear"></div>
         </div>
 
         <div class="section">
           <div class="section-title">Actions</div>
           <div class="rowBtns">
-            <button class="btn" id="clearSelectedBtn">🧼 Clear Selected</button>
-            <button class="btn" id="clearAllBtn">🧼 Clear All</button>
+            <button class="btn" id="clearFrontBtn">🧼 Clear Front</button>
+            <button class="btn" id="clearRearBtn">🧼 Clear Rear</button>
           </div>
 
-          <div style="margin-top:10px;">
-            <button class="btn" id="downloadBtn" style="width:100%;">⬇️ Download PNG</button>
-            <div class="mini">Downloads the preview (car + doors) as a PNG.</div>
+          <div class="rowBtns">
+            <button class="btn" id="clearAllBtn">🧼 Clear All</button>
+            <button class="btn" id="downloadBtn">⬇️ Download PNG</button>
           </div>
+
+          <div class="mini">Download exports exactly what you see (including arch cut & positioning).</div>
         </div>
       </div>
 
@@ -511,7 +499,7 @@
           <div>
             Frame: <span id="frameLabel">Arch (Front + Rear)</span>
             • Size: <span id="sizeLabel">18×36 in</span>
-            • Editing: <span id="editLabel">Rear</span>
+            • Selected: <span id="editLabel">Rear</span>
           </div>
         </div>
 
@@ -541,7 +529,6 @@
     </div>
   </div>
 
-  <!-- ✅ html2canvas for PNG download -->
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
   <script>
@@ -561,14 +548,15 @@
       [PANEL.REAR]:  { rot: 0, flipX: false, flipY: true  }
     };
 
-    // Door window state + inner image state
     const doorState = {
       [PANEL.FRONT]: { x:0, y:0, w:0, h:0, ix:0, iy:0, iz:1 },
       [PANEL.REAR]:  { x:0, y:0, w:0, h:0, ix:0, iy:0, iz:1 }
     };
 
-    const galleryItems = [];
-    let galleryIdCounter = 1;
+    // Separate galleries
+    const galleryFront = [];
+    const galleryRear  = [];
+    let gid = 1;
 
     const el = {
       carStage: document.getElementById('carStage'),
@@ -605,16 +593,20 @@
       emptyFront: document.getElementById('emptyFront'),
       emptyRear: document.getElementById('emptyRear'),
 
-      uploadZone: document.getElementById('uploadZone'),
-      imgInput: document.getElementById('imgInput'),
-      gallery: document.getElementById('gallery'),
+      // front upload/gall
+      uploadZoneFront: document.getElementById('uploadZoneFront'),
+      imgInputFront: document.getElementById('imgInputFront'),
+      galleryFront: document.getElementById('galleryFront'),
 
-      clearSelectedBtn: document.getElementById('clearSelectedBtn'),
+      // rear upload/gall
+      uploadZoneRear: document.getElementById('uploadZoneRear'),
+      imgInputRear: document.getElementById('imgInputRear'),
+      galleryRear: document.getElementById('galleryRear'),
+
+      clearFrontBtn: document.getElementById('clearFrontBtn'),
+      clearRearBtn: document.getElementById('clearRearBtn'),
       clearAllBtn: document.getElementById('clearAllBtn'),
       downloadBtn: document.getElementById('downloadBtn'),
-
-      clipPathFront: document.getElementById('clipPathFront'),
-      clipPathRear: document.getElementById('clipPathRear'),
     };
 
     el.carBg.addEventListener('error', ()=>{
@@ -702,22 +694,49 @@
       }
     }
 
+    // ===== Arch clip (CSS polygon) =====
+    function rotatePoint(px, py, deg){
+      const rad = deg * Math.PI / 180;
+      const cx = 0.5, cy = 0.5;
+      const x = px - cx;
+      const y = py - cy;
+      const xr = x * Math.cos(rad) - y * Math.sin(rad);
+      const yr = x * Math.sin(rad) + y * Math.cos(rad);
+      return [xr + cx, yr + cy];
+    }
+    function transformPoint(px, py, deg, flipX, flipY){
+      let [x,y] = rotatePoint(px, py, deg);
+      if (flipX) x = 1 - x;
+      if (flipY) y = 1 - y;
+      return [x,y];
+    }
+    function pointsToPolygon(points){
+      return "polygon(" + points.map(([x,y])=>{
+        x = clamp(x, 0, 1); y = clamp(y, 0, 1);
+        return `${(x*100).toFixed(2)}% ${(y*100).toFixed(2)}%`;
+      }).join(", ") + ")";
+    }
+    function baseArchPoints(panelKey){
+      if (panelKey === PANEL.FRONT) return [[0,1],[1,1],[1,0],[0.5,0]];
+      return [[0,1],[1,1],[0.5,0],[0,0]];
+    }
     function applyArchTransform(panelKey){
+      const d = doorEl(panelKey);
       const xf = archXform[panelKey];
       const deg = normalize360(xf.rot);
-      const sx = xf.flipX ? -1 : 1;
-      const sy = xf.flipY ? -1 : 1;
 
-      const clipEl = (panelKey === PANEL.FRONT) ? el.clipPathFront : el.clipPathRear;
-
-      if (clipEl && isArchPanel(panelKey)){
-        clipEl.setAttribute(
-          'transform',
-          `translate(0.5 0.5) rotate(${deg}) scale(${sx} ${sy}) translate(-0.5 -0.5)`
-        );
-      } else if (clipEl){
-        clipEl.removeAttribute('transform');
+      if (!isArchPanel(panelKey)){
+        d.style.clipPath = "none";
+        d.style.webkitClipPath = "none";
+        return;
       }
+
+      const pts = baseArchPoints(panelKey).map(([x,y]) =>
+        transformPoint(x,y,deg,!!xf.flipX,!!xf.flipY)
+      );
+      const poly = pointsToPolygon(pts);
+      d.style.clipPath = poly;
+      d.style.webkitClipPath = poly;
     }
 
     function updateArchUI(){
@@ -742,16 +761,10 @@
     }
 
     function applyFrameType(){
-      el.frontDoor.classList.remove('arch-front');
-      el.rearDoor.classList.remove('arch-rear');
-
       if (frameType === FRAME_TYPE.ARCH){
-        el.frontDoor.classList.add('arch-front');
-        el.rearDoor.classList.add('arch-rear');
         el.frameLabel.textContent = "Arch (Front + Rear)";
         el.frameInfo.textContent = "Arch: diagonal cut meets top in the middle (rear mirrored).";
       } else {
-        el.rearDoor.classList.add('arch-rear');
         el.frameLabel.textContent = "Mixed (Rear Arch)";
         el.frameInfo.textContent = "Mixed: Front Regular, Rear Arch (mirror) mid-cut.";
       }
@@ -764,17 +777,14 @@
 
     function setSelectedDoor(panelKey){
       editPanel = panelKey;
+      // keep selection logic but no visuals (CSS removes indicators)
       el.frontDoor.classList.toggle('selected', panelKey === PANEL.FRONT);
       el.rearDoor.classList.toggle('selected', panelKey === PANEL.REAR);
       el.editLabel.textContent = panelKey === PANEL.FRONT ? "Front" : "Rear";
       updateArchUI();
-      refreshGalleryUI();
     }
 
-    // Drag = move door
-    // Alt+Drag = move image inside
-    // Wheel = resize door
-    // Alt+Wheel = zoom image inside
+    // Door interactions
     function attachDoorBehavior(door, panelKey){
       let mode=null, startX=0, startY=0, sx=0, sy=0;
 
@@ -786,7 +796,6 @@
         startY = e.clientY;
 
         const s = doorState[panelKey];
-
         if (e.altKey){
           mode="inner";
           sx = s.ix; sy = s.iy;
@@ -803,14 +812,8 @@
         const dy = e.clientY - startY;
         const s = doorState[panelKey];
 
-        if(mode==="move"){
-          s.x = sx + dx;
-          s.y = sy + dy;
-        }
-        if(mode==="inner"){
-          s.ix = sx + dx;
-          s.iy = sy + dy;
-        }
+        if(mode==="move"){ s.x = sx + dx; s.y = sy + dy; }
+        if(mode==="inner"){ s.ix = sx + dx; s.iy = sy + dy; }
         renderDoor(panelKey);
       });
 
@@ -820,7 +823,6 @@
 
       door.addEventListener("wheel", (e)=>{
         e.preventDefault();
-
         const s = doorState[panelKey];
 
         if (e.altKey){
@@ -851,6 +853,8 @@
       el.sizeLabel.textContent = `${magnetH}×${magnetW} in`;
       el.sizeInfo.textContent = `Ratio: ${(w/h).toFixed(4)}:1 • Door preview uses this ratio.`;
       fitDoorsToRatio();
+      applyArchTransform(PANEL.FRONT);
+      applyArchTransform(PANEL.REAR);
     }
 
     function handleApplyClick(){
@@ -883,6 +887,7 @@
       el.presetSelect.value = "";
     });
 
+    // Arch UI events
     el.archRotateRange.addEventListener('input', ()=>{
       if (!isArchPanel(editPanel)) return;
       archXform[editPanel].rot = parseInt(el.archRotateRange.value, 10) || 0;
@@ -908,60 +913,7 @@
       updateArchUI();
     });
 
-    function readFileAsDataURL(file){
-      return new Promise((resolve, reject)=>{
-        const r = new FileReader();
-        r.onload = e => resolve(e.target.result);
-        r.onerror = reject;
-        r.readAsDataURL(file);
-      });
-    }
-
-    function refreshGalleryUI(){
-      el.gallery.innerHTML = "";
-      const currentSrc = imgEl(editPanel).getAttribute('src') || "";
-
-      galleryItems.forEach(item => {
-        const d = document.createElement('div');
-        d.className = 'thumb';
-        if (currentSrc && currentSrc === item.src) d.classList.add('active');
-
-        const im = document.createElement('img');
-        im.src = item.src;
-
-        const badge = document.createElement('div');
-        badge.className = 'badge';
-        badge.textContent =
-          item.appliedTo === PANEL.FRONT ? "Front" :
-          item.appliedTo === PANEL.REAR  ? "Rear"  : "—";
-
-        const del = document.createElement('button');
-        del.type = "button";
-        del.className = "del";
-        del.textContent = "✕";
-        del.addEventListener('click', (e)=>{
-          e.stopPropagation();
-          removeGalleryItem(item.id);
-        });
-
-        d.appendChild(im);
-        d.appendChild(badge);
-        d.appendChild(del);
-
-        d.addEventListener('click', ()=>{
-          applyGalleryItemToDoor(item.id, editPanel);
-        });
-
-        el.gallery.appendChild(d);
-      });
-    }
-
-    function markItemAppliedTo(itemId, panelKey){
-      galleryItems.forEach(it => { if (it.appliedTo === panelKey) it.appliedTo = null; });
-      const target = galleryItems.find(it => it.id === itemId);
-      if (target) target.appliedTo = panelKey;
-    }
-
+    // ===== Image set/clear =====
     function setPanelImage(panelKey, src){
       const img = imgEl(panelKey);
       const layer = layerEl(panelKey);
@@ -969,14 +921,17 @@
 
       img.src = src;
       layer.classList.add('show');
-      empty.style.display = 'none';
+      if (empty) empty.style.display = 'none';
 
+      // reset inner image offsets on new apply
       doorState[panelKey].ix = 0;
       doorState[panelKey].iy = 0;
       doorState[panelKey].iz = 1;
 
       renderDoor(panelKey);
-      refreshGalleryUI();
+      // highlight active thumb
+      refreshFrontGalleryUI();
+      refreshRearGalleryUI();
     }
 
     function clearPanel(panelKey){
@@ -986,53 +941,38 @@
 
       img.removeAttribute('src');
       layer.classList.remove('show');
-      empty.style.display = 'flex';
+      if (empty) empty.style.display = 'flex';
 
       doorState[panelKey].ix = 0;
       doorState[panelKey].iy = 0;
       doorState[panelKey].iz = 1;
 
-      galleryItems.forEach(it => { if (it.appliedTo === panelKey) it.appliedTo = null; });
-      refreshGalleryUI();
+      renderDoor(panelKey);
+      refreshFrontGalleryUI();
+      refreshRearGalleryUI();
     }
 
-    function applyGalleryItemToDoor(itemId, panelKey){
-      const item = galleryItems.find(it => it.id === itemId);
-      if (!item) return;
-      setSelectedDoor(panelKey);
-      setPanelImage(panelKey, item.src);
-      markItemAppliedTo(itemId, panelKey);
-      refreshGalleryUI();
+    // ===== File upload helpers =====
+    function readFileAsDataURL(file){
+      return new Promise((resolve, reject)=>{
+        const r = new FileReader();
+        r.onload = e => resolve(e.target.result);
+        r.onerror = reject;
+        r.readAsDataURL(file);
+      });
     }
 
-    function removeGalleryItem(itemId){
-      const idx = galleryItems.findIndex(it => it.id === itemId);
-      if (idx === -1) return;
-      const removed = galleryItems[idx];
-
-      const frontSrc = imgEl(PANEL.FRONT).getAttribute('src') || "";
-      const rearSrc  = imgEl(PANEL.REAR).getAttribute('src')  || "";
-      if (frontSrc && frontSrc === removed.src) clearPanel(PANEL.FRONT);
-      if (rearSrc && rearSrc === removed.src) clearPanel(PANEL.REAR);
-
-      galleryItems.splice(idx, 1);
-      refreshGalleryUI();
-    }
-
-    // ✅ Upload adds thumbnails ONLY (no auto-apply to both doors)
-    async function addFilesToGallery(fileList){
+    async function addFilesToGallery(targetGallery, fileList){
       const files = Array.from(fileList || []).filter(f => f && f.type && f.type.startsWith('image/'));
       if (!files.length) return;
 
       for (const f of files){
         const src = await readFileAsDataURL(f);
-        galleryItems.unshift({ id: galleryIdCounter++, src, appliedTo: null });
+        targetGallery.unshift({ id: gid++, src });
       }
-
-      refreshGalleryUI();
     }
 
-    function attachMultiUpload(zoneEl, inputEl){
+    function attachUpload(zoneEl, inputEl, targetGallery, refreshFn){
       zoneEl.addEventListener('click', ()=> inputEl.click());
 
       zoneEl.addEventListener('dragover', (e)=>{
@@ -1044,23 +984,113 @@
       zoneEl.addEventListener('drop', async (e)=>{
         e.preventDefault();
         zoneEl.classList.remove('dragover');
-        await addFilesToGallery(e.dataTransfer.files);
+        await addFilesToGallery(targetGallery, e.dataTransfer.files);
+        refreshFn();
       });
 
       inputEl.addEventListener('change', async (e)=>{
-        await addFilesToGallery(e.target.files);
+        await addFilesToGallery(targetGallery, e.target.files);
         inputEl.value = '';
+        refreshFn();
       });
     }
 
-    attachMultiUpload(el.uploadZone, el.imgInput);
+    // ===== Render galleries =====
+    function makeThumb(item, onApply, onDelete, isActive){
+      const d = document.createElement('div');
+      d.className = 'thumb';
+      if (isActive) d.classList.add('active');
 
-    el.clearSelectedBtn.addEventListener('click', ()=> clearPanel(editPanel));
+      const im = document.createElement('img');
+      im.src = item.src;
+
+      const del = document.createElement('button');
+      del.type = "button";
+      del.className = "del";
+      del.textContent = "✕";
+      del.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        onDelete(item.id);
+      });
+
+      d.appendChild(im);
+      d.appendChild(del);
+
+      d.addEventListener('click', ()=> onApply(item.id));
+
+      return d;
+    }
+
+    function refreshFrontGalleryUI(){
+      el.galleryFront.innerHTML = "";
+      const current = imgEl(PANEL.FRONT).getAttribute('src') || "";
+
+      galleryFront.forEach(item=>{
+        const thumb = makeThumb(
+          item,
+          (id)=>{
+            const it = galleryFront.find(x=>x.id===id);
+            if (!it) return;
+            setSelectedDoor(PANEL.FRONT);
+            setPanelImage(PANEL.FRONT, it.src);
+          },
+          (id)=>{
+            const idx = galleryFront.findIndex(x=>x.id===id);
+            if (idx>-1){
+              const removed = galleryFront[idx];
+              if (current && current === removed.src) clearPanel(PANEL.FRONT);
+              galleryFront.splice(idx,1);
+              refreshFrontGalleryUI();
+            }
+          },
+          current && current === item.src
+        );
+        el.galleryFront.appendChild(thumb);
+      });
+    }
+
+    function refreshRearGalleryUI(){
+      el.galleryRear.innerHTML = "";
+      const current = imgEl(PANEL.REAR).getAttribute('src') || "";
+
+      galleryRear.forEach(item=>{
+        const thumb = makeThumb(
+          item,
+          (id)=>{
+            const it = galleryRear.find(x=>x.id===id);
+            if (!it) return;
+            setSelectedDoor(PANEL.REAR);
+            setPanelImage(PANEL.REAR, it.src);
+          },
+          (id)=>{
+            const idx = galleryRear.findIndex(x=>x.id===id);
+            if (idx>-1){
+              const removed = galleryRear[idx];
+              if (current && current === removed.src) clearPanel(PANEL.REAR);
+              galleryRear.splice(idx,1);
+              refreshRearGalleryUI();
+            }
+          },
+          current && current === item.src
+        );
+        el.galleryRear.appendChild(thumb);
+      });
+    }
+
+    // Attach separate uploaders
+    attachUpload(el.uploadZoneFront, el.imgInputFront, galleryFront, refreshFrontGalleryUI);
+    attachUpload(el.uploadZoneRear,  el.imgInputRear,  galleryRear,  refreshRearGalleryUI);
+
+    // Clear buttons
+    el.clearFrontBtn.addEventListener('click', ()=> clearPanel(PANEL.FRONT));
+    el.clearRearBtn.addEventListener('click', ()=> clearPanel(PANEL.REAR));
     el.clearAllBtn.addEventListener('click', ()=>{
       clearPanel(PANEL.FRONT);
       clearPanel(PANEL.REAR);
-      galleryItems.length = 0;
-      refreshGalleryUI();
+      galleryFront.length = 0;
+      galleryRear.length  = 0;
+      refreshFrontGalleryUI();
+      refreshRearGalleryUI();
     });
 
     el.frameTypeSelect.addEventListener('change', ()=>{
@@ -1068,19 +1098,28 @@
       applyFrameType();
     });
 
-    // ✅ Download PNG of preview
+    // Download helpers
+    function nextFrame(){
+      return new Promise(res => requestAnimationFrame(()=> requestAnimationFrame(res)));
+    }
+
     async function downloadPreviewPNG(){
-      // If background missing (or still loading), warn
       if (!el.carBg.complete) {
         alert("Car background still loading. Try again in a moment.");
         return;
       }
 
+      // make sure clipping is up-to-date
+      applyArchTransform(PANEL.FRONT);
+      applyArchTransform(PANEL.REAR);
+      await nextFrame();
+
       try{
         const canvas = await html2canvas(el.carStage, {
           backgroundColor: null,
           useCORS: true,
-          scale: 2
+          scale: 2,
+          removeContainer: true
         });
 
         const a = document.createElement("a");
@@ -1113,11 +1152,18 @@
       applyFrameType();
       applyMagnetSize(magnetW, magnetH);
 
-      window.addEventListener('resize', ()=> fitDoorsToRatio());
-      refreshGalleryUI();
+      window.addEventListener('resize', ()=>{
+        fitDoorsToRatio();
+        applyArchTransform(PANEL.FRONT);
+        applyArchTransform(PANEL.REAR);
+      });
+
+      refreshFrontGalleryUI();
+      refreshRearGalleryUI();
     }
 
     init();
   </script>
 </body>
 </html>
+
