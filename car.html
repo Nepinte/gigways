@@ -317,14 +317,13 @@
     }
 
     /* === Door Panels === */
-    /* NOTE: all visual markers removed (no dotted outline, no arch/regular hint, no empty target). */
     .door{
       position:absolute;
       overflow:hidden;
       border-radius:14px;
-      background: transparent;           /* no visible panel background */
-      outline: none !important;          /* remove dotted outline */
-      box-shadow: none !important;       /* remove glow */
+      background: transparent;
+      outline: none !important;
+      box-shadow: none !important;
       touch-action:none;
       cursor: grab;
       z-index: 10;
@@ -370,8 +369,21 @@
       pointer-events:none;
     }
 
-    /* Remove empty target visuals completely */
     .empty{ display:none !important; }
+
+    /* ========================= */
+    /* EXPORT FIX (IMPORTANT)     */
+    /* During export, html2canvas */
+    /* can drop clip-path if 3D   */
+    /* transforms exist.          */
+    /* ========================= */
+    .car-stage.exporting .door.front,
+    .car-stage.exporting .door.rear{
+      transform: none !important;          /* allow clip-path to render */
+    }
+    /* (optional) if you want to keep a tiny 2D tilt during export, replace transform:none with something like:
+       transform: rotate(-1deg) !important;
+    */
 
     @media (max-width:1024px){
       .layout{grid-template-columns:1fr}
@@ -777,7 +789,6 @@
 
     function setSelectedDoor(panelKey){
       editPanel = panelKey;
-      // keep selection logic but no visuals (CSS removes indicators)
       el.frontDoor.classList.toggle('selected', panelKey === PANEL.FRONT);
       el.rearDoor.classList.toggle('selected', panelKey === PANEL.REAR);
       el.editLabel.textContent = panelKey === PANEL.FRONT ? "Front" : "Rear";
@@ -923,13 +934,11 @@
       layer.classList.add('show');
       if (empty) empty.style.display = 'none';
 
-      // reset inner image offsets on new apply
       doorState[panelKey].ix = 0;
       doorState[panelKey].iy = 0;
       doorState[panelKey].iz = 1;
 
       renderDoor(panelKey);
-      // highlight active thumb
       refreshFrontGalleryUI();
       refreshRearGalleryUI();
     }
@@ -1077,11 +1086,9 @@
       });
     }
 
-    // Attach separate uploaders
     attachUpload(el.uploadZoneFront, el.imgInputFront, galleryFront, refreshFrontGalleryUI);
     attachUpload(el.uploadZoneRear,  el.imgInputRear,  galleryRear,  refreshRearGalleryUI);
 
-    // Clear buttons
     el.clearFrontBtn.addEventListener('click', ()=> clearPanel(PANEL.FRONT));
     el.clearRearBtn.addEventListener('click', ()=> clearPanel(PANEL.REAR));
     el.clearAllBtn.addEventListener('click', ()=>{
@@ -1103,15 +1110,25 @@
       return new Promise(res => requestAnimationFrame(()=> requestAnimationFrame(res)));
     }
 
+    // ✅ EXPORT FIX: force clip-path to export correctly by temporarily removing 3D transforms
     async function downloadPreviewPNG(){
       if (!el.carBg.complete) {
         alert("Car background still loading. Try again in a moment.");
         return;
       }
 
-      // make sure clipping is up-to-date
+      // Ensure clip-path is current
       applyArchTransform(PANEL.FRONT);
       applyArchTransform(PANEL.REAR);
+
+      // If ANY arch is active, we export in "flat mode" so clip-path renders.
+      const hasAnyArch = isArchPanel(PANEL.FRONT) || isArchPanel(PANEL.REAR);
+
+      if (hasAnyArch){
+        el.carStage.classList.add('exporting');
+      }
+
+      // Let browser apply class + clip-path before html2canvas
       await nextFrame();
 
       try{
@@ -1119,7 +1136,8 @@
           backgroundColor: null,
           useCORS: true,
           scale: 2,
-          removeContainer: true
+          removeContainer: true,
+          foreignObjectRendering: true   // helps CSS features like clip-path in many cases
         });
 
         const a = document.createElement("a");
@@ -1134,6 +1152,9 @@
           "Download failed. If you're opening this with file://, run Live Server.\n" +
           "Also make sure assets/img/car.jpg loads correctly."
         );
+      } finally {
+        // Restore normal 3D look immediately after export
+        el.carStage.classList.remove('exporting');
       }
     }
 
@@ -1166,4 +1187,5 @@
   </script>
 </body>
 </html>
+
 
