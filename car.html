@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Door Preview (Arch / Mixed) - Door Move/Zoom + Inner Image Move/Zoom</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#FFFAFA;
+      --ink:#121212;
+      --muted:#7E7A74;
+      --brand:#8F7A5B;
+      --accent:#BFA889;
+      --glass:rgba(255,255,255,.72);
+      --glass-bd:rgba(0,0,0,.12);
+      --border:rgba(0,0,0,.10);
+      --shadow:0 10px 30px rgba(0,0,0,.12);
+      --shadow2:0 4px 16px rgba(0,0,0,.08);
+      --grad:linear-gradient(135deg,var(--brand),var(--accent));
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      min-height:100vh;
+      padding:18px;
+      line-height:1.55;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-140px -140px auto -140px;
+      height:520px;
+      background:
+        radial-gradient(closest-side at 20% 30%, rgba(191,168,137,.22), transparent 70%),
+        radial-gradient(closest-side at 70% 20%, rgba(191,168,137,.16), transparent 68%),
+        radial-gradient(closest-side at 40% 75%, rgba(0,0,0,.06), transparent 70%);
+      filter: blur(2px);
+      opacity:.9;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    .container{max-width:1200px;margin:0 auto}
+
+    .header{
+      background:var(--glass);
+      border:1px solid var(--glass-bd);
+      border-radius:22px;
+      padding:18px 22px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      margin-bottom:16px;
+    }
+    .header h1{
+      font-size:1.45rem;
+      font-weight:1000;
+      letter-spacing:-.02em;
+      margin-bottom:6px;
+    }
+    .header h1 span{ color:var(--brand); }
+    .header p{ color:var(--muted); font-size:.9rem; }
+
+    .layout{
+      display:grid;
+      grid-template-columns:360px 1fr;
+      gap:16px;
+      align-items:stretch;
+    }
+
+    .sidebar{
+      background:var(--glass);
+      border:1px solid var(--glass-bd);
+      border-radius:22px;
+      padding:16px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      height: calc(100vh - 150px);
+      overflow:auto;
+      position:sticky;
+      top:18px;
+    }
+
+    .stageWrap{
+      background:var(--glass);
+      border:1px solid var(--glass-bd);
+      border-radius:22px;
+      padding:16px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      overflow:hidden;
+      min-height:620px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .section{margin-bottom:14px}
+    .section-title{
+      font-size:12px;
+      font-weight:1000;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin:10px 0 10px;
+      letter-spacing:.5px;
+    }
+    .mini{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.35}
+
+    .preset{
+      width:100%;
+      padding:12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:rgba(255,255,255,.58);
+      cursor:pointer;
+      outline:none;
+      font-weight:900;
+      font-family:inherit;
+    }
+
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .field{
+      display:flex;flex-direction:column;gap:6px;
+      padding:10px;border:1px solid var(--border);border-radius:14px;
+      background:rgba(255,255,255,.55);
+    }
+    .field label{font-size:12px;color:var(--muted);font-weight:1000}
+    .field input[type="number"]{
+      width:100%;border:none;outline:none;background:transparent;
+      font-size:14px;font-weight:1000;color:var(--ink);
+    }
+
+    .apply-row{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+      align-items:center;
+      margin-top:10px;
+    }
+
+    .btn{
+      padding:12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.55);
+      font-weight:1000;
+      font-family:inherit;
+      cursor:pointer;
+      box-shadow:var(--shadow2);
+      transition:.15s ease;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+    .rowBtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+
+    .upload-zone{
+      border:1px dashed rgba(0,0,0,.18);
+      border-radius:16px;
+      padding:16px 12px;
+      text-align:center;
+      cursor:pointer;
+      transition:.15s ease;
+      background:rgba(255,255,255,.45);
+      user-select:none;
+    }
+    .upload-zone:hover{border-color:rgba(191,168,137,.7);background:rgba(191,168,137,.08)}
+    .upload-zone.dragover{border-color:rgba(191,168,137,.85);background:rgba(191,168,137,.14);transform:scale(1.01)}
+    input[type="file"]{display:none}
+
+    .arch-tools{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    .arch-tool{
+      padding:12px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:rgba(255,255,255,.55);
+      font-weight:1000;
+      font-size:13px;
+      cursor:pointer;
+      box-shadow:var(--shadow2);
+      transition:.12s ease;
+      user-select:none;
+    }
+    .arch-tool:hover{transform:translateY(-1px)}
+    .arch-tool.active{
+      background:var(--grad);
+      color:#fff;
+      border-color:transparent;
+    }
+    .arch-tool.full{grid-column:1 / -1;}
+    .arch-tool:disabled{opacity:.55;cursor:not-allowed;transform:none}
+
+    /* Gallery */
+    .gallery{
+      margin-top:10px;
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:10px;
+    }
+    .thumb{
+      position:relative;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:rgba(255,255,255,.55);
+      overflow:hidden;
+      aspect-ratio: 1 / 1;
+      cursor:pointer;
+      box-shadow:var(--shadow2);
+      transition:.12s ease;
+    }
+    .thumb:hover{transform:translateY(-1px)}
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      user-select:none;
+      pointer-events:none;
+    }
+    .thumb .badge{
+      position:absolute;
+      left:8px;
+      top:8px;
+      font-size:10px;
+      font-weight:1000;
+      padding:4px 8px;
+      border-radius:999px;
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(0,0,0,.10);
+      color:var(--ink);
+    }
+    .thumb .del{
+      position:absolute;
+      right:8px;
+      top:8px;
+      width:28px;height:28px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,.10);
+      background:rgba(255,255,255,.78);
+      cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:1000;
+      transition:.12s ease;
+    }
+    .thumb .del:hover{transform:scale(1.03)}
+    .thumb.active{
+      outline:3px solid rgba(191,168,137,.85);
+      outline-offset:2px;
+    }
+
+    /* ===== Stage ===== */
+    .noteBar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:10px 12px;
+      border:1px solid rgba(0,0,0,.08);
+      background:rgba(255,255,255,.55);
+      border-radius:16px;
+      box-shadow:var(--shadow2);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:1000;
+    }
+
+    .canvasArea{
+      flex:1;
+      border-radius:18px;
+      background:rgba(0,0,0,.03);
+      border:1px solid rgba(0,0,0,.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      overflow:hidden;
+    }
+
+    .car-stage{
+      position:relative;
+      width:min(1080px, 100%);
+      height:min(560px, 100%);
+    }
+
+    .car-bg{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      pointer-events:none;
+      user-select:none;
+      filter: drop-shadow(0 18px 40px rgba(0,0,0,.18));
+    }
+
+    .car-error{
+      position:absolute;
+      left:12px;
+      bottom:12px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(239,68,68,.35);
+      background:rgba(239,68,68,.10);
+      color:#7f1d1d;
+      font-weight:1000;
+      font-size:12px;
+      display:none;
+      max-width: 92%;
+    }
+
+    /* === Door Panels === */
+    .door{
+      position:absolute;
+      overflow:hidden;
+      border-radius:14px;
+      background: rgba(255,255,255,.05);
+      outline: 3px dashed rgba(191,168,137,.65);
+      outline-offset: 2px;
+      transition: outline-color .12s ease, box-shadow .12s ease;
+      touch-action:none;
+      cursor: grab;
+    }
+    .door:active{ cursor: grabbing; }
+    .door.selected{
+      outline-color: rgba(191,168,137,.95);
+      box-shadow: 0 18px 50px rgba(0,0,0,.14);
+    }
+
+    .door.front{
+      transform: perspective(900px) rotateY(-6deg) rotateX(1deg);
+      transform-origin:center;
+    }
+    .door.rear{
+      transform: perspective(900px) rotateY(-4deg) rotateX(1deg);
+      transform-origin:center;
+    }
+
+    .door.arch-front { clip-path: url(#clipArchFront); }
+    .door.arch-rear  { clip-path: url(#clipArchRear);  }
+
+    /* Relative layer */
+    .img-layer{
+      position:relative;
+      width:100%;
+      height:100%;
+      display:none;
+    }
+    .img-layer.show{ display:block; }
+
+    .img-layer img{
+      position:relative;
+      width:140%;
+      height:140%;
+      object-fit:cover;
+      transform: translate(0px,0px) scale(1);
+      transform-origin:center;
+      will-change: transform;
+      user-select:none;
+      pointer-events:none;
+    }
+
+    .empty{
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      flex-direction:column;
+      color:rgba(18,18,18,.65);
+      font-weight:1000;
+      text-align:center;
+      padding:8px;
+      pointer-events:none;
+    }
+    .empty .icon{font-size:34px; opacity:.75; margin-bottom:6px}
+
+    @media (max-width:1024px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{height:auto;position:relative;top:auto;}
+      .gallery{grid-template-columns:repeat(5,1fr)}
+    }
+    @media (max-width:520px){
+      .gallery{grid-template-columns:repeat(4,1fr)}
+    }
+  </style>
+</head>
+
+<body>
+
+  <svg width="0" height="0" style="position:absolute; left:-9999px; top:-9999px;">
+    <defs>
+      <clipPath id="clipArchFront" clipPathUnits="objectBoundingBox">
+        <path id="clipPathFront" d="M0 1 L1 1 L1 0 L0.5 0 Z"></path>
+      </clipPath>
+      <clipPath id="clipArchRear" clipPathUnits="objectBoundingBox">
+        <path id="clipPathRear" d="M0 1 L1 1 L0.5 0 L0 0 Z"></path>
+      </clipPath>
+    </defs>
+  </svg>
+
+  <div class="container">
+    <div class="header">
+      <h1>🚗 <span>Magnetic Door</span> Preview</h1>
+      <p>
+        <b>Drag</b> moves the door window • <b>Wheel</b> zooms the door window<br>
+        Hold <b>Alt</b> while dragging to move the image inside • Hold <b>Alt</b> + <b>Wheel</b> to zoom the inside image
+      </p>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <div class="section">
+          <div class="section-title">Frame Category</div>
+          <select class="preset" id="frameTypeSelect">
+            <option value="arch" selected>Arch Type (Front + Rear)</option>
+            <option value="mixed">Mixed (Front Regular + Rear Arch)</option>
+          </select>
+          <div class="mini" id="frameInfo">
+            Arch = diagonal cut meets top exactly in the middle (rear is mirrored). Mixed = rear only.
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Vinyl Size (inches)</div>
+
+          <div class="grid2">
+            <div class="field">
+              <label>Height (H)</label>
+              <input type="number" id="hIn" min="1" step="0.01" value="18">
+            </div>
+            <div class="field">
+              <label>Width (W)</label>
+              <input type="number" id="wIn" min="1" step="0.01" value="36">
+            </div>
+          </div>
+
+          <div class="apply-row">
+            <select class="preset" id="presetSelect">
+              <option value="">Presets (H×W)</option>
+            </select>
+
+            <button class="btn" id="applySizeBtn" style="width:auto;padding:12px 16px;">✅ Apply</button>
+          </div>
+
+          <div class="mini" id="sizeInfo"></div>
+        </div>
+
+        <div class="section" id="archRotateSection">
+          <div class="section-title">Arch Tools (Selected Door Only)</div>
+
+          <div class="control-group" style="margin-top:6px;">
+            <div class="control-label" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+              <span style="font-size:13px;font-weight:1000;color:var(--ink);">Rotate Arch Shape</span>
+              <span class="control-value" id="archRotateValue">0°</span>
+            </div>
+            <input type="range" id="archRotateRange" min="0" max="360" value="0">
+          </div>
+
+          <div class="arch-tools">
+            <button class="arch-tool" id="archFlipXBtn" type="button">↔ Flip Side</button>
+            <button class="arch-tool" id="archFlipYBtn" type="button">↕ Flip Up/Down</button>
+            <button class="arch-tool full" id="archResetBtn" type="button">⟲ Reset Arch</button>
+          </div>
+
+          <div class="mini" id="archPanelInfo"></div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Upload Images</div>
+          <div class="upload-zone" id="uploadZone">
+            <div style="font-size:30px;margin-bottom:6px;">🖼️</div>
+            <div style="font-size:14px;margin-bottom:6px;font-weight:1000;">Click or drag images</div>
+            <div style="font-size:12px;color:var(--muted);">JPG / PNG / WebP • multiple allowed</div>
+            <div class="mini">Click a door to select it, then click a thumbnail to apply.</div>
+          </div>
+          <input type="file" id="imgInput" accept="image/*" multiple>
+          <div class="gallery" id="gallery"></div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Actions</div>
+          <div class="rowBtns">
+            <button class="btn" id="clearSelectedBtn">🧼 Clear Selected</button>
+            <button class="btn" id="clearAllBtn">🧼 Clear All</button>
+          </div>
+
+          <div style="margin-top:10px;">
+            <button class="btn" id="downloadBtn" style="width:100%;">⬇️ Download PNG</button>
+            <div class="mini">Downloads the preview (car + doors) as a PNG.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stageWrap">
+        <div class="noteBar">
+          <div>✅ Car background: <b>assets/img/car.jpg</b></div>
+          <div>
+            Frame: <span id="frameLabel">Arch (Front + Rear)</span>
+            • Size: <span id="sizeLabel">18×36 in</span>
+            • Editing: <span id="editLabel">Rear</span>
+          </div>
+        </div>
+
+        <div class="canvasArea">
+          <div class="car-stage" id="carStage">
+            <img class="car-bg" id="carBg" src="assets/img/car.jpg" alt="Car" />
+            <div class="car-error" id="carErr"></div>
+
+            <div class="door front" id="frontDoor">
+              <div class="img-layer" id="frontLayer"><img id="frontImg" alt="Front"/></div>
+              <div class="empty" id="emptyFront">
+                <div class="icon">🎯</div><div>Front Door</div>
+              </div>
+            </div>
+
+            <div class="door rear selected" id="rearDoor">
+              <div class="img-layer" id="rearLayer"><img id="rearImg" alt="Rear"/></div>
+              <div class="empty" id="emptyRear">
+                <div class="icon">🎯</div><div>Rear Door</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ✅ html2canvas for PNG download -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <script>
+    function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+    function normalize360(d){ return ((d % 360) + 360) % 360; }
+
+    const PANEL = { FRONT:'front', REAR:'rear' };
+    const FRAME_TYPE = { ARCH:'arch', MIXED:'mixed' };
+    const PRESETS = [{h:16,w:36},{h:18,w:36},{h:18,w:40},{h:24,w:40}];
+
+    let frameType = FRAME_TYPE.ARCH;
+    let editPanel = PANEL.REAR;
+    let magnetW = 36, magnetH = 18;
+
+    const archXform = {
+      [PANEL.FRONT]: { rot: 0, flipX: false, flipY: false },
+      [PANEL.REAR]:  { rot: 0, flipX: false, flipY: true  }
+    };
+
+    // Door window state + inner image state
+    const doorState = {
+      [PANEL.FRONT]: { x:0, y:0, w:0, h:0, ix:0, iy:0, iz:1 },
+      [PANEL.REAR]:  { x:0, y:0, w:0, h:0, ix:0, iy:0, iz:1 }
+    };
+
+    const galleryItems = [];
+    let galleryIdCounter = 1;
+
+    const el = {
+      carStage: document.getElementById('carStage'),
+      carBg: document.getElementById('carBg'),
+      carErr: document.getElementById('carErr'),
+
+      frameTypeSelect: document.getElementById('frameTypeSelect'),
+      frameInfo: document.getElementById('frameInfo'),
+      frameLabel: document.getElementById('frameLabel'),
+      sizeLabel: document.getElementById('sizeLabel'),
+      editLabel: document.getElementById('editLabel'),
+
+      hIn: document.getElementById('hIn'),
+      wIn: document.getElementById('wIn'),
+      presetSelect: document.getElementById('presetSelect'),
+      applySizeBtn: document.getElementById('applySizeBtn'),
+      sizeInfo: document.getElementById('sizeInfo'),
+
+      archRotateRange: document.getElementById('archRotateRange'),
+      archRotateValue: document.getElementById('archRotateValue'),
+      archFlipXBtn: document.getElementById('archFlipXBtn'),
+      archFlipYBtn: document.getElementById('archFlipYBtn'),
+      archResetBtn: document.getElementById('archResetBtn'),
+      archPanelInfo: document.getElementById('archPanelInfo'),
+
+      frontDoor: document.getElementById('frontDoor'),
+      rearDoor: document.getElementById('rearDoor'),
+
+      frontLayer: document.getElementById('frontLayer'),
+      rearLayer: document.getElementById('rearLayer'),
+      frontImg: document.getElementById('frontImg'),
+      rearImg: document.getElementById('rearImg'),
+
+      emptyFront: document.getElementById('emptyFront'),
+      emptyRear: document.getElementById('emptyRear'),
+
+      uploadZone: document.getElementById('uploadZone'),
+      imgInput: document.getElementById('imgInput'),
+      gallery: document.getElementById('gallery'),
+
+      clearSelectedBtn: document.getElementById('clearSelectedBtn'),
+      clearAllBtn: document.getElementById('clearAllBtn'),
+      downloadBtn: document.getElementById('downloadBtn'),
+
+      clipPathFront: document.getElementById('clipPathFront'),
+      clipPathRear: document.getElementById('clipPathRear'),
+    };
+
+    el.carBg.addEventListener('error', ()=>{
+      el.carErr.style.display = 'block';
+      el.carErr.textContent =
+        "car.jpg not loading. Check: assets/img/car.jpg (case-sensitive). " +
+        "If you opened HTML via file://, use Live Server so assets load correctly.";
+    });
+
+    function isArchPanel(panelKey){
+      if (frameType === FRAME_TYPE.ARCH) return true;
+      return panelKey === PANEL.REAR;
+    }
+
+    function sanitizeInches(x){
+      const v = parseFloat(x);
+      if (!Number.isFinite(v)) return null;
+      return Math.round(v * 100) / 100;
+    }
+
+    function doorEl(panelKey){ return panelKey === PANEL.FRONT ? el.frontDoor : el.rearDoor; }
+    function layerEl(panelKey){ return panelKey === PANEL.FRONT ? el.frontLayer : el.rearLayer; }
+    function imgEl(panelKey){ return panelKey === PANEL.FRONT ? el.frontImg : el.rearImg; }
+    function emptyEl(panelKey){ return panelKey === PANEL.FRONT ? el.emptyFront : el.emptyRear; }
+
+    function fillPresets(){
+      el.presetSelect.innerHTML = `<option value="">Presets (H×W)</option>` + PRESETS
+        .map(p => `<option value="${p.h}x${p.w}">${p.h}×${p.w}</option>`)
+        .join("");
+    }
+
+    const DOOR_LAYOUT = {
+      front: { topPct: 35.7, leftPct: 30.4, heightPct: 47.1, widthMult: 1.00 },
+      rear:  { topPct: 35.7, leftPct: 51.0, heightPct: 47.1, widthMult: 0.92 }
+    };
+
+    function fitDoorsToRatio(){
+      const stage = el.carStage.getBoundingClientRect();
+      const ratio = magnetW / magnetH;
+
+      const baseH = stage.height * (DOOR_LAYOUT.front.heightPct / 100);
+      const baseFrontW = baseH * ratio * DOOR_LAYOUT.front.widthMult;
+      const baseRearW  = baseH * ratio * DOOR_LAYOUT.rear.widthMult;
+
+      const frontBaseTop  = stage.height * (DOOR_LAYOUT.front.topPct / 100);
+      const frontBaseLeft = stage.width  * (DOOR_LAYOUT.front.leftPct / 100);
+      const rearBaseTop   = stage.height * (DOOR_LAYOUT.rear.topPct / 100);
+      const rearBaseLeft  = stage.width  * (DOOR_LAYOUT.rear.leftPct / 100);
+
+      if (!doorState[PANEL.FRONT].w){
+        doorState[PANEL.FRONT].w = Math.max(40, Math.round(baseFrontW));
+        doorState[PANEL.FRONT].h = Math.max(40, Math.round(baseH));
+        doorState[PANEL.FRONT].x = Math.round(frontBaseLeft);
+        doorState[PANEL.FRONT].y = Math.round(frontBaseTop);
+      }
+      if (!doorState[PANEL.REAR].w){
+        doorState[PANEL.REAR].w = Math.max(40, Math.round(baseRearW));
+        doorState[PANEL.REAR].h = Math.max(40, Math.round(baseH));
+        doorState[PANEL.REAR].x = Math.round(rearBaseLeft);
+        doorState[PANEL.REAR].y = Math.round(rearBaseTop);
+      }
+
+      renderDoor(PANEL.FRONT);
+      renderDoor(PANEL.REAR);
+    }
+
+    function renderDoor(panelKey){
+      const d = doorEl(panelKey);
+      const s = doorState[panelKey];
+      const img = imgEl(panelKey);
+
+      d.style.left = s.x + "px";
+      d.style.top  = s.y + "px";
+      d.style.width  = s.w + "px";
+      d.style.height = s.h + "px";
+
+      if (panelKey === PANEL.FRONT){
+        d.style.transform = "perspective(900px) rotateY(-6deg) rotateX(1deg)";
+      } else {
+        d.style.transform = "perspective(900px) rotateY(-4deg) rotateX(1deg)";
+      }
+
+      if (img){
+        img.style.transform = `translate(${s.ix}px, ${s.iy}px) scale(${s.iz || 1})`;
+      }
+    }
+
+    function applyArchTransform(panelKey){
+      const xf = archXform[panelKey];
+      const deg = normalize360(xf.rot);
+      const sx = xf.flipX ? -1 : 1;
+      const sy = xf.flipY ? -1 : 1;
+
+      const clipEl = (panelKey === PANEL.FRONT) ? el.clipPathFront : el.clipPathRear;
+
+      if (clipEl && isArchPanel(panelKey)){
+        clipEl.setAttribute(
+          'transform',
+          `translate(0.5 0.5) rotate(${deg}) scale(${sx} ${sy}) translate(-0.5 -0.5)`
+        );
+      } else if (clipEl){
+        clipEl.removeAttribute('transform');
+      }
+    }
+
+    function updateArchUI(){
+      const archHere = isArchPanel(editPanel);
+      const xf = archXform[editPanel];
+
+      el.archPanelInfo.innerHTML = archHere
+        ? `Editing <b>${editPanel === PANEL.FRONT ? 'Front' : 'Rear'}</b> arch.`
+        : `Selected door is <b>Regular</b> right now — arch tools won’t affect it.`;
+
+      el.archRotateRange.disabled = !archHere;
+      el.archFlipXBtn.disabled = !archHere;
+      el.archFlipYBtn.disabled = !archHere;
+      el.archResetBtn.disabled = !archHere;
+
+      const deg = normalize360(xf.rot);
+      el.archRotateRange.value = Math.round(deg);
+      el.archRotateValue.textContent = Math.round(deg) + '°';
+
+      el.archFlipXBtn.classList.toggle('active', !!xf.flipX);
+      el.archFlipYBtn.classList.toggle('active', !!xf.flipY);
+    }
+
+    function applyFrameType(){
+      el.frontDoor.classList.remove('arch-front');
+      el.rearDoor.classList.remove('arch-rear');
+
+      if (frameType === FRAME_TYPE.ARCH){
+        el.frontDoor.classList.add('arch-front');
+        el.rearDoor.classList.add('arch-rear');
+        el.frameLabel.textContent = "Arch (Front + Rear)";
+        el.frameInfo.textContent = "Arch: diagonal cut meets top in the middle (rear mirrored).";
+      } else {
+        el.rearDoor.classList.add('arch-rear');
+        el.frameLabel.textContent = "Mixed (Rear Arch)";
+        el.frameInfo.textContent = "Mixed: Front Regular, Rear Arch (mirror) mid-cut.";
+      }
+
+      applyArchTransform(PANEL.FRONT);
+      applyArchTransform(PANEL.REAR);
+      updateArchUI();
+      fillPresets();
+    }
+
+    function setSelectedDoor(panelKey){
+      editPanel = panelKey;
+      el.frontDoor.classList.toggle('selected', panelKey === PANEL.FRONT);
+      el.rearDoor.classList.toggle('selected', panelKey === PANEL.REAR);
+      el.editLabel.textContent = panelKey === PANEL.FRONT ? "Front" : "Rear";
+      updateArchUI();
+      refreshGalleryUI();
+    }
+
+    // Drag = move door
+    // Alt+Drag = move image inside
+    // Wheel = resize door
+    // Alt+Wheel = zoom image inside
+    function attachDoorBehavior(door, panelKey){
+      let mode=null, startX=0, startY=0, sx=0, sy=0;
+
+      door.addEventListener("pointerdown", (e)=>{
+        setSelectedDoor(panelKey);
+        door.setPointerCapture(e.pointerId);
+
+        startX = e.clientX;
+        startY = e.clientY;
+
+        const s = doorState[panelKey];
+
+        if (e.altKey){
+          mode="inner";
+          sx = s.ix; sy = s.iy;
+        } else {
+          mode="move";
+          sx = s.x;  sy = s.y;
+        }
+        e.preventDefault();
+      });
+
+      door.addEventListener("pointermove", (e)=>{
+        if(!mode) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        const s = doorState[panelKey];
+
+        if(mode==="move"){
+          s.x = sx + dx;
+          s.y = sy + dy;
+        }
+        if(mode==="inner"){
+          s.ix = sx + dx;
+          s.iy = sy + dy;
+        }
+        renderDoor(panelKey);
+      });
+
+      ["pointerup","pointerleave","pointercancel"].forEach(ev=>{
+        door.addEventListener(ev, ()=> mode=null);
+      });
+
+      door.addEventListener("wheel", (e)=>{
+        e.preventDefault();
+
+        const s = doorState[panelKey];
+
+        if (e.altKey){
+          const oldZ = s.iz || 1;
+          const f = e.deltaY < 0 ? 1.06 : 1/1.06;
+          s.iz = clamp(oldZ * f, 0.30, 8.00);
+          renderDoor(panelKey);
+          return;
+        }
+
+        const f = e.deltaY < 0 ? 1.05 : 0.95;
+        s.w = clamp(s.w * f, 40, 900);
+        s.h = clamp(s.h * f, 40, 900);
+        renderDoor(panelKey);
+      }, { passive:false });
+
+      door.addEventListener("dblclick", (e)=>{
+        const s = doorState[panelKey];
+        if (e.altKey){
+          s.ix = 0; s.iy = 0; s.iz = 1;
+          renderDoor(panelKey);
+        }
+      });
+    }
+
+    function applyMagnetSize(w, h){
+      magnetW = w; magnetH = h;
+      el.sizeLabel.textContent = `${magnetH}×${magnetW} in`;
+      el.sizeInfo.textContent = `Ratio: ${(w/h).toFixed(4)}:1 • Door preview uses this ratio.`;
+      fitDoorsToRatio();
+    }
+
+    function handleApplyClick(){
+      const h = sanitizeInches(el.hIn.value);
+      const w = sanitizeInches(el.wIn.value);
+      if (w === null || h === null || w <= 0 || h <= 0){
+        alert("Enter valid inches.");
+        return;
+      }
+      el.applySizeBtn.disabled = true;
+      el.applySizeBtn.textContent = "Applying…";
+      requestAnimationFrame(()=>{
+        applyMagnetSize(w,h);
+        setTimeout(()=>{
+          el.applySizeBtn.disabled = false;
+          el.applySizeBtn.textContent = "✅ Apply";
+        }, 120);
+      });
+    }
+
+    el.applySizeBtn.addEventListener('click', handleApplyClick);
+    [el.wIn, el.hIn].forEach(inp => inp.addEventListener('keydown', (e)=>{ if(e.key==='Enter') handleApplyClick(); }));
+
+    el.presetSelect.addEventListener('change', () => {
+      const v = el.presetSelect.value;
+      if (!v) return;
+      const [hh, ww] = v.split('x').map(Number);
+      el.hIn.value = hh; el.wIn.value = ww;
+      handleApplyClick();
+      el.presetSelect.value = "";
+    });
+
+    el.archRotateRange.addEventListener('input', ()=>{
+      if (!isArchPanel(editPanel)) return;
+      archXform[editPanel].rot = parseInt(el.archRotateRange.value, 10) || 0;
+      applyArchTransform(editPanel);
+      updateArchUI();
+    });
+    el.archFlipXBtn.addEventListener('click', ()=>{
+      if (!isArchPanel(editPanel)) return;
+      archXform[editPanel].flipX = !archXform[editPanel].flipX;
+      applyArchTransform(editPanel);
+      updateArchUI();
+    });
+    el.archFlipYBtn.addEventListener('click', ()=>{
+      if (!isArchPanel(editPanel)) return;
+      archXform[editPanel].flipY = !archXform[editPanel].flipY;
+      applyArchTransform(editPanel);
+      updateArchUI();
+    });
+    el.archResetBtn.addEventListener('click', ()=>{
+      if (!isArchPanel(editPanel)) return;
+      archXform[editPanel] = { rot: 0, flipX: false, flipY: false };
+      applyArchTransform(editPanel);
+      updateArchUI();
+    });
+
+    function readFileAsDataURL(file){
+      return new Promise((resolve, reject)=>{
+        const r = new FileReader();
+        r.onload = e => resolve(e.target.result);
+        r.onerror = reject;
+        r.readAsDataURL(file);
+      });
+    }
+
+    function refreshGalleryUI(){
+      el.gallery.innerHTML = "";
+      const currentSrc = imgEl(editPanel).getAttribute('src') || "";
+
+      galleryItems.forEach(item => {
+        const d = document.createElement('div');
+        d.className = 'thumb';
+        if (currentSrc && currentSrc === item.src) d.classList.add('active');
+
+        const im = document.createElement('img');
+        im.src = item.src;
+
+        const badge = document.createElement('div');
+        badge.className = 'badge';
+        badge.textContent =
+          item.appliedTo === PANEL.FRONT ? "Front" :
+          item.appliedTo === PANEL.REAR  ? "Rear"  : "—";
+
+        const del = document.createElement('button');
+        del.type = "button";
+        del.className = "del";
+        del.textContent = "✕";
+        del.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          removeGalleryItem(item.id);
+        });
+
+        d.appendChild(im);
+        d.appendChild(badge);
+        d.appendChild(del);
+
+        d.addEventListener('click', ()=>{
+          applyGalleryItemToDoor(item.id, editPanel);
+        });
+
+        el.gallery.appendChild(d);
+      });
+    }
+
+    function markItemAppliedTo(itemId, panelKey){
+      galleryItems.forEach(it => { if (it.appliedTo === panelKey) it.appliedTo = null; });
+      const target = galleryItems.find(it => it.id === itemId);
+      if (target) target.appliedTo = panelKey;
+    }
+
+    function setPanelImage(panelKey, src){
+      const img = imgEl(panelKey);
+      const layer = layerEl(panelKey);
+      const empty = emptyEl(panelKey);
+
+      img.src = src;
+      layer.classList.add('show');
+      empty.style.display = 'none';
+
+      doorState[panelKey].ix = 0;
+      doorState[panelKey].iy = 0;
+      doorState[panelKey].iz = 1;
+
+      renderDoor(panelKey);
+      refreshGalleryUI();
+    }
+
+    function clearPanel(panelKey){
+      const img = imgEl(panelKey);
+      const layer = layerEl(panelKey);
+      const empty = emptyEl(panelKey);
+
+      img.removeAttribute('src');
+      layer.classList.remove('show');
+      empty.style.display = 'flex';
+
+      doorState[panelKey].ix = 0;
+      doorState[panelKey].iy = 0;
+      doorState[panelKey].iz = 1;
+
+      galleryItems.forEach(it => { if (it.appliedTo === panelKey) it.appliedTo = null; });
+      refreshGalleryUI();
+    }
+
+    function applyGalleryItemToDoor(itemId, panelKey){
+      const item = galleryItems.find(it => it.id === itemId);
+      if (!item) return;
+      setSelectedDoor(panelKey);
+      setPanelImage(panelKey, item.src);
+      markItemAppliedTo(itemId, panelKey);
+      refreshGalleryUI();
+    }
+
+    function removeGalleryItem(itemId){
+      const idx = galleryItems.findIndex(it => it.id === itemId);
+      if (idx === -1) return;
+      const removed = galleryItems[idx];
+
+      const frontSrc = imgEl(PANEL.FRONT).getAttribute('src') || "";
+      const rearSrc  = imgEl(PANEL.REAR).getAttribute('src')  || "";
+      if (frontSrc && frontSrc === removed.src) clearPanel(PANEL.FRONT);
+      if (rearSrc && rearSrc === removed.src) clearPanel(PANEL.REAR);
+
+      galleryItems.splice(idx, 1);
+      refreshGalleryUI();
+    }
+
+    // ✅ Upload adds thumbnails ONLY (no auto-apply to both doors)
+    async function addFilesToGallery(fileList){
+      const files = Array.from(fileList || []).filter(f => f && f.type && f.type.startsWith('image/'));
+      if (!files.length) return;
+
+      for (const f of files){
+        const src = await readFileAsDataURL(f);
+        galleryItems.unshift({ id: galleryIdCounter++, src, appliedTo: null });
+      }
+
+      refreshGalleryUI();
+    }
+
+    function attachMultiUpload(zoneEl, inputEl){
+      zoneEl.addEventListener('click', ()=> inputEl.click());
+
+      zoneEl.addEventListener('dragover', (e)=>{
+        e.preventDefault();
+        zoneEl.classList.add('dragover');
+      });
+      zoneEl.addEventListener('dragleave', ()=> zoneEl.classList.remove('dragover'));
+
+      zoneEl.addEventListener('drop', async (e)=>{
+        e.preventDefault();
+        zoneEl.classList.remove('dragover');
+        await addFilesToGallery(e.dataTransfer.files);
+      });
+
+      inputEl.addEventListener('change', async (e)=>{
+        await addFilesToGallery(e.target.files);
+        inputEl.value = '';
+      });
+    }
+
+    attachMultiUpload(el.uploadZone, el.imgInput);
+
+    el.clearSelectedBtn.addEventListener('click', ()=> clearPanel(editPanel));
+    el.clearAllBtn.addEventListener('click', ()=>{
+      clearPanel(PANEL.FRONT);
+      clearPanel(PANEL.REAR);
+      galleryItems.length = 0;
+      refreshGalleryUI();
+    });
+
+    el.frameTypeSelect.addEventListener('change', ()=>{
+      frameType = (el.frameTypeSelect.value === 'mixed') ? FRAME_TYPE.MIXED : FRAME_TYPE.ARCH;
+      applyFrameType();
+    });
+
+    // ✅ Download PNG of preview
+    async function downloadPreviewPNG(){
+      // If background missing (or still loading), warn
+      if (!el.carBg.complete) {
+        alert("Car background still loading. Try again in a moment.");
+        return;
+      }
+
+      try{
+        const canvas = await html2canvas(el.carStage, {
+          backgroundColor: null,
+          useCORS: true,
+          scale: 2
+        });
+
+        const a = document.createElement("a");
+        a.href = canvas.toDataURL("image/png");
+        a.download = "door-preview.png";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      } catch(err){
+        console.error(err);
+        alert(
+          "Download failed. If you're opening this with file://, run Live Server.\n" +
+          "Also make sure assets/img/car.jpg loads correctly."
+        );
+      }
+    }
+
+    el.downloadBtn.addEventListener('click', downloadPreviewPNG);
+
+    function init(){
+      el.hIn.value = magnetH;
+      el.wIn.value = magnetW;
+
+      attachDoorBehavior(el.frontDoor, PANEL.FRONT);
+      attachDoorBehavior(el.rearDoor, PANEL.REAR);
+
+      setSelectedDoor(editPanel);
+
+      fillPresets();
+      applyFrameType();
+      applyMagnetSize(magnetW, magnetH);
+
+      window.addEventListener('resize', ()=> fitDoorsToRatio());
+      refreshGalleryUI();
+    }
+
+    init();
+  </script>
+</body>
+</html>
