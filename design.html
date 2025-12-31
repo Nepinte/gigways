@@ -510,6 +510,11 @@
       outline:4px solid rgba(191,168,137,.55);
       outline-offset:6px;
     }
+    .canvas-frame.drop-target{
+      outline:5px solid rgba(191,168,137,.70);
+      outline-offset:6px;
+      box-shadow:0 22px 70px rgba(0,0,0,.16);
+    }
 
     .arch-outline{
       position:absolute;
@@ -517,7 +522,7 @@
       pointer-events:none;
       display:none;
     }
-    .arch-outline svg{ width:100%; height:100%; display:block; }
+    .arch-outline svg{width:100%;height:100%;display:block;}
     .arch-outline path{
       fill:none;
       stroke: rgba(191,168,137,.95);
@@ -575,24 +580,204 @@
       pointer-events:none
     }
 
-    /* pills for flip buttons */
-    .pillrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    .pill{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      padding:12px 12px;border-radius:14px;
-      border:1px solid var(--border-color);
-      background:rgba(255,255,255,.55);
-      font-weight:900;
-      cursor:pointer;
-      user-select:none;
-      transition:.12s ease;
-      flex:1;
-      min-width:140px;
+    /* Arch flip buttons */
+    .arch-tools{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:10px;
     }
-    .pill.on{
-      background:rgba(191,168,137,.18);
-      border-color:rgba(191,168,137,.75);
-      box-shadow:0 10px 22px rgba(0,0,0,.08);
+    .arch-tool{
+      padding:12px 12px;
+      border:1px solid var(--border-color);
+      border-radius:14px;
+      background:rgba(255,255,255,.55);
+      font-weight:1000;
+      font-size:13px;
+      color:var(--second-color);
+      cursor:pointer;
+      box-shadow:var(--shadow-sm);
+      transition:.12s ease;
+      user-select:none;
+    }
+    .arch-tool:hover{transform:translateY(-1px); box-shadow:var(--shadow-md); border-color:rgba(191,168,137,.65)}
+    .arch-tool.active{
+      background:var(--button-grad);
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 16px 34px rgba(0,0,0,.18);
+    }
+    .arch-tool.full{grid-column:1 / -1;}
+
+    /* Library */
+    .library{
+      border:1px solid var(--border-color);
+      border-radius:16px;
+      background:rgba(255,255,255,.55);
+      overflow:hidden;
+      margin-top:10px;
+    }
+    .library-head{
+      padding:10px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      border-bottom:1px solid rgba(0,0,0,.06);
+      font-weight:1000;
+      font-size:13px;
+      color:var(--second-color);
+    }
+    .library-count{ color:var(--third-color); font-weight:1000; }
+    .library-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:10px;
+      padding:12px;
+    }
+    .lib-item{
+      border:1px solid rgba(0,0,0,.08);
+      border-radius:14px;
+      overflow:hidden;
+      background:rgba(255,255,255,.7);
+      box-shadow:0 10px 20px rgba(0,0,0,.08);
+      cursor:grab;
+      user-select:none;
+      position:relative;
+      aspect-ratio: 1 / 1;
+      display:grid;
+      place-items:center;
+    }
+    .lib-item:active{cursor:grabbing}
+    .lib-item img{width:100%;height:100%;object-fit:cover;display:block}
+    .lib-x{
+      position:absolute;
+      top:6px; right:6px;
+      width:26px;height:26px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,.12);
+      background:rgba(255,255,255,.78);
+      display:grid; place-items:center;
+      font-weight:1000;
+      cursor:pointer;
+    }
+    .lib-x:hover{ background:rgba(239,68,68,.10); border-color:rgba(239,68,68,.45); }
+
+    .hexpicker-pop{
+      position:fixed;
+      z-index:9999;
+      width:320px;
+      background:#fff;
+      border:1px solid rgba(0,0,0,.18);
+      border-radius:12px;
+      box-shadow:0 18px 50px rgba(0,0,0,.18);
+      overflow:hidden;
+      font-family:var(--body-font);
+      user-select:none;
+    }
+    .hexpicker-top{padding:12px 12px 0 12px;}
+    .hexpicker-sv{
+      width:100%;
+      height:170px;
+      border-radius:8px;
+      position:relative;
+      overflow:hidden;
+      background:red;
+      cursor:crosshair;
+      border:1px solid rgba(0,0,0,.08);
+    }
+    .hexpicker-sv::before{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(to right, #fff, rgba(255,255,255,0));
+    }
+    .hexpicker-sv::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(to top, #000, rgba(0,0,0,0));
+      pointer-events:none;
+    }
+    .hexpicker-dot{
+      position:absolute;
+      width:14px;height:14px;
+      border-radius:50%;
+      border:2px solid #fff;
+      box-shadow:0 4px 12px rgba(0,0,0,.25);
+      transform: translate(-7px, -7px);
+      pointer-events:none;
+    }
+    .hexpicker-mid{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px 10px 12px;
+    }
+    .hexpicker-ico{
+      width:28px;height:28px;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,.12);
+      background:rgba(0,0,0,.03);
+      display:grid;place-items:center;
+      font-size:14px;
+    }
+    .hexpicker-preview{
+      width:28px;height:28px;
+      border-radius:999px;
+      border:2px solid #fff;
+      outline:1px solid rgba(0,0,0,.18);
+      box-shadow:0 6px 14px rgba(0,0,0,.12);
+      background:#fff;
+    }
+    .hexpicker-hue{
+      flex:1;
+      -webkit-appearance:none;
+      height:10px;
+      border-radius:999px;
+      outline:none;
+      cursor:pointer;
+      background: linear-gradient(to right,
+        #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000
+      );
+    }
+    .hexpicker-hue::-webkit-slider-thumb{
+      -webkit-appearance:none;
+      width:16px;height:16px;border-radius:50%;
+      background:#fff;
+      border:1px solid rgba(0,0,0,.18);
+      box-shadow:0 6px 14px rgba(0,0,0,.18);
+    }
+    .hexpicker-bot{
+      padding:10px 12px 12px 12px;
+      display:grid;
+      gap:10px;
+    }
+    .hexpicker-hex{
+      width:100%;
+      padding:10px 12px;
+      border:1px solid rgba(0,0,0,.18);
+      border-radius:8px;
+      font-weight:900;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      outline:none;
+      transition: .12s ease;
+      font-size:16px;
+      text-align:center;
+    }
+    .hexpicker-row{display:grid;grid-template-columns:1fr;gap:10px;}
+    .hexpicker-format{
+      width:100%;
+      padding:10px 12px;
+      border:2px solid #2f6cff22;
+      border-radius:8px;
+      font-weight:900;
+      background:#fff;
+      outline:none;
+      font-size:15px;
+      text-align:center;
+    }
+    .hexpicker-invalid{
+      border-color:rgba(239,68,68,.65)!important;
+      box-shadow:0 0 0 3px rgba(239,68,68,.12);
     }
 
     @media (max-width:1024px){
@@ -605,20 +790,24 @@
       .header h1{font-size:1.25rem}
       .canvas-wrapper{padding:18px}
       .stage{height:min(520px,100%)}
+      .hexpicker-pop{ width: 300px; }
+      .library-grid{ grid-template-columns:repeat(4, 1fr); }
     }
   </style>
 </head>
 
 <body>
-  <!-- SVG clip defs: we transform these PATHS per panel independently -->
+  <!-- SVG clip defs: MID-CUT at exactly 50% (top point is centered), rear is true mirror -->
   <svg width="0" height="0" style="position:absolute; left:-9999px; top:-9999px;">
     <defs>
+      <!-- FRONT: left diagonal goes to exact middle top -->
       <clipPath id="clipArchFront" clipPathUnits="objectBoundingBox">
-        <path id="clipPathFront" d="M0 1 L1 1 L1 0 C0.65 0, 0.30 0.46, 0 1 Z"></path>
+        <path id="clipPathFront" d="M0 1 L1 1 L1 0 L0.5 0 Z"></path>
       </clipPath>
 
+      <!-- REAR: mirror of front (right diagonal goes to exact middle top) -->
       <clipPath id="clipArchRear" clipPathUnits="objectBoundingBox">
-        <path id="clipPathRear" d="M0 1 L1 1 C0.70 0.46, 0.35 0, 0 0 L0 1 Z"></path>
+        <path id="clipPathRear" d="M0 1 L1 1 L0.5 0 L0 0 Z"></path>
       </clipPath>
     </defs>
   </svg>
@@ -628,8 +817,9 @@
       <h1>🚗 <span>Vinyl</span> Designer</h1>
       <p>
         <b>Mouse wheel:</b> Zoom • <b>Shift + wheel:</b> Rotate • <b>Drag:</b> Move selected layer
-        <br><b>Arch:</b> rotation/flip apply to the <b>current edit panel only</b>.
-        <br><b>Mixed:</b> you can set <b>Front Regular + Rear Arch</b> or <b>Front Arch + Rear Regular</b>.
+        <br><b>Add Text:</b> type text → click <b>Add Text</b>
+        <br><b>Undo/Redo:</b> use the buttons above the canvas
+        <br><b>NEW:</b> Upload once → drag from <b>Image Library</b> to Front/Rear. Drag layers between panels to move them.
       </p>
     </div>
 
@@ -641,45 +831,47 @@
         </div>
 
         <div class="tab-content active" id="design-tab">
-
           <div class="section">
             <div class="section-title">Frame Category</div>
             <select class="preset" id="frameTypeSelect" aria-label="Frame Category">
-              <option value="regular" selected>Regular (Both Panels)</option>
-              <option value="arch">Arch (Both Panels)</option>
-              <option value="mixedFRRA">Mixed: Front Regular + Rear Arch</option>
-              <option value="mixedFAR R">Mixed: Front Arch + Rear Regular</option>
+              <option value="regular" selected>Regular Frame</option>
+              <option value="arch">Arch Type (Both)</option>
+              <option value="mixed">Mixed Frame (Front Regular + Rear Arch)</option>
             </select>
             <div class="mini" id="frameTypeInfo">
-              Regular = both rectangle. Arch = both curved. Mixed = one regular + one arch.
+              Regular = original rectangle. Arch Type = diagonal cut meets top exactly in the middle.
             </div>
           </div>
 
-          <!-- Arch controls (per edit panel) -->
-          <div class="section" id="archControls" style="display:none;">
-            <div class="section-title">Arch Controls (Per Edit Panel)</div>
+          <!-- Arch rotation + flips (affects ONLY selected panel) -->
+          <div class="section" id="archRotateSection" style="display:none;">
+            <div class="section-title">Arch Tools (Selected Panel Only)</div>
 
-            <div class="mini" id="archWhichPanel" style="margin-top:-2px;">
-              Editing: <b>Front</b>
-            </div>
-
-            <div class="control-group" style="margin-top:10px;">
+            <div class="control-group" style="margin-top:6px;">
               <div class="control-label">
                 <span>Rotate Arch Shape</span>
                 <span class="control-value" id="archRotateValue">0°</span>
               </div>
               <input type="range" id="archRotateRange" min="0" max="360" value="0">
-              <div class="mini">Rotates the <b>frame shape</b> only (clip + outline + export). Artwork stays as-is.</div>
-
-              <div class="pillrow">
-                <div class="pill" id="flipHBtn">↔ Flip Arch</div>
-                <div class="pill" id="flipVBtn">↕ Flip Upside</div>
-              </div>
-
-              <div class="pillrow" style="margin-top:10px">
-                <div class="pill" id="resetArchBtn" style="flex:1;">Reset Arch (This Panel)</div>
+              <div class="mini">
+                Rotates the <b>arch frame shape</b> only (clip + outline + export). Artwork stays as-is.
+                <br><b>Note:</b> In Mixed mode, only Rear is an arch.
               </div>
             </div>
+
+            <div class="arch-tools">
+              <button class="arch-tool" id="archFlipXBtn" type="button" title="Flip arch shape left/right">
+                ↔ Flip Side
+              </button>
+              <button class="arch-tool" id="archFlipYBtn" type="button" title="Flip arch shape up/down">
+                ↕ Flip Up/Down
+              </button>
+              <button class="arch-tool full" id="archResetBtn" type="button" title="Reset arch rotation and flips for selected panel">
+                ⟲ Reset Arch (Selected Panel)
+              </button>
+            </div>
+
+            <div class="mini" id="archPanelInfo"></div>
           </div>
 
           <div class="section">
@@ -710,14 +902,23 @@
           </div>
 
           <div class="section">
-            <div class="section-title">Upload Images (Multiple)</div>
+            <div class="section-title">Upload Images (Shared Library)</div>
             <div class="upload-zone" id="uploadZone">
               <div style="font-size:34px;margin-bottom:6px;">🖼️</div>
               <div style="font-size:14px;margin-bottom:6px;font-weight:900;color:var(--second-color);">Click or drag images here</div>
               <div style="font-size:12px;color:var(--text-color-light);">Supports JPG, PNG, WebP</div>
             </div>
             <input type="file" id="fileInput" accept="image/*" multiple>
-            <div class="mini" id="uploadInfo"></div>
+            <div class="mini" id="uploadInfo">Uploads go into the Image Library. Drag any image onto Front/Rear to add it.</div>
+
+            <div class="library" id="libraryBox">
+              <div class="library-head">
+                <span>Image Library</span>
+                <span class="library-count" id="libraryCount">0</span>
+              </div>
+              <div class="library-grid" id="libraryGrid"></div>
+            </div>
+            <div class="mini">Drag a library thumbnail onto a panel to create a new layer there.</div>
           </div>
 
           <div class="section">
@@ -735,7 +936,7 @@
           <div class="section">
             <div class="section-title">Layers</div>
             <div class="layers" id="layerList"></div>
-            <div class="mini">In <b>Merge</b> view: left is Front, right is Rear.</div>
+            <div class="mini">In <b>Merge</b> view: left is Front, right is Rear (mirrored).</div>
           </div>
 
           <div class="section">
@@ -852,7 +1053,8 @@
             <div class="canvas-frame focus" id="panelFront">
               <div class="arch-outline" aria-hidden="true">
                 <svg viewBox="0 0 1000 500" preserveAspectRatio="none">
-                  <path id="archPathFront" d="M0 500 L1000 500 L1000 0 C650 0, 300 230, 0 500 Z"></path>
+                  <!-- MID-CUT: meets top at 500 (center) -->
+                  <path id="archPathFront" d="M0 500 L1000 500 L1000 0 L500 0 Z"></path>
                 </svg>
               </div>
 
@@ -866,7 +1068,8 @@
             <div class="canvas-frame" id="panelRear" style="display:none;">
               <div class="arch-outline" aria-hidden="true">
                 <svg viewBox="0 0 1000 500" preserveAspectRatio="none">
-                  <path id="archPathRear" d="M0 500 L1000 500 C700 230, 350 0, 0 0 L0 500 Z"></path>
+                  <!-- MID-CUT mirror -->
+                  <path id="archPathRear" d="M0 500 L1000 500 L500 0 L0 0 Z"></path>
                 </svg>
               </div>
 
@@ -885,7 +1088,7 @@
 
 <script>
   /* ============================
-     Small helpers
+     HEX-only picker
      ============================ */
   function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
 
@@ -910,7 +1113,6 @@
     if (h.length !== 6) h = "FFFFFF";
     return { r: parseInt(h.slice(0,2),16), g: parseInt(h.slice(2,4),16), b: parseInt(h.slice(4,6),16) };
   }
-
   function rgbToHsv(r,g,b){
     r/=255; g/=255; b/=255;
     const max=Math.max(r,g,b), min=Math.min(r,g,b);
@@ -938,20 +1140,13 @@
     else if (h<240){ r=0; g=x; b=c; }
     else if (h<300){ r=x; g=0; b=c; }
     else { r=c; g=0; b=x; }
-    return { r: Math.round((r+m)*255), g: Math.round((g+m)*255), b: Math.round((b+m)*255) };
+    return {
+      r: Math.round((r+m)*255),
+      g: Math.round((g+m)*255),
+      b: Math.round((b+m)*255)
+    };
   }
 
-  function uid(){ return 'L' + Math.random().toString(16).slice(2) + Date.now().toString(16); }
-  function normalizeDeg(d){
-    let x = d % 360;
-    if (x > 180) x -= 360;
-    if (x < -180) x += 360;
-    return x;
-  }
-
-  /* ============================
-     HEX-only picker (same)
-     ============================ */
   class HexOnlyPicker {
     constructor({anchorEl, initialHex="#FFFFFF", onChange}) {
       this.anchorEl = anchorEl;
@@ -976,40 +1171,24 @@
       if (this.root) return;
       this.root = document.createElement('div');
       this.root.className = 'hexpicker-pop';
-      this.root.style.position = "fixed";
-      this.root.style.zIndex = "9999";
-      this.root.style.width = "320px";
-      this.root.style.background = "#fff";
-      this.root.style.border = "1px solid rgba(0,0,0,.18)";
-      this.root.style.borderRadius = "12px";
-      this.root.style.boxShadow = "0 18px 50px rgba(0,0,0,.18)";
-      this.root.style.overflow = "hidden";
-      this.root.style.userSelect = "none";
       this.root.innerHTML = `
-        <div style="padding:12px 12px 0 12px;">
-          <div class="hexpicker-sv" tabindex="0" aria-label="Saturation Value" style="
-              width:100%;height:170px;border-radius:8px;position:relative;overflow:hidden;
-              background:red;cursor:crosshair;border:1px solid rgba(0,0,0,.08);">
-            <div class="hexpicker-dot" style="
-              position:absolute;width:14px;height:14px;border-radius:50%;
-              border:2px solid #fff;box-shadow:0 4px 12px rgba(0,0,0,.25);
-              transform:translate(-7px,-7px);pointer-events:none;"></div>
+        <div class="hexpicker-top">
+          <div class="hexpicker-sv" tabindex="0" aria-label="Saturation Value">
+            <div class="hexpicker-dot"></div>
           </div>
         </div>
-        <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;">
-          <div style="width:28px;height:28px;border-radius:8px;border:1px solid rgba(0,0,0,.12);background:rgba(0,0,0,.03);display:grid;place-items:center;font-size:14px;">✎</div>
-          <div class="hexpicker-preview" style="width:28px;height:28px;border-radius:999px;border:2px solid #fff;outline:1px solid rgba(0,0,0,.18);box-shadow:0 6px 14px rgba(0,0,0,.12);background:#fff;"></div>
-          <input class="hexpicker-hue" type="range" min="0" max="360" value="0" aria-label="Hue" style="
-              flex:1;-webkit-appearance:none;height:10px;border-radius:999px;outline:none;cursor:pointer;
-              background:linear-gradient(to right,#ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000);">
+        <div class="hexpicker-mid">
+          <div class="hexpicker-ico">✎</div>
+          <div class="hexpicker-preview"></div>
+          <input class="hexpicker-hue" type="range" min="0" max="360" value="0" aria-label="Hue">
         </div>
-        <div style="padding:10px 12px 12px 12px;display:grid;gap:10px;">
-          <input class="hexpicker-hex" value="#FFFFFF" aria-label="HEX" style="
-              width:100%;padding:10px 12px;border:1px solid rgba(0,0,0,.18);border-radius:8px;
-              font-weight:900;letter-spacing:.06em;text-transform:uppercase;outline:none;font-size:16px;text-align:center;">
-          <select style="width:100%;padding:10px 12px;border:2px solid #2f6cff22;border-radius:8px;font-weight:900;background:#fff;outline:none;font-size:15px;text-align:center;">
-            <option>HEX</option>
-          </select>
+        <div class="hexpicker-bot">
+          <input class="hexpicker-hex" value="#FFFFFF" aria-label="HEX">
+          <div class="hexpicker-row">
+            <select class="hexpicker-format" aria-label="Format">
+              <option value="HEX">HEX</option>
+            </select>
+          </div>
         </div>
       `;
       document.body.appendChild(this.root);
@@ -1056,9 +1235,12 @@
       document.addEventListener('mousemove', (e)=>{ if(dragging) onSV(e.clientX, e.clientY); });
       document.addEventListener('mouseup', ()=>{ dragging=false; });
 
+      this.sv.addEventListener('touchstart', (e)=>{ const t=e.touches[0]; if(t) onSV(t.clientX,t.clientY); }, {passive:true});
+      this.sv.addEventListener('touchmove', (e)=>{ const t=e.touches[0]; if(t) onSV(t.clientX,t.clientY); }, {passive:true});
+
       this.hexInput.addEventListener('input', ()=>{
         const hex = normalizeHex(this.hexInput.value);
-        this.hexInput.style.borderColor = hex ? "rgba(0,0,0,.18)" : "rgba(239,68,68,.65)";
+        this.hexInput.classList.toggle('hexpicker-invalid', !hex);
         if (!hex) return;
         const {r,g,b} = hexToRgb(hex);
         this.hsv = rgbToHsv(r,g,b);
@@ -1097,7 +1279,7 @@
       this.preview.style.background = hex;
 
       if (!fromHex){
-        this.hexInput.style.borderColor = "rgba(0,0,0,.18)";
+        this.hexInput.classList.remove('hexpicker-invalid');
         this.hexInput.value = hex;
       }
 
@@ -1111,14 +1293,7 @@
      App
      ============================ */
   const PANEL = { FRONT:'front', REAR:'rear', MERGE:'merge' };
-
-  // ✅ NEW: frame modes including mixed
-  const FRAME_MODE = {
-    REGULAR_BOTH: 'regular',
-    ARCH_BOTH: 'arch',
-    MIX_FR_RA: 'mixedFRRA',     // Front regular, Rear arch
-    MIX_FA_RR: 'mixedFARR'      // Front arch, Rear regular
-  };
+  const FRAME_TYPE = { REGULAR:'regular', ARCH:'arch', MIXED:'mixed' };
 
   const PRESETS_REGULAR = [
     {h:12,w:24},{h:16,w:36},{h:18,w:36},{h:18,w:40},{h:24,w:24},{h:24,w:36},{h:24,w:40}
@@ -1131,15 +1306,16 @@
   let editPanel = PANEL.FRONT;
 
   let magnetW = 36, magnetH = 18;
+  let frameType = FRAME_TYPE.REGULAR;
 
-  // ✅ NEW: frame mode (regular/arch/mixed)
-  let frameMode = FRAME_MODE.REGULAR_BOTH;
-
-  // ✅ per-panel arch settings (rotate + flip) — applied ONLY to that panel when it is arch
-  const arch = {
-    [PANEL.FRONT]: { rot:0, flipH:false, flipV:false },
-    [PANEL.REAR]:  { rot:0, flipH:false, flipV:false }
+  // per-panel arch transform state (rotate + flipX + flipY)
+  const archXform = {
+    [PANEL.FRONT]: { rot: 0, flipX: false, flipY: false },
+    [PANEL.REAR]:  { rot: 0, flipX: false, flipY: false }
   };
+
+  // NEW: shared image library
+  const imageLibrary = []; // { libId, src, name, naturalW, naturalH }
 
   const state = {
     [PANEL.FRONT]: { layers: [], selectedId: null, bgColor:"#FFFFFF" },
@@ -1164,13 +1340,13 @@
     frameTypeSelect: document.getElementById('frameTypeSelect'),
     frameTypeInfo: document.getElementById('frameTypeInfo'),
 
-    archControls: document.getElementById('archControls'),
-    archWhichPanel: document.getElementById('archWhichPanel'),
+    archRotateSection: document.getElementById('archRotateSection'),
     archRotateRange: document.getElementById('archRotateRange'),
     archRotateValue: document.getElementById('archRotateValue'),
-    flipHBtn: document.getElementById('flipHBtn'),
-    flipVBtn: document.getElementById('flipVBtn'),
-    resetArchBtn: document.getElementById('resetArchBtn'),
+    archFlipXBtn: document.getElementById('archFlipXBtn'),
+    archFlipYBtn: document.getElementById('archFlipYBtn'),
+    archResetBtn: document.getElementById('archResetBtn'),
+    archPanelInfo: document.getElementById('archPanelInfo'),
 
     hIn: document.getElementById('hIn'),
     wIn: document.getElementById('wIn'),
@@ -1181,6 +1357,9 @@
     uploadZone: document.getElementById('uploadZone'),
     fileInput: document.getElementById('fileInput'),
     uploadInfo: document.getElementById('uploadInfo'),
+
+    libraryGrid: document.getElementById('libraryGrid'),
+    libraryCount: document.getElementById('libraryCount'),
 
     layerList: document.getElementById('layerList'),
 
@@ -1251,6 +1430,12 @@
   function stack(panelKey){ return panelKey === PANEL.FRONT ? el.stackFront : el.stackRear; }
   function empty(panelKey){ return panelKey === PANEL.FRONT ? el.emptyFront : el.emptyRear; }
 
+  function isArchPanel(panelKey){
+    if (frameType === FRAME_TYPE.ARCH) return true;
+    if (frameType === FRAME_TYPE.MIXED) return panelKey === PANEL.REAR;
+    return false;
+  }
+
   function selectedLayer(panelKey=editPanel){
     const id = s(panelKey).selectedId;
     return s(panelKey).layers.find(l => l.id === id) || null;
@@ -1259,125 +1444,132 @@
     return s(panelKey).layers.find(l => l.id === id) || null;
   }
 
-  function panelIsArch(panelKey){
-    if (frameMode === FRAME_MODE.ARCH_BOTH) return true;
-    if (frameMode === FRAME_MODE.REGULAR_BOTH) return false;
-    if (frameMode === FRAME_MODE.MIX_FR_RA) return panelKey === PANEL.REAR; // rear is arch
-    if (frameMode === FRAME_MODE.MIX_FA_RR) return panelKey === PANEL.FRONT; // front is arch
-    return false;
-  }
+  function uid(){ return 'L' + Math.random().toString(16).slice(2) + Date.now().toString(16); }
+  function libUid(){ return 'I' + Math.random().toString(16).slice(2) + Date.now().toString(16); }
 
-  function anyArchEnabled(){
-    return panelIsArch(PANEL.FRONT) || panelIsArch(PANEL.REAR);
+  function normalizeDeg(d){
+    let x = d % 360;
+    if (x > 180) x -= 360;
+    if (x < -180) x += 360;
+    return x;
+  }
+  function normalize360(d){
+    return ((d % 360) + 360) % 360;
   }
 
   /* ============================
-     Arch transforms (PER PANEL)
+     Drag & Drop payload
      ============================ */
-  function setArchUIFromPanel(panelKey){
-    const a = arch[panelKey];
-    el.archWhichPanel.innerHTML = `Editing: <b>${panelKey===PANEL.FRONT?'Front':'Rear'}</b>`;
+  const DND = {
+    mime: 'application/x-vinyl-dnd',
+    make(payload){ return JSON.stringify(payload); },
+    parse(data){ try{ return JSON.parse(data); } catch { return null; } }
+  };
 
-    const deg = ((a.rot % 360) + 360) % 360;
+  /* ============================
+     apply arch transform
+     ============================ */
+  function applyArchTransform(panelKey){
+    const xf = archXform[panelKey];
+    const deg = normalize360(xf.rot);
+    const sx = xf.flipX ? -1 : 1;
+    const sy = xf.flipY ? -1 : 1;
+
+    const clipEl = (panelKey === PANEL.FRONT) ? el.clipPathFront : el.clipPathRear;
+    if (clipEl && isArchPanel(panelKey)){
+      clipEl.setAttribute(
+        'transform',
+        `translate(0.5 0.5) rotate(${deg}) scale(${sx} ${sy}) translate(-0.5 -0.5)`
+      );
+    } else if (clipEl){
+      clipEl.removeAttribute('transform');
+    }
+
+    const pathEl = (panelKey === PANEL.FRONT) ? el.archPathFront : el.archPathRear;
+    if (pathEl && isArchPanel(panelKey)){
+      pathEl.setAttribute(
+        'transform',
+        `translate(500 250) rotate(${deg}) scale(${sx} ${sy}) translate(-500 -250)`
+      );
+    } else if (pathEl){
+      pathEl.removeAttribute('transform');
+    }
+  }
+
+  function updateArchUI(){
+    const archHere = isArchPanel(editPanel);
+    const xf = archXform[editPanel];
+
+    el.archPanelInfo.innerHTML = archHere
+      ? `Editing <b>${editPanel === PANEL.FRONT ? 'Front' : 'Rear'}</b> arch. Changes apply to this panel only.`
+      : `Selected panel (<b>${editPanel === PANEL.FRONT ? 'Front' : 'Rear'}</b>) is <b>Regular</b> right now — arch tools won’t affect it.`;
+
+    el.archRotateRange.disabled = !archHere;
+    el.archFlipXBtn.disabled = !archHere;
+    el.archFlipYBtn.disabled = !archHere;
+    el.archResetBtn.disabled = !archHere;
+
+    const deg = normalize360(xf.rot);
     el.archRotateRange.value = Math.round(deg);
     el.archRotateValue.textContent = Math.round(deg) + '°';
 
-    el.flipHBtn.classList.toggle('on', !!a.flipH);
-    el.flipVBtn.classList.toggle('on', !!a.flipV);
+    el.archFlipXBtn.classList.toggle('active', !!xf.flipX);
+    el.archFlipYBtn.classList.toggle('active', !!xf.flipY);
   }
 
-  function applyArchForPanel(panelKey){
-    if (!panelIsArch(panelKey)) {
-      // reset transforms if panel not arch (so outline not rotated when hidden)
-      if (panelKey === PANEL.FRONT){
-        if (el.clipPathFront) el.clipPathFront.removeAttribute('transform');
-        if (el.archPathFront) el.archPathFront.removeAttribute('transform');
-      } else {
-        if (el.clipPathRear) el.clipPathRear.removeAttribute('transform');
-        if (el.archPathRear) el.archPathRear.removeAttribute('transform');
-      }
-      return;
-    }
-
-    const a = arch[panelKey];
-    const deg = ((a.rot % 360) + 360) % 360;
-    const sx = a.flipH ? -1 : 1;
-    const sy = a.flipV ? -1 : 1;
-
-    // objectBoundingBox => center 0.5,0.5
-    const clipT = `translate(0.5 0.5) rotate(${deg}) scale(${sx} ${sy}) translate(-0.5 -0.5)`;
-    // outline viewBox 1000x500 => center 500,250
-    const outlineT = `translate(500 250) rotate(${deg}) scale(${sx} ${sy}) translate(-500 -250)`;
-
-    if (panelKey === PANEL.FRONT){
-      if (el.clipPathFront) el.clipPathFront.setAttribute('transform', clipT);
-      if (el.archPathFront) el.archPathFront.setAttribute('transform', outlineT);
-    } else {
-      if (el.clipPathRear) el.clipPathRear.setAttribute('transform', clipT);
-      if (el.archPathRear) el.archPathRear.setAttribute('transform', outlineT);
-    }
-  }
-
-  function applyArchAll(){
-    applyArchForPanel(PANEL.FRONT);
-    applyArchForPanel(PANEL.REAR);
-
-    // Show controls only if edit panel is arch (and any arch exists)
-    const show = anyArchEnabled() && panelIsArch(editPanel);
-    el.archControls.style.display = show ? 'block' : 'none';
-    if (show) setArchUIFromPanel(editPanel);
-  }
-
-  /* ============================
-     Frame mode application (per panel)
-     ============================ */
-  function applyFrameMode(){
-    // apply per-panel class + clipPath
-    [PANEL.FRONT, PANEL.REAR].forEach(pk=>{
-      const isArch = panelIsArch(pk);
-      const fr = frame(pk);
-
-      fr.classList.toggle('arch', isArch);
-
-      if (isArch){
-        fr.style.clipPath = pk === PANEL.FRONT ? 'url(#clipArchFront)' : 'url(#clipArchRear)';
-      } else {
-        fr.style.clipPath = 'none';
-      }
-    });
-
-    // info label
-    if (frameMode === FRAME_MODE.REGULAR_BOTH){
-      el.frameTypeInfo.textContent = "Regular: both panels rectangle.";
-    } else if (frameMode === FRAME_MODE.ARCH_BOTH){
-      el.frameTypeInfo.textContent = "Arch: both panels curved. Arch controls work per panel.";
-    } else if (frameMode === FRAME_MODE.MIX_FR_RA){
-      el.frameTypeInfo.textContent = "Mixed: Front is Regular, Rear is Arch (controls apply when editing Rear).";
-    } else if (frameMode === FRAME_MODE.MIX_FA_RR){
-      el.frameTypeInfo.textContent = "Mixed: Front is Arch, Rear is Regular (controls apply when editing Front).";
-    }
-
-    fillPresets();
-    fitFrames(true);
-    refitAll();
-    applyArchAll();
-    setTitle();
-    pushHistory();
-  }
-
-  /* ============================
-     Presets: if ANY arch exists, use arch presets (safer)
-     ============================ */
   function fillPresets(){
-    const list = anyArchEnabled() ? PRESETS_ARCH : PRESETS_REGULAR;
+    const list = (frameType === FRAME_TYPE.ARCH) ? PRESETS_ARCH : PRESETS_REGULAR;
     el.presetSelect.innerHTML = `<option value="">Presets (H×W)</option>` + list
       .map(p => `<option value="${p.h}x${p.w}">${p.h}×${p.w}</option>`)
       .join("");
   }
 
-  /* ============================
-     History
-     ============================ */
+  function applyFrameType(){
+    const front = frame(PANEL.FRONT);
+    const rear  = frame(PANEL.REAR);
+
+    front.classList.remove('arch');
+    rear.classList.remove('arch');
+    front.style.clipPath = 'none';
+    rear.style.clipPath  = 'none';
+
+    if (frameType === FRAME_TYPE.ARCH){
+      front.classList.add('arch');
+      rear.classList.add('arch');
+      front.style.clipPath = 'url(#clipArchFront)';
+      rear.style.clipPath  = 'url(#clipArchRear)';
+
+      el.frameTypeInfo.textContent =
+        "Arch Type (Both): diagonal cut meets top exactly in the middle. Merge: left Front, right Rear (mirror).";
+
+      el.archRotateSection.style.display = 'block';
+    }
+    else if (frameType === FRAME_TYPE.MIXED){
+      rear.classList.add('arch');
+      rear.style.clipPath  = 'url(#clipArchRear)';
+
+      el.frameTypeInfo.textContent =
+        "Mixed Frame: Front is Regular (rectangle). Rear is Arch (mirror) with mid-cut.";
+
+      el.archRotateSection.style.display = 'block';
+    }
+    else {
+      el.frameTypeInfo.textContent =
+        "Regular: original rectangle frame (all presets available).";
+
+      el.archRotateSection.style.display = 'none';
+    }
+
+    applyArchTransform(PANEL.FRONT);
+    applyArchTransform(PANEL.REAR);
+    updateArchUI();
+
+    fillPresets();
+    fitFrames(true);
+    refitAll();
+    pushHistory();
+  }
+
   function stripLayer(l){
     if (l.type === 'image'){
       return {
@@ -1395,9 +1587,10 @@
 
   function snapshotState(){
     return JSON.stringify({
-      magnetW, magnetH, currentView, editPanel, frameMode,
-      arch,
+      magnetW, magnetH, currentView, editPanel, frameType,
+      archXform,
       lastFrameSize,
+      imageLibrary, // NEW
       state: {
         [PANEL.FRONT]: {
           selectedId: state[PANEL.FRONT].selectedId,
@@ -1425,11 +1618,8 @@
     updateUndoRedoButtons();
   }
 
-  /* ============================
-     UI text
-     ============================ */
-  function setUploadInfo(){
-    el.uploadInfo.innerHTML = `Uploading to <b>${editPanel === PANEL.FRONT ? "Front Panel" : "Rear Panel"}</b>.`;
+  function applyFrameBg(panelKey){
+    frame(panelKey).style.background = s(panelKey).bgColor;
   }
 
   function setTitle(){
@@ -1437,17 +1627,25 @@
                   (currentView === PANEL.REAR)  ? "Rear Panel"  : "Merge";
     const editLabel = (currentView === PANEL.MERGE) ? ` • editing: ${editPanel === PANEL.FRONT ? "Front" : "Rear"}` : "";
 
-    const frontT = panelIsArch(PANEL.FRONT) ? "Front: Arch" : "Front: Regular";
-    const rearT  = panelIsArch(PANEL.REAR)  ? "Rear: Arch"  : "Rear: Regular";
-    el.canvasTitle.textContent = `${label}${editLabel} • ${magnetH}×${magnetW} in • ${frontT} • ${rearT}`;
+    const typeLabel =
+      frameType === FRAME_TYPE.ARCH  ? `Arch (Both)` :
+      frameType === FRAME_TYPE.MIXED ? `Mixed (Rear Arch)` :
+      "Regular";
 
-    // also controls visibility (only if edit panel is arch)
-    applyArchAll();
+    const xf = archXform[editPanel];
+    const archBits = isArchPanel(editPanel)
+      ? ` • Arch: ${Math.round(normalize360(xf.rot))}°${xf.flipX ? " • FlipX" : ""}${xf.flipY ? " • FlipY" : ""}`
+      : "";
+
+    el.canvasTitle.textContent = `${label}${editLabel} • ${magnetH}×${magnetW} in • ${typeLabel}${archBits}`;
   }
 
-  /* ============================
-     Tabs
-     ============================ */
+  function sanitizeInches(x){
+    const v = parseFloat(x);
+    if (!Number.isFinite(v)) return null;
+    return Math.round(v * 100) / 100;
+  }
+
   el.tabBtns.forEach(btn=>{
     btn.addEventListener('click', ()=>{
       el.tabBtns.forEach(b=>b.classList.remove('active'));
@@ -1457,9 +1655,47 @@
     });
   });
 
-  /* ============================
-     Frame fitting
-     ============================ */
+  /* Arch tools */
+  el.archRotateRange.addEventListener('input', ()=>{
+    if (!isArchPanel(editPanel)) return;
+    pushHistory();
+    archXform[editPanel].rot = parseInt(el.archRotateRange.value, 10) || 0;
+    applyArchTransform(editPanel);
+    updateArchUI();
+    setTitle();
+    pushHistory();
+  });
+
+  el.archFlipXBtn.addEventListener('click', ()=>{
+    if (!isArchPanel(editPanel)) return;
+    pushHistory();
+    archXform[editPanel].flipX = !archXform[editPanel].flipX;
+    applyArchTransform(editPanel);
+    updateArchUI();
+    setTitle();
+    pushHistory();
+  });
+
+  el.archFlipYBtn.addEventListener('click', ()=>{
+    if (!isArchPanel(editPanel)) return;
+    pushHistory();
+    archXform[editPanel].flipY = !archXform[editPanel].flipY;
+    applyArchTransform(editPanel);
+    updateArchUI();
+    setTitle();
+    pushHistory();
+  });
+
+  el.archResetBtn.addEventListener('click', ()=>{
+    if (!isArchPanel(editPanel)) return;
+    pushHistory();
+    archXform[editPanel] = { rot: 0, flipX: false, flipY: false };
+    applyArchTransform(editPanel);
+    updateArchUI();
+    setTitle();
+    pushHistory();
+  });
+
   function fitFrameToBox(panelEl, boxRect){
     const ratio = magnetW / magnetH;
     const maxW = Math.max(100, boxRect.width);
@@ -1537,9 +1773,6 @@
     });
   }
 
-  /* ============================
-     Render layers
-     ============================ */
   function renderLayerTransform(layer){
     layer.wrap.style.transform =
       `translate(-50%, -50%) translate(${layer.x}px, ${layer.y}px) rotate(${layer.rotation}deg) scale(${layer.scale})`;
@@ -1569,9 +1802,6 @@
     updateUIFromSelection();
   }
 
-  /* ============================
-     Selection
-     ============================ */
   function clearSelection(panelKey){
     state[panelKey].selectedId = null;
     state[panelKey].layers.forEach(l => l.wrap?.classList.remove('selected'));
@@ -1599,7 +1829,7 @@
       el.bgColorValue.textContent = (layer.text.bg || "#FFFFFF").toUpperCase();
     }
 
-    setUploadInfo();
+    updateArchUI();
     setTitle();
     updateUIFromSelection();
     refreshLayerList();
@@ -1622,9 +1852,6 @@
     el.rotateValue.textContent = Math.round(layer.rotation) + '°';
   }
 
-  /* ============================
-     Layer list
-     ============================ */
   function refreshLayerList(){
     el.layerList.innerHTML = '';
     const list = s(editPanel).layers;
@@ -1713,7 +1940,6 @@
     refreshLayerList();
     pushHistory();
   }
-
   function deleteLayer(panelKey, layerId){
     pushHistory();
     const list = state[panelKey].layers;
@@ -1767,9 +1993,6 @@
   }));
   el.tb_del.addEventListener('click', withSelected(deleteLayer));
 
-  /* ============================
-     Move/Zoom with wheel
-     ============================ */
   function screenToLayerLocal(layer, panelKey, clientX, clientY){
     const r = frame(panelKey).getBoundingClientRect();
     const cx = r.left + r.width/2 + layer.x;
@@ -1885,7 +2108,7 @@
         el.frameBgSwatch.style.background = s(editPanel).bgColor;
         el.frameBgValue.textContent = s(editPanel).bgColor;
 
-        setUploadInfo(); setTitle(); refreshLayerList(); updateUIFromSelection();
+        updateArchUI(); setTitle(); refreshLayerList(); updateUIFromSelection();
       }
 
       if (panelKey !== editPanel) return;
@@ -1923,36 +2146,137 @@
   });
 
   /* ============================
-     Upload
+     Library UI + Upload (shared)
      ============================ */
+  function refreshLibrary(){
+    el.libraryGrid.innerHTML = '';
+    el.libraryCount.textContent = String(imageLibrary.length);
+
+    if (!imageLibrary.length){
+      const empty = document.createElement('div');
+      empty.style.gridColumn = '1 / -1';
+      empty.style.padding = '8px';
+      empty.style.color = 'var(--text-color-light)';
+      empty.style.fontWeight = '900';
+      empty.style.fontSize = '13px';
+      empty.textContent = 'No images yet. Upload above.';
+      el.libraryGrid.appendChild(empty);
+      return;
+    }
+
+    imageLibrary.forEach(item=>{
+      const card = document.createElement('div');
+      card.className = 'lib-item';
+      card.draggable = true;
+      card.title = 'Drag onto a panel to add';
+
+      const img = document.createElement('img');
+      img.src = item.src;
+      card.appendChild(img);
+
+      const x = document.createElement('button');
+      x.className = 'lib-x';
+      x.type = 'button';
+      x.textContent = '×';
+      x.title = 'Remove from library';
+      x.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        pushHistory();
+        const idx = imageLibrary.findIndex(a=>a.libId === item.libId);
+        if (idx !== -1) imageLibrary.splice(idx,1);
+        refreshLibrary();
+        pushHistory();
+      });
+      card.appendChild(x);
+
+      card.addEventListener('dragstart', (e)=>{
+        const payload = { kind:'library', libId: item.libId };
+        e.dataTransfer.setData(DND.mime, DND.make(payload));
+        e.dataTransfer.effectAllowed = 'copy';
+      });
+
+      // Optional: click to add to current edit panel
+      card.addEventListener('click', ()=>{
+        createImageLayerFromLibrary(editPanel, item.libId, null);
+      });
+
+      el.libraryGrid.appendChild(card);
+    });
+  }
+
+  async function addToLibraryFromFile(file){
+    const src = await new Promise((resolve, reject)=>{
+      const reader = new FileReader();
+      reader.onload = (e)=> resolve(e.target.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+    const libId = libUid();
+    const name = file.name || 'Image';
+
+    // measure natural size once (optional but helps)
+    const dims = await new Promise((resolve)=>{
+      const img = new Image();
+      img.onload = ()=> resolve({ w: img.naturalWidth || 1, h: img.naturalHeight || 1 });
+      img.onerror = ()=> resolve({ w: 1, h: 1 });
+      img.src = src;
+    });
+
+    imageLibrary.push({ libId, src, name, naturalW: dims.w, naturalH: dims.h });
+  }
+
   el.uploadZone.addEventListener('click', () => el.fileInput.click());
   el.uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); el.uploadZone.classList.add('dragover'); });
   el.uploadZone.addEventListener('dragleave', () => el.uploadZone.classList.remove('dragover'));
-  el.uploadZone.addEventListener('drop', (e) => {
+  el.uploadZone.addEventListener('drop', async (e) => {
     e.preventDefault();
     el.uploadZone.classList.remove('dragover');
     const files = Array.from(e.dataTransfer.files || []).filter(f => f.type.startsWith('image/'));
-    files.forEach(loadImageFile);
+    if (!files.length) return;
+
+    pushHistory();
+    for (const f of files) await addToLibraryFromFile(f);
+    refreshLibrary();
+    pushHistory();
   });
-  el.fileInput.addEventListener('change', (e) => {
+
+  el.fileInput.addEventListener('change', async (e) => {
     const files = Array.from(e.target.files || []).filter(f => f.type.startsWith('image/'));
-    files.forEach(loadImageFile);
+    if (!files.length) return;
+    pushHistory();
+    for (const f of files) await addToLibraryFromFile(f);
+    refreshLibrary();
+    pushHistory();
     el.fileInput.value = '';
   });
 
-  function loadImageFile(file){
-    const reader = new FileReader();
-    reader.onload = (e) => createImageLayer(editPanel, e.target.result, file.name);
-    reader.readAsDataURL(file);
+  function findLibraryItem(libId){
+    return imageLibrary.find(x=>x.libId === libId) || null;
   }
 
-  function createImageLayer(panelKey, src, name="Image"){
-    pushHistory();
+  /* ============================
+     Create layers
+     ============================ */
+  function createImageLayer(panelKey, src, name="Image", naturalW=1, naturalH=1, initTransform=null){
     const id = uid();
 
     const wrap = document.createElement('div');
     wrap.className = 'layer-wrap';
     wrap.dataset.layerId = id;
+    wrap.dataset.panelKey = panelKey;
+
+    // allow dragging this layer between panels
+    wrap.draggable = true;
+    wrap.addEventListener('dragstart', (e)=>{
+      const layer = getLayer(panelKey, id);
+      if (!layer) return;
+      const payload = { kind:'layer', fromPanel: panelKey, layerId: id };
+      e.dataTransfer.setData(DND.mime, DND.make(payload));
+      e.dataTransfer.effectAllowed = 'move';
+      // (nice) ensure it is selected when dragging
+      setSelected(panelKey, id);
+    });
 
     const img = document.createElement('img');
     img.className = 'layer-img';
@@ -1965,15 +2289,22 @@
     const layer = {
       id, type:'image', name,
       x:0, y:0, scale:1, rotation:0,
-      src, naturalW:1, naturalH:1,
+      src, naturalW:naturalW || 1, naturalH:naturalH || 1,
       wrap, img
     };
+
+    if (initTransform){
+      layer.x = initTransform.x ?? 0;
+      layer.y = initTransform.y ?? 0;
+      layer.scale = initTransform.scale ?? 1;
+      layer.rotation = initTransform.rotation ?? 0;
+    }
 
     wrap.addEventListener('mousedown', () => setSelected(panelKey, id));
 
     img.onload = () => {
-      layer.naturalW = img.naturalWidth || 1;
-      layer.naturalH = img.naturalHeight || 1;
+      layer.naturalW = img.naturalWidth || layer.naturalW;
+      layer.naturalH = img.naturalHeight || layer.naturalH;
 
       fitImageBaseToFrame(panelKey, layer);
 
@@ -1988,6 +2319,29 @@
     };
   }
 
+  function createImageLayerFromLibrary(panelKey, libId, dropEvent){
+    const item = findLibraryItem(libId);
+    if (!item) return;
+
+    pushHistory();
+
+    // If dropped, place at cursor position relative to frame center
+    let init = null;
+    if (dropEvent){
+      const fr = frame(panelKey).getBoundingClientRect();
+      const cx = fr.left + fr.width/2;
+      const cy = fr.top  + fr.height/2;
+      init = {
+        x: (dropEvent.clientX - cx),
+        y: (dropEvent.clientY - cy),
+        scale: 1,
+        rotation: 0
+      };
+    }
+
+    createImageLayer(panelKey, item.src, item.name, item.naturalW, item.naturalH, init);
+  }
+
   function createTextLayer(panelKey, textValue){
     pushHistory();
     const id = uid();
@@ -1995,6 +2349,7 @@
     const wrap = document.createElement('div');
     wrap.className = 'layer-wrap';
     wrap.dataset.layerId = id;
+    wrap.dataset.panelKey = panelKey;
 
     const box = document.createElement('div');
     box.className = 'layer-textbox';
@@ -2029,6 +2384,162 @@
     pushHistory();
   }
 
+  /* ============================
+     Move layer between panels (drag)
+     ============================ */
+  function moveLayerToOtherPanel(fromPanel, layerId, toPanel, dropEvent){
+    if (fromPanel === toPanel) return;
+
+    const layer = getLayer(fromPanel, layerId);
+    if (!layer) return;
+
+    pushHistory();
+
+    // capture transform
+    const oldFr = frame(fromPanel).getBoundingClientRect();
+    const newFr = frame(toPanel).getBoundingClientRect();
+
+    // Keep relative position within frame
+    // layer.x/y is px relative to center of old frame.
+    const relX = oldFr.width  ? (layer.x / oldFr.width)  : 0;
+    const relY = oldFr.height ? (layer.y / oldFr.height) : 0;
+
+    let newX = relX * newFr.width;
+    let newY = relY * newFr.height;
+
+    // If dropped, place at cursor on new panel (more intuitive)
+    if (dropEvent){
+      const cx = newFr.left + newFr.width/2;
+      const cy = newFr.top  + newFr.height/2;
+      newX = (dropEvent.clientX - cx);
+      newY = (dropEvent.clientY - cy);
+    }
+
+    const init = { x: newX, y: newY, scale: layer.scale, rotation: layer.rotation };
+
+    // remove old
+    const list = state[fromPanel].layers;
+    const idx = list.findIndex(l=>l.id === layerId);
+    if (idx !== -1){
+      list[idx].wrap?.remove();
+      list.splice(idx,1);
+    }
+    if (state[fromPanel].selectedId === layerId) state[fromPanel].selectedId = null;
+
+    // recreate on target
+    if (layer.type === 'image'){
+      createImageLayer(toPanel, layer.src, layer.name, layer.naturalW, layer.naturalH, init);
+    } else {
+      // move text (keep style)
+      const id = uid();
+      const wrap = document.createElement('div');
+      wrap.className = 'layer-wrap';
+      wrap.dataset.layerId = id;
+      wrap.dataset.panelKey = toPanel;
+
+      const box = document.createElement('div');
+      box.className = 'layer-textbox';
+      wrap.appendChild(box);
+
+      stack(toPanel).appendChild(wrap);
+
+      const newLayer = {
+        id, type:'text', name:'Text',
+        x:init.x, y:init.y, scale:init.scale, rotation:init.rotation,
+        wrap, textEl: box,
+        text: {...layer.text}
+      };
+
+      // allow dragging between panels (optional)
+      wrap.draggable = true;
+      wrap.addEventListener('dragstart', (e)=>{
+        const payload = { kind:'layer', fromPanel: toPanel, layerId: id };
+        e.dataTransfer.setData(DND.mime, DND.make(payload));
+        e.dataTransfer.effectAllowed = 'move';
+        setSelected(toPanel, id);
+      });
+
+      wrap.addEventListener('mousedown', () => setSelected(toPanel, id));
+      wrap.style.display = 'block';
+      state[toPanel].layers.push(newLayer);
+
+      renderTextLayer(newLayer);
+      renderLayerTransform(newLayer);
+
+      setSelected(toPanel, id);
+      updateEmpty(toPanel);
+      refreshLayerList();
+      pushHistory();
+    }
+
+    updateEmpty(fromPanel);
+    refreshLayerList();
+    pushHistory();
+  }
+
+  /* ============================
+     Panel drop targets
+     ============================ */
+  function setDropHighlight(panelKey, on){
+    frame(panelKey).classList.toggle('drop-target', !!on);
+  }
+
+  function attachPanelDnd(panelKey){
+    const fr = frame(panelKey);
+
+    fr.addEventListener('dragenter', (e)=>{
+      const data = e.dataTransfer.getData(DND.mime);
+      if (!data) return;
+      e.preventDefault();
+      setDropHighlight(panelKey, true);
+    });
+    fr.addEventListener('dragover', (e)=>{
+      const data = e.dataTransfer.getData(DND.mime);
+      if (!data) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+    });
+    fr.addEventListener('dragleave', (e)=>{
+      // when leaving to a child, ignore
+      const rect = fr.getBoundingClientRect();
+      if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) return;
+      setDropHighlight(panelKey, false);
+    });
+    fr.addEventListener('drop', (e)=>{
+      const raw = e.dataTransfer.getData(DND.mime);
+      const payload = DND.parse(raw);
+      setDropHighlight(panelKey, false);
+      if (!payload) return;
+
+      e.preventDefault();
+
+      // If in merge view, dropping also sets editPanel to that panel for consistency
+      if (currentView === PANEL.MERGE){
+        editPanel = panelKey;
+        el.panelFront.classList.toggle('focus', editPanel === PANEL.FRONT);
+        el.panelRear.classList.toggle('focus', editPanel === PANEL.REAR);
+      }
+
+      if (payload.kind === 'library'){
+        createImageLayerFromLibrary(panelKey, payload.libId, e);
+        return;
+      }
+      if (payload.kind === 'layer'){
+        const fromPanel = payload.fromPanel;
+        const layerId = payload.layerId;
+        if (!fromPanel || !layerId) return;
+        moveLayerToOtherPanel(fromPanel, layerId, panelKey, e);
+        return;
+      }
+    });
+  }
+
+  attachPanelDnd(PANEL.FRONT);
+  attachPanelDnd(PANEL.REAR);
+
+  /* ============================
+     Text UI
+     ============================ */
   el.textSizeRange.addEventListener('input', ()=>{ el.textSizeValue.textContent=el.textSizeRange.value+'px'; });
   el.bgOpacityRange.addEventListener('input', ()=>{ el.bgOpacityValue.textContent=el.bgOpacityRange.value+'%'; });
 
@@ -2062,15 +2573,6 @@
     deleteLayer(editPanel, layer.id);
     el.textInput.value = "";
   });
-
-  /* ============================
-     Size
-     ============================ */
-  function sanitizeInches(x){
-    const v = parseFloat(x);
-    if (!Number.isFinite(v)) return null;
-    return Math.round(v * 100) / 100;
-  }
 
   function applyMagnetSize(w, h){
     magnetW = w; magnetH = h;
@@ -2116,9 +2618,6 @@
     el.presetSelect.value = "";
   });
 
-  /* ============================
-     Panel view switching
-     ============================ */
   function applyViewUI(){
     if (currentView === PANEL.MERGE){
       el.panelFront.style.display = 'block';
@@ -2153,7 +2652,7 @@
                  : "Download JPG";
     el.downloadLabel.textContent = label;
 
-    setUploadInfo();
+    updateArchUI();
     setTitle();
   }
 
@@ -2194,17 +2693,200 @@
   });
 
   /* ============================
-     Frame background (picker)
+     Export
      ============================ */
+  async function downloadSinglePanel(panelKey){
+    const MAX_W_PX = 6000;
+    const dpi = Math.max(72, Math.floor(MAX_W_PX / magnetW));
+    const outW = Math.round(magnetW * dpi);
+    const outH = Math.round(magnetH * dpi);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = outW;
+    canvas.height = outH;
+    const ctx = canvas.getContext('2d');
+
+    if (isArchPanel(panelKey)){
+      ctx.save();
+      ctx.beginPath();
+      buildArchPathOnCtx(ctx, panelKey, outW, outH);
+      ctx.closePath();
+      ctx.clip();
+      await renderPanelToCtx(ctx, panelKey, 0, 0, outW, outH);
+      ctx.restore();
+    } else {
+      await renderPanelToCtx(ctx, panelKey, 0, 0, outW, outH);
+    }
+
+    return new Promise((resolve, reject) => {
+      canvas.toBlob((blob)=>{
+        if (!blob) return reject(new Error("Blob failed"));
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `vinyl-${panelKey}-${frameType}-${magnetH}x${magnetW}in-${dpi}dpi-${Date.now()}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        resolve();
+      }, 'image/jpeg', 0.92);
+    });
+  }
+
+  function buildArchPathOnCtx(ctx, panelKey, W, H){
+    const xf = archXform[panelKey];
+    const deg = normalize360(xf.rot);
+    const rad = deg * Math.PI / 180;
+    const sx = xf.flipX ? -1 : 1;
+    const sy = xf.flipY ? -1 : 1;
+
+    ctx.save();
+    ctx.translate(W/2, H/2);
+    ctx.rotate(rad);
+    ctx.scale(sx, sy);
+    ctx.translate(-W/2, -H/2);
+
+    const s = 0.5;
+
+    if (panelKey === PANEL.FRONT){
+      ctx.moveTo(0, H);
+      ctx.lineTo(W, H);
+      ctx.lineTo(W, 0);
+      ctx.lineTo(s*W, 0);
+      ctx.lineTo(0, H);
+    } else {
+      ctx.moveTo(0, H);
+      ctx.lineTo(W, H);
+      ctx.lineTo(s*W, 0);
+      ctx.lineTo(0, 0);
+      ctx.lineTo(0, H);
+    }
+
+    ctx.restore();
+  }
+
+  async function handleSingleDownload(){
+    try{ await downloadSinglePanel(editPanel); }
+    catch(err){ console.warn(err); alert("Export failed. Try smaller size or fewer layers."); }
+  }
+  el.downloadBtn.addEventListener('click', handleSingleDownload);
+
+  async function handleFrontDownload(){
+    try{ await downloadSinglePanel(PANEL.FRONT); }
+    catch(err){ console.warn(err); alert("Front export failed."); }
+  }
+  async function handleRearDownload(){
+    try{ await downloadSinglePanel(PANEL.REAR); }
+    catch(err){ console.warn(err); alert("Rear export failed."); }
+  }
+  el.downloadFrontBtn.addEventListener('click', handleFrontDownload);
+  el.downloadRearBtn.addEventListener('click', handleRearDownload);
+
+  async function handleBothDownload(){
+    try{
+      el.downloadBothBtn.disabled = true;
+      el.downloadBothBtn.textContent = "Preparing…";
+      await downloadSinglePanel(PANEL.FRONT);
+      await new Promise(r=>setTimeout(r, 250));
+      await downloadSinglePanel(PANEL.REAR);
+    } catch(err){
+      console.warn(err);
+      alert("Export failed. Try smaller size or fewer layers.");
+    } finally{
+      el.downloadBothBtn.disabled = false;
+      el.downloadBothBtn.textContent = "⬇⬇ Download Both (Front + Rear)";
+    }
+  }
+  el.downloadBothBtn.addEventListener('click', handleBothDownload);
+
+  async function renderPanelToCtx(ctx, panelKey, offX, offY, outW, outH){
+    ctx.save();
+    ctx.translate(offX, offY);
+
+    ctx.fillStyle = s(panelKey).bgColor || '#FFFFFF';
+    ctx.fillRect(0,0,outW,outH);
+
+    const fr = frame(panelKey).getBoundingClientRect();
+    const pxPerScreenX = outW / fr.width;
+    const pxPerScreenY = outH / fr.height;
+
+    for (const layer of s(panelKey).layers){
+      ctx.save();
+      ctx.translate(outW/2, outH/2);
+      ctx.translate(layer.x * pxPerScreenX, layer.y * pxPerScreenY);
+      ctx.rotate((layer.rotation * Math.PI)/180);
+      ctx.scale(layer.scale, layer.scale);
+
+      if (layer.type === 'image'){
+        const img = await loadImage(layer.src);
+        const drawW = (layer.img?.width || img.naturalWidth) * pxPerScreenX;
+        const drawH = (layer.img?.height || img.naturalHeight) * pxPerScreenY;
+        ctx.drawImage(img, -drawW/2, -drawH/2, drawW, drawH);
+      } else {
+        const t = layer.text;
+        const fontPx = (t.fontPx || 32) * pxPerScreenX;
+
+        ctx.font = `900 ${Math.max(1, Math.round(fontPx))}px 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+
+        const lines = (t.value || '').split('\n');
+        const lineHeight = Math.max(1, fontPx) * 1.2;
+        const padding = 20 * pxPerScreenX;
+
+        let maxW = 0;
+        lines.forEach(line => { maxW = Math.max(maxW, ctx.measureText(line).width); });
+        const bgW = maxW + padding * 2;
+        const bgH = lines.length * lineHeight + padding * 2;
+
+        const rgb = hexToRgb(t.bg || '#FFFFFF');
+        ctx.fillStyle = `rgba(${rgb.r},${rgb.g},${rgb.b},${t.bgOpacity ?? 0.9})`;
+        roundRect(ctx, -bgW/2, -bgH/2, bgW, bgH, 16 * pxPerScreenX);
+        ctx.fill();
+
+        ctx.fillStyle = t.color || '#000000';
+        lines.forEach((line, i) => {
+          const y = -((lines.length - 1) * lineHeight)/2 + i*lineHeight;
+          ctx.fillText(line, 0, y);
+        });
+      }
+
+      ctx.restore();
+    }
+
+    ctx.restore();
+  }
+
+  function roundRect(ctx, x, y, w, h, r){
+    const radius = Math.max(0, Math.min(r, Math.min(w,h)/2));
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.lineTo(x + w - radius, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+    ctx.lineTo(x + w, y + h - radius);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+    ctx.lineTo(x + radius, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+    ctx.lineTo(x, y + radius);
+    ctx.quadraticCurveTo(x, y, x + radius, y);
+    ctx.closePath();
+  }
+
+  function loadImage(src){
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = async () => { try{ if (img.decode) await img.decode(); } catch{} resolve(img); };
+      img.onerror = reject;
+      img.src = src;
+    });
+  }
+
   let activePicker = null;
   function openPicker(anchorEl, initialHex, onHex){
     if (activePicker) activePicker.close();
     activePicker = new HexOnlyPicker({ anchorEl, initialHex, onChange: (hex)=> onHex(hex) });
     activePicker.open();
-  }
-
-  function applyFrameBg(panelKey){
-    frame(panelKey).style.background = s(panelKey).bgColor;
   }
 
   function setFrameBg(hex){
@@ -2251,262 +2933,43 @@
   el.bgColorRow.addEventListener('click', ()=> openPicker(el.bgColorRow, el.bgColorValue.textContent, setBgColor));
   el.bgColorSwatch.addEventListener('click', (e)=>{ e.stopPropagation(); openPicker(el.bgColorRow, el.bgColorValue.textContent, setBgColor); });
 
-  /* ============================
-     Frame category (regular/arch/mixed)
-     ============================ */
   el.frameTypeSelect.addEventListener('change', ()=>{
     const v = el.frameTypeSelect.value;
+    frameType =
+      v === 'arch'  ? FRAME_TYPE.ARCH :
+      v === 'mixed' ? FRAME_TYPE.MIXED :
+      FRAME_TYPE.REGULAR;
     pushHistory();
-
-    if (v === FRAME_MODE.REGULAR_BOTH) frameMode = FRAME_MODE.REGULAR_BOTH;
-    else if (v === FRAME_MODE.ARCH_BOTH) frameMode = FRAME_MODE.ARCH_BOTH;
-    else if (v === FRAME_MODE.MIX_FR_RA) frameMode = FRAME_MODE.MIX_FR_RA;
-    else if (v === FRAME_MODE.MIX_FA_RR || v === "mixedFAR R") frameMode = FRAME_MODE.MIX_FA_RR;
-    else frameMode = FRAME_MODE.REGULAR_BOTH;
-
-    // fix typo option value from HTML (we kept your request)
-    if (v === "mixedFAR R") el.frameTypeSelect.value = FRAME_MODE.MIX_FA_RR;
-
-    applyFrameMode();
+    applyFrameType();
   });
 
-  /* ============================
-     Arch control events (ONLY edit panel)
-     ============================ */
-  el.archRotateRange.addEventListener('input', ()=>{
-    if (!panelIsArch(editPanel)) return;
-    pushHistory();
-    arch[editPanel].rot = parseInt(el.archRotateRange.value, 10) || 0;
-    applyArchAll();
-    setTitle();
-    pushHistory();
-  });
-
-  el.flipHBtn.addEventListener('click', ()=>{
-    if (!panelIsArch(editPanel)) return;
-    pushHistory();
-    arch[editPanel].flipH = !arch[editPanel].flipH;
-    applyArchAll();
-    setTitle();
-    pushHistory();
-  });
-
-  el.flipVBtn.addEventListener('click', ()=>{
-    if (!panelIsArch(editPanel)) return;
-    pushHistory();
-    arch[editPanel].flipV = !arch[editPanel].flipV;
-    applyArchAll();
-    setTitle();
-    pushHistory();
-  });
-
-  el.resetArchBtn.addEventListener('click', ()=>{
-    if (!panelIsArch(editPanel)) return;
-    pushHistory();
-    arch[editPanel] = { rot:0, flipH:false, flipV:false };
-    applyArchAll();
-    setTitle();
-    pushHistory();
-  });
-
-  /* ============================
-     Download / Export (per panel)
-     ============================ */
-  function applyArchTransformOnCtx(ctx, panelKey, W, H){
-    const a = arch[panelKey];
-    const deg = ((a.rot%360)+360)%360;
-    const rad = deg*Math.PI/180;
-    const sx = a.flipH ? -1 : 1;
-    const sy = a.flipV ? -1 : 1;
-
-    ctx.translate(W/2, H/2);
-    ctx.rotate(rad);
-    ctx.scale(sx, sy);
-    ctx.translate(-W/2, -H/2);
-  }
-
-  function buildArchPathOnCtx(ctx, panelKey, W, H){
-    if (panelKey === PANEL.FRONT){
-      ctx.moveTo(0, H);
-      ctx.lineTo(W, H);
-      ctx.lineTo(W, 0);
-      ctx.bezierCurveTo(0.65*W, 0, 0.30*W, 0.46*H, 0, H);
-      ctx.closePath();
-    } else {
-      ctx.moveTo(0, H);
-      ctx.lineTo(W, H);
-      ctx.bezierCurveTo(0.70*W, 0.46*H, 0.35*W, 0, 0, 0);
-      ctx.lineTo(0, H);
-      ctx.closePath();
-    }
-  }
-
-  async function renderPanelToCtx(ctx, panelKey, outW, outH){
-    ctx.fillStyle = s(panelKey).bgColor || "#FFFFFF";
-    ctx.fillRect(0,0,outW,outH);
-
-    const fr = frame(panelKey).getBoundingClientRect();
-    const pxX = outW / fr.width;
-    const pxY = outH / fr.height;
-
-    for (const L of s(panelKey).layers){
-      ctx.save();
-      ctx.translate(outW/2, outH/2);
-      ctx.translate(L.x*pxX, L.y*pxY);
-      ctx.rotate((L.rotation*Math.PI)/180);
-      ctx.scale(L.scale, L.scale);
-
-      if (L.type==='image'){
-        const img = await loadImage(L.src);
-        const drawW = (L.img?.width || img.naturalWidth) * pxX;
-        const drawH = (L.img?.height|| img.naturalHeight) * pxY;
-        ctx.drawImage(img, -drawW/2, -drawH/2, drawW, drawH);
-      } else {
-        const t=L.text;
-        const fontPx = (t.fontPx||32) * pxX;
-        ctx.font = `900 ${Math.max(1,Math.round(fontPx))}px 'Poppins', Arial, sans-serif`;
-        ctx.textAlign='center';
-        ctx.textBaseline='middle';
-
-        const lines=(t.value||"").split('\n');
-        const lh = fontPx*1.2;
-        const pad = 20*pxX;
-
-        let maxW=0;
-        lines.forEach(line=>{ maxW=Math.max(maxW, ctx.measureText(line).width); });
-        const bgW=maxW + pad*2;
-        const bgH=lines.length*lh + pad*2;
-
-        const rgb=hexToRgb(t.bg||"#FFFFFF");
-        ctx.fillStyle=`rgba(${rgb.r},${rgb.g},${rgb.b},${t.bgOpacity??0.9})`;
-        roundRect(ctx, -bgW/2, -bgH/2, bgW, bgH, 16*pxX);
-        ctx.fill();
-
-        ctx.fillStyle=t.color||"#000";
-        lines.forEach((line,i)=>{
-          const y = -((lines.length-1)*lh)/2 + i*lh;
-          ctx.fillText(line, 0, y);
-        });
-      }
-
-      ctx.restore();
-    }
-  }
-
-  function roundRect(ctx,x,y,w,h,r){
-    r=Math.max(0,Math.min(r,Math.min(w,h)/2));
-    ctx.beginPath();
-    ctx.moveTo(x+r,y);
-    ctx.lineTo(x+w-r,y);
-    ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-    ctx.lineTo(x+w,y+h-r);
-    ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-    ctx.lineTo(x+r,y+h);
-    ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-    ctx.lineTo(x,y+r);
-    ctx.quadraticCurveTo(x,y,x+r,y);
-    ctx.closePath();
-  }
-
-  async function downloadSinglePanel(panelKey){
-    const MAX_W_PX = 6000;
-    const dpi = Math.max(72, Math.floor(MAX_W_PX / magnetW));
-    const outW = Math.round(magnetW * dpi);
-    const outH = Math.round(magnetH * dpi);
-
-    const canvas = document.createElement('canvas');
-    canvas.width = outW;
-    canvas.height = outH;
-    const ctx = canvas.getContext('2d');
-
-    if (panelIsArch(panelKey)){
-      // clip with rotated/flipped arch SHAPE only
-      ctx.save();
-      ctx.beginPath();
-      ctx.save();
-      applyArchTransformOnCtx(ctx, panelKey, outW, outH);
-      buildArchPathOnCtx(ctx, panelKey, outW, outH);
-      ctx.restore();
-      ctx.clip();
-      ctx.restore();
-
-      // render artwork normally
-      await renderPanelToCtx(ctx, panelKey, outW, outH);
-    } else {
-      await renderPanelToCtx(ctx, panelKey, outW, outH);
-    }
-
-    return new Promise((resolve, reject) => {
-      canvas.toBlob((blob)=>{
-        if (!blob) return reject(new Error("Blob failed"));
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `vinyl-${panelKey}-${panelIsArch(panelKey)?'arch':'regular'}-${magnetH}x${magnetW}in-${dpi}dpi-${Date.now()}.jpg`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-        resolve();
-      }, 'image/jpeg', 0.92);
-    });
-  }
-
-  async function handleSingleDownload(){
-    try{ await downloadSinglePanel(editPanel); }
-    catch(err){ console.warn(err); alert("Export failed. Try smaller size or fewer layers."); }
-  }
-  el.downloadBtn.addEventListener('click', handleSingleDownload);
-
-  el.downloadFrontBtn.addEventListener('click', ()=>downloadSinglePanel(PANEL.FRONT).catch(()=>alert("Front export failed.")));
-  el.downloadRearBtn.addEventListener('click', ()=>downloadSinglePanel(PANEL.REAR).catch(()=>alert("Rear export failed.")));
-
-  el.downloadBothBtn.addEventListener('click', async ()=>{
-    try{
-      el.downloadBothBtn.disabled = true;
-      el.downloadBothBtn.textContent = "Preparing…";
-      await downloadSinglePanel(PANEL.FRONT);
-      await new Promise(r=>setTimeout(r, 250));
-      await downloadSinglePanel(PANEL.REAR);
-    } catch(err){
-      console.warn(err);
-      alert("Export failed. Try smaller size or fewer layers.");
-    } finally{
-      el.downloadBothBtn.disabled = false;
-      el.downloadBothBtn.textContent = "⬇⬇ Download Both (Front + Rear)";
-    }
-  });
-
-  /* ============================
-     Image loader for export
-     ============================ */
-  function loadImage(src){
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = async () => { try{ if (img.decode) await img.decode(); } catch{} resolve(img); };
-      img.onerror = reject;
-      img.src = src;
-    });
-  }
-
-  /* ============================
-     Undo / Redo
-     ============================ */
   function applySnapshot(snapshot){
     applyingHistory = true;
     try{
       const data = JSON.parse(snapshot);
       magnetW = data.magnetW; magnetH = data.magnetH;
       currentView = data.currentView; editPanel = data.editPanel;
-      frameMode = data.frameMode || FRAME_MODE.REGULAR_BOTH;
+      frameType = data.frameType || FRAME_TYPE.REGULAR;
 
-      // arch state
-      if (data.arch && data.arch.front && data.arch.rear){
-        arch.front = { ...arch.front, ...data.arch.front };
-        arch.rear  = { ...arch.rear,  ...data.arch.rear };
+      // NEW: restore per-panel arch transforms (fallback if older history)
+      if (data.archXform && data.archXform.front && data.archXform.rear){
+        archXform[PANEL.FRONT] = {
+          rot: data.archXform.front.rot || 0,
+          flipX: !!data.archXform.front.flipX,
+          flipY: !!data.archXform.front.flipY
+        };
+        archXform[PANEL.REAR] = {
+          rot: data.archXform.rear.rot || 0,
+          flipX: !!data.archXform.rear.flipX,
+          flipY: !!data.archXform.rear.flipY
+        };
+      } else {
+        // default
+        archXform[PANEL.FRONT] = archXform[PANEL.FRONT] || { rot:0, flipX:false, flipY:false };
+        archXform[PANEL.REAR]  = archXform[PANEL.REAR]  || { rot:0, flipX:false, flipY:false };
       }
 
-      el.frameTypeSelect.value = frameMode;
+      el.frameTypeSelect.value = frameType;
 
       [PANEL.FRONT, PANEL.REAR].forEach(pk=>{
         stack(pk).innerHTML = '';
@@ -2578,7 +3041,9 @@
         }
       };
 
-      applyFrameMode();
+      applyFrameType();
+      applyArchTransform(PANEL.FRONT);
+      applyArchTransform(PANEL.REAR);
       fitFrames(true);
 
       Promise.resolve()
@@ -2613,9 +3078,6 @@
     updateUndoRedoButtons();
   });
 
-  /* ============================
-     Init
-     ============================ */
   function init(){
     el.textSizeValue.textContent = el.textSizeRange.value + 'px';
     el.bgOpacityValue.textContent = el.bgOpacityRange.value + '%';
@@ -2632,19 +3094,15 @@
     el.bgColorValue.textContent = "#FFFFFF";
 
     fillPresets();
-
-    // start in regular both
-    frameMode = FRAME_MODE.REGULAR_BOTH;
-    el.frameTypeSelect.value = frameMode;
-
     applyFrameBg(PANEL.FRONT);
     applyFrameBg(PANEL.REAR);
 
     applyViewUI();
     fitFrames(true);
 
-    // apply arch transforms (no-op unless arch is on)
-    applyArchAll();
+    applyArchTransform(PANEL.FRONT);
+    applyArchTransform(PANEL.REAR);
+    updateArchUI();
 
     updateEmpty(PANEL.FRONT);
     updateEmpty(PANEL.REAR);
@@ -2664,3 +3122,4 @@
 </script>
 </body>
 </html>
+
