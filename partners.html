@@ -15,14 +15,14 @@
   </script>
 
   <title>Magnetic Car Advertising for Businesses | Gigways</title>
-  <meta name="description" content="Launch magnetic car advertising campaigns with Gigways. We design and professionally install magnetic ads, manage opt-in drivers, and scale fleets with transparent tiered pricing. One-time install fee waived for continuous campaigns." />
+  <meta name="description" content="Launch magnetic car advertising campaigns with Gigways. We design and professionally install magnetic ads, manage opt-in drivers, and scale fleets with transparent tiered pricing." />
   <meta name="keywords" content="magnetic car advertising, car advertising, vehicle advertising, mobile billboard advertising, fleet advertising, fleet marketing, magnetic car ads, OOH advertising, local advertising, gig driver advertising, rideshare advertising" />
   <meta name="author" content="Gigways Team" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://gigways.com/partners.html" />
 
   <meta property="og:title" content="Magnetic Car Advertising for Businesses | Gigways" />
-  <meta property="og:description" content="We design and install magnetic car ads, coordinate opt-in drivers, and scale campaigns city-by-city. Transparent fleet pricing with a one-time install fee (waived for continuous campaigns)." />
+  <meta property="og:description" content="We design and install magnetic car ads, coordinate opt-in drivers, and scale campaigns city-by-city. Transparent fleet pricing." />
   <meta property="og:image" content="https://gigways.com/assets/img/App.png" />
   <meta property="og:url" content="https://gigways.com/partners.html" />
   <meta property="og:type" content="website" />
@@ -30,7 +30,7 @@
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Magnetic Car Advertising for Businesses | Gigways" />
-  <meta name="twitter:description" content="Magnetic car ads with opt-in drivers. We design, install, and manage campaigns with tiered fleet pricing. Install fee waived for continuous campaigns." />
+  <meta name="twitter:description" content="Magnetic car ads with opt-in drivers. We design, install, and manage campaigns with tiered fleet pricing." />
   <meta name="twitter:image" content="https://gigways.com/assets/img/App.png" />
 
   <link rel="icon" href="assets/img/App.png" />
@@ -58,7 +58,7 @@
           "availability":"https://schema.org/InStock",
           "category":"Advertising"
         },
-        "description":"Premium Magnet Vinyl powered by opt-in drivers. We design and professionally install magnetic ads, coordinate rollout, and support scalable fleet campaigns with transparent tiered pricing and a one-time install fee (waived for continuous campaigns)."
+        "description":"Premium Magnet Vinyl powered by opt-in drivers. We design and professionally install magnetic ads, coordinate rollout, and support scalable fleet campaigns with transparent tiered pricing."
       }
     ]
   }
@@ -271,72 +271,6 @@
       color:var(--third-color);
     }
 
-    /* Continue toggle */
-    .continue-card{
-      margin-top: .9rem;
-      border-radius: 18px;
-      border: 1px solid var(--gw-border);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.035));
-      padding: .9rem .95rem;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:.9rem;
-      color: var(--gw-text);
-    }
-    .continue-card b{ display:block; color: var(--gw-text); }
-    .continue-card span{
-      display:block;
-      margin-top:.15rem;
-      color: var(--gw-sub);
-      font-size:.92rem;
-      line-height:1.35;
-    }
-    .toggle{
-      display:inline-flex;
-      align-items:center;
-      gap:.6rem;
-      user-select:none;
-      cursor:pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .toggle input{ position:absolute; left:-9999px; }
-    .switch{
-      width: 52px;
-      height: 30px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.07);
-      box-shadow: inset 0 0 0 1px var(--gw-border);
-      position: relative;
-      flex: 0 0 auto;
-    }
-    .knob{
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.9);
-      position:absolute;
-      top: 2.8px;
-      left: 3px;
-      transition: transform .16s ease;
-      box-shadow: 0 10px 18px rgba(0,0,0,.18);
-    }
-    .toggle input:checked + .switch{
-      background: rgba(216,198,175,.35);
-      border-color: rgba(216,198,175,.65);
-      box-shadow: inset 0 0 0 1px rgba(216,198,175,.55);
-    }
-    .toggle input:checked + .switch .knob{
-      transform: translateX(22px);
-      background: rgba(216,198,175,.98);
-    }
-    .toggle .labeltxt{
-      font-weight: 950;
-      font-size: .92rem;
-      white-space: nowrap;
-      color: var(--gw-text);
-    }
-
     /* Custom months */
     .custom-plan{
       margin-top: .9rem;
@@ -506,7 +440,10 @@
     html:not(.dark-theme) .tier{ background: rgba(0,0,0,.03); }
     .tier span{ font-size: .88rem; font-weight: 900; color: var(--gw-sub); }
     .tier b{ font-size: .95rem; font-weight: 1000; color: var(--gw-text); letter-spacing:.2px; }
-    .pb-callout{
+    .pb-muted{ margin-top:.35rem; font-size:.88rem; color:var(--gw-sub); line-height:1.4; }
+
+    /* Discount callout (duration) */
+    .duration-discount{
       margin-top: .75rem;
       border-radius: 16px;
       border: 1px solid rgba(216,198,175,.35);
@@ -516,20 +453,16 @@
       gap:.7rem;
       align-items:flex-start;
     }
-    .pb-callout-icon{
-      width: 36px;
-      height: 36px;
-      border-radius: 14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+    .duration-discount .icon{
+      width: 36px; height: 36px; border-radius: 14px;
+      display:flex; align-items:center; justify-content:center;
       background: rgba(216,198,175,.18);
       border: 1px solid rgba(216,198,175,.25);
       flex: 0 0 auto;
     }
-    .pb-callout-icon i{ font-size: 1.1rem; color: var(--gw-text); }
-    .pb-callout-text b{ display:block; font-weight: 1000; color: var(--gw-text); font-size: .93rem; }
-    .pb-callout-text span{ display:block; margin-top: .12rem; font-size: .88rem; color: var(--gw-sub); line-height: 1.35; }
+    .duration-discount .icon i{ font-size: 1.1rem; color: var(--gw-text); }
+    .duration-discount b{ display:block; font-weight: 1000; color: var(--gw-text); font-size: .93rem; }
+    .duration-discount span{ display:block; margin-top:.12rem; font-size:.88rem; color: var(--gw-sub); line-height: 1.35; }
 
     /* Estimate banner */
     .estimate-banner.aside-estimate{
@@ -573,17 +506,8 @@
     html:not(.dark-theme) .est-body{ background: rgba(0,0,0,.03); }
 
     /* ✅ Ad type buttons (HARD FORCE TEXT COLOR so it can't disappear) */
-    .adtype-row{
-      margin-top: .85rem;
-      display:flex;
-      flex-wrap:wrap;
-      gap:.6rem;
-    }
-    .adtype-row .adtype-btn,
-    .adtype-row .adtype-btn *{
-      color: var(--gw-text) !important;
-      -webkit-text-fill-color: var(--gw-text) !important;
-    }
+    .adtype-row{ margin-top: .85rem; display:flex; flex-wrap:wrap; gap:.6rem; }
+    .adtype-row .adtype-btn, .adtype-row .adtype-btn *{ color: var(--gw-text) !important; -webkit-text-fill-color: var(--gw-text) !important; }
     .adtype-btn{
       border-radius: 999px;
       padding: .58rem .85rem;
@@ -597,45 +521,32 @@
       transition: transform .08s ease, opacity .15s ease;
     }
     .adtype-btn:hover{ transform: translateY(-1px); }
-    .adtype-row .adtype-btn.selected,
-    .adtype-row .adtype-btn.selected *{
+    .adtype-row .adtype-btn.selected, .adtype-row .adtype-btn.selected *{
       background: rgba(216,198,175,.92);
       border-color: rgba(216,198,175,.95);
       color: var(--gw-accentText) !important;
       -webkit-text-fill-color: var(--gw-accentText) !important;
     }
-    .adtype-btn.disabled{
-      cursor: not-allowed;
-      opacity: .65;
-    }
+    .adtype-btn.disabled{ cursor:not-allowed; opacity:.65; }
     .adtype-soon{
-      font-size: .78rem;
-      padding: .15rem .45rem;
-      border-radius: 999px;
+      font-size:.78rem; padding:.15rem .45rem; border-radius:999px;
       border: 1px solid var(--gw-border);
       background: rgba(0,0,0,.14);
       color: var(--gw-sub) !important;
       -webkit-text-fill-color: var(--gw-sub) !important;
       font-weight: 900;
     }
-    html:not(.dark-theme) .adtype-row .adtype-btn,
-    html:not(.dark-theme) .adtype-row .adtype-btn *{
-      color: #121212 !important;
-      -webkit-text-fill-color: #121212 !important;
+    html:not(.dark-theme) .adtype-row .adtype-btn, html:not(.dark-theme) .adtype-row .adtype-btn *{
+      color:#121212 !important; -webkit-text-fill-color:#121212 !important;
     }
     html:not(.dark-theme) .adtype-row .adtype-btn{
-      background: rgba(0,0,0,.05) !important;
-      border-color: rgba(0,0,0,.16) !important;
+      background: rgba(0,0,0,.05) !important; border-color: rgba(0,0,0,.16) !important;
     }
-    html:not(.dark-theme) .adtype-row .adtype-btn.selected,
-    html:not(.dark-theme) .adtype-row .adtype-btn.selected *{
-      background: rgba(216,198,175,.88) !important;
-      border-color: rgba(216,198,175,.95) !important;
-      color: #121212 !important;
-      -webkit-text-fill-color: #121212 !important;
+    html:not(.dark-theme) .adtype-row .adtype-btn.selected, html:not(.dark-theme) .adtype-row .adtype-btn.selected *{
+      background: rgba(216,198,175,.88) !important; border-color: rgba(216,198,175,.95) !important;
+      color:#121212 !important; -webkit-text-fill-color:#121212 !important;
     }
-    html:not(.dark-theme) .adtype-row .adtype-btn.disabled,
-    html:not(.dark-theme) .adtype-row .adtype-btn.disabled *{
+    html:not(.dark-theme) .adtype-row .adtype-btn.disabled, html:not(.dark-theme) .adtype-row .adtype-btn.disabled *{
       color: rgba(18,18,18,.65) !important;
       -webkit-text-fill-color: rgba(18,18,18,.65) !important;
       opacity: 1;
@@ -649,53 +560,19 @@
       -webkit-text-fill-color: rgba(18,18,18,.72) !important;
     }
 
-    /* ✅ Design type selector (Arch vs Mixed) with POPUP view button */
-    .designtype-wrap{
-      margin-top: .85rem;
-      border-radius: 16px;
-      border: 1px solid var(--gw-border);
-      background: rgba(255,255,255,.04);
-      padding: .85rem;
-    }
-    .designtype-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:.75rem;
-      flex-wrap:wrap;
-      margin-bottom:.65rem;
-    }
-    .designtype-title{
-      font-weight: 1000;
-      color: var(--gw-text);
-      margin:0;
-      font-size:.95rem;
-    }
-    .designtype-sub{
-      margin-top:.15rem;
-      color: var(--gw-sub);
-      font-size:.88rem;
-      line-height:1.35;
-    }
-    .design-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:.6rem;
-      margin-top:.45rem;
-      align-items:center;
-    }
+    /* ✅ Design selector + modal */
+    .designtype-wrap{ margin-top:.85rem; border-radius:16px; border:1px solid var(--gw-border); background: rgba(255,255,255,.04); padding:.85rem; }
+    .designtype-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:.75rem; flex-wrap:wrap; margin-bottom:.65rem; }
+    .designtype-title{ font-weight:1000; color:var(--gw-text); margin:0; font-size:.95rem; }
+    .designtype-sub{ margin-top:.15rem; color:var(--gw-sub); font-size:.88rem; line-height:1.35; }
+    .design-row{ display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.45rem; align-items:center; }
     .design-btn{
-      border-radius: 999px;
-      padding: .58rem .85rem;
-      border: 1px solid var(--gw-border);
+      border-radius:999px; padding:.58rem .85rem;
+      border:1px solid var(--gw-border);
       background: rgba(255,255,255,.06);
       color: var(--gw-text) !important;
       -webkit-text-fill-color: var(--gw-text) !important;
-      font-weight: 1000;
-      cursor: pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:.55rem;
+      font-weight:1000; cursor:pointer; display:inline-flex; align-items:center; gap:.55rem;
       transition: transform .08s ease, opacity .15s ease;
     }
     .design-btn:hover{ transform: translateY(-1px); }
@@ -705,24 +582,17 @@
       color: var(--gw-accentText) !important;
       -webkit-text-fill-color: var(--gw-accentText) !important;
     }
-
     .design-view{
-      display:inline-flex;
-      align-items:center;
-      gap:.45rem;
-      padding:.48rem .7rem;
-      border-radius: 999px;
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.48rem .7rem; border-radius:999px;
       border: 1px solid var(--gw-border);
       background: rgba(0,0,0,.10);
       color: var(--gw-sub);
-      font-weight: 900;
-      font-size: .86rem;
-      cursor:pointer;
-      transition: transform .08s ease, opacity .15s ease;
+      font-weight:900; font-size:.86rem;
+      cursor:pointer; transition: transform .08s ease, opacity .15s ease;
     }
     .design-view:hover{ opacity:.95; transform: translateY(-1px); }
-    .design-view i{ font-size: 1rem; }
-
+    .design-view i{ font-size:1rem; }
     html:not(.dark-theme) .design-btn{
       background: rgba(0,0,0,.05) !important;
       border-color: rgba(0,0,0,.16) !important;
@@ -741,87 +611,45 @@
       color: rgba(18,18,18,.75);
     }
 
-    /* ✅ POPUP MODAL (does NOT open a new page) */
     .gw-modal{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.62);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1.1rem;
-      z-index: 9999;
+      position: fixed; inset: 0; background: rgba(0,0,0,.62);
+      display:none; align-items:center; justify-content:center;
+      padding:1.1rem; z-index:9999;
     }
     .gw-modal.open{ display:flex; }
     .gw-modal__dialog{
-      width: min(920px, 100%);
-      border-radius: 18px;
-      border: 1px solid var(--gw-border);
-      background: rgba(20,20,20,.72);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 22px 70px rgba(0,0,0,.35);
-      overflow: hidden;
+      width:min(920px,100%); border-radius:18px; border:1px solid var(--gw-border);
+      background: rgba(20,20,20,.72); backdrop-filter: blur(10px);
+      box-shadow: 0 22px 70px rgba(0,0,0,.35); overflow:hidden;
     }
-    html:not(.dark-theme) .gw-modal__dialog{
-      background: rgba(255,255,255,.92);
-    }
+    html:not(.dark-theme) .gw-modal__dialog{ background: rgba(255,255,255,.92); }
     .gw-modal__top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:.75rem;
-      padding: .8rem .9rem;
-      border-bottom: 1px solid var(--gw-border);
+      display:flex; align-items:center; justify-content:space-between;
+      gap:.75rem; padding:.8rem .9rem; border-bottom:1px solid var(--gw-border);
     }
     .gw-modal__title{
-      font-weight: 1000;
-      color: var(--gw-text);
-      display:flex;
-      align-items:center;
-      gap:.55rem;
+      font-weight:1000; color:var(--gw-text);
+      display:flex; align-items:center; gap:.55rem;
     }
     html:not(.dark-theme) .gw-modal__title{ color:#121212; }
     .gw-modal__close{
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      border: 1px solid var(--gw-border);
+      width:42px; height:42px; border-radius:14px;
+      border:1px solid var(--gw-border);
       background: rgba(255,255,255,.06);
       color: var(--gw-text);
-      font-size: 1.4rem;
-      line-height: 1;
-      cursor: pointer;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      font-size:1.4rem; line-height:1; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
     }
-    html:not(.dark-theme) .gw-modal__close{
-      background: rgba(0,0,0,.04);
-      color:#121212;
-    }
-    .gw-modal__body{
-      padding: .9rem;
-      background: rgba(0,0,0,.10);
-    }
-    html:not(.dark-theme) .gw-modal__body{
-      background: rgba(0,0,0,.03);
-    }
+    html:not(.dark-theme) .gw-modal__close{ background: rgba(0,0,0,.04); color:#121212; }
+    .gw-modal__body{ padding:.9rem; background: rgba(0,0,0,.10); }
+    html:not(.dark-theme) .gw-modal__body{ background: rgba(0,0,0,.03); }
     .gw-modal__img{
-      width: 100%;
-      height: auto;
-      display:block;
-      border-radius: 14px;
-      border: 1px solid var(--gw-border);
+      width:100%; height:auto; display:block;
+      border-radius:14px; border:1px solid var(--gw-border);
       background: rgba(0,0,0,.12);
-      max-height: 70vh;
-      object-fit: contain;
+      max-height:70vh; object-fit: contain;
     }
-    .gw-modal__cap{
-      margin-top: .7rem;
-      color: var(--gw-sub);
-      font-size: .9rem;
-      line-height: 1.4;
-    }
+    .gw-modal__cap{ margin-top:.7rem; color: var(--gw-sub); font-size:.9rem; line-height:1.4; }
     html:not(.dark-theme) .gw-modal__cap{ color: rgba(18,18,18,.78); }
 
     /* FAQ */
@@ -863,16 +691,11 @@
     .faq-q{ display:flex; align-items:flex-start; gap:.65rem; line-height:1.2; }
     .faq-q i{ font-size: 1.15rem; margin-top:.05rem; opacity:.95; }
     .faq-chevron{
-      width: 34px;
-      height: 34px;
-      border-radius: 12px;
+      width: 34px; height: 34px; border-radius: 12px;
       border: 1px solid var(--faq-border);
       background: var(--faq-chip);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex: 0 0 auto;
-      transition: transform .15s ease;
+      display:flex; align-items:center; justify-content:center;
+      flex: 0 0 auto; transition: transform .15s ease;
       color: var(--faq-text);
     }
     details[open] .faq-chevron{ transform: rotate(180deg); }
@@ -1036,35 +859,19 @@
               </div>
             </div>
 
-            <!-- ✅ Continue option -->
-            <div class="continue-card" aria-label="Continue campaign option">
-              <div>
-                <b><i class="bx bx-refresh"></i> Continuing campaign?</b>
-                <span>
-                  Turn this on if you plan to keep the campaign running month-to-month (no pause).
-                  <strong>Install/reinstall fees are waived while you continuously renew.</strong>
-                </span>
-              </div>
-              <label class="toggle" for="continue_campaign">
-                <span class="labeltxt">Continue</span>
-                <input type="checkbox" id="continue_campaign" />
-                <span class="switch" aria-hidden="true"><span class="knob"></span></span>
-              </label>
-            </div>
-
-            <!-- ✅ Custom months ONLY -->
+            <!-- ✅ Custom months ONLY (1–6) -->
             <div class="custom-plan" aria-label="Custom duration">
               <div class="top">
                 <div>
                   <h4 class="cp-title"><i class="bx bx-slider-alt"></i> Custom duration</h4>
-                  <div class="cp-sub">Enter how many months you want to run (1–12). End date will auto-adjust.</div>
+                  <div class="cp-sub">Enter how many months you want to run (1–6). End date will auto-adjust.</div>
                 </div>
                 <span class="cp-badge"><i class="bx bx-time-five"></i> Flexible</span>
               </div>
 
               <div class="cp-row">
                 <span>Months</span>
-                <input id="custom_months" class="cp-input" type="number" min="1" max="12" value="1" inputmode="numeric" />
+                <input id="custom_months" class="cp-input" type="number" min="1" max="6" value="1" inputmode="numeric" />
               </div>
             </div>
 
@@ -1116,11 +923,16 @@
                 </div>
               </div>
 
-              <div class="pb-callout">
-                <div class="pb-callout-icon"><i class="bx bx-refresh"></i></div>
-                <div class="pb-callout-text">
-                  <b>Continuing campaigns (best deal)</b>
-                  <span>Keep the campaign active with no pause and we waive future install/reinstall fees while you continuously renew.</span>
+              <!-- ✅ NEW: Duration discount info -->
+              <div class="duration-discount" aria-label="Duration discounts">
+                <div class="icon"><i class="bx bx-purchase-tag"></i></div>
+                <div>
+                  <b>Duration discounts (monthly only)</b>
+                  <span>
+                    2–4 months: <strong>5% off</strong> monthly charges •
+                    5–6 months: <strong>10% off</strong> monthly charges.
+                    (Install fee is not discounted.)
+                  </span>
                 </div>
               </div>
             </div>
@@ -1146,8 +958,11 @@
               <input type="hidden" id="campaign_fleet_discount" name="fleetDiscountApplied" value="false">
               <input type="hidden" id="campaign_fleet_discount_rate" name="fleetDiscountRate" value="0">
               <input type="hidden" id="campaign_install_fee_total" name="installFeeTotal" value="">
-              <input type="hidden" id="campaign_continue" name="continueCampaign" value="false">
               <input type="hidden" id="campaign_install_fee_per_car" name="installFeePerCar" value="200">
+
+              <!-- ✅ NEW hidden fields for duration discount -->
+              <input type="hidden" id="campaign_duration_discount_pct" name="durationDiscountPct" value="0">
+              <input type="hidden" id="campaign_duration_discount_amount" name="durationDiscountAmount" value="0">
             </div>
 
             <p class="hero-lead" style="margin-top:.85rem; opacity:.85; font-size:.95rem;">
@@ -1246,7 +1061,6 @@
                     Arch Design
                   </button>
 
-                  <!-- ✅ POPUP "View" (replace the image URL with your real one) -->
                   <button
                     type="button"
                     class="design-view"
@@ -1259,7 +1073,6 @@
                     Mixed Design
                   </button>
 
-                  <!-- ✅ POPUP "View" (replace the image URL with your real one) -->
                   <button
                     type="button"
                     class="design-view"
@@ -1489,7 +1302,7 @@
     </div>
   </main>
 
-  <!-- ✅ POPUP MODAL HTML (put anywhere in body, best near end) -->
+  <!-- ✅ POPUP MODAL HTML -->
   <div class="gw-modal" id="designModal" role="dialog" aria-modal="true" aria-labelledby="designModalTitle">
     <div class="gw-modal__dialog" role="document">
       <div class="gw-modal__top">
@@ -1557,7 +1370,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
 
-  <!-- ✅ Page JS (pricing + form + POPUP modal) -->
+  <!-- ✅ Page JS (pricing + form + POPUP modal + duration discounts) -->
   <script>
     (function(){
       const $ = s => document.querySelector(s);
@@ -1610,6 +1423,15 @@
         return { rate: 450, negotiable: false };
       }
 
+      // ✅ NEW: duration discount % based on months
+      function durationDiscountPct(months){
+        const m = parseInt(months, 10);
+        if (!isFinite(m)) return 0;
+        if (m >= 5) return 0.10;   // 5–6 months
+        if (m >= 2) return 0.05;   // 2–4 months
+        return 0;                  // 1 month
+      }
+
       const BASE_INSTALL_FEE_PER_CAR = 200;
 
       const form    = $('#my-form');
@@ -1623,7 +1445,6 @@
       const endEl   = $('#end_date');
 
       const monthsEl = $('#custom_months');
-      const continueToggle = $('#continue_campaign');
 
       const estimateText  = $('#estimateText');
       const estimatePrice = $('#estimatePrice');
@@ -1636,8 +1457,11 @@
       const fleetHidden  = $('#campaign_fleet_discount');
       const fleetRateHidden = $('#campaign_fleet_discount_rate');
       const installTotalHidden = $('#campaign_install_fee_total');
-      const continueHidden = $('#campaign_continue');
       const installPerCarHidden = $('#campaign_install_fee_per_car');
+
+      // ✅ NEW hidden fields
+      const durDiscPctHidden = $('#campaign_duration_discount_pct');
+      const durDiscAmtHidden = $('#campaign_duration_discount_amount');
 
       const sticky = $('#stickySummary');
       const stickyClose = $('#stickyClose');
@@ -1675,7 +1499,7 @@
         });
       });
 
-      // ✅ Design type buttons (hidden input)
+      // Design type buttons (hidden input)
       const designHidden = $('#design_type');
       const designBtns = $$('.design-btn');
       designBtns.forEach(b=>{
@@ -1687,7 +1511,7 @@
         });
       });
 
-      /* ✅ POPUP MODAL logic */
+      /* POPUP MODAL logic */
       const modal = $('#designModal');
       const modalClose = $('#designModalClose');
       const modalTitle = $('#designModalTitle span');
@@ -1736,11 +1560,19 @@
 
       let syncing = false;
 
+      function clampMonthsToRange(raw){
+        const m = parseInt(raw, 10);
+        if (!isFinite(m)) return 1;
+        return Math.max(1, Math.min(6, m)); // 1–6 only
+      }
+
       function syncEndFromStartMonths(){
         if (syncing) return;
         const sd = parseDate(startEl?.value);
-        const m = parseInt(monthsEl?.value || '0', 10);
-        if (!sd || !isFinite(m) || m < 1) return;
+        const m = clampMonthsToRange(monthsEl?.value || '1');
+        if (!sd) return;
+
+        if (monthsEl) monthsEl.value = String(m);
 
         syncing = true;
         const endCandidate = addMonthsLocal(sd, m);
@@ -1763,7 +1595,7 @@
         let months = (endPlus.getFullYear() - sd.getFullYear()) * 12 + (endPlus.getMonth() - sd.getMonth());
         if (endPlus.getDate() < sd.getDate()) months -= 1;
 
-        months = Math.max(1, Math.min(12, months || 1));
+        months = Math.max(1, Math.min(6, months || 1));
         monthsEl.value = String(months);
         syncing = false;
       }
@@ -1775,6 +1607,7 @@
       });
 
       monthsEl?.addEventListener('input', ()=>{
+        if (monthsEl) monthsEl.value = String(clampMonthsToRange(monthsEl.value));
         syncEndFromStartMonths();
         updatePricing();
       });
@@ -1786,62 +1619,69 @@
       });
 
       carsEl?.addEventListener('input', updatePricing);
-      continueToggle?.addEventListener('change', updatePricing);
 
-      function computePricing({ months, numberOfCars, isContinuing }){
+      function computePricing({ months, numberOfCars }){
         const m = parseInt(months, 10);
         const cars = parseInt(numberOfCars, 10);
-        const continuing = !!isContinuing;
 
-        const isValidMonths = (m >= 1 && m <= 12);
+        const isValidMonths = (m >= 1 && m <= 6);
         const isValidCars = isFinite(cars) && cars >= 1;
 
         if (!isValidMonths || !isValidCars){
-          return { error: !isValidMonths ? 'Enter a valid duration (1–12 months).' : 'Enter a valid number of cars (1+).' };
+          return { error: !isValidMonths ? 'Enter a valid duration (1–6 months).' : 'Enter a valid number of cars (1+).' };
         }
 
         const t = tierRate(cars);
 
         if (t.negotiable){
-          return { negotiable: true, months: m, numberOfCars: cars, isContinuing: continuing, error: '' };
+          return { negotiable: true, months: m, numberOfCars: cars, error: '' };
         }
 
         const rate = t.rate;
         if (!rate) return { error: 'Pricing configuration missing for this selection.' };
 
-        const installFeePerCar = continuing ? 0 : BASE_INSTALL_FEE_PER_CAR;
-
-        const monthlyTotal = rate * cars;
+        const installFeePerCar = BASE_INSTALL_FEE_PER_CAR; // always applies
         const installTotal = installFeePerCar * cars;
-        const campaignTotal = (monthlyTotal * m) + installTotal;
+
+        const monthlyTotal = rate * cars; // before duration discount
+        const discPct = durationDiscountPct(m);
+        const monthlyDiscountAmount = monthlyTotal * discPct; // per month
+        const discountedMonthlyTotal = monthlyTotal - monthlyDiscountAmount;
+
+        const campaignTotal = (discountedMonthlyTotal * m) + installTotal;
 
         const baseline = 450 * cars;
-        const discountPct = baseline > 0 ? (1 - (monthlyTotal / baseline)) * 100 : 0;
+        const discountPctFleetVsBase = baseline > 0 ? (1 - (monthlyTotal / baseline)) * 100 : 0;
 
         return {
           months: m,
           numberOfCars: cars,
           ratePerCarPerMonth: rate,
-          monthlyTotal,
+
+          monthlyTotal,                 // before duration discount
+          durationDiscountPct: discPct, // 0 / 0.05 / 0.10
+          durationDiscountPerMonth: monthlyDiscountAmount,
+          discountedMonthlyTotal,       // after duration discount
+
           installFeePerCar,
           installTotal,
           campaignTotal,
-          isContinuing: continuing,
+
           fleetApplied: cars >= 5,
-          fleetRate: Math.max(0, discountPct),
+          fleetRate: Math.max(0, discountPctFleetVsBase),
           error: ''
         };
       }
 
       function updatePricing(){
-        const months = parseInt(monthsEl?.value || 0, 10);
+        const months = clampMonthsToRange(monthsEl?.value || '1');
+        if (monthsEl) monthsEl.value = String(months);
+
         const cars = parseInt(carsEl?.value || 0, 10);
-        const continuing = !!(continueToggle && continueToggle.checked);
 
         if (monthsHidden) monthsHidden.value = String(months);
-        if (continueHidden) continueHidden.value = String(continuing);
 
-        const result = computePricing({ months, numberOfCars: cars, isContinuing: continuing });
+        const result = computePricing({ months, numberOfCars: cars });
 
         if (result && result.negotiable){
           estimatePrice.textContent = 'Negotiable';
@@ -1860,6 +1700,9 @@
           if (fleetHidden) fleetHidden.value = 'true';
           if (fleetRateHidden) fleetRateHidden.value = '0';
 
+          if (durDiscPctHidden) durDiscPctHidden.value = '0';
+          if (durDiscAmtHidden) durDiscAmtHidden.value = '0';
+
           if (sticky && !stickyDismissed){
             sticky.classList.remove('hidden');
             stickyLine.textContent = `Premium Magnet Vinyl • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
@@ -1874,12 +1717,17 @@
           estimateText.textContent = result.error;
           estimateMeta.textContent = 'Final pricing confirmed after review.';
           if (estimatePill) estimatePill.textContent = 'Non-binding';
+
           if (rateHidden) rateHidden.value = '';
           if (totalHidden) totalHidden.value = '';
           if (installTotalHidden) installTotalHidden.value = '';
           if (installPerCarHidden) installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
           if (fleetHidden) fleetHidden.value = 'false';
           if (fleetRateHidden) fleetRateHidden.value = '0';
+
+          if (durDiscPctHidden) durDiscPctHidden.value = '0';
+          if (durDiscAmtHidden) durDiscAmtHidden.value = '0';
+
           if (sticky && !stickyDismissed) sticky.classList.add('hidden');
           return;
         }
@@ -1891,20 +1739,27 @@
         if (fleetHidden) fleetHidden.value = String(!!result.fleetApplied);
         if (fleetRateHidden) fleetRateHidden.value = String(result.fleetRate.toFixed(2));
 
+        // ✅ duration discount hidden fields (total discount over entire campaign monthly portion)
+        const totalDurationDiscount = result.durationDiscountPerMonth * result.months;
+        if (durDiscPctHidden) durDiscPctHidden.value = String((result.durationDiscountPct * 100).toFixed(0)); // 0 / 5 / 10
+        if (durDiscAmtHidden) durDiscAmtHidden.value = String(totalDurationDiscount.toFixed(2));
+
         const pkgLabel = 'Premium Magnet Vinyl';
 
         estimatePrice.textContent = formatMoney(result.campaignTotal);
         if (estimatePill) estimatePill.textContent = 'Non-binding';
 
-        const installLine = result.isContinuing
-          ? `Install (one-time): <strong>${formatMoney(0)}</strong> <span style="opacity:.9;">(waived for continuous campaign)</span>`
-          : `Install (one-time): <strong>${formatMoney(result.installTotal)}</strong> <span style="opacity:.9;">(${formatMoney(BASE_INSTALL_FEE_PER_CAR)} per car)</span>`;
+        const durationLine = result.durationDiscountPct > 0
+          ? `Duration discount: <strong>${(result.durationDiscountPct*100).toFixed(0)}% off</strong> monthly (${formatMoney(result.durationDiscountPerMonth)} / month)`
+          : `Duration discount: <strong>None</strong> (1 month)`;
 
         estimateText.innerHTML =
           `<strong>${pkgLabel}</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(result.months)}</strong><br>` +
           `Monthly rate: <strong>${formatMoney(result.ratePerCarPerMonth)}</strong> per car<br>` +
-          `Monthly total: <strong>${formatMoney(result.monthlyTotal)}</strong><br>` +
-          `${installLine}<br>` +
+          `Monthly total (before duration discount): <strong>${formatMoney(result.monthlyTotal)}</strong><br>` +
+          `${durationLine}<br>` +
+          `Monthly total (after discount): <strong>${formatMoney(result.discountedMonthlyTotal)}</strong><br>` +
+          `Install (one-time): <strong>${formatMoney(result.installTotal)}</strong> <span style="opacity:.9;">(${formatMoney(BASE_INSTALL_FEE_PER_CAR)} per car)</span><br>` +
           `Estimated campaign total: <strong>${formatMoney(result.campaignTotal)}</strong>`;
 
         const sd = parseDate(startEl?.value);
@@ -1918,8 +1773,8 @@
           stickyLine.textContent = `${pkgLabel} • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
           stickyPrice.textContent = formatMoney(result.campaignTotal);
 
-          const contTag = result.isContinuing ? ' • continue: install waived' : ` • install: ${formatMoney(BASE_INSTALL_FEE_PER_CAR)}/car`;
-          stickyMeta.textContent = `Rate: ${formatMoney(result.ratePerCarPerMonth)} per car / month${contTag}.`;
+          const discTag = result.durationDiscountPct > 0 ? ` • duration: ${(result.durationDiscountPct*100).toFixed(0)}% off` : '';
+          stickyMeta.textContent = `Rate: ${formatMoney(result.ratePerCarPerMonth)} per car / month • install: ${formatMoney(BASE_INSTALL_FEE_PER_CAR)}/car${discTag}.`;
         }
       }
 
@@ -1982,7 +1837,6 @@
             form.reset();
 
             if (monthsEl) monthsEl.value = '1';
-            if (continueToggle) continueToggle.checked = false;
 
             const premiumBtn = document.querySelector('.adtype-btn[data-package="premium_magnet_vinyl"]');
             if (premiumBtn){
@@ -1991,7 +1845,6 @@
             }
             if (adTypeHidden) adTypeHidden.value = 'premium_magnet_vinyl';
 
-            // Reset design type to Arch
             const archBtn = document.querySelector('.design-btn[data-design="arch_design"]');
             if (archBtn){
               designBtns.forEach(x=>x.classList.remove('selected'));
@@ -2041,5 +1894,7 @@
     });
   </script>
 </body>
+</html>
+
 </html>
 
