@@ -13,10 +13,9 @@
   <meta name="author" content="Gigways Team" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://gigways.com/market" />
-
   <meta
     name="keywords"
-    content="gig driver insurance, rideshare insurance, delivery driver insurance, car insurance quotes, life insurance, 1099 tax filing, gig worker taxes, mileage tracking, gig driver benefits, roadside assistance"
+    content="gig driver insurance, rideshare insurance, delivery driver insurance, car insurance quotes, life insurance, 1099 tax filing, gig worker taxes, mileage tracking, gig driver benefits, roadside assistance, tires, NTB, Mavis"
   />
 
   <!-- ✅ Social Sharing -->
@@ -38,7 +37,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
 
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
   <!-- ✅ Structured Data (Services) -->
   <script type="application/ld+json">
@@ -59,12 +58,11 @@
       "@type": "ItemList",
       "name": "Gig Driver Services",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "item": { "@type": "Service", "name": "Car Insurance (Gig/Rideshare)" } },
-        { "@type": "ListItem", "position": 2, "item": { "@type": "Service", "name": "Life Insurance" } },
-        { "@type": "ListItem", "position": 3, "item": { "@type": "Service", "name": "Tax Filing (1099)" } },
-        { "@type": "ListItem", "position": 4, "item": { "@type": "Service", "name": "Health Insurance" } },
-        { "@type": "ListItem", "position": 5, "item": { "@type": "Service", "name": "Legal Help" } },
-        { "@type": "ListItem", "position": 6, "item": { "@type": "Service", "name": "Roadside Assistance" } }
+        { "@type": "ListItem", "position": 1, "item": { "@type": "Service", "name": "Tax Filing (1099)" } },
+        { "@type": "ListItem", "position": 2, "item": { "@type": "Service", "name": "Tire Deals (Guaranteed Lowest Prices)" } },
+        { "@type": "ListItem", "position": 3, "item": { "@type": "Service", "name": "Car Insurance (Gig/Rideshare)" } },
+        { "@type": "ListItem", "position": 4, "item": { "@type": "Service", "name": "Legal Help" } },
+        { "@type": "ListItem", "position": 5, "item": { "@type": "Service", "name": "Driver Tools" } }
       ]
     }
   }
@@ -74,18 +72,13 @@
     /* Keep scrollbar to prevent layout shift */
     html { overflow-y: scroll; }
 
+    /* ====== Page background wrapper (keep your existing look) ====== */
     .market.section {
       max-width: 100%;
       padding-top: calc(var(--header-height) + 2rem);
       padding-bottom: 4rem;
       position: relative;
-
-      /* ✅ FIX:
-         Sticky elements (like .mk-bar) break/act weird when ANY parent has overflow hidden/auto/scroll.
-         This is what caused the “Details going under the footer” behavior while scrolling.
-      */
       overflow: visible;
-
       background: linear-gradient(to bottom, rgba(191, 168, 137, 0.03) 0%, transparent 50%);
     }
 
@@ -123,7 +116,7 @@
       z-index: 1;
     }
 
-    /* Hero */
+    /* ====== HERO (unchanged) ====== */
     .mk-hero {
       border-radius: 24px;
       border: 1px solid var(--glass-bd);
@@ -204,7 +197,6 @@
 
     .mk-disclosure strong { color: var(--second-color); }
 
-    /* Stats */
     .mk-stats {
       margin-top: 1.5rem;
       display: grid;
@@ -229,266 +221,398 @@
     .mk-stat:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
     .mk-stat i { font-size: 1.5rem; color: var(--third-color); margin-top: 0.1rem; }
-
     .mk-stat b { display: block; color: var(--second-color); font-size: 1.05rem; margin-bottom: 0.25rem; }
-
     .mk-stat span { display: block; color: var(--text-color-light); font-size: 0.95rem; line-height: 1.4; }
 
-    /* Search + filters */
-    .mk-bar {
-      margin-bottom: 2rem;
-      position: sticky;
-      top: calc(var(--header-height) + 0.5rem);
-      z-index: 10;
-      border-radius: 20px;
-      border: 1px solid var(--glass-bd);
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: var(--shadow-md);
-      padding: 1rem;
-    }
-
-    .mk-search {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      border-radius: 16px;
-      border: 1px solid var(--glass-bd);
-      background: rgba(255, 255, 255, 0.5);
-      padding: 1rem 1.25rem;
-      transition: all 0.2s ease;
-    }
-
-    .dark-theme .mk-search { background: rgba(255, 255, 255, 0.08); }
-
-    .mk-search:focus-within {
-      border-color: var(--third-color);
-      box-shadow: 0 0 0 3px rgba(143, 122, 91, 0.15);
-    }
-
-    .mk-search i { font-size: 1.3rem; color: var(--third-color); }
-
-    .mk-search input { all: unset; width: 100%; color: var(--second-color); font-size: 1rem; }
-
-    .mk-search input::placeholder { color: var(--text-color-light); }
-
-    .mk-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
-
-    .mk-chip {
-      border: 1px solid var(--chip-bd);
-      background: var(--chip-bg);
-      color: var(--second-color);
-      border-radius: 999px;
-      padding: 0.55rem 0.8rem;
-      font-size: 0.85rem;
-      font-weight: 800;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 140ms ease, box-shadow 140ms ease, background-color var(--transition-fast);
-    }
-
-    .mk-chip:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
-    .mk-chip[aria-pressed="true"] { background: var(--button-grad); color: #fff; border-color: rgba(0,0,0,0.06); }
-
-    /* Grid */
-    .mk-grid {
+    /* ====== NEW LISTINGS GRID (Airbnb-like) ====== */
+    .mk-grid{
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+    @media (max-width: 1100px){
+      .mk-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 768px){
+      .mk-container{ padding-inline: 1rem; }
+      .mk-grid{ grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 768px) { .mk-grid { grid-template-columns: 1fr; } }
-
-    /* Cards */
-    .svc {
-      border-radius: 20px;
+    /* Card */
+    .mk-card{
+      border-radius: 22px;
+      overflow: hidden;
       border: 1px solid var(--glass-bd);
       background: var(--glass);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       box-shadow: var(--shadow-sm);
-      padding: 1.5rem;
-      display: flex;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      display:flex;
       flex-direction: column;
-      gap: 1rem;
-      min-height: 280px;
-      transition: all 0.3s ease;
+      min-height: 430px;
       position: relative;
-      overflow: hidden;
+      isolation: isolate;
+    }
+    .mk-card:hover{
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--chip-bd);
     }
 
-    .svc::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--button-grad);
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    /* =========================
+       IMAGE IMPROVEMENTS
+       ========================= */
+    .mk-media{
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow:hidden;
+      /* cleaner background behind images */
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.55), rgba(255,255,255,.18) 55%, rgba(0,0,0,.04)),
+        rgba(0,0,0,.04);
+    }
+    .dark-theme .mk-media{
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,.10), rgba(255,255,255,.04) 55%, rgba(0,0,0,.35)),
+        rgba(0,0,0,.25);
     }
 
-    .svc:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--chip-bd); }
-    .svc:hover::before { opacity: 1; }
-
-    .svc__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
-
-    .svc__iconTitle { display: flex; gap: 1rem; align-items: flex-start; flex: 1; min-width: 0; }
-
-    .svc__icon {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      display: grid; place-items: center;
-      background: var(--button-grad);
-      box-shadow: 0 4px 12px rgba(143, 122, 91, 0.25);
-      flex-shrink: 0;
+    .mk-media img{
+      width:100%;
+      height:100%;
+      display:block;
+      /* default: modern listing photo look */
+      object-fit: cover;
+      transform: scale(1.02);
+      /* makes resized logos look cleaner */
+      image-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      backface-visibility: hidden;
     }
 
-    .svc__icon i { font-size: 1.6rem; color: white; }
-    .svc__titleWrap { flex: 1; min-width: 0; }
+    /* When the image is a local asset, keep it contained (no ugly crop) */
+    .mk-media img.is-local{
+      object-fit: contain;
+      transform: none;
+      padding: 18px; /* gives your asset image breathing room */
+      filter: drop-shadow(0 10px 22px rgba(0,0,0,.10));
+    }
+    .dark-theme .mk-media img.is-local{
+      filter: drop-shadow(0 12px 26px rgba(0,0,0,.35));
+    }
 
-    .svc__title {
-      margin: 0;
-      font-size: 1.15rem;
+    .mk-media::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,.26), transparent 52%);
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .mk-badgeRow{
+      position:absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      z-index:2;
+    }
+
+    .mk-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(0,0,0,.08);
       font-weight: 900;
+      font-size: .82rem;
+      color:#111;
+      box-shadow: 0 10px 22px rgba(0,0,0,.10);
+      white-space: nowrap;
+    }
+    .dark-theme .mk-badge{
+      background: rgba(20,22,28,.86);
+      border-color: rgba(255,255,255,.12);
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(0,0,0,.30);
+    }
+    .mk-badge i{ color: var(--third-color); font-size: 1.05rem; }
+
+    /* carousel arrows */
+    .mk-arrows{
+      position:absolute;
+      inset: 0;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: 0 10px;
+      pointer-events:none;
+      z-index:2;
+    }
+    .mk-arrow{
+      pointer-events:auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.10);
+      background: rgba(255,255,255,.92);
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .18s ease, transform .18s ease;
+      box-shadow: 0 12px 26px rgba(0,0,0,.14);
+    }
+    .dark-theme .mk-arrow{
+      background: rgba(20,22,28,.82);
+      border-color: rgba(255,255,255,.14);
+      box-shadow: 0 12px 26px rgba(0,0,0,.34);
+    }
+    .mk-arrow i{ font-size: 1.45rem; color: var(--second-color); }
+    .mk-card:hover .mk-arrow{ opacity: 1; transform: translateY(0); }
+
+    .mk-dots{
+      position:absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      display:flex;
+      justify-content:center;
+      gap:6px;
+      z-index:2;
+      pointer-events:none;
+    }
+    .mk-dot{
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(0,0,0,.12);
+      box-shadow: 0 10px 20px rgba(0,0,0,.12);
+    }
+    .mk-dot[aria-current="true"]{ background: rgba(255,255,255,.98); }
+    .dark-theme .mk-dot{ background: rgba(255,255,255,.22); border-color: rgba(255,255,255,.12); }
+    .dark-theme .mk-dot[aria-current="true"]{ background: rgba(255,255,255,.92); }
+
+    /* Body */
+    .mk-body{
+      padding: 14px 14px 16px;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .mk-topLine{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .mk-h3{
+      margin:0;
+      font-weight: 950;
+      font-size: 1.05rem;
       letter-spacing: -0.01em;
       color: var(--second-color);
-      line-height: 1.3;
+      line-height: 1.25;
     }
 
-    .svc__sub { margin: 0.4rem 0 0; color: var(--text-color-light); line-height: 1.5; font-size: 0.95rem; }
+    .mk-meta{
+      margin:0;
+      color: var(--text-color-light);
+      font-weight: 700;
+      font-size: .92rem;
+      line-height: 1.35;
+    }
 
-    .svc__badge {
-      font-size: 0.75rem;
-      font-weight: 800;
-      padding: 0.35rem 0.75rem;
-      border-radius: 999px;
-      background: var(--chip-bg);
+    /* Partner row (professional, no tiny logo in button) */
+    .mk-partner{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 16px;
       border: 1px solid var(--chip-bd);
-      color: var(--third-color);
+      background: var(--chip-bg);
+    }
+    .mk-partnerLeft{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+    .mk-partnerLogo{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.08);
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+      flex-shrink:0;
+    }
+    .dark-theme .mk-partnerLogo{ background: rgba(255,255,255,.92); }
+    .mk-partnerLogo img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+      display:block;
+    }
+    .mk-partnerText{
+      min-width:0;
+      display:flex;
+      flex-direction: column;
+      gap:2px;
+    }
+    .mk-partnerText b{
+      font-size: .92rem;
+      font-weight: 950;
+      color: var(--second-color);
       white-space: nowrap;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .mk-partnerText span{
+      font-size: .82rem;
+      font-weight: 800;
+      color: var(--text-color-light);
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
     }
 
-    .svc__chips { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
-
-    .svc__chips li {
-      font-size: 0.8rem;
-      padding: 0.35rem 0.75rem;
+    .mk-pills{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .mk-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding: 7px 10px;
       border-radius: 999px;
       border: 1px solid var(--chip-bd);
       background: var(--chip-bg);
-      color: var(--text-color-light);
-      font-weight: 600;
+      font-weight: 900;
+      font-size: .78rem;
+      color: var(--second-color);
+    }
+    .mk-pill i{ color: var(--third-color); font-size: 1rem; }
+
+    .mk-bottom{
+      margin-top: auto;
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 4px;
     }
 
-    .svc__actions { margin-top: auto; display: flex; gap: 0.75rem; flex-wrap: wrap; }
-
-    /* Buttons */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.25rem;
-      border-radius: 12px;
+    .mk-price{
+      font-weight: 950;
+      font-size: 1.05rem;
+      color: var(--second-color);
+      letter-spacing: -0.02em;
+    }
+    .mk-price span{
       font-weight: 800;
-      font-size: 0.95rem;
-      transition: all 0.2s ease;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .btn--primary { background: var(--button-grad); color: white; box-shadow: 0 4px 12px rgba(143, 122, 91, 0.25); }
-    .btn--primary:hover { box-shadow: 0 6px 16px rgba(143, 122, 91, 0.35); transform: translateY(-1px); }
-
-    .btn--soft { background: var(--chip-bg); border: 1px solid var(--chip-bd); color: var(--second-color); }
-    .btn--soft:hover { background: rgba(191, 168, 137, 0.18); border-color: var(--accent-color); }
-
-    .mk-empty {
-      margin-top: 1.25rem;
-      border-radius: 18px;
-      border: 1px solid var(--glass-bd);
-      background: var(--glass);
-      padding: 1.25rem;
+      font-size: .92rem;
       color: var(--text-color-light);
-      display: none;
     }
 
-    /* Modal */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(4px);
-      display: grid;
-      place-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 1000;
-      padding: 1rem;
+    .mk-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
-    .modal[aria-hidden="false"] { opacity: 1; pointer-events: auto; }
-
-    .modal__dialog {
-      width: min(600px, 100%);
-      border-radius: 24px;
-      border: 1px solid var(--glass-bd);
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      padding: 2rem;
-      position: relative;
-      color: var(--second-color);
-      transform: scale(0.95);
-      transition: transform 0.3s ease;
-    }
-
-    .modal[aria-hidden="false"] .modal__dialog { transform: scale(1); }
-
-    .modal__close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
+    .mk-cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 10px 12px;
+      border-radius: 14px;
       border: none;
+      background: var(--button-grad);
+      color:#fff;
+      cursor:pointer;
+      font-weight: 950;
+      box-shadow: 0 12px 26px rgba(143,122,91,.22);
+      transition: transform .15s ease, box-shadow .15s ease;
+      text-decoration:none;
+      white-space: nowrap;
+    }
+    .mk-cta:hover{ transform: translateY(-1px); box-shadow: 0 16px 34px rgba(143,122,91,.32); }
+    .mk-cta i{ font-size: 1.2rem; }
+
+    .mk-infoBtn{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border: 1px solid var(--glass-bd);
+      background: rgba(255,255,255,.55);
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .dark-theme .mk-infoBtn{ background: rgba(255,255,255,.08); }
+    .mk-infoBtn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    .mk-infoBtn i{ font-size: 1.35rem; color: var(--second-color); }
+
+    /* modal (reuse your modal classes) */
+    .modal__content .mk-modalPills{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 12px 0 4px;
+      padding:0;
+      list-style:none;
+    }
+    .modal__content .mk-modalPills li{
+      margin:0;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--chip-bd);
       background: var(--chip-bg);
-      font-size: 1.5rem;
+      font-weight: 900;
+      font-size: .85rem;
       color: var(--second-color);
-      border-radius: 10px;
-      padding: 0.4rem 0.6rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: grid;
-      place-items: center;
     }
 
-    .modal__close:hover { background: var(--chip-bd); transform: rotate(90deg); }
-
-    .modal__content h3 { margin: 0 0 1rem; font-size: 1.5rem; font-weight: 900; color: var(--second-color); }
-    .modal__content p { margin: 0 0 1rem; line-height: 1.6; color: var(--text-color-light); }
-    .modal__list { margin: 1rem 0; padding-left: 0; list-style: none; }
-
-    .modal__list li {
-      position: relative;
-      margin: 0.75rem 0;
-      color: var(--text-color-light);
-      line-height: 1.6;
-      padding-left: 1.8rem;
+    /* Hidden tracking pixel helper */
+    .trk {
+      position:absolute;
+      left:-9999px;
+      width:1px;
+      height:1px;
+      overflow:hidden;
     }
-
-    .modal__list li::before { content: "✓"; position: absolute; left: 0; color: var(--third-color); font-weight: 900; }
 
     @media (max-width: 768px) {
-      .mk-container { padding-inline: 1rem; }
       .mk-hero { padding: 1.5rem; }
       .mk-title { font-size: 1.85rem; }
       .mk-stats { grid-template-columns: 1fr; }
-      .svc { padding: 1.25rem; }
       .modal__dialog { padding: 1.5rem; }
+      .mk-actions{ width: 100%; justify-content: space-between; }
+      .mk-cta{ flex: 1; }
     }
   </style>
 </head>
@@ -558,223 +682,14 @@
           </div>
         </div>
 
-        <!-- Search Bar + Filters -->
-        <div class="mk-bar">
-          <label class="mk-search" for="marketSearch">
-            <i class="bx bx-search" aria-hidden="true"></i>
-            <input
-              type="search"
-              id="marketSearch"
-              placeholder="Search services: insurance, taxes, legal help..."
-              aria-label="Search services"
-              autocomplete="off"
-            />
-          </label>
+        <!-- ✅ LISTINGS GRID -->
+        <div class="mk-grid" id="serviceGrid" aria-label="Marketplace listings"></div>
 
-          <div class="mk-filters" role="group" aria-label="Service categories">
-            <button class="mk-chip" type="button" data-filter="all" aria-pressed="true">All</button>
-            <button class="mk-chip" type="button" data-filter="insurance" aria-pressed="false">Insurance</button>
-            <button class="mk-chip" type="button" data-filter="taxes" aria-pressed="false">Taxes</button>
-            <button class="mk-chip" type="button" data-filter="support" aria-pressed="false">Support</button>
-            <button class="mk-chip" type="button" data-filter="tools" aria-pressed="false">Tools</button>
-          </div>
-        </div>
-
-        <!-- SERVICES -->
-        <div class="mk-grid" id="serviceGrid">
-
-          <!-- Car Insurance -->
-          <article class="svc service__card"
-            data-category="insurance"
-            data-name="Car Insurance Gig Rideshare Delivery Quote Compare Coverage"
-          >
-            <div class="svc__top">
-              <div class="svc__iconTitle">
-                <div class="svc__icon" aria-hidden="true"><i class="bx bx-car"></i></div>
-                <div class="svc__titleWrap">
-                  <h3 class="svc__title">Car Insurance</h3>
-                  <p class="svc__sub">Compare quotes that match how you drive for work.</p>
-                </div>
-              </div>
-              <span class="svc__badge">Popular</span>
-            </div>
-
-            <ul class="svc__chips" aria-label="Highlights">
-              <li>Quote comparison</li><li>Gig-use options</li><li>Start fast</li>
-            </ul>
-
-            <div class="svc__actions">
-              <a class="btn btn--primary" href="#" rel="nofollow sponsored"><i class="bx bx-shield"></i> Get Quotes</a>
-              <button class="btn btn--soft quick-view" type="button" data-modal="auto"><i class="bx bx-info-circle"></i> Details</button>
-            </div>
-          </article>
-
-          <!-- Life Insurance -->
-          <article class="svc service__card"
-            data-category="insurance"
-            data-name="Life Insurance Term Life Family Protection Compare Plans"
-          >
-            <div class="svc__top">
-              <div class="svc__iconTitle">
-                <div class="svc__icon" aria-hidden="true"><i class="bx bx-heart"></i></div>
-                <div class="svc__titleWrap">
-                  <h3 class="svc__title">Life Insurance</h3>
-                  <p class="svc__sub">Protect your people with coverage that fits your budget.</p>
-                </div>
-              </div>
-              <span class="svc__badge">Protection</span>
-            </div>
-
-            <ul class="svc__chips" aria-label="Highlights">
-              <li>Term & options</li><li>Plan compare</li><li>Partner offers</li>
-            </ul>
-
-            <div class="svc__actions">
-              <a class="btn btn--primary" href="#" rel="nofollow sponsored"><i class="bx bx-check-shield"></i> Compare Plans</a>
-              <button class="btn btn--soft quick-view" type="button" data-modal="life"><i class="bx bx-info-circle"></i> Details</button>
-            </div>
-          </article>
-
-          <!-- Tax Filing -->
-          <article class="svc service__card"
-            data-category="taxes"
-            data-name="Tax Filing 1099 Gig Worker Deductions Mileage Expenses"
-          >
-            <div class="svc__top">
-              <div class="svc__iconTitle">
-                <div class="svc__icon" aria-hidden="true"><i class="bx bx-receipt"></i></div>
-                <div class="svc__titleWrap">
-                  <h3 class="svc__title">Tax Filing (1099)</h3>
-                  <p class="svc__sub">File smarter with deductions built around gig work.</p>
-                </div>
-              </div>
-              <span class="svc__badge">Tax Time</span>
-            </div>
-
-            <ul class="svc__chips" aria-label="Highlights">
-              <li>1099 support</li><li>Deductions</li><li>Guided flow</li>
-            </ul>
-
-            <div class="svc__actions">
-              <a class="btn btn--primary" href="#" rel="nofollow sponsored"><i class="bx bx-lock-open-alt"></i> Start Filing</a>
-              <button class="btn btn--soft quick-view" type="button" data-modal="tax"><i class="bx bx-info-circle"></i> Details</button>
-            </div>
-          </article>
-
-          <!-- Health Insurance -->
-          <article class="svc service__card"
-            data-category="insurance"
-            data-name="Health Insurance Gig Worker Individual Family Medical Coverage"
-          >
-            <div class="svc__top">
-              <div class="svc__iconTitle">
-                <div class="svc__icon" aria-hidden="true"><i class="bx bx-plus-medical"></i></div>
-                <div class="svc__titleWrap">
-                  <h3 class="svc__title">Health Insurance</h3>
-                  <p class="svc__sub">Medical coverage options built for gig workers.</p>
-                </div>
-              </div>
-              <span class="svc__badge">Essential</span>
-            </div>
-
-            <ul class="svc__chips" aria-label="Highlights">
-              <li>Individual & family plans</li><li>Self-employed friendly</li><li>Compare cost</li>
-            </ul>
-
-            <div class="svc__actions">
-              <a class="btn btn--primary" href="#" rel="nofollow sponsored"><i class="bx bx-heart-circle"></i> View Plans</a>
-              <button class="btn btn--soft quick-view" type="button" data-modal="health"><i class="bx bx-info-circle"></i> Details</button>
-            </div>
-          </article>
-
-          <!-- Legal Services -->
-          <article class="svc service__card"
-            data-category="support"
-            data-name="Legal Help Traffic Tickets Accidents Disputes Gig Drivers"
-          >
-            <div class="svc__top">
-              <div class="svc__iconTitle">
-                <div class="svc__icon" aria-hidden="true"><i class="bx bx-shield-quarter"></i></div>
-                <div class="svc__titleWrap">
-                  <h3 class="svc__title">Legal Help</h3>
-                  <p class="svc__sub">Support for tickets, accidents, and driver disputes.</p>
-                </div>
-              </div>
-              <span class="svc__badge">Protection</span>
-            </div>
-
-            <ul class="svc__chips" aria-label="Highlights">
-              <li>Ticket help</li><li>Accident guidance</li><li>Dispute support</li>
-            </ul>
-
-            <div class="svc__actions">
-              <a class="btn btn--primary" href="#" rel="nofollow sponsored"><i class="bx bx-gavel"></i> Get Legal Help</a>
-              <button class="btn btn--soft quick-view" type="button" data-modal="legal"><i class="bx bx-info-circle"></i> Details</button>
-            </div>
-          </article>
-
-          <!-- Roadside Assistance -->
-          <article class="svc service__card"
-            data-category="support"
-            data-name="Roadside Assistance Tow Battery Flat Tire Lockout"
-          >
-            <div class="svc__top">
-              <div class="svc__iconTitle">
-                <div class="svc__icon" aria-hidden="true"><i class="bx bx-wrench"></i></div>
-                <div class="svc__titleWrap">
-                  <h3 class="svc__title">Roadside Assistance</h3>
-                  <p class="svc__sub">Tow, jump start, flat tire help, and lockout support.</p>
-                </div>
-              </div>
-              <span class="svc__badge">On-Call</span>
-            </div>
-
-            <ul class="svc__chips" aria-label="Highlights">
-              <li>Towing</li><li>Battery</li><li>Flat tire</li>
-            </ul>
-
-            <div class="svc__actions">
-              <a class="btn btn--primary" href="#" rel="nofollow sponsored"><i class="bx bx-phone-call"></i> View Options</a>
-              <button class="btn btn--soft quick-view" type="button" data-modal="roadside"><i class="bx bx-info-circle"></i> Details</button>
-            </div>
-          </article>
-
-          <!-- Driver Tools -->
-          <article class="svc service__card"
-            data-category="tools"
-            data-name="Driver Tools Mileage Tracking Expense Tracking Profit Calculator"
-          >
-            <div class="svc__top">
-              <div class="svc__iconTitle">
-                <div class="svc__icon" aria-hidden="true"><i class="bx bx-line-chart"></i></div>
-                <div class="svc__titleWrap">
-                  <h3 class="svc__title">Driver Tools</h3>
-                  <p class="svc__sub">Track miles, expenses, and see your real profit.</p>
-                </div>
-              </div>
-              <span class="svc__badge">In App</span>
-            </div>
-
-            <ul class="svc__chips" aria-label="Highlights">
-              <li>Mileage</li><li>Expenses</li><li>Profit insights</li>
-            </ul>
-
-            <div class="svc__actions">
-              <a class="btn btn--primary" href="index.html#download"><i class="bx bx-download"></i> Get the App</a>
-              <button class="btn btn--soft quick-view" type="button" data-modal="tools"><i class="bx bx-info-circle"></i> Details</button>
-            </div>
-          </article>
-
-        </div>
-
-        <div class="mk-empty" id="emptyState">
-          No services match your search/filter. Try “insurance” or clear filters.
-        </div>
       </div>
     </section>
   </main>
 
-  <!-- MODALS -->
+  <!-- MODAL -->
   <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Service details">
     <div class="modal__dialog" role="document">
       <button class="modal__close" type="button" aria-label="Close">×</button>
@@ -828,6 +743,9 @@
   </footer>
 
   <script>
+    // =========================
+    // Keep your theme preload
+    // =========================
     (function () {
       const root = document.documentElement;
       root.classList.add("preload");
@@ -857,114 +775,278 @@
       else root.classList.remove("dark-theme");
       localStorage.setItem("selected-theme", mode);
     }
-
     function syncThemeIcon() {
       if (!themeButton) return;
       const isDark = root.classList.contains("dark-theme");
       themeButton.src = isDark ? "assets/img/sun.png" : "assets/img/moon.png";
     }
-
     if (themeButton) {
       syncThemeIcon();
       themeButton.addEventListener("click", () => {
         const isDark = root.classList.contains("dark-theme");
         setTheme(isDark ? "light" : "dark");
         syncThemeIcon();
+        renderListings();
       });
     }
 
-    // Marketplace search + category filter
-    const searchInput = document.getElementById("marketSearch");
-    const serviceGrid = document.getElementById("serviceGrid");
-    const services = Array.from(serviceGrid.querySelectorAll(".service__card"));
-    const chips = Array.from(document.querySelectorAll(".mk-chip"));
-    const emptyState = document.getElementById("emptyState");
+    // =========================
+    // LISTINGS DATA
+    // =========================
+    const LISTINGS = [
+      {
+        id: "tax-efile",
+        category: "taxes",
+        title: "Tax Filing (1099) — Save 20%",
+        meta: "Gig Worker Taxes • Deductions",
+        price: 32.99,
+        priceUnit: "starting",
+        reviews: 1820,
+        badge: "Top Offer",
+        badgeIcon: "bx-purchase-tag",
+        partnerName: "E-file.com",
+        partnerSub: "Guided 1099 filing",
+        partnerLogo: "assets/img/e-file.png",
+        pills: ["1099 Support", "Mileage + Expenses", "Guided Filing"],
+        desc: "Gig drivers often have deductions like mileage and expenses. Use a guided filing flow and save with coupon code SAVE24 when available.",
+        linkPrimary: "https://www.dpbolvw.net/click-101499113-11917173",
+        linkSecondary: "https://www.dpbolvw.net/click-101499113-11917143",
+        secondaryLabel: "State filing • $10 off",
+        pixels: [
+          "https://www.ftjcfx.com/image-101499113-11917173",
+          "https://www.ftjcfx.com/image-101499113-11917143"
+        ],
+        images: [
+          "assets/img/e-file.png",
+          "assets/img/e-file1.png",
+        ]
+      },
+      {
+        id: "tires-mavis",
+        category: "tires",
+        title: "Tire Deals (Guaranteed Lowest Prices)",
+        meta: "Mavis / NTB • Shop Online",
+        price: 73.99,
+        priceUnit: "from",
+        reviews: 945,
+        badge: "Top Deal",
+        badgeIcon: "bx-badge-check",
+        partnerName: "Mavis / NTB",
+        partnerSub: "Compare deals & brands",
+        partnerLogo: "assets/img/mavis.png",
+        pills: ["Brand-name tires", "Compare prices", "Install options"],
+        desc: "Tires are one of the biggest driver expenses. Compare deals and shop quickly to stay safe and keep earning.",
+        linkPrimary: "https://www.dpbolvw.net/click-101499113-15767014",
+        pixels: ["https://www.tqlkg.com/image-101499113-15767014"],
+        images: [
+          "assets/img/mavis.png",
+          "assets/img/mavis1.png",
+         
+        ]
+      },
+    ];
 
-    let activeFilter = "all";
+    // =========================
+    // STATE (favorites removed)
+    // =========================
+    const state = {
+      slideIndexById: {}
+    };
 
-    function applyFilters() {
-      const q = (searchInput?.value || "").trim().toLowerCase();
-      let visible = 0;
+    const grid = document.getElementById("serviceGrid");
 
-      services.forEach((card) => {
-        const category = (card.getAttribute("data-category") || "").toLowerCase();
-        const name = (card.getAttribute("data-name") || "").toLowerCase();
+    // =========================
+    // RENDER
+    // =========================
+    function renderListings(){
+      if (!grid) return;
+      grid.innerHTML = "";
 
-        const okCategory = activeFilter === "all" ? true : category === activeFilter;
-        const okSearch = q ? name.includes(q) : true;
+      LISTINGS.forEach(item => {
+        if (state.slideIndexById[item.id] == null) state.slideIndexById[item.id] = 0;
+        const idx = state.slideIndexById[item.id];
 
-        const ok = okCategory && okSearch;
-        card.style.display = ok ? "" : "none";
-        if (ok) visible++;
+        const card = document.createElement("article");
+        card.className = "mk-card";
+        card.setAttribute("data-id", item.id);
+
+        const currentImg = (item.images && item.images[idx]) ? item.images[idx] : "";
+        const isLocal = isLocalAsset(currentImg);
+
+        card.innerHTML = `
+          <div class="mk-media" data-id="${escapeHtml(item.id)}">
+            <img
+              src="${escapeHtml(currentImg)}"
+              alt="${escapeHtml(item.title)}"
+              loading="lazy"
+              decoding="async"
+              referrerpolicy="no-referrer"
+              class="${isLocal ? "is-local" : ""}"
+            />
+
+            <div class="mk-badgeRow">
+              <span class="mk-badge"><i class="bx ${escapeHtml(item.badgeIcon)}"></i> ${escapeHtml(item.badge)}</span>
+              <span style="width:42px;height:42px;"></span>
+            </div>
+
+            <div class="mk-arrows" aria-hidden="false">
+              <button class="mk-arrow" type="button" aria-label="Previous image" data-prev="${escapeHtml(item.id)}">
+                <i class="bx bx-chevron-left"></i>
+              </button>
+              <button class="mk-arrow" type="button" aria-label="Next image" data-next="${escapeHtml(item.id)}">
+                <i class="bx bx-chevron-right"></i>
+              </button>
+            </div>
+
+            <div class="mk-dots" aria-label="Image position">
+              ${(item.images || []).map((_,i)=>`<span class="mk-dot" aria-current="${i===idx ? "true":"false"}"></span>`).join("")}
+            </div>
+          </div>
+
+          <div class="mk-body">
+            <div class="mk-topLine">
+              <h3 class="mk-h3">${escapeHtml(item.title)}</h3>
+            </div>
+
+            <p class="mk-meta">${escapeHtml(item.meta)} • ${formatReviews(item.reviews)} reviews</p>
+
+            <div class="mk-partner" aria-label="Partner">
+              <div class="mk-partnerLeft">
+                <div class="mk-partnerLogo">
+                  <img src="${escapeHtml(item.partnerLogo)}" alt="${escapeHtml(item.partnerName)} logo" />
+                </div>
+                <div class="mk-partnerText">
+                  <b>${escapeHtml(item.partnerName)}</b>
+                  <span>${escapeHtml(item.partnerSub)}</span>
+                </div>
+              </div>
+              <span class="mk-badge" style="padding:7px 10px;font-size:.78rem;">
+                <i class="bx bx-link-external"></i> Partner
+              </span>
+            </div>
+
+            <div class="mk-pills">
+              ${(item.pills || []).slice(0,3).map(p=>`
+                <span class="mk-pill"><i class="bx bx-check-circle"></i> ${escapeHtml(p)}</span>
+              `).join("")}
+            </div>
+
+            <div class="mk-bottom">
+              <div class="mk-price">${formatPrice(item.price, item.priceUnit)}</div>
+
+              <div class="mk-actions">
+                <a class="mk-cta" href="${escapeHtml(item.linkPrimary)}" target="_top" rel="nofollow sponsored">
+                  <i class="bx bx-link-external"></i> Get offer
+                </a>
+
+                <button class="mk-infoBtn quick-view" type="button" data-modal="${escapeHtml(item.id)}" aria-label="Details">
+                  <i class="bx bx-info-circle"></i>
+                </button>
+              </div>
+            </div>
+
+            ${(item.linkSecondary && item.secondaryLabel) ? `
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:2px;">
+                <a class="btn btn--secondary" href="${escapeHtml(item.linkSecondary)}" target="_top" rel="nofollow sponsored" style="border-radius:14px;">
+                  <i class="bx bx-coupon"></i> ${escapeHtml(item.secondaryLabel)}
+                </a>
+              </div>
+            ` : ``}
+
+            ${(item.pixels || []).map(px => `
+              <span class="trk" aria-hidden="true">
+                <img src="${escapeHtml(px)}" width="1" height="1" border="0" alt="" />
+              </span>
+            `).join("")}
+          </div>
+        `;
+
+        grid.appendChild(card);
       });
 
-      if (emptyState) emptyState.style.display = visible === 0 ? "block" : "none";
+      // wire carousel
+      grid.querySelectorAll("[data-prev]").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          slide(btn.dataset.prev, -1);
+        });
+      });
+      grid.querySelectorAll("[data-next]").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          slide(btn.dataset.next, +1);
+        });
+      });
+
+      // open modal
+      grid.querySelectorAll(".quick-view").forEach(btn => {
+        btn.addEventListener("click", () => openModal(btn.getAttribute("data-modal")));
+      });
+
+      // click image area opens modal
+      grid.querySelectorAll(".mk-media").forEach(m => {
+        m.addEventListener("click", (e) => {
+          const id = m.dataset.id;
+          if (e.target.closest("[data-prev]") || e.target.closest("[data-next]")) return;
+          openModal(id);
+        });
+      });
     }
 
-    if (searchInput) searchInput.addEventListener("input", applyFilters);
+    function slide(id, dir){
+      const item = LISTINGS.find(x => x.id === id);
+      if (!item) return;
+      const imgs = item.images || [];
+      if (!imgs.length) return;
 
-    chips.forEach((chip) => {
-      chip.addEventListener("click", () => {
-        chips.forEach((c) => c.setAttribute("aria-pressed", "false"));
-        chip.setAttribute("aria-pressed", "true");
-        activeFilter = chip.getAttribute("data-filter") || "all";
-        applyFilters();
-      });
-    });
+      let idx = state.slideIndexById[id] ?? 0;
+      idx = (idx + dir + imgs.length) % imgs.length;
+      state.slideIndexById[id] = idx;
+      renderListings();
+    }
 
-    // Modal logic
+    // =========================
+    // MODAL
+    // =========================
     const modal = document.getElementById("modal");
     const modalContent = document.getElementById("modalContent");
     const modalCloseBtn = modal?.querySelector(".modal__close");
 
-    const MODAL_DATA = {
-      auto: {
-        title: "Car Insurance (Gig-Friendly)",
-        p: "If you drive for rideshare or delivery, your personal policy may not cover every working situation. Compare options designed for how you drive.",
-        list: ["Compare quotes fast", "Look for rideshare/delivery endorsements", "Choose coverage that matches your work schedule"]
-      },
-      life: {
-        title: "Life Insurance",
-        p: "Coverage that protects your family if something happens. Compare term options and monthly costs.",
-        list: ["Term coverage options", "Simple comparisons", "Budget-friendly choices"]
-      },
-      tax: {
-        title: "Tax Filing (1099)",
-        p: "Gig drivers often have deductions like mileage and expenses. Tax tools can help organize your filing.",
-        list: ["1099 support", "Deductions guidance", "Guided filing steps"]
-      },
-      health: {
-        title: "Health Insurance",
-        p: "Independent workers still need coverage. Compare plans and pick what fits your needs and budget.",
-        list: ["Individual & family plans", "Compare costs", "Check network coverage"]
-      },
-      legal: {
-        title: "Legal Help",
-        p: "Support for common driver issues like tickets, disputes, and accidents.",
-        list: ["Ticket guidance", "Accident help", "Dispute support"]
-      },
-      roadside: {
-        title: "Roadside Assistance",
-        p: "When your car stops, your income stops. Roadside services help you get moving again.",
-        list: ["Tow assistance", "Jump start", "Flat tire / lockout help"]
-      },
-      tools: {
-        title: "Driver Tools",
-        p: "Gigways helps you track miles and expenses, so you can understand profit after costs.",
-        list: ["Mileage tracking", "Expense tracking", "Profit insights"]
-      }
-    };
-
-    function openModal(key) {
+    function openModal(id) {
       if (!modal || !modalContent) return;
-      const data = MODAL_DATA[key];
-      if (!data) return;
+      const item = LISTINGS.find(x => x.id === id);
+      if (!item) return;
 
       modalContent.innerHTML = `
-        <h3>${data.title}</h3>
-        <p>${data.p}</p>
-        <ul class="modal__list">${data.list.map((x) => `<li>${x}</li>`).join("")}</ul>
-        <p style="margin-top:1rem;"><strong>Tip:</strong> Always review coverage details and confirm what’s included before purchasing.</p>
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml(item.desc)}</p>
+
+        <ul class="mk-modalPills" aria-label="Highlights">
+          ${(item.pills || []).map(x => `<li>${escapeHtml(x)}</li>`).join("")}
+        </ul>
+
+        <p style="margin-top:.75rem;">
+          <strong>Partner:</strong> ${escapeHtml(item.partnerName)} • ${escapeHtml(item.partnerSub)}
+          <br/>
+          <strong>Reviews:</strong> ${formatReviews(item.reviews)}
+          <br/>
+          <strong>Price:</strong> ${stripHtml(formatPrice(item.price, item.priceUnit))}
+        </p>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:1rem;">
+          <a class="btn btn--primary" href="${escapeHtml(item.linkPrimary)}" target="_top" rel="nofollow sponsored" style="border-radius:14px;">
+            <i class="bx bx-link-external"></i> Go to partner
+          </a>
+          ${item.linkSecondary ? `
+            <a class="btn btn--secondary" href="${escapeHtml(item.linkSecondary)}" target="_top" rel="nofollow sponsored" style="border-radius:14px;">
+              <i class="bx bx-coupon"></i> ${escapeHtml(item.secondaryLabel || "Secondary offer")}
+            </a>
+          ` : ``}
+        </div>
+
+        <p style="margin-top:1rem;">
+          <strong>Tip:</strong> Always review details and confirm what’s included before purchasing.
+        </p>
       `;
 
       modal.setAttribute("aria-hidden", "false");
@@ -978,16 +1060,52 @@
       document.body.style.overflow = "";
     }
 
-    document.querySelectorAll(".quick-view").forEach((btn) => {
-      btn.addEventListener("click", () => openModal(btn.getAttribute("data-modal")));
-    });
-
     modalCloseBtn?.addEventListener("click", closeModal);
     modal?.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
     window.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
+    // =========================
+    // Helpers
+    // =========================
+    function isLocalAsset(url){
+      const u = String(url || "");
+      return u.startsWith("assets/") || u.startsWith("./assets/") || u.startsWith("../assets/");
+    }
+
+    function formatPrice(price, unit){
+      const p = Number(price || 0);
+      if (!p) return `$0 <span>(${unit || "free"})</span>`;
+      if (unit === "avg/mo") return `$${p} <span>/mo avg</span>`;
+      if (unit === "starting") return `$${p} <span>starting</span>`;
+      if (unit === "from") return `$${p} <span>from</span>`;
+      return `$${p} <span>${unit || ""}</span>`;
+    }
+
+    function stripHtml(html){
+      const tmp = document.createElement("div");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    }
+
+    function formatReviews(n){
+      const num = Number(n || 0);
+      if (!num) return "0";
+      if (num >= 1000) return (num/1000).toFixed(1).replace(".0","") + "k";
+      return String(num);
+    }
+
+    function escapeHtml(str){
+      return String(str ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
     // Initial render
-    applyFilters();
+    renderListings();
   </script>
 </body>
 </html>
+
