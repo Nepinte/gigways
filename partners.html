@@ -883,7 +883,7 @@
                   <div>
                     <b>Premium Magnet Vinyl</b>
                     <div class="pb-sub">
-                      Flat tier pricing per car (discounts shown up to <strong>$400</strong> at <strong>29 cars</strong>). <strong>30+</strong> is custom / negotiable.
+                      Flat tier pricing per car (discounts shown up to <strong>$375</strong> at <strong>24 cars</strong>). <strong>25+</strong> is custom / negotiable.
                     </div>
                   </div>
                 </div>
@@ -898,7 +898,7 @@
                 <div class="pb-card">
                   <div class="pb-card-top">
                     <span class="pb-kicker"><i class="bx bx-wrench"></i> Install</span>
-                    <span class="pb-value">$200 <span class="pb-unit">/ vehicle</span></span>
+                    <span class="pb-value">$150 <span class="pb-unit">/ vehicle</span></span>
                   </div>
                   <div class="pb-muted">Applies to first install. Reapplies only if you pause and restart.</div>
                 </div>
@@ -910,13 +910,12 @@
                   </div>
 
                   <div class="tier-row" role="list" aria-label="Fleet pricing tiers">
-                    <div class="tier" role="listitem"><span>1–4</span><b>$450</b></div>
-                    <div class="tier" role="listitem"><span>5–9</span><b>$440</b></div>
-                    <div class="tier" role="listitem"><span>10–14</span><b>$430</b></div>
-                    <div class="tier" role="listitem"><span>15–19</span><b>$420</b></div>
-                    <div class="tier" role="listitem"><span>20–24</span><b>$410</b></div>
-                    <div class="tier" role="listitem"><span>25–29</span><b>$400</b></div>
-                    <div class="tier" role="listitem"><span>30+</span><b>Negotiable</b></div>
+                    <div class="tier" role="listitem"><span>1–4</span><b>$415</b></div>
+                    <div class="tier" role="listitem"><span>5–9</span><b>$405</b></div>
+                    <div class="tier" role="listitem"><span>10–14</span><b>$395</b></div>
+                    <div class="tier" role="listitem"><span>15–19</span><b>$385</b></div>
+                    <div class="tier" role="listitem"><span>20–24</span><b>$375</b></div>
+                    <div class="tier" role="listitem"><span>25+</span><b>Negotiable</b></div>
                   </div>
 
                   <div class="pb-muted">No duration discounts — pricing is based on cars and months. 30+ requires confirmation.</div>
@@ -930,7 +929,7 @@
                   <b>Duration discounts (monthly only)</b>
                   <span>
                     2–4 months: <strong>5% off</strong> monthly charges •
-                    5–6 months: <strong>10% off</strong> monthly charges.
+                    5–6 months : <strong>10% off</strong> monthly charges.
                     (Install fee is not discounted.)
                   </span>
                 </div>
@@ -1371,519 +1370,566 @@
   <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
 
   <!-- ✅ Page JS (pricing + form + POPUP modal + duration discounts) -->
-  <script>
-    (function(){
-      const $ = s => document.querySelector(s);
-      const $$ = s => Array.from(document.querySelectorAll(s));
+<script>
+  (function(){
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
 
-      function formatMoney(n){
-        const num = Number(n);
-        if (!isFinite(num)) return '$0';
-        return `$${num.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
-      }
+    function formatMoney(n){
+      const num = Number(n);
+      if (!isFinite(num)) return '$0';
+      return `$${num.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+    }
 
-      function parseDate(d){
-        const dt = new Date(d);
-        return isNaN(dt.getTime()) ? null : dt;
-      }
+    function parseDate(d){
+      const dt = new Date(d);
+      return isNaN(dt.getTime()) ? null : dt;
+    }
 
-      // Local YYYY-MM-DD (no timezone surprises)
-      function toYMD(dt){
-        const y = dt.getFullYear();
-        const m = String(dt.getMonth() + 1).padStart(2, '0');
-        const d = String(dt.getDate()).padStart(2, '0');
-        return `${y}-${m}-${d}`;
-      }
+    // Local YYYY-MM-DD (no timezone surprises)
+    function toYMD(dt){
+      const y = dt.getFullYear();
+      const m = String(dt.getMonth() + 1).padStart(2, '0');
+      const d = String(dt.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
 
-      function monthLabel(months){ return `${months} month${months > 1 ? 's' : ''}`; }
+    function monthLabel(months){ return `${months} month${months > 1 ? 's' : ''}`; }
 
-      // Add months in local time, keep day as close as possible
-      function addMonthsLocal(date, months){
-        const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        const targetMonth = d.getMonth() + months;
-        const y = d.getFullYear() + Math.floor(targetMonth / 12);
-        const m = ((targetMonth % 12) + 12) % 12;
+    // Add months in local time, keep day as close as possible
+    function addMonthsLocal(date, months){
+      const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      const targetMonth = d.getMonth() + months;
+      const y = d.getFullYear() + Math.floor(targetMonth / 12);
+      const m = ((targetMonth % 12) + 12) % 12;
 
-        // last day of target month
-        const lastDay = new Date(y, m + 1, 0).getDate();
-        const day = Math.min(d.getDate(), lastDay);
-        return new Date(y, m, day);
-      }
+      const lastDay = new Date(y, m + 1, 0).getDate();
+      const day = Math.min(d.getDate(), lastDay);
+      return new Date(y, m, day);
+    }
 
-      function tierRate(cars){
-        const n = parseInt(cars, 10);
-        if (!isFinite(n) || n < 1) return { rate: 0, negotiable: false };
+    function tierRate(cars){
+      const n = parseInt(cars, 10);
+      if (!isFinite(n) || n < 1) return { rate: 0, negotiable: false };
 
-        if (n >= 30) return { rate: 0, negotiable: true };
-        if (n >= 25) return { rate: 400, negotiable: false };
-        if (n >= 20) return { rate: 410, negotiable: false };
-        if (n >= 15) return { rate: 420, negotiable: false };
-        if (n >= 10) return { rate: 430, negotiable: false };
-        if (n >= 5)  return { rate: 440, negotiable: false };
-        return { rate: 450, negotiable: false };
-      }
+      if (n >= 25) return { rate: 0, negotiable: true };
+      if (n >= 20) return { rate: 375, negotiable: false };
+      if (n >= 15) return { rate: 385, negotiable: false };
+      if (n >= 10) return { rate: 395, negotiable: false };
+      if (n >= 5)  return { rate: 405, negotiable: false };
+      return { rate: 415, negotiable: false };
+    }
 
-      // ✅ NEW: duration discount % based on months
-      function durationDiscountPct(months){
-        const m = parseInt(months, 10);
-        if (!isFinite(m)) return 0;
-        if (m >= 5) return 0.10;   // 5–6 months
-        if (m >= 2) return 0.05;   // 2–4 months
-        return 0;                  // 1 month
-      }
+    function durationDiscountPct(months){
+      const m = parseInt(months, 10);
+      if (!isFinite(m)) return 0;
+      if (m >= 5) return 0.10;   // 5–6 months
+      if (m >= 2) return 0.05;   // 2–4 months
+      return 0;                  // 1 month
+    }
 
-      const BASE_INSTALL_FEE_PER_CAR = 200;
+    const BASE_INSTALL_FEE_PER_CAR = 150;
 
-      const form    = $('#my-form');
-      const status  = $('#my-form-status');
-      const btn     = $('#my-form-button');
-      const spin    = $('#btn-spin');
-      const btnText = $('#btn-text');
+    const form    = $('#my-form');
+    const status  = $('#my-form-status');
+    const btn     = $('#my-form-button');
+    const spin    = $('#btn-spin');
+    const btnText = $('#btn-text');
 
-      const carsEl  = $('#car_count');
-      const startEl = $('#start_date');
-      const endEl   = $('#end_date');
+    const carsEl  = $('#car_count');
+    const startEl = $('#start_date');
+    const endEl   = $('#end_date');
 
-      const monthsEl = $('#custom_months');
+    const monthsEl = $('#custom_months');
 
-      const estimateText  = $('#estimateText');
-      const estimatePrice = $('#estimatePrice');
-      const estimateMeta  = $('#estimateMeta');
-      const estimatePill  = $('#estimatePill');
+    const estimateText  = $('#estimateText');
+    const estimatePrice = $('#estimatePrice');
+    const estimateMeta  = $('#estimateMeta');
+    const estimatePill  = $('#estimatePill');
 
-      const monthsHidden = $('#campaign_months');
-      const rateHidden   = $('#campaign_rate');
-      const totalHidden  = $('#campaign_est_total');
-      const fleetHidden  = $('#campaign_fleet_discount');
-      const fleetRateHidden = $('#campaign_fleet_discount_rate');
-      const installTotalHidden = $('#campaign_install_fee_total');
-      const installPerCarHidden = $('#campaign_install_fee_per_car');
+    const monthsHidden = $('#campaign_months');
+    const rateHidden   = $('#campaign_rate');
+    const totalHidden  = $('#campaign_est_total');
+    const fleetHidden  = $('#campaign_fleet_discount');
+    const fleetRateHidden = $('#campaign_fleet_discount_rate');
+    const installTotalHidden = $('#campaign_install_fee_total');
+    const installPerCarHidden = $('#campaign_install_fee_per_car');
 
-      // ✅ NEW hidden fields
-      const durDiscPctHidden = $('#campaign_duration_discount_pct');
-      const durDiscAmtHidden = $('#campaign_duration_discount_amount');
+    const durDiscPctHidden = $('#campaign_duration_discount_pct');
+    const durDiscAmtHidden = $('#campaign_duration_discount_amount');
 
-      const sticky = $('#stickySummary');
-      const stickyClose = $('#stickyClose');
-      const stickyLine = $('#stickyLine');
-      const stickyPrice = $('#stickyPrice');
-      const stickyMeta = $('#stickyMeta');
-      let stickyDismissed = false;
+    const sticky = $('#stickySummary');
+    const stickyClose = $('#stickyClose');
+    const stickyLine = $('#stickyLine');
+    const stickyPrice = $('#stickyPrice');
+    const stickyMeta = $('#stickyMeta');
+    let stickyDismissed = false;
 
-      if (stickyClose){
-        stickyClose.addEventListener('click', ()=>{
-          stickyDismissed = true;
-          sticky.classList.add('hidden');
-        });
-      }
+    if (stickyClose){
+      stickyClose.addEventListener('click', ()=>{
+        stickyDismissed = true;
+        sticky.classList.add('hidden');
+      });
+    }
 
-      // Message counter
-      const msg = $('#message');
-      const counter = $('#msg_counter');
-      if (msg && counter){
-        const updateCount = () => counter.textContent = `${msg.value.length} / 1200`;
-        msg.addEventListener('input', updateCount);
-        updateCount();
-      }
+    // Message counter
+    const msg = $('#message');
+    const counter = $('#msg_counter');
+    if (msg && counter){
+      const updateCount = () => counter.textContent = `${msg.value.length} / 1200`;
+      msg.addEventListener('input', updateCount);
+      updateCount();
+    }
 
-      // Ad type buttons
-      const adTypeHidden = $('#ad_type');
-      const adBtns = $$('.adtype-btn:not(.disabled)');
-      adBtns.forEach(b=>{
-        b.addEventListener('click', ()=>{
-          adBtns.forEach(x=>x.classList.remove('selected'));
-          b.classList.add('selected');
-          const pkg = b.getAttribute('data-package') || 'premium_magnet_vinyl';
-          if (adTypeHidden) adTypeHidden.value = pkg;
-          updatePricing();
+    // Ad type buttons
+    const adTypeHidden = $('#ad_type');
+    const adBtns = $$('.adtype-btn:not(.disabled)');
+    adBtns.forEach(b=>{
+      b.addEventListener('click', ()=>{
+        adBtns.forEach(x=>x.classList.remove('selected'));
+        b.classList.add('selected');
+        const pkg = b.getAttribute('data-package') || 'premium_magnet_vinyl';
+        if (adTypeHidden) adTypeHidden.value = pkg;
+        updatePricing();
+      });
+    });
+
+    // Design type buttons (hidden input)
+    const designHidden = $('#design_type');
+    const designBtns = $$('.design-btn');
+    designBtns.forEach(b=>{
+      b.addEventListener('click', ()=>{
+        designBtns.forEach(x=>x.classList.remove('selected'));
+        b.classList.add('selected');
+        const val = b.getAttribute('data-design') || 'arch_design';
+        if (designHidden) designHidden.value = val;
+      });
+    });
+
+    /* POPUP MODAL logic */
+    const modal = $('#designModal');
+    const modalClose = $('#designModalClose');
+    const modalTitle = $('#designModalTitle span');
+    const modalImg = $('#designModalImg');
+    const modalCap = $('#designModalCap');
+
+    function openModal({ title, img, cap }){
+      if (!modal) return;
+      modalTitle.textContent = title || 'Preview';
+      modalImg.src = img || '';
+      modalCap.textContent = cap || '';
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      modalClose?.focus();
+    }
+    function closeModal(){
+      if (!modal) return;
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      modalImg.src = '';
+    }
+
+    $$('.design-view').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        openModal({
+          title: btn.getAttribute('data-modal-title'),
+          img: btn.getAttribute('data-modal-img'),
+          cap: btn.getAttribute('data-modal-cap')
         });
       });
+    });
 
-      // Design type buttons (hidden input)
-      const designHidden = $('#design_type');
-      const designBtns = $$('.design-btn');
-      designBtns.forEach(b=>{
-        b.addEventListener('click', ()=>{
-          designBtns.forEach(x=>x.classList.remove('selected'));
-          b.classList.add('selected');
-          const val = b.getAttribute('data-design') || 'arch_design';
-          if (designHidden) designHidden.value = val;
-        });
-      });
+    modalClose?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
+    window.addEventListener('keydown', (e)=>{ if (e.key === 'Escape' && modal?.classList.contains('open')) closeModal(); });
 
-      /* POPUP MODAL logic */
-      const modal = $('#designModal');
-      const modalClose = $('#designModalClose');
-      const modalTitle = $('#designModalTitle span');
-      const modalImg = $('#designModalImg');
-      const modalCap = $('#designModalCap');
-
-      function openModal({ title, img, cap }){
-        if (!modal) return;
-        modalTitle.textContent = title || 'Preview';
-        modalImg.src = img || '';
-        modalCap.textContent = cap || '';
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        modalClose?.focus();
+    function validateTimeline(){
+      const sd = parseDate(startEl?.value);
+      const ed = parseDate(endEl?.value);
+      if (sd && ed && ed < sd){
+        endEl.setCustomValidity('End date must be after the start date.');
+      } else {
+        endEl.setCustomValidity('');
       }
-      function closeModal(){
-        if (!modal) return;
-        modal.classList.remove('open');
-        document.body.style.overflow = '';
-        modalImg.src = '';
-      }
+    }
 
-      $$('.design-view').forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          openModal({
-            title: btn.getAttribute('data-modal-title'),
-            img: btn.getAttribute('data-modal-img'),
-            cap: btn.getAttribute('data-modal-cap')
-          });
-        });
-      });
+    let syncing = false;
 
-      modalClose?.addEventListener('click', closeModal);
-      modal?.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
-      window.addEventListener('keydown', (e)=>{ if (e.key === 'Escape' && modal?.classList.contains('open')) closeModal(); });
+    // ✅ IMPORTANT: allow empty while typing
+    function clampMonthsToRange(raw){
+      if (raw === '' || raw == null) return null; // allow empty
+      const m = parseInt(raw, 10);
+      if (!isFinite(m)) return null;
+      return Math.max(1, Math.min(6, m));
+    }
 
-      function validateTimeline(){
-        const sd = parseDate(startEl?.value);
-        const ed = parseDate(endEl?.value);
-        if (sd && ed && ed < sd){
-          endEl.setCustomValidity('End date must be after the start date.');
-        } else {
-          endEl.setCustomValidity('');
-        }
-      }
+    // ✅ Only call this when we want to COMMIT months (blur/change/Enter)
+    function commitMonths(){
+      const clamped = clampMonthsToRange(monthsEl?.value);
+      const finalVal = (clamped == null) ? 1 : clamped; // default on commit
+      if (monthsEl) monthsEl.value = String(finalVal);
+      return finalVal;
+    }
 
-      let syncing = false;
+    function syncEndFromStartMonths(){
+      if (syncing) return;
 
-      function clampMonthsToRange(raw){
-        const m = parseInt(raw, 10);
-        if (!isFinite(m)) return 1;
-        return Math.max(1, Math.min(6, m)); // 1–6 only
-      }
+      const sd = parseDate(startEl?.value);
+      if (!sd) return;
 
-      function syncEndFromStartMonths(){
-        if (syncing) return;
-        const sd = parseDate(startEl?.value);
-        const m = clampMonthsToRange(monthsEl?.value || '1');
-        if (!sd) return;
+      const clamped = clampMonthsToRange(monthsEl?.value);
 
-        if (monthsEl) monthsEl.value = String(m);
+      // If user is still typing (empty), don't force anything
+      if (clamped == null) return;
 
-        syncing = true;
-        const endCandidate = addMonthsLocal(sd, m);
-        endCandidate.setDate(endCandidate.getDate() - 1);
-        endEl.value = toYMD(endCandidate);
-        syncing = false;
-      }
+      syncing = true;
+      const endCandidate = addMonthsLocal(sd, clamped);
+      endCandidate.setDate(endCandidate.getDate() - 1);
+      endEl.value = toYMD(endCandidate);
+      syncing = false;
+    }
 
-      function syncMonthsFromDates(){
-        if (syncing) return;
-        const sd = parseDate(startEl?.value);
-        const ed = parseDate(endEl?.value);
-        if (!sd || !ed) return;
+    function syncMonthsFromDates(){
+      if (syncing) return;
 
-        syncing = true;
+      const sd = parseDate(startEl?.value);
+      const ed = parseDate(endEl?.value);
+      if (!sd || !ed) return;
 
-        const endPlus = new Date(ed.getFullYear(), ed.getMonth(), ed.getDate());
-        endPlus.setDate(endPlus.getDate() + 1);
+      syncing = true;
 
-        let months = (endPlus.getFullYear() - sd.getFullYear()) * 12 + (endPlus.getMonth() - sd.getMonth());
-        if (endPlus.getDate() < sd.getDate()) months -= 1;
+      const endPlus = new Date(ed.getFullYear(), ed.getMonth(), ed.getDate());
+      endPlus.setDate(endPlus.getDate() + 1);
 
-        months = Math.max(1, Math.min(6, months || 1));
-        monthsEl.value = String(months);
-        syncing = false;
-      }
+      let months = (endPlus.getFullYear() - sd.getFullYear()) * 12 + (endPlus.getMonth() - sd.getMonth());
+      if (endPlus.getDate() < sd.getDate()) months -= 1;
 
-      startEl?.addEventListener('change', ()=>{
-        validateTimeline();
+      months = Math.max(1, Math.min(6, months || 1));
+      if (monthsEl) monthsEl.value = String(months);
+
+      syncing = false;
+    }
+
+    startEl?.addEventListener('change', ()=>{
+      validateTimeline();
+      // if months currently empty, commit to 1 on start-date change (so dates can sync)
+      if (monthsEl && monthsEl.value === '') monthsEl.value = '1';
+      syncEndFromStartMonths();
+      updatePricing();
+    });
+
+    // ✅ DO NOT clamp on input (keystrokes). Just update display.
+    monthsEl?.addEventListener('input', ()=>{
+      // If empty while typing, show prompt + stop forcing 1/6
+      updatePricing();
+    });
+
+    // ✅ Clamp only when user finishes (blur/change/Enter)
+    monthsEl?.addEventListener('blur', ()=>{
+      commitMonths();
+      syncEndFromStartMonths();
+      updatePricing();
+    });
+    monthsEl?.addEventListener('change', ()=>{
+      commitMonths();
+      syncEndFromStartMonths();
+      updatePricing();
+    });
+    monthsEl?.addEventListener('keydown', (e)=>{
+      if (e.key === 'Enter'){
+        e.preventDefault();
+        commitMonths();
         syncEndFromStartMonths();
         updatePricing();
-      });
+        monthsEl.blur();
+      }
+    });
 
-      monthsEl?.addEventListener('input', ()=>{
-        if (monthsEl) monthsEl.value = String(clampMonthsToRange(monthsEl.value));
-        syncEndFromStartMonths();
-        updatePricing();
-      });
+    endEl?.addEventListener('change', ()=>{
+      validateTimeline();
+      syncMonthsFromDates();
+      updatePricing();
+    });
 
-      endEl?.addEventListener('change', ()=>{
-        validateTimeline();
-        syncMonthsFromDates();
-        updatePricing();
-      });
+    carsEl?.addEventListener('input', updatePricing);
 
-      carsEl?.addEventListener('input', updatePricing);
+    function computePricing({ months, numberOfCars }){
+      const m = parseInt(months, 10);
+      const cars = parseInt(numberOfCars, 10);
 
-      function computePricing({ months, numberOfCars }){
-        const m = parseInt(months, 10);
-        const cars = parseInt(numberOfCars, 10);
+      const isValidMonths = (m >= 1 && m <= 6);
+      const isValidCars = isFinite(cars) && cars >= 1;
 
-        const isValidMonths = (m >= 1 && m <= 6);
-        const isValidCars = isFinite(cars) && cars >= 1;
-
-        if (!isValidMonths || !isValidCars){
-          return { error: !isValidMonths ? 'Enter a valid duration (1–6 months).' : 'Enter a valid number of cars (1+).' };
-        }
-
-        const t = tierRate(cars);
-
-        if (t.negotiable){
-          return { negotiable: true, months: m, numberOfCars: cars, error: '' };
-        }
-
-        const rate = t.rate;
-        if (!rate) return { error: 'Pricing configuration missing for this selection.' };
-
-        const installFeePerCar = BASE_INSTALL_FEE_PER_CAR; // always applies
-        const installTotal = installFeePerCar * cars;
-
-        const monthlyTotal = rate * cars; // before duration discount
-        const discPct = durationDiscountPct(m);
-        const monthlyDiscountAmount = monthlyTotal * discPct; // per month
-        const discountedMonthlyTotal = monthlyTotal - monthlyDiscountAmount;
-
-        const campaignTotal = (discountedMonthlyTotal * m) + installTotal;
-
-        const baseline = 450 * cars;
-        const discountPctFleetVsBase = baseline > 0 ? (1 - (monthlyTotal / baseline)) * 100 : 0;
-
-        return {
-          months: m,
-          numberOfCars: cars,
-          ratePerCarPerMonth: rate,
-
-          monthlyTotal,                 // before duration discount
-          durationDiscountPct: discPct, // 0 / 0.05 / 0.10
-          durationDiscountPerMonth: monthlyDiscountAmount,
-          discountedMonthlyTotal,       // after duration discount
-
-          installFeePerCar,
-          installTotal,
-          campaignTotal,
-
-          fleetApplied: cars >= 5,
-          fleetRate: Math.max(0, discountPctFleetVsBase),
-          error: ''
-        };
+      if (!isValidMonths || !isValidCars){
+        return { error: !isValidMonths ? 'Enter a valid duration (1–6 months).' : 'Enter a valid number of cars (1+).' };
       }
 
-      function updatePricing(){
-        const months = clampMonthsToRange(monthsEl?.value || '1');
-        if (monthsEl) monthsEl.value = String(months);
+      const t = tierRate(cars);
 
-        const cars = parseInt(carsEl?.value || 0, 10);
+      if (t.negotiable){
+        return { negotiable: true, months: m, numberOfCars: cars, error: '' };
+      }
 
-        if (monthsHidden) monthsHidden.value = String(months);
+      const rate = t.rate;
+      if (!rate) return { error: 'Pricing configuration missing for this selection.' };
 
-        const result = computePricing({ months, numberOfCars: cars });
+      const installFeePerCar = BASE_INSTALL_FEE_PER_CAR;
+      const installTotal = installFeePerCar * cars;
 
-        if (result && result.negotiable){
-          estimatePrice.textContent = 'Negotiable';
-          estimateText.innerHTML =
-            `<strong>Premium Magnet Vinyl</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(result.months)}</strong><br>` +
-            `For <strong>30+ cars</strong>, pricing is <strong>custom / negotiable</strong>.<br>` +
-            `Send your brief and we’ll confirm the fleet rate.`;
+      const monthlyTotal = rate * cars;
+      const discPct = durationDiscountPct(m);
+      const monthlyDiscountAmount = monthlyTotal * discPct;
+      const discountedMonthlyTotal = monthlyTotal - monthlyDiscountAmount;
 
-          estimateMeta.textContent = 'Final pricing confirmed after review.';
-          if (estimatePill) estimatePill.textContent = 'Contact us';
+      const campaignTotal = (discountedMonthlyTotal * m) + installTotal;
 
-          if (rateHidden) rateHidden.value = '';
-          if (totalHidden) totalHidden.value = '';
-          if (installTotalHidden) installTotalHidden.value = '';
-          if (installPerCarHidden) installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
-          if (fleetHidden) fleetHidden.value = 'true';
-          if (fleetRateHidden) fleetRateHidden.value = '0';
+      const baseline = 450 * cars;
+      const discountPctFleetVsBase = baseline > 0 ? (1 - (monthlyTotal / baseline)) * 100 : 0;
 
-          if (durDiscPctHidden) durDiscPctHidden.value = '0';
-          if (durDiscAmtHidden) durDiscAmtHidden.value = '0';
+      return {
+        months: m,
+        numberOfCars: cars,
+        ratePerCarPerMonth: rate,
 
-          if (sticky && !stickyDismissed){
-            sticky.classList.remove('hidden');
-            stickyLine.textContent = `Premium Magnet Vinyl • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
-            stickyPrice.textContent = 'Negotiable';
-            stickyMeta.textContent = '30+ cars: custom fleet pricing. Submit brief for quote.';
-          }
-          return;
-        }
+        monthlyTotal,
+        durationDiscountPct: discPct,
+        durationDiscountPerMonth: monthlyDiscountAmount,
+        discountedMonthlyTotal,
 
-        if (result.error){
-          estimatePrice.textContent = '$0';
-          estimateText.textContent = result.error;
-          estimateMeta.textContent = 'Final pricing confirmed after review.';
-          if (estimatePill) estimatePill.textContent = 'Non-binding';
+        installFeePerCar,
+        installTotal,
+        campaignTotal,
 
-          if (rateHidden) rateHidden.value = '';
-          if (totalHidden) totalHidden.value = '';
-          if (installTotalHidden) installTotalHidden.value = '';
-          if (installPerCarHidden) installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
-          if (fleetHidden) fleetHidden.value = 'false';
-          if (fleetRateHidden) fleetRateHidden.value = '0';
+        fleetApplied: cars >= 5,
+        fleetRate: Math.max(0, discountPctFleetVsBase),
+        error: ''
+      };
+    }
 
-          if (durDiscPctHidden) durDiscPctHidden.value = '0';
-          if (durDiscAmtHidden) durDiscAmtHidden.value = '0';
+    function updatePricing(){
+      const rawMonths = monthsEl ? monthsEl.value : '1';
+      const clamped = clampMonthsToRange(rawMonths);
 
-          if (sticky && !stickyDismissed) sticky.classList.add('hidden');
-          return;
-        }
-
-        if (rateHidden) rateHidden.value = String(result.ratePerCarPerMonth);
-        if (totalHidden) totalHidden.value = String(result.campaignTotal);
-        if (installTotalHidden) installTotalHidden.value = String(result.installTotal);
-        if (installPerCarHidden) installPerCarHidden.value = String(result.installFeePerCar);
-        if (fleetHidden) fleetHidden.value = String(!!result.fleetApplied);
-        if (fleetRateHidden) fleetRateHidden.value = String(result.fleetRate.toFixed(2));
-
-        // ✅ duration discount hidden fields (total discount over entire campaign monthly portion)
-        const totalDurationDiscount = result.durationDiscountPerMonth * result.months;
-        if (durDiscPctHidden) durDiscPctHidden.value = String((result.durationDiscountPct * 100).toFixed(0)); // 0 / 5 / 10
-        if (durDiscAmtHidden) durDiscAmtHidden.value = String(totalDurationDiscount.toFixed(2));
-
-        const pkgLabel = 'Premium Magnet Vinyl';
-
-        estimatePrice.textContent = formatMoney(result.campaignTotal);
+      // if empty/invalid while typing, don’t force to 1 or 6
+      if (clamped == null){
+        if (monthsHidden) monthsHidden.value = '';
+        estimatePrice.textContent = '$0';
+        estimateText.textContent = 'Enter months (1–6) and number of cars to preview pricing.';
+        estimateMeta.textContent = 'Final pricing confirmed after review.';
         if (estimatePill) estimatePill.textContent = 'Non-binding';
 
-        const durationLine = result.durationDiscountPct > 0
-          ? `Duration discount: <strong>${(result.durationDiscountPct*100).toFixed(0)}% off</strong> monthly (${formatMoney(result.durationDiscountPerMonth)} / month)`
-          : `Duration discount: <strong>None</strong> (1 month)`;
+        if (sticky && !stickyDismissed) sticky.classList.add('hidden');
+        return;
+      }
 
+      const months = clamped;
+      const cars = parseInt(carsEl?.value || 0, 10);
+
+      if (monthsHidden) monthsHidden.value = String(months);
+
+      const result = computePricing({ months, numberOfCars: cars });
+
+      if (result && result.negotiable){
+        estimatePrice.textContent = 'Negotiable';
         estimateText.innerHTML =
-          `<strong>${pkgLabel}</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(result.months)}</strong><br>` +
-          `Monthly rate: <strong>${formatMoney(result.ratePerCarPerMonth)}</strong> per car<br>` +
-          `Monthly total (before duration discount): <strong>${formatMoney(result.monthlyTotal)}</strong><br>` +
-          `${durationLine}<br>` +
-          `Monthly total (after discount): <strong>${formatMoney(result.discountedMonthlyTotal)}</strong><br>` +
-          `Install (one-time): <strong>${formatMoney(result.installTotal)}</strong> <span style="opacity:.9;">(${formatMoney(BASE_INSTALL_FEE_PER_CAR)} per car)</span><br>` +
-          `Estimated campaign total: <strong>${formatMoney(result.campaignTotal)}</strong>`;
+          `<strong>Premium Magnet Vinyl</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(result.months)}</strong><br>` +
+          `For <strong>25+ cars</strong>, pricing is <strong>custom / negotiable</strong>.<br>` +
+          `Send your brief and we’ll confirm the fleet rate.`;
 
-        const sd = parseDate(startEl?.value);
-        const ed = parseDate(endEl?.value);
-        estimateMeta.textContent = (sd && ed)
-          ? `Timeline: ${sd.toLocaleDateString()} → ${ed.toLocaleDateString()}`
-          : 'Final pricing confirmed after review.';
+        estimateMeta.textContent = 'Final pricing confirmed after review.';
+        if (estimatePill) estimatePill.textContent = 'Contact us';
+
+        if (rateHidden) rateHidden.value = '';
+        if (totalHidden) totalHidden.value = '';
+        if (installTotalHidden) installTotalHidden.value = '';
+        if (installPerCarHidden) installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
+        if (fleetHidden) fleetHidden.value = 'true';
+        if (fleetRateHidden) fleetRateHidden.value = '0';
+
+        if (durDiscPctHidden) durDiscPctHidden.value = '0';
+        if (durDiscAmtHidden) durDiscAmtHidden.value = '0';
 
         if (sticky && !stickyDismissed){
           sticky.classList.remove('hidden');
-          stickyLine.textContent = `${pkgLabel} • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
-          stickyPrice.textContent = formatMoney(result.campaignTotal);
-
-          const discTag = result.durationDiscountPct > 0 ? ` • duration: ${(result.durationDiscountPct*100).toFixed(0)}% off` : '';
-          stickyMeta.textContent = `Rate: ${formatMoney(result.ratePerCarPerMonth)} per car / month • install: ${formatMoney(BASE_INSTALL_FEE_PER_CAR)}/car${discTag}.`;
+          stickyLine.textContent = `Premium Magnet Vinyl • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
+          stickyPrice.textContent = 'Negotiable';
+          stickyMeta.textContent = '25+ cars: custom fleet pricing. Submit brief for quote.';
         }
+        return;
       }
 
-      // Images preview
-      const carImgInput = $('#car_images');
-      const carImgPrev  = $('#car_img_preview');
-      const carImgErr   = $('#car_img_err');
+      if (result.error){
+        estimatePrice.textContent = '$0';
+        estimateText.textContent = result.error;
+        estimateMeta.textContent = 'Final pricing confirmed after review.';
+        if (estimatePill) estimatePill.textContent = 'Non-binding';
 
-      if (carImgInput){
-        carImgInput.addEventListener('change', ()=>{
-          carImgErr.textContent=''; carImgPrev.innerHTML='';
-          const files = Array.from(carImgInput.files||[]);
-          const MAX_FILES = 5, MAX_SIZE = 8*1024*1024;
+        if (rateHidden) rateHidden.value = '';
+        if (totalHidden) totalHidden.value = '';
+        if (installTotalHidden) installTotalHidden.value = '';
+        if (installPerCarHidden) installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
+        if (fleetHidden) fleetHidden.value = 'false';
+        if (fleetRateHidden) fleetRateHidden.value = '0';
 
-          if (files.length > MAX_FILES){
-            carImgErr.textContent = `Please select up to ${MAX_FILES} images.`;
-            carImgInput.value = '';
-            return;
-          }
-          if (files.some(f=>f.size>MAX_SIZE)){
-            carImgErr.textContent = 'Each image must be under 8MB.';
-            carImgInput.value = '';
-            return;
-          }
+        if (durDiscPctHidden) durDiscPctHidden.value = '0';
+        if (durDiscAmtHidden) durDiscAmtHidden.value = '0';
 
-          files.forEach(f=>{
-            const img = new Image();
-            img.alt = f.name;
-            const url = URL.createObjectURL(f);
-            img.onload = () => URL.revokeObjectURL(url);
-            img.src = url;
-            carImgPrev.appendChild(img);
-          });
-        });
+        if (sticky && !stickyDismissed) sticky.classList.add('hidden');
+        return;
       }
 
-      form.addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        status.className='status'; status.textContent='';
+      if (rateHidden) rateHidden.value = String(result.ratePerCarPerMonth);
+      if (totalHidden) totalHidden.value = String(result.campaignTotal);
+      if (installTotalHidden) installTotalHidden.value = String(result.installTotal);
+      if (installPerCarHidden) installPerCarHidden.value = String(result.installFeePerCar);
+      if (fleetHidden) fleetHidden.value = String(!!result.fleetApplied);
+      if (fleetRateHidden) fleetRateHidden.value = String(result.fleetRate.toFixed(2));
 
-        validateTimeline();
-        updatePricing();
+      const totalDurationDiscount = result.durationDiscountPerMonth * result.months;
+      if (durDiscPctHidden) durDiscPctHidden.value = String((result.durationDiscountPct * 100).toFixed(0));
+      if (durDiscAmtHidden) durDiscAmtHidden.value = String(totalDurationDiscount.toFixed(2));
 
-        if (!form.checkValidity()){
-          status.className='status err';
-          status.textContent='Please complete the required fields.';
-          form.reportValidity();
+      const pkgLabel = 'Premium Magnet Vinyl';
+
+      estimatePrice.textContent = formatMoney(result.campaignTotal);
+      if (estimatePill) estimatePill.textContent = 'Non-binding';
+
+      const durationLine = result.durationDiscountPct > 0
+        ? `Duration discount: <strong>${(result.durationDiscountPct*100).toFixed(0)}% off</strong> monthly (${formatMoney(result.durationDiscountPerMonth)} / month)`
+        : `Duration discount: <strong>None</strong> (1 month)`;
+
+      estimateText.innerHTML =
+        `<strong>${pkgLabel}</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(result.months)}</strong><br>` +
+        `Monthly rate: <strong>${formatMoney(result.ratePerCarPerMonth)}</strong> per car<br>` +
+        `Monthly total (before duration discount): <strong>${formatMoney(result.monthlyTotal)}</strong><br>` +
+        `${durationLine}<br>` +
+        `Monthly total (after discount): <strong>${formatMoney(result.discountedMonthlyTotal)}</strong><br>` +
+        `Install (one-time): <strong>${formatMoney(result.installTotal)}</strong> <span style="opacity:.9;">(${formatMoney(BASE_INSTALL_FEE_PER_CAR)} per car)</span><br>` +
+        `Estimated campaign total: <strong>${formatMoney(result.campaignTotal)}</strong>`;
+
+      const sd = parseDate(startEl?.value);
+      const ed = parseDate(endEl?.value);
+      estimateMeta.textContent = (sd && ed)
+        ? `Timeline: ${sd.toLocaleDateString()} → ${ed.toLocaleDateString()}`
+        : 'Final pricing confirmed after review.';
+
+      if (sticky && !stickyDismissed){
+        sticky.classList.remove('hidden');
+        stickyLine.textContent = `${pkgLabel} • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
+        stickyPrice.textContent = formatMoney(result.campaignTotal);
+
+        const discTag = result.durationDiscountPct > 0 ? ` • duration: ${(result.durationDiscountPct*100).toFixed(0)}% off` : '';
+        stickyMeta.textContent = `Rate: ${formatMoney(result.ratePerCarPerMonth)} per car / month • install: ${formatMoney(BASE_INSTALL_FEE_PER_CAR)}/car${discTag}.`;
+      }
+    }
+
+    // Images preview
+    const carImgInput = $('#car_images');
+    const carImgPrev  = $('#car_img_preview');
+    const carImgErr   = $('#car_img_err');
+
+    if (carImgInput){
+      carImgInput.addEventListener('change', ()=>{
+        carImgErr.textContent=''; carImgPrev.innerHTML='';
+        const files = Array.from(carImgInput.files||[]);
+        const MAX_FILES = 5, MAX_SIZE = 8*1024*1024;
+
+        if (files.length > MAX_FILES){
+          carImgErr.textContent = `Please select up to ${MAX_FILES} images.`;
+          carImgInput.value = '';
+          return;
+        }
+        if (files.some(f=>f.size>MAX_SIZE)){
+          carImgErr.textContent = 'Each image must be under 8MB.';
+          carImgInput.value = '';
           return;
         }
 
-        btn.disabled=true; spin.style.display='inline-block'; btnText.textContent='Sending…';
-        try{
-          const res = await fetch(form.action,{
-            method:'POST',
-            body:new FormData(form),
-            headers:{Accept:'application/json'}
-          });
-
-          if(res.ok){
-            form.reset();
-
-            if (monthsEl) monthsEl.value = '1';
-
-            const premiumBtn = document.querySelector('.adtype-btn[data-package="premium_magnet_vinyl"]');
-            if (premiumBtn){
-              adBtns.forEach(x=>x.classList.remove('selected'));
-              premiumBtn.classList.add('selected');
-            }
-            if (adTypeHidden) adTypeHidden.value = 'premium_magnet_vinyl';
-
-            const archBtn = document.querySelector('.design-btn[data-design="arch_design"]');
-            if (archBtn){
-              designBtns.forEach(x=>x.classList.remove('selected'));
-              archBtn.classList.add('selected');
-            }
-            if (designHidden) designHidden.value = 'arch_design';
-
-            syncEndFromStartMonths();
-            updatePricing();
-
-            if (carImgPrev) carImgPrev.innerHTML='';
-            if (counter) counter.textContent = '0 / 1200';
-
-            status.className='status ok';
-            status.textContent='Thanks! We’ll follow up shortly.';
-            window.scrollTo({ top: document.getElementById('partner-card').offsetTop - 20, behavior:'smooth' });
-          }else{
-            status.className='status err';
-            status.textContent='Something went wrong. Please try again.';
-          }
-        }catch{
-          status.className='status err';
-          status.textContent='Network error. Please retry.';
-        }finally{
-          btn.disabled=false; spin.style.display='none'; btnText.textContent='Send brief';
-        }
+        files.forEach(f=>{
+          const img = new Image();
+          img.alt = f.name;
+          const url = URL.createObjectURL(f);
+          img.onload = () => URL.revokeObjectURL(url);
+          img.src = url;
+          carImgPrev.appendChild(img);
+        });
       });
+    }
 
-      if (window.ScrollReveal){
-        ScrollReveal().reveal('.hero-card',{ distance:'18px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
-        ScrollReveal().reveal('#partner-card',{ distance:'20px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
-        ScrollReveal().reveal('.faq-wrap',{ distance:'18px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      status.className='status'; status.textContent='';
+
+      validateTimeline();
+      updatePricing();
+
+      if (!form.checkValidity()){
+        status.className='status err';
+        status.textContent='Please complete the required fields.';
+        form.reportValidity();
+        return;
       }
 
-      // Initial
-      syncEndFromStartMonths();
-      updatePricing();
-    })();
-  </script>
+      btn.disabled=true; spin.style.display='inline-block'; btnText.textContent='Sending…';
+      try{
+        const res = await fetch(form.action,{
+          method:'POST',
+          body:new FormData(form),
+          headers:{Accept:'application/json'}
+        });
+
+        if(res.ok){
+          form.reset();
+
+          if (monthsEl) monthsEl.value = '1';
+
+          const premiumBtn = document.querySelector('.adtype-btn[data-package="premium_magnet_vinyl"]');
+          if (premiumBtn){
+            adBtns.forEach(x=>x.classList.remove('selected'));
+            premiumBtn.classList.add('selected');
+          }
+          if (adTypeHidden) adTypeHidden.value = 'premium_magnet_vinyl';
+
+          const archBtn = document.querySelector('.design-btn[data-design="arch_design"]');
+          if (archBtn){
+            designBtns.forEach(x=>x.classList.remove('selected'));
+            archBtn.classList.add('selected');
+          }
+          if (designHidden) designHidden.value = 'arch_design';
+
+          // Only sync dates if start date exists
+          syncEndFromStartMonths();
+          updatePricing();
+
+          if (carImgPrev) carImgPrev.innerHTML='';
+          if (counter) counter.textContent = '0 / 1200';
+
+          status.className='status ok';
+          status.textContent='Thanks! We’ll follow up shortly.';
+          window.scrollTo({ top: document.getElementById('partner-card').offsetTop - 20, behavior:'smooth' });
+        }else{
+          status.className='status err';
+          status.textContent='Something went wrong. Please try again.';
+        }
+      }catch{
+        status.className='status err';
+        status.textContent='Network error. Please retry.';
+      }finally{
+        btn.disabled=false; spin.style.display='none'; btnText.textContent='Send brief';
+      }
+    });
+
+    if (window.ScrollReveal){
+      ScrollReveal().reveal('.hero-card',{ distance:'18px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
+      ScrollReveal().reveal('#partner-card',{ distance:'20px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
+      ScrollReveal().reveal('.faq-wrap',{ distance:'18px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
+    }
+
+    // Initial
+    updatePricing();
+  })();
+</script>
+
 
   <script src="assets/js/main.js"></script>
 
@@ -1896,5 +1942,4 @@
 </body>
 </html>
 
-</html>
 
