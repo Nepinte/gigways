@@ -267,7 +267,6 @@
       position: relative;
       aspect-ratio: 4 / 3;
       overflow:hidden;
-      /* cleaner background behind images */
       background:
         radial-gradient(circle at 20% 10%, rgba(255,255,255,.55), rgba(255,255,255,.18) 55%, rgba(0,0,0,.04)),
         rgba(0,0,0,.04);
@@ -282,20 +281,17 @@
       width:100%;
       height:100%;
       display:block;
-      /* default: modern listing photo look */
       object-fit: cover;
       transform: scale(1.02);
-      /* makes resized logos look cleaner */
       image-rendering: auto;
       -webkit-font-smoothing: antialiased;
       backface-visibility: hidden;
     }
 
-    /* When the image is a local asset, keep it contained (no ugly crop) */
     .mk-media img.is-local{
       object-fit: contain;
       transform: none;
-      padding: 18px; /* gives your asset image breathing room */
+      padding: 18px;
       filter: drop-shadow(0 10px 22px rgba(0,0,0,.10));
     }
     .dark-theme .mk-media img.is-local{
@@ -345,7 +341,6 @@
     }
     .mk-badge i{ color: var(--third-color); font-size: 1.05rem; }
 
-    /* carousel arrows */
     .mk-arrows{
       position:absolute;
       inset: 0;
@@ -402,7 +397,6 @@
     .dark-theme .mk-dot{ background: rgba(255,255,255,.22); border-color: rgba(255,255,255,.12); }
     .dark-theme .mk-dot[aria-current="true"]{ background: rgba(255,255,255,.92); }
 
-    /* Body */
     .mk-body{
       padding: 14px 14px 16px;
       display:flex;
@@ -435,7 +429,6 @@
       line-height: 1.35;
     }
 
-    /* Partner row (professional, no tiny logo in button) */
     .mk-partner{
       display:flex;
       align-items:center;
@@ -577,7 +570,6 @@
     .mk-infoBtn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-sm); }
     .mk-infoBtn i{ font-size: 1.35rem; color: var(--second-color); }
 
-    /* modal (reuse your modal classes) */
     .modal__content .mk-modalPills{
       display:flex;
       flex-wrap: wrap;
@@ -597,7 +589,6 @@
       color: var(--second-color);
     }
 
-    /* Hidden tracking pixel helper */
     .trk {
       position:absolute;
       left:-9999px;
@@ -818,7 +809,7 @@
         ],
         images: [
           "assets/img/e-file.png",
-          "assets/img/e-file1.png",
+          "assets/img/e-file1.png"
         ]
       },
       {
@@ -840,10 +831,34 @@
         pixels: ["https://www.tqlkg.com/image-101499113-15767014"],
         images: [
           "assets/img/mavis.png",
-          "assets/img/mavis1.png",
-         
+          "assets/img/mavis1.png"
         ]
       },
+
+      /* ✅ NEW: MyAutoLoan Affiliate Listing */
+      {
+        id: "auto-loan-myautoloan",
+        category: "auto-loans",
+        title: "Auto Loans — Compare Offers",
+        meta: "MyAutoLoan • Multiple lenders",
+        price: 0,
+        priceUnit: "free",
+        reviews: 520,
+        badge: "Compare",
+        badgeIcon: "bx-car",
+        partnerName: "MyAutoLoan",
+        partnerSub: "Compare loan offers online",
+        partnerLogo: "assets/img/myautoloan.png",   // <-- you will add image
+        pills: ["Fast quotes", "Multiple lenders", "Compare APRs"],
+        desc: "Compare auto loan offers from multiple lenders in one place. Great for buying or refinancing a vehicle.",
+        linkPrimary: "https://www.dpbolvw.net/click-101499113-10608154",
+        // If you later get CJ tracking image/pixel URL(s), add them here:
+        pixels: [],
+        images: [
+          "assets/img/myautoloan.png",              // <-- you will add image
+          "assets/img/myautoloan1.png"              // <-- optional second slide if you want
+        ]
+      }
     ];
 
     // =========================
@@ -1108,4 +1123,5 @@
   </script>
 </body>
 </html>
+
 
