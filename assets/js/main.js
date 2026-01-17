@@ -65,44 +65,53 @@ sr.reveal(".contact__button", { delay: 400 });
 sr.reveal(".contact__info-item", { interval: 200 });
 
 /*===== THEME (NO FLASH) =====
+  - DEFAULT: DARK
   - Applies theme ASAP on load (before paint if you also add the small <head> script)
   - Keeps html + body in sync
+  - Saves:
+      selected-theme = "dark" | "light"
+      selected-icon  = "sun"  | "moon"
 */
 (function initTheme() {
   const themeButton = document.getElementById("iconMS");
   if (!themeButton) return;
 
   const darkTheme = "dark-theme";
-  const iconTheme = "assets/img/sun.png";
-  const iconDark = "assets/img/moon.png";
+  const iconSun = "assets/img/sun.png";
+  const iconMoon = "assets/img/moon.png";
 
   const root = document.documentElement;
 
-  // Apply saved theme
-  const selectedTheme = localStorage.getItem("selected-theme"); // "dark" | "light"
-  const selectedIcon = localStorage.getItem("selected-icon");   // "sun" | "moon"
+  // Saved values (or null if first visit)
+  const selectedTheme = localStorage.getItem("selected-theme"); // "dark" | "light" | null
+  const selectedIcon = localStorage.getItem("selected-icon");   // "sun"  | "moon"  | null
 
   const applyTheme = (isDark) => {
     root.classList.toggle(darkTheme, isDark);
     document.body.classList.toggle(darkTheme, isDark);
   };
 
-  if (selectedTheme === "dark") applyTheme(true);
-  else applyTheme(false);
+  // ✅ DEFAULT: DARK (only go light if explicitly saved)
+  const isDark = selectedTheme !== "light";
+  applyTheme(isDark);
 
-  // Apply saved icon
-  if (selectedIcon === "sun") themeButton.src = iconTheme;
-  else themeButton.src = iconDark;
+  // Icon should show what user can switch TO
+  // If currently dark -> show sun (tap to go light)
+  // If currently light -> show moon (tap to go dark)
+  // If you want to respect previously saved icon, keep the next 3 lines.
+  if (selectedIcon === "sun") themeButton.src = iconSun;
+  else if (selectedIcon === "moon") themeButton.src = iconMoon;
+  else themeButton.src = isDark ? iconSun : iconMoon;
 
   // Toggle theme on click
   themeButton.addEventListener("click", () => {
-    const isDark = !root.classList.contains(darkTheme);
-    applyTheme(isDark);
+    const nowDark = !root.classList.contains(darkTheme);
+    applyTheme(nowDark);
 
-    themeButton.src = isDark ? iconTheme : iconDark;
+    themeButton.src = nowDark ? iconSun : iconMoon;
 
-    localStorage.setItem("selected-theme", isDark ? "dark" : "light");
-    localStorage.setItem("selected-icon", isDark ? "sun" : "moon");
+    localStorage.setItem("selected-theme", nowDark ? "dark" : "light");
+    localStorage.setItem("selected-icon", nowDark ? "sun" : "moon");
   });
 })();
 
