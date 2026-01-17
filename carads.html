@@ -1,10 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ✅ NO-FLASH: theme class before first paint -->
+  <!-- ✅ NO-FLASH: run BEFORE any CSS so first paint is already themed -->
   <script>
     (function () {
       const root = document.documentElement;
@@ -14,46 +14,29 @@
     })();
   </script>
 
-  <title>Car Advertising for Businesses | Gigways</title>
-  <meta
-    name="description"
-    content="Launch magnetic car advertising campaigns with Gigways. We design and professionally install magnetic ads, manage opt-in drivers, and scale fleets with transparent tiered pricing."
-  />
-  <meta
-    name="keywords"
-    content="magnetic car advertising, car advertising, vehicle advertising, mobile billboard advertising, fleet advertising, fleet marketing, magnetic car ads, OOH advertising, local advertising, gig driver advertising, rideshare advertising"
-  />
+  <title>Magnetic Car Advertising for Businesses | Gigways</title>
+  <meta name="description" content="Launch magnetic car advertising campaigns with Gigways. We design and professionally install magnetic ads, manage opt-in drivers, and scale fleets with transparent tiered pricing." />
+  <meta name="keywords" content="magnetic car advertising, car advertising, vehicle advertising, mobile billboard advertising, fleet advertising, fleet marketing, magnetic car ads, OOH advertising, local advertising, gig driver advertising, rideshare advertising" />
   <meta name="author" content="Gigways Team" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="canonical" href="https://gigways.com/partners.html" />
+  <link rel="canonical" href="https://gigways.com/carads.html" />
 
-  <!-- Social -->
-  <meta property="og:title" content="Car Advertising for Businesses | Gigways" />
-  <meta
-    property="og:description"
-    content="We design and install magnetic car ads, coordinate opt-in drivers, and scale campaigns city-by-city. Transparent fleet pricing."
-  />
+  <meta property="og:title" content="Magnetic Car Advertising for Businesses | Gigways" />
+  <meta property="og:description" content="We design and install magnetic car ads, coordinate opt-in drivers, and scale campaigns city-by-city. Transparent fleet pricing." />
   <meta property="og:image" content="https://gigways.com/assets/img/App.png" />
-  <meta property="og:url" content="https://gigways.com/partners.html" />
+  <meta property="og:url" content="https://gigways.com/carads.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Gigways" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Car Advertising for Businesses | Gigways" />
-  <meta
-    name="twitter:description"
-    content="Magnetic car ads with opt-in drivers. We design, install, and manage campaigns with tiered fleet pricing."
-  />
+  <meta name="twitter:title" content="Magnetic Car Advertising for Businesses | Gigways" />
+  <meta name="twitter:description" content="Magnetic car ads with opt-in drivers. We design, install, and manage campaigns with tiered fleet pricing." />
   <meta name="twitter:image" content="https://gigways.com/assets/img/App.png" />
 
   <link rel="icon" href="assets/img/App.png" />
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <link
-    href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
 
-  <!-- Schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -82,90 +65,66 @@
   </script>
 
   <style>
-    /* =========================================================
-       Clean / Professional polish layer for partners page
-       (keeps your existing styles.css + overrides what’s needed)
-       ========================================================= */
+    /* Disable transitions during first paint to prevent flicker */
+    .preload *, .preload *::before, .preload *::after { transition: none !important; animation: none !important; }
+    .preload body, .preload .l-header, .preload .nav__menu { transition: none !important; }
 
-    /* No flash / no animation during first paint */
-    .preload *, .preload *::before, .preload *::after {
-      transition: none !important;
-      animation: none !important;
-    }
-
-    /* Theme tokens */
     :root{
-      --gw-radius: 18px;
-
-      --gw-text: rgba(255,255,255,.92);
-      --gw-sub: rgba(255,255,255,.78);
-
       --gw-card: rgba(255,255,255,.06);
       --gw-border: rgba(255,255,255,.12);
-      --gw-panel: rgba(0,0,0,.10);
-
+      --gw-text: rgba(255,255,255,.92);
+      --gw-sub: rgba(255,255,255,.78);
+      --gw-soft: rgba(0,0,0,.10);
       --gw-accent: rgba(216,198,175,.95);
       --gw-accentText: #121212;
+      --gw-radius: 18px;
 
-      --gw-shadow: rgba(0,0,0,.18);
+      --page-text: rgba(255,255,255,.92);
+      --page-sub: rgba(255,255,255,.78);
 
-      --page-text: var(--gw-text);
-      --page-sub: var(--gw-sub);
-
-      /* FAQ */
       --faq-bg: rgba(255,255,255,.05);
       --faq-border: rgba(255,255,255,.12);
+      --faq-text: rgba(255,255,255,.92);
+      --faq-sub: rgba(255,255,255,.78);
       --faq-panel: rgba(0,0,0,.10);
       --faq-chip: rgba(255,255,255,.04);
       --faq-shadow: rgba(0,0,0,.12);
-      --faq-text: var(--gw-text);
-      --faq-sub: var(--gw-sub);
     }
 
     html:not(.dark-theme){
+      --page-text: #121212;
+      --page-sub: rgba(18,18,18,.78);
+
       --gw-text: #121212;
       --gw-sub: rgba(18,18,18,.78);
-
       --gw-card: rgba(0,0,0,.03);
       --gw-border: rgba(0,0,0,.12);
-      --gw-panel: rgba(0,0,0,.03);
-
-      --page-text: var(--gw-text);
-      --page-sub: var(--gw-sub);
+      --gw-soft: rgba(0,0,0,.03);
 
       --faq-bg: rgba(0,0,0,.03);
       --faq-border: rgba(0,0,0,.12);
+      --faq-text: #121212;
+      --faq-sub: rgba(18,18,18,.78);
       --faq-panel: rgba(0,0,0,.03);
       --faq-chip: rgba(255,255,255,.85);
       --faq-shadow: rgba(0,0,0,.10);
-      --faq-text: #121212;
-      --faq-sub: rgba(18,18,18,.78);
     }
 
-    /* Layout helpers */
     .container{ max-width: 1120px; }
-    body, main, .section, .container{ color: var(--page-text); }
+    body, .section, main, .container{ color: var(--page-text); }
     .section-title{ color: var(--page-text) !important; }
-    .section-subtitle, .small-note, .hint, .footer__description{ color: var(--page-sub) !important; }
+    .section-subtitle, .small-note{ color: var(--page-sub) !important; }
+    .form-block__sub, .fieldset-note, .hint, .footer__description{ color: var(--page-sub); }
+    .label{ color: var(--page-text); }
 
-    /* Focus */
-    a:focus-visible, button:focus-visible, summary:focus-visible,
-    input:focus-visible, textarea:focus-visible{
-      outline: 3px solid rgba(216,198,175,.65);
-      outline-offset: 2px;
-      border-radius: 12px;
-    }
-
-    /* =========================================================
-       HERO
-       ========================================================= */
+    /* HERO */
     .hero-card{
       border-radius: var(--gw-radius);
       border: 1px solid var(--gw-border);
       background: var(--gw-card);
       padding: 1.1rem;
       backdrop-filter: blur(8px);
-      box-shadow: 0 12px 34px var(--gw-shadow);
+      box-shadow: 0 12px 34px rgba(0,0,0,.18);
     }
     .hero-head{
       display:flex;
@@ -193,11 +152,6 @@
       color: var(--gw-text);
       margin: .65rem 0 0;
     }
-    .hero-note{
-      margin-top:.9rem;
-      opacity:.82;
-      font-size:.95rem;
-    }
 
     /* Trust strip */
     .trust-strip{
@@ -221,13 +175,7 @@
     }
     .trust-chip i{ font-size: 1.2rem; margin-top:.05rem; opacity:.95; }
     .trust-chip b{ display:block; font-size:.95rem; color: var(--gw-text); }
-    .trust-chip span{
-      display:block;
-      font-size:.88rem;
-      color: var(--gw-sub);
-      line-height:1.3;
-      margin-top:.15rem;
-    }
+    .trust-chip span{ display:block; font-size:.88rem; color: var(--gw-sub); line-height:1.3; margin-top:.15rem; }
 
     /* CTAs */
     .cta-row{
@@ -237,40 +185,50 @@
       flex-wrap:wrap;
       align-items:center;
     }
-    .btn-solid, .btn-ghost{
+    .btn-solid{
       display:inline-flex;
       align-items:center;
       gap:.55rem;
       border-radius: 14px;
       padding: .85rem 1rem;
-      font-weight: 950;
-      text-decoration:none;
-      transition: transform .08s ease, opacity .15s ease;
-      will-change: transform;
-    }
-    .btn-solid{
       border: 1px solid rgba(216,198,175,.75);
       background: var(--gw-accent);
       color: var(--gw-accentText);
+      font-weight: 950;
+      text-decoration:none;
+      transition: transform .08s ease, opacity .15s ease;
     }
+    .btn-solid:hover{ transform: translateY(-1px); opacity:.95; }
+
     .btn-ghost{
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      border-radius: 14px;
+      padding: .85rem 1rem;
       border: 1px solid var(--gw-border);
       background: rgba(255,255,255,.05);
       color: var(--gw-text);
       font-weight: 900;
+      text-decoration:none;
+      transition: transform .08s ease, opacity .15s ease;
     }
-    .btn-solid:hover, .btn-ghost:hover{ transform: translateY(-1px); opacity:.95; }
+    .btn-ghost:hover{ transform: translateY(-1px); }
+
     .btn-solid, .btn-solid:hover, .btn-solid:focus, .btn-solid:active{
       color: var(--gw-accentText) !important;
       text-decoration: none !important;
     }
+    .btn-solid i, .btn-solid:hover i{ color: var(--gw-accentText) !important; }
+
     .btn-ghost, .btn-ghost:hover, .btn-ghost:focus, .btn-ghost:active{
       color: var(--gw-text) !important;
       text-decoration: none !important;
     }
+    .btn-ghost i, .btn-ghost:hover i{ color: var(--gw-text) !important; }
 
     /* Bullets */
-    .hero-bullets{ margin-top: 1rem; display:grid; gap:.65rem; }
+    .hero-bullets{ margin-top: 1rem; }
     .hero-pill{
       border-radius: 16px;
       border: 1px solid var(--gw-border);
@@ -285,92 +243,7 @@
     .hero-pill p{ margin:.25rem 0 0; color: var(--gw-sub); line-height:1.45; }
     .hero-pill i{ font-size:1.35rem; margin-top:.05rem; opacity:.95; }
 
-    /* =========================================================
-       CAR ADS (NEW SECTION)
-       Uses your existing about styles + adds a polished card
-       ========================================================= */
-    #car-ads .section-title{
-      margin-bottom: .35rem;
-    }
-    .car-ads__grid{
-      align-items: center;
-      gap: 1.1rem;
-    }
-    /* If your base styles already define about__container/bd-grid,
-       these tweaks just ensure spacing stays premium. */
-    #car-ads .about__content{
-      border-radius: var(--gw-radius);
-      border: 1px solid var(--gw-border);
-      background: var(--gw-card);
-      box-shadow: 0 12px 34px var(--gw-shadow);
-      padding: 1.1rem;
-      backdrop-filter: blur(8px);
-    }
-    #car-ads .about__subtitle{
-      margin-top: 0;
-      color: var(--page-text);
-      letter-spacing: .2px;
-    }
-    #car-ads .about__text{
-      color: var(--page-sub);
-      line-height: 1.65;
-      margin: .65rem 0 0;
-    }
-
-    .gallery-card{
-      border-radius: var(--gw-radius);
-      border: 1px solid var(--gw-border);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.045));
-      box-shadow: 0 18px 46px var(--gw-shadow);
-      overflow: hidden;
-      position: relative;
-    }
-    .gallery-card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(600px 220px at 20% 20%, rgba(216,198,175,.20), transparent 60%),
-                  radial-gradient(520px 240px at 80% 30%, rgba(255,255,255,.08), transparent 60%);
-      pointer-events:none;
-      opacity:.9;
-    }
-    .gallery-stage{
-      position: relative;
-      padding: 1rem;
-      background: rgba(0,0,0,.08);
-    }
-    html:not(.dark-theme) .gallery-stage{
-      background: rgba(0,0,0,.03);
-    }
-    .gallery-stage img{
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 14px;
-      border: 1px solid var(--gw-border);
-      background: rgba(0,0,0,.10);
-      box-shadow: 0 18px 46px rgba(0,0,0,.22);
-    }
-    /* small caption chip (optional look; kept subtle) */
-    .gallery-cap{
-      position: absolute;
-      left: 1rem;
-      bottom: 1rem;
-      display:inline-flex;
-      align-items:center;
-      gap:.45rem;
-      border-radius: 999px;
-      padding: .35rem .6rem;
-      border: 1px solid rgba(216,198,175,.35);
-      background: rgba(216,198,175,.12);
-      color: var(--gw-text);
-      font-weight: 900;
-      font-size: .82rem;
-      backdrop-filter: blur(8px);
-    }
-
-    /* =========================================================
-       Pricing Aside / Estimate
-       ========================================================= */
+    /* Pricing aside */
     .pricing-aside{ position: sticky; top: 92px; align-self: start; }
     @media (max-width: 980px){ .pricing-aside{ position: static; top:auto; } }
 
@@ -379,15 +252,8 @@
       border: 1px solid var(--gw-border);
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.045));
       padding: 1.05rem;
-      box-shadow: 0 18px 46px var(--gw-shadow);
+      box-shadow: 0 18px 46px rgba(0,0,0,.18);
       color: var(--gw-text);
-    }
-    .pricing-aside__head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:.75rem;
-      flex-wrap:wrap;
     }
     .pricing-aside__title{ color: var(--gw-text); margin:0; font-size: 1.05rem; letter-spacing:.2px; }
     .pricing-aside__sub{ opacity:.9; color: var(--gw-sub); margin:.35rem 0 0; font-size:.92rem; line-height:1.45; }
@@ -413,7 +279,7 @@
       background: rgba(255,255,255,.04);
       padding: .95rem;
     }
-    .custom-plan__top{
+    .custom-plan .top{
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -493,7 +359,11 @@
       gap:.8rem;
       margin-bottom: .85rem;
     }
-    .pb-title{ display:flex; gap:.7rem; align-items:flex-start; }
+    .pb-title{
+      display:flex;
+      gap:.7rem;
+      align-items:flex-start;
+    }
     .pb-title i{ font-size: 1.15rem; opacity:.95; margin-top:.1rem; }
     .pb-title b{ display:block; font-size: .98rem; color: var(--gw-text); }
     .pb-sub{ font-size: .88rem; color: var(--gw-sub); margin-top:.18rem; line-height: 1.35; }
@@ -570,8 +440,9 @@
     html:not(.dark-theme) .tier{ background: rgba(0,0,0,.03); }
     .tier span{ font-size: .88rem; font-weight: 900; color: var(--gw-sub); }
     .tier b{ font-size: .95rem; font-weight: 1000; color: var(--gw-text); letter-spacing:.2px; }
+    .pb-muted{ margin-top:.35rem; font-size:.88rem; color:var(--gw-sub); line-height:1.4; }
 
-    /* Duration discount callout */
+    /* Discount callout (duration) */
     .duration-discount{
       margin-top: .75rem;
       border-radius: 16px;
@@ -591,16 +462,10 @@
     }
     .duration-discount .icon i{ font-size: 1.1rem; color: var(--gw-text); }
     .duration-discount b{ display:block; font-weight: 1000; color: var(--gw-text); font-size: .93rem; }
-    .duration-discount span{
-      display:block;
-      margin-top:.12rem;
-      font-size:.88rem;
-      color: var(--gw-sub);
-      line-height: 1.35;
-    }
+    .duration-discount span{ display:block; margin-top:.12rem; font-size:.88rem; color: var(--gw-sub); line-height: 1.35; }
 
     /* Estimate banner */
-    .estimate-banner{
+    .estimate-banner.aside-estimate{
       border-radius: 18px;
       border: 1px solid var(--gw-border);
       background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.035));
@@ -617,7 +482,7 @@
       margin-bottom: .65rem;
     }
     .est-title{ font-weight: 1000; letter-spacing:.2px; color: var(--gw-text); font-size: .95rem; }
-    .est-sub{ margin-top: .18rem; color: var(--gw-sub); font-size:.88rem; line-height: 1.35; }
+    .est-sub{ margin-top: .18rem; color: var(--gw-sub); font-size: .88rem; line-height: 1.35; }
     .est-total{ display:flex; flex-direction:column; align-items:flex-end; gap:.35rem; }
     .est-pill{
       border-radius: 999px;
@@ -640,34 +505,130 @@
     }
     html:not(.dark-theme) .est-body{ background: rgba(0,0,0,.03); }
 
-    /* =========================================================
-       Modal
-       ========================================================= */
+    /* ✅ Ad type buttons (HARD FORCE TEXT COLOR so it can't disappear) */
+    .adtype-row{ margin-top: .85rem; display:flex; flex-wrap:wrap; gap:.6rem; }
+    .adtype-row .adtype-btn, .adtype-row .adtype-btn *{ color: var(--gw-text) !important; -webkit-text-fill-color: var(--gw-text) !important; }
+    .adtype-btn{
+      border-radius: 999px;
+      padding: .58rem .85rem;
+      border: 1px solid var(--gw-border);
+      background: rgba(255,255,255,.06);
+      font-weight: 1000;
+      cursor: pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      transition: transform .08s ease, opacity .15s ease;
+    }
+    .adtype-btn:hover{ transform: translateY(-1px); }
+    .adtype-row .adtype-btn.selected, .adtype-row .adtype-btn.selected *{
+      background: rgba(216,198,175,.92);
+      border-color: rgba(216,198,175,.95);
+      color: var(--gw-accentText) !important;
+      -webkit-text-fill-color: var(--gw-accentText) !important;
+    }
+    .adtype-btn.disabled{ cursor:not-allowed; opacity:.65; }
+    .adtype-soon{
+      font-size:.78rem; padding:.15rem .45rem; border-radius:999px;
+      border: 1px solid var(--gw-border);
+      background: rgba(0,0,0,.14);
+      color: var(--gw-sub) !important;
+      -webkit-text-fill-color: var(--gw-sub) !important;
+      font-weight: 900;
+    }
+    html:not(.dark-theme) .adtype-row .adtype-btn, html:not(.dark-theme) .adtype-row .adtype-btn *{
+      color:#121212 !important; -webkit-text-fill-color:#121212 !important;
+    }
+    html:not(.dark-theme) .adtype-row .adtype-btn{
+      background: rgba(0,0,0,.05) !important; border-color: rgba(0,0,0,.16) !important;
+    }
+    html:not(.dark-theme) .adtype-row .adtype-btn.selected, html:not(.dark-theme) .adtype-row .adtype-btn.selected *{
+      background: rgba(216,198,175,.88) !important; border-color: rgba(216,198,175,.95) !important;
+      color:#121212 !important; -webkit-text-fill-color:#121212 !important;
+    }
+    html:not(.dark-theme) .adtype-row .adtype-btn.disabled, html:not(.dark-theme) .adtype-row .adtype-btn.disabled *{
+      color: rgba(18,18,18,.65) !important;
+      -webkit-text-fill-color: rgba(18,18,18,.65) !important;
+      opacity: 1;
+      background: rgba(0,0,0,.03) !important;
+      border-color: rgba(0,0,0,.12) !important;
+    }
+    html:not(.dark-theme) .adtype-soon{
+      background: rgba(0,0,0,.06);
+      border-color: rgba(0,0,0,.10);
+      color: rgba(18,18,18,.72) !important;
+      -webkit-text-fill-color: rgba(18,18,18,.72) !important;
+    }
+
+    /* ✅ Design selector + modal */
+    .designtype-wrap{ margin-top:.85rem; border-radius:16px; border:1px solid var(--gw-border); background: rgba(255,255,255,.04); padding:.85rem; }
+    .designtype-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:.75rem; flex-wrap:wrap; margin-bottom:.65rem; }
+    .designtype-title{ font-weight:1000; color:var(--gw-text); margin:0; font-size:.95rem; }
+    .designtype-sub{ margin-top:.15rem; color:var(--gw-sub); font-size:.88rem; line-height:1.35; }
+    .design-row{ display:flex; flex-wrap:wrap; gap:.6rem; margin-top:.45rem; align-items:center; }
+    .design-btn{
+      border-radius:999px; padding:.58rem .85rem;
+      border:1px solid var(--gw-border);
+      background: rgba(255,255,255,.06);
+      color: var(--gw-text) !important;
+      -webkit-text-fill-color: var(--gw-text) !important;
+      font-weight:1000; cursor:pointer; display:inline-flex; align-items:center; gap:.55rem;
+      transition: transform .08s ease, opacity .15s ease;
+    }
+    .design-btn:hover{ transform: translateY(-1px); }
+    .design-btn.selected{
+      border-color: rgba(216,198,175,.95);
+      background: rgba(216,198,175,.92);
+      color: var(--gw-accentText) !important;
+      -webkit-text-fill-color: var(--gw-accentText) !important;
+    }
+    .design-view{
+      display:inline-flex; align-items:center; gap:.45rem;
+      padding:.48rem .7rem; border-radius:999px;
+      border: 1px solid var(--gw-border);
+      background: rgba(0,0,0,.10);
+      color: var(--gw-sub);
+      font-weight:900; font-size:.86rem;
+      cursor:pointer; transition: transform .08s ease, opacity .15s ease;
+    }
+    .design-view:hover{ opacity:.95; transform: translateY(-1px); }
+    .design-view i{ font-size:1rem; }
+    html:not(.dark-theme) .design-btn{
+      background: rgba(0,0,0,.05) !important;
+      border-color: rgba(0,0,0,.16) !important;
+      color:#121212 !important;
+      -webkit-text-fill-color:#121212 !important;
+    }
+    html:not(.dark-theme) .design-btn.selected{
+      background: rgba(216,198,175,.88) !important;
+      border-color: rgba(216,198,175,.95) !important;
+      color:#121212 !important;
+      -webkit-text-fill-color:#121212 !important;
+    }
+    html:not(.dark-theme) .design-view{
+      background: rgba(0,0,0,.04);
+      border-color: rgba(0,0,0,.12);
+      color: rgba(18,18,18,.75);
+    }
+
     .gw-modal{
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,.62);
+      position: fixed; inset: 0; background: rgba(0,0,0,.62);
       display:none; align-items:center; justify-content:center;
       padding:1.1rem; z-index:9999;
     }
     .gw-modal.open{ display:flex; }
     .gw-modal__dialog{
-      width:min(920px,100%);
-      border-radius:18px;
-      border:1px solid var(--gw-border);
-      background: rgba(20,20,20,.72);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 22px 70px rgba(0,0,0,.35);
-      overflow:hidden;
+      width:min(920px,100%); border-radius:18px; border:1px solid var(--gw-border);
+      background: rgba(20,20,20,.72); backdrop-filter: blur(10px);
+      box-shadow: 0 22px 70px rgba(0,0,0,.35); overflow:hidden;
     }
     html:not(.dark-theme) .gw-modal__dialog{ background: rgba(255,255,255,.92); }
     .gw-modal__top{
       display:flex; align-items:center; justify-content:space-between;
-      gap:.75rem; padding:.8rem .9rem;
-      border-bottom:1px solid var(--gw-border);
+      gap:.75rem; padding:.8rem .9rem; border-bottom:1px solid var(--gw-border);
     }
     .gw-modal__title{
-      font-weight:1000;
-      color:var(--gw-text);
+      font-weight:1000; color:var(--gw-text);
       display:flex; align-items:center; gap:.55rem;
     }
     html:not(.dark-theme) .gw-modal__title{ color:#121212; }
@@ -679,9 +640,7 @@
       font-size:1.4rem; line-height:1; cursor:pointer;
       display:flex; align-items:center; justify-content:center;
     }
-    html:not(.dark-theme) .gw-modal__close{
-      background: rgba(0,0,0,.04); color:#121212;
-    }
+    html:not(.dark-theme) .gw-modal__close{ background: rgba(0,0,0,.04); color:#121212; }
     .gw-modal__body{ padding:.9rem; background: rgba(0,0,0,.10); }
     html:not(.dark-theme) .gw-modal__body{ background: rgba(0,0,0,.03); }
     .gw-modal__img{
@@ -693,9 +652,7 @@
     .gw-modal__cap{ margin-top:.7rem; color: var(--gw-sub); font-size:.9rem; line-height:1.4; }
     html:not(.dark-theme) .gw-modal__cap{ color: rgba(18,18,18,.78); }
 
-    /* =========================================================
-       FAQ
-       ========================================================= */
+    /* FAQ */
     .faq-wrap{
       margin-top: .9rem;
       border-radius: var(--gw-radius);
@@ -707,9 +664,7 @@
     .faq-grid{ display:grid; grid-template-columns: 1.15fr .85fr; gap: 0; }
     @media (max-width: 980px){ .faq-grid{ grid-template-columns: 1fr; } }
     .faq-left{ padding: 1rem; border-right: 1px solid var(--faq-border); }
-    @media (max-width: 980px){
-      .faq-left{ border-right: none; border-bottom: 1px solid var(--faq-border); }
-    }
+    @media (max-width: 980px){ .faq-left{ border-right: none; border-bottom: 1px solid var(--faq-border); } }
     .faq-right{ padding: 1rem; background: var(--faq-panel); }
 
     .faq-item{
@@ -777,6 +732,12 @@
     .faq-mini i{ font-size: 1.1rem; margin-top:.05rem; opacity:.95; }
     .faq-mini b{ display:block; font-size:.92rem; color: var(--faq-text); }
     .faq-mini span{ display:block; margin-top:.15rem; font-size:.88rem; color: var(--faq-sub); line-height:1.3; }
+
+    a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, textarea:focus-visible{
+      outline: 3px solid rgba(216,198,175,.65);
+      outline-offset: 2px;
+      border-radius: 12px;
+    }
   </style>
 </head>
 
@@ -786,26 +747,24 @@
 
   <!-- HEADER -->
   <header class="l-header">
-    <nav class="nav bd-grid" aria-label="Primary">
+    <nav class="nav bd-grid">
       <div><a href="index.html" class="nav__logo">Gigways</a></div>
 
       <div class="nav__menu" id="nav-menu">
         <ul class="nav__list">
           <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
           <li class="nav__item"><a href="index.html#about" class="nav__link">About</a></li>
-          <li class="nav__item"><a href="partners.html" class="nav__link active">Car Advertising</a></li>
+          <li class="nav__item"><a href="carads.html" class="nav__link active">Car Advertising</a></li>
           <li class="nav__item"><a href="market.html" class="nav__link" aria-current="page">Marketplace</a></li>
           <li class="nav__item"><a href="careers.html" class="nav__link">Careers</a></li>
         </ul>
       </div>
 
-      <div class="theme" aria-label="Theme toggle">
+      <div class="theme">
         <img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" />
       </div>
 
-      <div class="nav__toggle" id="nav-toggle" aria-label="Open menu">
-        <i class="bx bx-menu"></i>
-      </div>
+      <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
     </nav>
   </header>
 
@@ -827,11 +786,10 @@
           <div class="cta-row">
             <a class="btn-solid" href="#forms"><i class="bx bx-send"></i> Send a Brief</a>
             <a class="btn-ghost" href="#pricingWrap"><i class="bx bx-dollar-circle"></i> See Estimate</a>
-            <a class="btn-ghost" href="#car-ads"><i class="bx bx-car"></i> How it Works</a>
           </div>
         </div>
 
-        <div class="trust-strip" aria-label="Highlights">
+        <div class="trust-strip" aria-label="Trust highlights">
           <div class="trust-chip">
             <i class="bx bx-user-check"></i>
             <div><b>Opt-in drivers</b><span>Brand-safe participation</span></div>
@@ -876,40 +834,9 @@
           </div>
         </div>
 
-        <p class="hero-lead hero-note">
+        <p class="hero-lead" style="margin-top:.9rem; opacity:.82; font-size:.95rem;">
           Available now: <strong>Premium Magnet Vinyl</strong>. Coming soon: rooftop formats.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CAR ADS (ADDED) -->
-  <section class="about section" id="car-ads">
-    <div class="container">
-      <h2 class="section-title">Car Advertising (Optional for Drivers)</h2>
-
-      <div class="about__container bd-grid car-ads__grid">
-        <!-- LEFT -->
-        <div class="about__content">
-          <h2 class="about__subtitle">Local Campaigns That Support Drivers</h2>
-
-          <p class="about__text">
-            Businesses can promote their brand with real-world visibility through driver car ads.
-            Create a campaign, choose your area, and reach people where they live, commute, and shop.
-          </p>
-
-          <p class="about__text">
-            For drivers, it’s a flexible way to earn extra — completely optional and opt-in.
-          </p>
-        </div>
-
-        <!-- RIGHT -->
-        <div class="gallery-card" aria-label="Car advertising preview">
-          <div class="gallery-stage">
-            <img src="assets/img/car.png" alt="Car advertising wrap preview" loading="lazy" />
-            <div class="gallery-cap"><i class="bx bx-image"></i> Preview</div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
@@ -925,17 +852,16 @@
         <!-- Pricing Aside -->
         <aside class="pricing-aside" aria-label="Pricing & estimate">
           <div class="pricing-aside__card" id="pricingWrap" aria-label="Choose a pricing plan">
-
-            <div class="pricing-aside__head">
+            <div class="pricing-aside__head" style="display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;flex-wrap:wrap;">
               <div>
                 <h3 class="pricing-aside__title"><i class="bx bx-dollar-circle"></i> Pricing estimate</h3>
                 <p class="pricing-aside__sub">Enter months + cars (dates auto-match your months).</p>
               </div>
             </div>
 
-            <!-- Custom duration -->
+            <!-- ✅ Custom months ONLY (1–6) -->
             <div class="custom-plan" aria-label="Custom duration">
-              <div class="custom-plan__top">
+              <div class="top">
                 <div>
                   <h4 class="cp-title"><i class="bx bx-slider-alt"></i> Custom duration</h4>
                   <div class="cp-sub">Enter how many months you want to run (1–6). End date will auto-adjust.</div>
@@ -945,20 +871,11 @@
 
               <div class="cp-row">
                 <span>Months</span>
-                <input
-                  id="custom_months"
-                  class="cp-input"
-                  type="number"
-                  min="1"
-                  max="6"
-                  value="1"
-                  inputmode="numeric"
-                  aria-label="Campaign months"
-                />
+                <input id="custom_months" class="cp-input" type="number" min="1" max="6" value="1" inputmode="numeric" />
               </div>
             </div>
 
-            <!-- Pricing details -->
+            <!-- ✅ Pricing details -->
             <div class="pricing-block" id="fleetNote" aria-live="polite">
               <div class="pb-head">
                 <div class="pb-title">
@@ -1005,22 +922,22 @@
                 </div>
               </div>
 
-              <!-- Duration discount info -->
+              <!-- ✅ NEW: Duration discount info -->
               <div class="duration-discount" aria-label="Duration discounts">
                 <div class="icon"><i class="bx bx-purchase-tag"></i></div>
                 <div>
                   <b>Duration discounts (monthly only)</b>
                   <span>
                     2–4 months: <strong>5% off</strong> monthly charges •
-                    5–6 months: <strong>10% off</strong> monthly charges.
+                    5–6 months : <strong>10% off</strong> monthly charges.
                     (Install fee is not discounted.)
                   </span>
                 </div>
               </div>
             </div>
 
-            <!-- Estimate banner -->
-            <div class="estimate-banner" aria-live="polite">
+            <!-- ✅ Estimate banner -->
+            <div class="estimate-banner aside-estimate" aria-live="polite" style="margin-top:.9rem;">
               <div class="est-top">
                 <div>
                   <div class="est-title">Estimated total</div>
@@ -1034,19 +951,20 @@
 
               <div class="est-body" id="estimateText">Enter months + number of cars to preview pricing.</div>
 
-              <!-- Hidden fields for Formspree -->
               <input type="hidden" id="campaign_months" name="campaign_months" value="1">
               <input type="hidden" id="campaign_rate" name="ratePerCarPerMonth" value="">
               <input type="hidden" id="campaign_est_total" name="campaignTotal" value="">
               <input type="hidden" id="campaign_fleet_discount" name="fleetDiscountApplied" value="false">
               <input type="hidden" id="campaign_fleet_discount_rate" name="fleetDiscountRate" value="0">
               <input type="hidden" id="campaign_install_fee_total" name="installFeeTotal" value="">
-              <input type="hidden" id="campaign_install_fee_per_car" name="installFeePerCar" value="150">
+              <input type="hidden" id="campaign_install_fee_per_car" name="installFeePerCar" value="200">
+
+              <!-- ✅ NEW hidden fields for duration discount -->
               <input type="hidden" id="campaign_duration_discount_pct" name="durationDiscountPct" value="0">
               <input type="hidden" id="campaign_duration_discount_amount" name="durationDiscountAmount" value="0">
             </div>
 
-            <p class="hero-lead hero-note">
+            <p class="hero-lead" style="margin-top:.85rem; opacity:.85; font-size:.95rem;">
               Pricing varies by geography and rollout logistics. We’ll confirm final numbers after your brief.
             </p>
           </div>
@@ -1054,20 +972,13 @@
 
         <!-- Form -->
         <div class="card" id="partner-card">
-          <form
-            id="my-form"
-            action="https://formspree.io/f/mzboyvbe"
-            method="POST"
-            enctype="multipart/form-data"
-            aria-describedby="my-form-status"
-          >
+          <form id="my-form" action="https://formspree.io/f/mzboyvbe" method="POST" enctype="multipart/form-data" aria-describedby="my-form-status">
             <input type="hidden" name="_subject" value="Gigways Vehicle Advertising Brief">
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
             <input type="hidden" name="partner_type" value="vehicle_ads">
             <input type="hidden" id="design_type" name="designType" value="arch_design">
             <input type="hidden" id="ad_type" name="packageType" value="premium_magnet_vinyl">
 
-            <!-- Contact -->
             <div class="form-block">
               <div class="form-block__head">
                 <h3 class="form-block__title"><i class="bx bx-user"></i> Contact</h3>
@@ -1109,7 +1020,6 @@
               </div>
             </div>
 
-            <!-- Campaign details -->
             <fieldset id="fs-carads" class="fieldset fieldset--modern">
               <legend><span class="legend-pill"><i class="bx bx-car"></i> Campaign Details</span></legend>
 
@@ -1149,7 +1059,6 @@
                 </div>
               </div>
 
-              <!-- Uploads -->
               <div class="upload-box">
                 <div class="upload-box__top">
                   <div class="upload-box__title">
@@ -1176,7 +1085,6 @@
               </div>
             </fieldset>
 
-            <!-- Brief -->
             <div class="form-block form-block--brief">
               <div class="form-block__head">
                 <h3 class="form-block__title"><i class="bx bx-edit-alt"></i> Campaign brief *</h3>
@@ -1187,14 +1095,8 @@
                 <label class="label" for="message">Brief *</label>
                 <div class="field">
                   <i class="bx bx-file icon"></i>
-                  <textarea
-                    class="textarea"
-                    id="message"
-                    name="message"
-                    required
-                    maxlength="1200"
-                    placeholder="Example: We’re promoting our new location. Target: Atlanta. Goal: drive visits using a QR code + promo code. Ideal start date: Jan 10."
-                  ></textarea>
+                  <textarea class="textarea" id="message" name="message" required maxlength="1200"
+                    placeholder="Example: We’re promoting our new location. Target: Atlanta. Goal: drive visits using a QR code + promo code. Ideal start date: Jan 10."></textarea>
                 </div>
 
                 <div class="hint hint-row" style="display:flex;justify-content:space-between;gap:1rem;">
@@ -1203,7 +1105,6 @@
               </div>
             </div>
 
-            <!-- Footer -->
             <div class="form-footer">
               <label class="label consent-row">
                 <input type="checkbox" name="consent" required style="width:18px;height:18px">
@@ -1238,8 +1139,9 @@
                 <div class="faq-a">
                   <p>
                     Pricing is based on <strong>campaign duration, number of vehicles, market coverage,</strong>
-                    and the ad format you choose. Estimates shown are <strong>preliminary</strong>.
-                    Final pricing is confirmed after your campaign brief and rollout details are reviewed.
+                    and the ad format you choose.
+                    Estimates shown are <strong>preliminary</strong>. Final pricing is confirmed after your campaign brief
+                    and rollout details are reviewed.
                   </p>
                 </div>
               </details>
@@ -1252,8 +1154,8 @@
                 <div class="faq-a">
                   <p>
                     All drivers are <strong>opt-in</strong> and managed through our app-based system.
-                    Drivers must complete required tasks, follow placement guidelines, and submit proof throughout the campaign.
-                    Non-compliant drivers are removed.
+                    Drivers must complete required tasks, follow placement guidelines, and submit proof
+                    throughout the campaign. Non-compliant drivers are removed.
                   </p>
                 </div>
               </details>
@@ -1266,7 +1168,8 @@
                 <div class="faq-a">
                   <p>
                     Yes. Drivers use our app to submit <strong>installation photos, weekly photo check-ins,</strong>
-                    and basic activity confirmations until the campaign ends. Mileage and task completion are tracked.
+                    and basic activity confirmations until the campaign ends.
+                    Mileage and task completion are tracked to ensure active exposure.
                   </p>
                 </div>
               </details>
@@ -1279,7 +1182,8 @@
                 <div class="faq-a">
                   <p>
                     Our system tracks <strong>driver participation, mileage ranges, and weekly task completion</strong>.
-                    For advertiser performance, we recommend adding a QR code, custom landing page, promo code, or call tracking number.
+                    For advertiser performance, we recommend adding your own tracking such as
+                    a QR code, custom landing page, promo code, or call tracking number.
                   </p>
                 </div>
               </details>
@@ -1334,7 +1238,7 @@
     </div>
   </main>
 
-  <!-- Modal (for design previews if you re-enable buttons later) -->
+  <!-- ✅ POPUP MODAL HTML -->
   <div class="gw-modal" id="designModal" role="dialog" aria-modal="true" aria-labelledby="designModalTitle">
     <div class="gw-modal__dialog" role="document">
       <div class="gw-modal__top">
@@ -1365,7 +1269,6 @@
     </div>
   </aside>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="footer__container">
       <div class="footer__content">
@@ -1378,7 +1281,7 @@
         <ul class="footer__links">
           <li><a href="index.html" class="footer__link">Home</a></li>
           <li><a href="market.html" class="footer__link">Marketplace</a></li>
-          <li><a href="partners.html#forms" class="footer__link">Car Advertising</a></li>
+          <li><a href="carads.html#forms" class="footer__link">Car Advertising</a></li>
           <li><a href="careers.html" class="footer__link">Careers</a></li>
           <li><a href="privacy-policy.html" class="footer__link">Privacy Policy</a></li>
           <li><a href="faq.html" class="footer__link">FAQ Support</a></li>
@@ -1388,10 +1291,10 @@
       <div class="footer__content">
         <h3 class="footer__subtitle">Connect With Us</h3>
         <div class="footer__social">
-          <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon" aria-label="Facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="https://x.com/i/flow/single_sign_on" class="footer__icon" aria-label="X / Twitter"><i class="bx bxl-twitter"></i></a>
-          <a href="https://www.instagram.com/" class="footer__icon" aria-label="Instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="mailto:Support@gigways.com" class="footer__icon" aria-label="Email"><i class="bx bxs-envelope"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon"><i class="bx bxl-facebook"></i></a>
+          <a href="https://x.com/i/flow/single_sign_on" class="footer__icon"><i class="bx bxl-twitter"></i></a>
+          <a href="https://www.instagram.com/" class="footer__icon"><i class="bx bxl-instagram"></i></a>
+          <a href="mailto:Support@gigways.com" class="footer__icon"><i class="bx bxs-envelope"></i></a>
         </div>
       </div>
     </div>
@@ -1403,543 +1306,571 @@
 
   <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
 
-  <!-- =========================================================
-       Page JS (pricing + form + modal + duration discounts)
-       Cleaned: fewer globals, clearer functions, safer parsing
-       ========================================================= -->
-  <script>
-    (function(){
-      "use strict";
+  <!-- ✅ Page JS (pricing + form + POPUP modal + duration discounts) -->
+<script>
+  (function(){
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
 
-      const $ = (s) => document.querySelector(s);
-      const $$ = (s) => Array.from(document.querySelectorAll(s));
+    function formatMoney(n){
+      const num = Number(n);
+      if (!isFinite(num)) return '$0';
+      return `$${num.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+    }
 
-      const formatMoney = (n) => {
-        const num = Number(n);
-        if (!Number.isFinite(num)) return "$0";
-        return `$${num.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
-      };
+    function parseDate(d){
+      const dt = new Date(d);
+      return isNaN(dt.getTime()) ? null : dt;
+    }
 
-      const parseDate = (d) => {
-        const dt = new Date(d);
-        return Number.isNaN(dt.getTime()) ? null : dt;
-      };
+    // Local YYYY-MM-DD (no timezone surprises)
+    function toYMD(dt){
+      const y = dt.getFullYear();
+      const m = String(dt.getMonth() + 1).padStart(2, '0');
+      const d = String(dt.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
 
-      // Local YYYY-MM-DD (avoids timezone surprises)
-      const toYMD = (dt) => {
-        const y = dt.getFullYear();
-        const m = String(dt.getMonth() + 1).padStart(2, "0");
-        const d = String(dt.getDate()).padStart(2, "0");
-        return `${y}-${m}-${d}`;
-      };
+    function monthLabel(months){ return `${months} month${months > 1 ? 's' : ''}`; }
 
-      const monthLabel = (months) => `${months} month${months > 1 ? "s" : ""}`;
+    // Add months in local time, keep day as close as possible
+    function addMonthsLocal(date, months){
+      const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      const targetMonth = d.getMonth() + months;
+      const y = d.getFullYear() + Math.floor(targetMonth / 12);
+      const m = ((targetMonth % 12) + 12) % 12;
 
-      // Add months in local time; clamp to last day if needed
-      const addMonthsLocal = (date, months) => {
-        const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        const targetMonth = d.getMonth() + months;
-        const y = d.getFullYear() + Math.floor(targetMonth / 12);
-        const m = ((targetMonth % 12) + 12) % 12;
+      const lastDay = new Date(y, m + 1, 0).getDate();
+      const day = Math.min(d.getDate(), lastDay);
+      return new Date(y, m, day);
+    }
 
-        const lastDay = new Date(y, m + 1, 0).getDate();
-        const day = Math.min(d.getDate(), lastDay);
-        return new Date(y, m, day);
-      };
+    function tierRate(cars){
+      const n = parseInt(cars, 10);
+      if (!isFinite(n) || n < 1) return { rate: 0, negotiable: false };
 
-      const tierRate = (cars) => {
-        const n = parseInt(cars, 10);
-        if (!Number.isFinite(n) || n < 1) return { rate: 0, negotiable: false };
+      if (n >= 25) return { rate: 0, negotiable: true };
+      if (n >= 20) return { rate: 375, negotiable: false };
+      if (n >= 15) return { rate: 385, negotiable: false };
+      if (n >= 10) return { rate: 395, negotiable: false };
+      if (n >= 5)  return { rate: 405, negotiable: false };
+      return { rate: 415, negotiable: false };
+    }
 
-        if (n >= 25) return { rate: 0, negotiable: true };
-        if (n >= 20) return { rate: 375, negotiable: false };
-        if (n >= 15) return { rate: 385, negotiable: false };
-        if (n >= 10) return { rate: 395, negotiable: false };
-        if (n >= 5)  return { rate: 405, negotiable: false };
-        return { rate: 415, negotiable: false };
-      };
+    function durationDiscountPct(months){
+      const m = parseInt(months, 10);
+      if (!isFinite(m)) return 0;
+      if (m >= 5) return 0.10;   // 5–6 months
+      if (m >= 2) return 0.05;   // 2–4 months
+      return 0;                  // 1 month
+    }
 
-      const durationDiscountPct = (months) => {
-        const m = parseInt(months, 10);
-        if (!Number.isFinite(m)) return 0;
-        if (m >= 5) return 0.10; // 5–6 months
-        if (m >= 2) return 0.05; // 2–4 months
-        return 0;                // 1 month
-      };
+    const BASE_INSTALL_FEE_PER_CAR = 150;
 
-      const BASE_INSTALL_FEE_PER_CAR = 150;
+    const form    = $('#my-form');
+    const status  = $('#my-form-status');
+    const btn     = $('#my-form-button');
+    const spin    = $('#btn-spin');
+    const btnText = $('#btn-text');
 
-      // Elements
-      const form    = $("#my-form");
-      const status  = $("#my-form-status");
-      const btn     = $("#my-form-button");
-      const spin    = $("#btn-spin");
-      const btnText = $("#btn-text");
+    const carsEl  = $('#car_count');
+    const startEl = $('#start_date');
+    const endEl   = $('#end_date');
 
-      const carsEl  = $("#car_count");
-      const startEl = $("#start_date");
-      const endEl   = $("#end_date");
-      const monthsEl = $("#custom_months");
+    const monthsEl = $('#custom_months');
 
-      const estimateText  = $("#estimateText");
-      const estimatePrice = $("#estimatePrice");
-      const estimateMeta  = $("#estimateMeta");
-      const estimatePill  = $("#estimatePill");
+    const estimateText  = $('#estimateText');
+    const estimatePrice = $('#estimatePrice');
+    const estimateMeta  = $('#estimateMeta');
+    const estimatePill  = $('#estimatePill');
 
-      const monthsHidden = $("#campaign_months");
-      const rateHidden   = $("#campaign_rate");
-      const totalHidden  = $("#campaign_est_total");
-      const fleetHidden  = $("#campaign_fleet_discount");
-      const fleetRateHidden = $("#campaign_fleet_discount_rate");
-      const installTotalHidden = $("#campaign_install_fee_total");
-      const installPerCarHidden = $("#campaign_install_fee_per_car");
-      const durDiscPctHidden = $("#campaign_duration_discount_pct");
-      const durDiscAmtHidden = $("#campaign_duration_discount_amount");
+    const monthsHidden = $('#campaign_months');
+    const rateHidden   = $('#campaign_rate');
+    const totalHidden  = $('#campaign_est_total');
+    const fleetHidden  = $('#campaign_fleet_discount');
+    const fleetRateHidden = $('#campaign_fleet_discount_rate');
+    const installTotalHidden = $('#campaign_install_fee_total');
+    const installPerCarHidden = $('#campaign_install_fee_per_car');
 
-      const sticky = $("#stickySummary");
-      const stickyClose = $("#stickyClose");
-      const stickyLine = $("#stickyLine");
-      const stickyPrice = $("#stickyPrice");
-      const stickyMeta = $("#stickyMeta");
-      let stickyDismissed = false;
+    const durDiscPctHidden = $('#campaign_duration_discount_pct');
+    const durDiscAmtHidden = $('#campaign_duration_discount_amount');
 
-      stickyClose?.addEventListener("click", () => {
+    const sticky = $('#stickySummary');
+    const stickyClose = $('#stickyClose');
+    const stickyLine = $('#stickyLine');
+    const stickyPrice = $('#stickyPrice');
+    const stickyMeta = $('#stickyMeta');
+    let stickyDismissed = false;
+
+    if (stickyClose){
+      stickyClose.addEventListener('click', ()=>{
         stickyDismissed = true;
-        sticky.classList.add("hidden");
+        sticky.classList.add('hidden');
       });
+    }
 
-      // Message counter
-      const msg = $("#message");
-      const counter = $("#msg_counter");
-      if (msg && counter){
-        const updateCount = () => counter.textContent = `${msg.value.length} / 1200`;
-        msg.addEventListener("input", updateCount);
-        updateCount();
-      }
+    // Message counter
+    const msg = $('#message');
+    const counter = $('#msg_counter');
+    if (msg && counter){
+      const updateCount = () => counter.textContent = `${msg.value.length} / 1200`;
+      msg.addEventListener('input', updateCount);
+      updateCount();
+    }
 
-      // Modal (safe even if no design buttons exist)
-      const modal = $("#designModal");
-      const modalClose = $("#designModalClose");
-      const modalTitle = $("#designModalTitle span");
-      const modalImg = $("#designModalImg");
-      const modalCap = $("#designModalCap");
+    // Ad type buttons
+    const adTypeHidden = $('#ad_type');
+    const adBtns = $$('.adtype-btn:not(.disabled)');
+    adBtns.forEach(b=>{
+      b.addEventListener('click', ()=>{
+        adBtns.forEach(x=>x.classList.remove('selected'));
+        b.classList.add('selected');
+        const pkg = b.getAttribute('data-package') || 'premium_magnet_vinyl';
+        if (adTypeHidden) adTypeHidden.value = pkg;
+        updatePricing();
+      });
+    });
 
-      const openModal = ({ title, img, cap }) => {
-        if (!modal) return;
-        modalTitle.textContent = title || "Preview";
-        modalImg.src = img || "";
-        modalCap.textContent = cap || "";
-        modal.classList.add("open");
-        document.body.style.overflow = "hidden";
-        modalClose?.focus();
-      };
+    // Design type buttons (hidden input)
+    const designHidden = $('#design_type');
+    const designBtns = $$('.design-btn');
+    designBtns.forEach(b=>{
+      b.addEventListener('click', ()=>{
+        designBtns.forEach(x=>x.classList.remove('selected'));
+        b.classList.add('selected');
+        const val = b.getAttribute('data-design') || 'arch_design';
+        if (designHidden) designHidden.value = val;
+      });
+    });
 
-      const closeModal = () => {
-        if (!modal) return;
-        modal.classList.remove("open");
-        document.body.style.overflow = "";
-        modalImg.src = "";
-      };
+    /* POPUP MODAL logic */
+    const modal = $('#designModal');
+    const modalClose = $('#designModalClose');
+    const modalTitle = $('#designModalTitle span');
+    const modalImg = $('#designModalImg');
+    const modalCap = $('#designModalCap');
 
-      $$(".design-view").forEach(btn => {
-        btn.addEventListener("click", () => {
-          openModal({
-            title: btn.getAttribute("data-modal-title"),
-            img: btn.getAttribute("data-modal-img"),
-            cap: btn.getAttribute("data-modal-cap")
-          });
+    function openModal({ title, img, cap }){
+      if (!modal) return;
+      modalTitle.textContent = title || 'Preview';
+      modalImg.src = img || '';
+      modalCap.textContent = cap || '';
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      modalClose?.focus();
+    }
+    function closeModal(){
+      if (!modal) return;
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      modalImg.src = '';
+    }
+
+    $$('.design-view').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        openModal({
+          title: btn.getAttribute('data-modal-title'),
+          img: btn.getAttribute('data-modal-img'),
+          cap: btn.getAttribute('data-modal-cap')
         });
       });
+    });
 
-      modalClose?.addEventListener("click", closeModal);
-      modal?.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && modal?.classList.contains("open")) closeModal();
-      });
+    modalClose?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
+    window.addEventListener('keydown', (e)=>{ if (e.key === 'Escape' && modal?.classList.contains('open')) closeModal(); });
 
-      // Timeline validity
-      const validateTimeline = () => {
-        const sd = parseDate(startEl?.value);
-        const ed = parseDate(endEl?.value);
-        if (sd && ed && ed < sd){
-          endEl.setCustomValidity("End date must be after the start date.");
-        } else {
-          endEl.setCustomValidity("");
-        }
-      };
+    function validateTimeline(){
+      const sd = parseDate(startEl?.value);
+      const ed = parseDate(endEl?.value);
+      if (sd && ed && ed < sd){
+        endEl.setCustomValidity('End date must be after the start date.');
+      } else {
+        endEl.setCustomValidity('');
+      }
+    }
 
-      // Sync helpers
-      let syncing = false;
+    let syncing = false;
 
-      // Allow empty while typing
-      const clampMonthsToRange = (raw) => {
-        if (raw === "" || raw == null) return null;
-        const m = parseInt(raw, 10);
-        if (!Number.isFinite(m)) return null;
-        return Math.max(1, Math.min(6, m));
-      };
+    // ✅ IMPORTANT: allow empty while typing
+    function clampMonthsToRange(raw){
+      if (raw === '' || raw == null) return null; // allow empty
+      const m = parseInt(raw, 10);
+      if (!isFinite(m)) return null;
+      return Math.max(1, Math.min(6, m));
+    }
 
-      const commitMonths = () => {
-        const clamped = clampMonthsToRange(monthsEl?.value);
-        const finalVal = (clamped == null) ? 1 : clamped;
-        if (monthsEl) monthsEl.value = String(finalVal);
-        return finalVal;
-      };
+    // ✅ Only call this when we want to COMMIT months (blur/change/Enter)
+    function commitMonths(){
+      const clamped = clampMonthsToRange(monthsEl?.value);
+      const finalVal = (clamped == null) ? 1 : clamped; // default on commit
+      if (monthsEl) monthsEl.value = String(finalVal);
+      return finalVal;
+    }
 
-      const syncEndFromStartMonths = () => {
-        if (syncing) return;
+    function syncEndFromStartMonths(){
+      if (syncing) return;
 
-        const sd = parseDate(startEl?.value);
-        if (!sd) return;
+      const sd = parseDate(startEl?.value);
+      if (!sd) return;
 
-        const clamped = clampMonthsToRange(monthsEl?.value);
-        if (clamped == null) return; // user still typing
+      const clamped = clampMonthsToRange(monthsEl?.value);
 
-        syncing = true;
-        const endCandidate = addMonthsLocal(sd, clamped);
-        endCandidate.setDate(endCandidate.getDate() - 1);
-        endEl.value = toYMD(endCandidate);
-        syncing = false;
-      };
+      // If user is still typing (empty), don't force anything
+      if (clamped == null) return;
 
-      const syncMonthsFromDates = () => {
-        if (syncing) return;
+      syncing = true;
+      const endCandidate = addMonthsLocal(sd, clamped);
+      endCandidate.setDate(endCandidate.getDate() - 1);
+      endEl.value = toYMD(endCandidate);
+      syncing = false;
+    }
 
-        const sd = parseDate(startEl?.value);
-        const ed = parseDate(endEl?.value);
-        if (!sd || !ed) return;
+    function syncMonthsFromDates(){
+      if (syncing) return;
 
-        syncing = true;
+      const sd = parseDate(startEl?.value);
+      const ed = parseDate(endEl?.value);
+      if (!sd || !ed) return;
 
-        const endPlus = new Date(ed.getFullYear(), ed.getMonth(), ed.getDate());
-        endPlus.setDate(endPlus.getDate() + 1);
+      syncing = true;
 
-        let months = (endPlus.getFullYear() - sd.getFullYear()) * 12 + (endPlus.getMonth() - sd.getMonth());
-        if (endPlus.getDate() < sd.getDate()) months -= 1;
+      const endPlus = new Date(ed.getFullYear(), ed.getMonth(), ed.getDate());
+      endPlus.setDate(endPlus.getDate() + 1);
 
-        months = Math.max(1, Math.min(6, months || 1));
-        if (monthsEl) monthsEl.value = String(months);
+      let months = (endPlus.getFullYear() - sd.getFullYear()) * 12 + (endPlus.getMonth() - sd.getMonth());
+      if (endPlus.getDate() < sd.getDate()) months -= 1;
 
-        syncing = false;
-      };
+      months = Math.max(1, Math.min(6, months || 1));
+      if (monthsEl) monthsEl.value = String(months);
 
-      startEl?.addEventListener("change", () => {
-        validateTimeline();
-        if (monthsEl && monthsEl.value === "") monthsEl.value = "1";
-        syncEndFromStartMonths();
-        updatePricing();
-      });
+      syncing = false;
+    }
 
-      monthsEl?.addEventListener("input", () => updatePricing());
+    startEl?.addEventListener('change', ()=>{
+      validateTimeline();
+      // if months currently empty, commit to 1 on start-date change (so dates can sync)
+      if (monthsEl && monthsEl.value === '') monthsEl.value = '1';
+      syncEndFromStartMonths();
+      updatePricing();
+    });
 
-      monthsEl?.addEventListener("blur", () => {
+    // ✅ DO NOT clamp on input (keystrokes). Just update display.
+    monthsEl?.addEventListener('input', ()=>{
+      // If empty while typing, show prompt + stop forcing 1/6
+      updatePricing();
+    });
+
+    // ✅ Clamp only when user finishes (blur/change/Enter)
+    monthsEl?.addEventListener('blur', ()=>{
+      commitMonths();
+      syncEndFromStartMonths();
+      updatePricing();
+    });
+    monthsEl?.addEventListener('change', ()=>{
+      commitMonths();
+      syncEndFromStartMonths();
+      updatePricing();
+    });
+    monthsEl?.addEventListener('keydown', (e)=>{
+      if (e.key === 'Enter'){
+        e.preventDefault();
         commitMonths();
         syncEndFromStartMonths();
         updatePricing();
-      });
+        monthsEl.blur();
+      }
+    });
 
-      monthsEl?.addEventListener("change", () => {
-        commitMonths();
-        syncEndFromStartMonths();
-        updatePricing();
-      });
+    endEl?.addEventListener('change', ()=>{
+      validateTimeline();
+      syncMonthsFromDates();
+      updatePricing();
+    });
 
-      monthsEl?.addEventListener("keydown", (e) => {
-        if (e.key === "Enter"){
-          e.preventDefault();
-          commitMonths();
-          syncEndFromStartMonths();
-          updatePricing();
-          monthsEl.blur();
-        }
-      });
+    carsEl?.addEventListener('input', updatePricing);
 
-      endEl?.addEventListener("change", () => {
-        validateTimeline();
-        syncMonthsFromDates();
-        updatePricing();
-      });
+    function computePricing({ months, numberOfCars }){
+      const m = parseInt(months, 10);
+      const cars = parseInt(numberOfCars, 10);
 
-      carsEl?.addEventListener("input", updatePricing);
+      const isValidMonths = (m >= 1 && m <= 6);
+      const isValidCars = isFinite(cars) && cars >= 1;
 
-      const computePricing = ({ months, numberOfCars }) => {
-        const m = parseInt(months, 10);
-        const cars = parseInt(numberOfCars, 10);
+      if (!isValidMonths || !isValidCars){
+        return { error: !isValidMonths ? 'Enter a valid duration (1–6 months).' : 'Enter a valid number of cars (1+).' };
+      }
 
-        const isValidMonths = (m >= 1 && m <= 6);
-        const isValidCars = Number.isFinite(cars) && cars >= 1;
+      const t = tierRate(cars);
 
-        if (!isValidMonths || !isValidCars){
-          return { error: !isValidMonths ? "Enter a valid duration (1–6 months)." : "Enter a valid number of cars (1+)." };
-        }
+      if (t.negotiable){
+        return { negotiable: true, months: m, numberOfCars: cars, error: '' };
+      }
 
-        const t = tierRate(cars);
+      const rate = t.rate;
+      if (!rate) return { error: 'Pricing configuration missing for this selection.' };
 
-        if (t.negotiable){
-          return { negotiable: true, months: m, numberOfCars: cars, error: "" };
-        }
+      const installFeePerCar = BASE_INSTALL_FEE_PER_CAR;
+      const installTotal = installFeePerCar * cars;
 
-        const rate = t.rate;
-        if (!rate) return { error: "Pricing configuration missing for this selection." };
+      const monthlyTotal = rate * cars;
+      const discPct = durationDiscountPct(m);
+      const monthlyDiscountAmount = monthlyTotal * discPct;
+      const discountedMonthlyTotal = monthlyTotal - monthlyDiscountAmount;
 
-        const installFeePerCar = BASE_INSTALL_FEE_PER_CAR;
-        const installTotal = installFeePerCar * cars;
+      const campaignTotal = (discountedMonthlyTotal * m) + installTotal;
 
-        const monthlyTotal = rate * cars;
-        const discPct = durationDiscountPct(m);
-        const monthlyDiscountAmount = monthlyTotal * discPct;
-        const discountedMonthlyTotal = monthlyTotal - monthlyDiscountAmount;
+      const baseline = 450 * cars;
+      const discountPctFleetVsBase = baseline > 0 ? (1 - (monthlyTotal / baseline)) * 100 : 0;
 
-        const campaignTotal = (discountedMonthlyTotal * m) + installTotal;
+      return {
+        months: m,
+        numberOfCars: cars,
+        ratePerCarPerMonth: rate,
 
-        const baseline = 450 * cars;
-        const discountPctFleetVsBase = baseline > 0 ? (1 - (monthlyTotal / baseline)) * 100 : 0;
+        monthlyTotal,
+        durationDiscountPct: discPct,
+        durationDiscountPerMonth: monthlyDiscountAmount,
+        discountedMonthlyTotal,
 
-        return {
-          months: m,
-          numberOfCars: cars,
-          ratePerCarPerMonth: rate,
+        installFeePerCar,
+        installTotal,
+        campaignTotal,
 
-          monthlyTotal,
-          durationDiscountPct: discPct,
-          durationDiscountPerMonth: monthlyDiscountAmount,
-          discountedMonthlyTotal,
-
-          installFeePerCar,
-          installTotal,
-          campaignTotal,
-
-          fleetApplied: cars >= 5,
-          fleetRate: Math.max(0, discountPctFleetVsBase),
-          error: ""
-        };
+        fleetApplied: cars >= 5,
+        fleetRate: Math.max(0, discountPctFleetVsBase),
+        error: ''
       };
+    }
 
-      function updatePricing(){
-        const rawMonths = monthsEl ? monthsEl.value : "1";
-        const clamped = clampMonthsToRange(rawMonths);
+    function updatePricing(){
+      const rawMonths = monthsEl ? monthsEl.value : '1';
+      const clamped = clampMonthsToRange(rawMonths);
 
-        // Empty/invalid while typing -> don’t force
-        if (clamped == null){
-          if (monthsHidden) monthsHidden.value = "";
-          estimatePrice.textContent = "$0";
-          estimateText.textContent = "Enter months (1–6) and number of cars to preview pricing.";
-          estimateMeta.textContent = "Final pricing confirmed after review.";
-          estimatePill.textContent = "Non-binding";
-          if (sticky && !stickyDismissed) sticky.classList.add("hidden");
-          return;
-        }
+      // if empty/invalid while typing, don’t force to 1 or 6
+      if (clamped == null){
+        if (monthsHidden) monthsHidden.value = '';
+        estimatePrice.textContent = '$0';
+        estimateText.textContent = 'Enter months (1–6) and number of cars to preview pricing.';
+        estimateMeta.textContent = 'Final pricing confirmed after review.';
+        if (estimatePill) estimatePill.textContent = 'Non-binding';
 
-        const months = clamped;
-        const cars = parseInt(carsEl?.value || 0, 10);
-        if (monthsHidden) monthsHidden.value = String(months);
+        if (sticky && !stickyDismissed) sticky.classList.add('hidden');
+        return;
+      }
 
-        const result = computePricing({ months, numberOfCars: cars });
+      const months = clamped;
+      const cars = parseInt(carsEl?.value || 0, 10);
 
-        // Negotiable
-        if (result && result.negotiable){
-          estimatePrice.textContent = "Negotiable";
-          estimateText.innerHTML =
-            `<strong>Premium Magnet Vinyl</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(result.months)}</strong><br>` +
-            `For <strong>25+ cars</strong>, pricing is <strong>custom / negotiable</strong>.<br>` +
-            `Send your brief and we’ll confirm the fleet rate.`;
+      if (monthsHidden) monthsHidden.value = String(months);
 
-          estimateMeta.textContent = "Final pricing confirmed after review.";
-          estimatePill.textContent = "Contact us";
+      const result = computePricing({ months, numberOfCars: cars });
 
-          rateHidden.value = "";
-          totalHidden.value = "";
-          installTotalHidden.value = "";
-          installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
-          fleetHidden.value = "true";
-          fleetRateHidden.value = "0";
-          durDiscPctHidden.value = "0";
-          durDiscAmtHidden.value = "0";
-
-          if (sticky && !stickyDismissed){
-            sticky.classList.remove("hidden");
-            stickyLine.textContent = `Premium Magnet Vinyl • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
-            stickyPrice.textContent = "Negotiable";
-            stickyMeta.textContent = "25+ cars: custom fleet pricing. Submit brief for quote.";
-          }
-          return;
-        }
-
-        // Errors
-        if (result.error){
-          estimatePrice.textContent = "$0";
-          estimateText.textContent = result.error;
-          estimateMeta.textContent = "Final pricing confirmed after review.";
-          estimatePill.textContent = "Non-binding";
-
-          rateHidden.value = "";
-          totalHidden.value = "";
-          installTotalHidden.value = "";
-          installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
-          fleetHidden.value = "false";
-          fleetRateHidden.value = "0";
-          durDiscPctHidden.value = "0";
-          durDiscAmtHidden.value = "0";
-
-          if (sticky && !stickyDismissed) sticky.classList.add("hidden");
-          return;
-        }
-
-        // Fill hidden fields
-        rateHidden.value = String(result.ratePerCarPerMonth);
-        totalHidden.value = String(result.campaignTotal);
-        installTotalHidden.value = String(result.installTotal);
-        installPerCarHidden.value = String(result.installFeePerCar);
-        fleetHidden.value = String(!!result.fleetApplied);
-        fleetRateHidden.value = String(result.fleetRate.toFixed(2));
-
-        const totalDurationDiscount = result.durationDiscountPerMonth * result.months;
-        durDiscPctHidden.value = String((result.durationDiscountPct * 100).toFixed(0));
-        durDiscAmtHidden.value = String(totalDurationDiscount.toFixed(2));
-
-        estimatePrice.textContent = formatMoney(result.campaignTotal);
-        estimatePill.textContent = "Non-binding";
-
-        const durationLine = result.durationDiscountPct > 0
-          ? `Duration discount: <strong>${(result.durationDiscountPct*100).toFixed(0)}% off</strong> monthly (${formatMoney(result.durationDiscountPerMonth)} / month)`
-          : `Duration discount: <strong>None</strong> (1 month)`;
-
+      if (result && result.negotiable){
+        estimatePrice.textContent = 'Negotiable';
         estimateText.innerHTML =
           `<strong>Premium Magnet Vinyl</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(result.months)}</strong><br>` +
-          `Monthly rate: <strong>${formatMoney(result.ratePerCarPerMonth)}</strong> per car<br>` +
-          `Monthly total (before duration discount): <strong>${formatMoney(result.monthlyTotal)}</strong><br>` +
-          `${durationLine}<br>` +
-          `Monthly total (after discount): <strong>${formatMoney(result.discountedMonthlyTotal)}</strong><br>` +
-          `Install (one-time): <strong>${formatMoney(result.installTotal)}</strong> <span style="opacity:.9;">(${formatMoney(BASE_INSTALL_FEE_PER_CAR)} per car)</span><br>` +
-          `Estimated campaign total: <strong>${formatMoney(result.campaignTotal)}</strong>`;
+          `For <strong>25+ cars</strong>, pricing is <strong>custom / negotiable</strong>.<br>` +
+          `Send your brief and we’ll confirm the fleet rate.`;
 
-        const sd = parseDate(startEl?.value);
-        const ed = parseDate(endEl?.value);
-        estimateMeta.textContent = (sd && ed)
-          ? `Timeline: ${sd.toLocaleDateString()} → ${ed.toLocaleDateString()}`
-          : "Final pricing confirmed after review.";
+        estimateMeta.textContent = 'Final pricing confirmed after review.';
+        if (estimatePill) estimatePill.textContent = 'Contact us';
+
+        if (rateHidden) rateHidden.value = '';
+        if (totalHidden) totalHidden.value = '';
+        if (installTotalHidden) installTotalHidden.value = '';
+        if (installPerCarHidden) installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
+        if (fleetHidden) fleetHidden.value = 'true';
+        if (fleetRateHidden) fleetRateHidden.value = '0';
+
+        if (durDiscPctHidden) durDiscPctHidden.value = '0';
+        if (durDiscAmtHidden) durDiscAmtHidden.value = '0';
 
         if (sticky && !stickyDismissed){
-          sticky.classList.remove("hidden");
+          sticky.classList.remove('hidden');
           stickyLine.textContent = `Premium Magnet Vinyl • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
-          stickyPrice.textContent = formatMoney(result.campaignTotal);
-
-          const discTag = result.durationDiscountPct > 0
-            ? ` • duration: ${(result.durationDiscountPct*100).toFixed(0)}% off`
-            : "";
-          stickyMeta.textContent = `Rate: ${formatMoney(result.ratePerCarPerMonth)} per car / month • install: ${formatMoney(BASE_INSTALL_FEE_PER_CAR)}/car${discTag}.`;
+          stickyPrice.textContent = 'Negotiable';
+          stickyMeta.textContent = '25+ cars: custom fleet pricing. Submit brief for quote.';
         }
+        return;
       }
 
-      // Image preview
-      const carImgInput = $("#car_images");
-      const carImgPrev  = $("#car_img_preview");
-      const carImgErr   = $("#car_img_err");
+      if (result.error){
+        estimatePrice.textContent = '$0';
+        estimateText.textContent = result.error;
+        estimateMeta.textContent = 'Final pricing confirmed after review.';
+        if (estimatePill) estimatePill.textContent = 'Non-binding';
 
-      if (carImgInput){
-        carImgInput.addEventListener("change", () => {
-          carImgErr.textContent = "";
-          carImgPrev.innerHTML = "";
+        if (rateHidden) rateHidden.value = '';
+        if (totalHidden) totalHidden.value = '';
+        if (installTotalHidden) installTotalHidden.value = '';
+        if (installPerCarHidden) installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
+        if (fleetHidden) fleetHidden.value = 'false';
+        if (fleetRateHidden) fleetRateHidden.value = '0';
 
-          const files = Array.from(carImgInput.files || []);
-          const MAX_FILES = 5, MAX_SIZE = 8 * 1024 * 1024;
+        if (durDiscPctHidden) durDiscPctHidden.value = '0';
+        if (durDiscAmtHidden) durDiscAmtHidden.value = '0';
 
-          if (files.length > MAX_FILES){
-            carImgErr.textContent = `Please select up to ${MAX_FILES} images.`;
-            carImgInput.value = "";
-            return;
-          }
-          if (files.some(f => f.size > MAX_SIZE)){
-            carImgErr.textContent = "Each image must be under 8MB.";
-            carImgInput.value = "";
-            return;
-          }
-
-          files.forEach(f => {
-            const img = new Image();
-            img.alt = f.name;
-            const url = URL.createObjectURL(f);
-            img.onload = () => URL.revokeObjectURL(url);
-            img.src = url;
-            carImgPrev.appendChild(img);
-          });
-        });
+        if (sticky && !stickyDismissed) sticky.classList.add('hidden');
+        return;
       }
 
-      // Submit
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        status.className = "status";
-        status.textContent = "";
+      if (rateHidden) rateHidden.value = String(result.ratePerCarPerMonth);
+      if (totalHidden) totalHidden.value = String(result.campaignTotal);
+      if (installTotalHidden) installTotalHidden.value = String(result.installTotal);
+      if (installPerCarHidden) installPerCarHidden.value = String(result.installFeePerCar);
+      if (fleetHidden) fleetHidden.value = String(!!result.fleetApplied);
+      if (fleetRateHidden) fleetRateHidden.value = String(result.fleetRate.toFixed(2));
 
-        validateTimeline();
-        updatePricing();
+      const totalDurationDiscount = result.durationDiscountPerMonth * result.months;
+      if (durDiscPctHidden) durDiscPctHidden.value = String((result.durationDiscountPct * 100).toFixed(0));
+      if (durDiscAmtHidden) durDiscAmtHidden.value = String(totalDurationDiscount.toFixed(2));
 
-        if (!form.checkValidity()){
-          status.className = "status err";
-          status.textContent = "Please complete the required fields.";
-          form.reportValidity();
+      const pkgLabel = 'Premium Magnet Vinyl';
+
+      estimatePrice.textContent = formatMoney(result.campaignTotal);
+      if (estimatePill) estimatePill.textContent = 'Non-binding';
+
+      const durationLine = result.durationDiscountPct > 0
+        ? `Duration discount: <strong>${(result.durationDiscountPct*100).toFixed(0)}% off</strong> monthly (${formatMoney(result.durationDiscountPerMonth)} / month)`
+        : `Duration discount: <strong>None</strong> (1 month)`;
+
+      estimateText.innerHTML =
+        `<strong>${pkgLabel}</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(result.months)}</strong><br>` +
+        `Monthly rate: <strong>${formatMoney(result.ratePerCarPerMonth)}</strong> per car<br>` +
+        `Monthly total (before duration discount): <strong>${formatMoney(result.monthlyTotal)}</strong><br>` +
+        `${durationLine}<br>` +
+        `Monthly total (after discount): <strong>${formatMoney(result.discountedMonthlyTotal)}</strong><br>` +
+        `Install (one-time): <strong>${formatMoney(result.installTotal)}</strong> <span style="opacity:.9;">(${formatMoney(BASE_INSTALL_FEE_PER_CAR)} per car)</span><br>` +
+        `Estimated campaign total: <strong>${formatMoney(result.campaignTotal)}</strong>`;
+
+      const sd = parseDate(startEl?.value);
+      const ed = parseDate(endEl?.value);
+      estimateMeta.textContent = (sd && ed)
+        ? `Timeline: ${sd.toLocaleDateString()} → ${ed.toLocaleDateString()}`
+        : 'Final pricing confirmed after review.';
+
+      if (sticky && !stickyDismissed){
+        sticky.classList.remove('hidden');
+        stickyLine.textContent = `${pkgLabel} • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
+        stickyPrice.textContent = formatMoney(result.campaignTotal);
+
+        const discTag = result.durationDiscountPct > 0 ? ` • duration: ${(result.durationDiscountPct*100).toFixed(0)}% off` : '';
+        stickyMeta.textContent = `Rate: ${formatMoney(result.ratePerCarPerMonth)} per car / month • install: ${formatMoney(BASE_INSTALL_FEE_PER_CAR)}/car${discTag}.`;
+      }
+    }
+
+    // Images preview
+    const carImgInput = $('#car_images');
+    const carImgPrev  = $('#car_img_preview');
+    const carImgErr   = $('#car_img_err');
+
+    if (carImgInput){
+      carImgInput.addEventListener('change', ()=>{
+        carImgErr.textContent=''; carImgPrev.innerHTML='';
+        const files = Array.from(carImgInput.files||[]);
+        const MAX_FILES = 5, MAX_SIZE = 8*1024*1024;
+
+        if (files.length > MAX_FILES){
+          carImgErr.textContent = `Please select up to ${MAX_FILES} images.`;
+          carImgInput.value = '';
+          return;
+        }
+        if (files.some(f=>f.size>MAX_SIZE)){
+          carImgErr.textContent = 'Each image must be under 8MB.';
+          carImgInput.value = '';
           return;
         }
 
-        btn.disabled = true;
-        spin.style.display = "inline-block";
-        btnText.textContent = "Sending…";
-
-        try{
-          const res = await fetch(form.action, {
-            method: "POST",
-            body: new FormData(form),
-            headers: { Accept: "application/json" }
-          });
-
-          if (res.ok){
-            form.reset();
-            if (monthsEl) monthsEl.value = "1";
-
-            // Re-sync dates only if start date exists
-            syncEndFromStartMonths();
-            updatePricing();
-
-            carImgPrev && (carImgPrev.innerHTML = "");
-            counter && (counter.textContent = "0 / 1200");
-
-            status.className = "status ok";
-            status.textContent = "Thanks! We’ll follow up shortly.";
-
-            const card = $("#partner-card");
-            if (card) window.scrollTo({ top: card.offsetTop - 20, behavior: "smooth" });
-          } else {
-            status.className = "status err";
-            status.textContent = "Something went wrong. Please try again.";
-          }
-        } catch {
-          status.className = "status err";
-          status.textContent = "Network error. Please retry.";
-        } finally {
-          btn.disabled = false;
-          spin.style.display = "none";
-          btnText.textContent = "Send brief";
-        }
+        files.forEach(f=>{
+          const img = new Image();
+          img.alt = f.name;
+          const url = URL.createObjectURL(f);
+          img.onload = () => URL.revokeObjectURL(url);
+          img.src = url;
+          carImgPrev.appendChild(img);
+        });
       });
+    }
 
-      // Reveal animations
-      if (window.ScrollReveal){
-        ScrollReveal().reveal(".hero-card", { distance:"18px", duration:650, origin:"bottom", easing:"ease-out", opacity:0 });
-        ScrollReveal().reveal("#car-ads .about__content", { distance:"18px", duration:650, origin:"bottom", easing:"ease-out", opacity:0 });
-        ScrollReveal().reveal("#car-ads .gallery-card", { distance:"18px", duration:650, origin:"bottom", easing:"ease-out", opacity:0, delay: 60 });
-        ScrollReveal().reveal("#partner-card", { distance:"20px", duration:650, origin:"bottom", easing:"ease-out", opacity:0 });
-        ScrollReveal().reveal(".faq-wrap", { distance:"18px", duration:650, origin:"bottom", easing:"ease-out", opacity:0 });
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      status.className='status'; status.textContent='';
+
+      validateTimeline();
+      updatePricing();
+
+      if (!form.checkValidity()){
+        status.className='status err';
+        status.textContent='Please complete the required fields.';
+        form.reportValidity();
+        return;
       }
 
-      // Init
-      updatePricing();
-    })();
-  </script>
+      btn.disabled=true; spin.style.display='inline-block'; btnText.textContent='Sending…';
+      try{
+        const res = await fetch(form.action,{
+          method:'POST',
+          body:new FormData(form),
+          headers:{Accept:'application/json'}
+        });
+
+        if(res.ok){
+          form.reset();
+
+          if (monthsEl) monthsEl.value = '1';
+
+          const premiumBtn = document.querySelector('.adtype-btn[data-package="premium_magnet_vinyl"]');
+          if (premiumBtn){
+            adBtns.forEach(x=>x.classList.remove('selected'));
+            premiumBtn.classList.add('selected');
+          }
+          if (adTypeHidden) adTypeHidden.value = 'premium_magnet_vinyl';
+
+          const archBtn = document.querySelector('.design-btn[data-design="arch_design"]');
+          if (archBtn){
+            designBtns.forEach(x=>x.classList.remove('selected'));
+            archBtn.classList.add('selected');
+          }
+          if (designHidden) designHidden.value = 'arch_design';
+
+          // Only sync dates if start date exists
+          syncEndFromStartMonths();
+          updatePricing();
+
+          if (carImgPrev) carImgPrev.innerHTML='';
+          if (counter) counter.textContent = '0 / 1200';
+
+          status.className='status ok';
+          status.textContent='Thanks! We’ll follow up shortly.';
+          window.scrollTo({ top: document.getElementById('partner-card').offsetTop - 20, behavior:'smooth' });
+        }else{
+          status.className='status err';
+          status.textContent='Something went wrong. Please try again.';
+        }
+      }catch{
+        status.className='status err';
+        status.textContent='Network error. Please retry.';
+      }finally{
+        btn.disabled=false; spin.style.display='none'; btnText.textContent='Send brief';
+      }
+    });
+
+    if (window.ScrollReveal){
+      ScrollReveal().reveal('.hero-card',{ distance:'18px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
+      ScrollReveal().reveal('#partner-card',{ distance:'20px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
+      ScrollReveal().reveal('.faq-wrap',{ distance:'18px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
+    }
+
+    // Initial
+    updatePricing();
+  })();
+</script>
+
 
   <script src="assets/js/main.js"></script>
 
-  <!-- Remove preload after load -->
+  <!-- ✅ Remove preload AFTER everything loads (prevents transition flash) -->
   <script>
     window.addEventListener("load", () => {
       document.documentElement.classList.remove("preload");
