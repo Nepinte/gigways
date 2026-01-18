@@ -23,17 +23,14 @@
       name="title"
       content="Gigways - Driver Tools & Private Trip App | Track Miles, Earnings & Expenses"
     />
-
     <meta
       name="description"
       content="All-in-one toolkit for rideshare and delivery drivers. Track mileage, expenses, hours, earnings, and manage private trips. Earn extra with optional car advertising. Free for iOS and Android."
     />
-
     <meta
       name="keywords"
       content="driver tools, mileage tracker, rideshare driver app, delivery driver tools, gig worker app, private trips, car advertising, earnings tracker, expense tracker, driver scheduling"
     />
-
     <meta name="author" content="Gigways LLC" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://www.gigways.com/" />
@@ -69,58 +66,12 @@
     <meta name="theme-color" content="#0b0b0f" />
     <meta name="format-detection" content="telephone=no" />
 
-    <!-- Structured Data / Schema.org for Google -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "MobileApplication",
-        "name": "Gigways",
-        "description": "All-in-one toolkit for rideshare and delivery drivers to track mileage, expenses, hours, earnings, and manage private trips.",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "iOS, Android",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "ratingCount": "150"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Gigways LLC",
-          "url": "https://www.gigways.com",
-          "logo": "https://www.gigways.com/assets/img/logo.svg"
-        }
-      }
-    </script>
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Gigways LLC",
-        "url": "https://www.gigways.com",
-        "logo": "https://www.gigways.com/assets/img/logo.svg",
-        "description": "Driver-first toolkit with tracking, private trips, and optional car advertising for gig workers.",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "support@gigways.com",
-          "contactType": "Customer Support"
-        },
-        "sameAs": [
-          "https://www.facebook.com/profile.php?id=61574801146211",
-          "https://x.com/gigways",
-          "https://www.instagram.com/gigways/"
-        ]
-      }
-    </script>
-
     <link rel="icon" href="/assets/img/App.png" />
     <link rel="apple-touch-icon" href="/assets/img/App.png" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <!-- ✅ cache-bust so updates always show -->
+    <link rel="stylesheet" href="assets/css/styles.css?v=20260118-pal" />
+
     <link
       href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
       rel="stylesheet"
@@ -152,9 +103,8 @@
       }
 
       /* =========================================================
-         FEATURES (THEME-SAFE)
+         FEATURES SECTION (UNIQUE NAMES - NO CONFLICTS)
       ========================================================= */
-
       #features .section-title {
         margin-bottom: 0.75rem;
       }
@@ -169,35 +119,85 @@
         padding: 0 1rem;
       }
 
-      .mode-block {
-        margin-top: 1.25rem;
-      }
-      .mode-head {
+      /* ✅ NEW UNIQUE TOGGLE CLASSES */
+      .gw-modeSwitch {
+        max-width: var(--page-max);
+        margin: 0 auto 1rem;
+        padding: 0 1rem;
         display: flex;
-        align-items: center;
-        gap: 10px;
         justify-content: center;
-        margin: 1.4rem 0 1rem;
       }
-      .mode-pill {
+
+      .gw-modeTabs {
+        display: inline-flex;
+        gap: 10px;
+        padding: 10px;
+        border-radius: 999px;
+        border: 1px solid var(--chip-bd);
+        background: var(--glass);
+        backdrop-filter: blur(10px);
+        box-shadow: var(--shadow-sm);
+        position: relative;
+        z-index: 3;
+      }
+
+      .gw-modeBtn {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 8px 12px;
-        border-radius: 999px;
         border: 1px solid var(--chip-bd);
         background: var(--chip-bg);
         color: var(--second-color);
-        font-weight: 800;
-        font-size: 0.95rem;
+        font-weight: 900;
+        padding: 10px 14px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease,
+          border-color 160ms ease;
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
       }
-      .mode-pill i {
+
+      .gw-modeBtn i {
         font-size: 1.1rem;
         color: var(--third-color);
       }
 
-      /* IMPORTANT: we do NOT use .bd-grid here to avoid layout conflicts */
-      #features .features__container {
+      .gw-modeBtn:hover {
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .gw-modeBtn.is-active {
+        background: var(--button-grad);
+        color: #fff;
+        border-color: rgba(0, 0, 0, 0.06);
+        box-shadow: var(--shadow-md);
+      }
+      .gw-modeBtn.is-active i {
+        color: #fff;
+      }
+
+      /* ✅ NEW UNIQUE PANEL CLASSES */
+      .gw-panel {
+        display: none;
+        grid-column: 1 / -1;
+        position: relative;
+        z-index: 1;
+      }
+      .gw-panel.is-active {
+        display: block;
+      }
+
+      .gw-gridWrap {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 16px;
+        align-items: stretch;
+      }
+
+      /* Container grid */
+      #features .gw-featuresGrid {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         gap: 16px;
@@ -207,7 +207,8 @@
         padding: 0 1rem;
       }
 
-      #features .feature__card {
+      /* ✅ NEW UNIQUE CARD CLASSES */
+      #features .gw-card {
         grid-column: span 4;
         padding: 18px 18px 16px;
         border-radius: 18px;
@@ -215,18 +216,18 @@
         background: var(--glass);
         backdrop-filter: blur(10px);
         box-shadow: var(--shadow-sm);
-        transition: transform 160ms ease, box-shadow 160ms ease,
-          border-color 160ms ease;
+        transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
         text-align: left;
+        color: var(--text-color-light);
       }
 
-      #features .feature__card:hover {
+      #features .gw-card:hover {
         transform: translateY(-3px);
         box-shadow: var(--shadow-md);
         border-color: var(--chip-bd);
       }
 
-      #features .feature__icon {
+      #features .gw-icon {
         width: 46px;
         height: 46px;
         border-radius: 14px;
@@ -237,12 +238,13 @@
         border: 1px solid var(--chip-bd);
         margin-bottom: 10px;
       }
-      #features .feature__icon i {
+
+      #features .gw-icon i {
         font-size: 1.35rem;
         color: var(--third-color);
       }
 
-      #features .feature__title {
+      #features .gw-title {
         font-size: 1.05rem;
         line-height: 1.25;
         margin: 0 0 8px;
@@ -250,110 +252,44 @@
         color: var(--second-color);
       }
 
-      #features .feature__description {
+      #features .gw-desc {
         margin: 0;
         font-size: 0.95rem;
         line-height: 1.55;
         color: var(--text-color-light);
       }
 
-      #features .mode-divider {
-        grid-column: 1 / -1;
-        height: 1px;
-        background: var(--border-color);
-        margin: 10px 0 2px;
-      }
-
       @media (max-width: 980px) {
-        #features .feature__card {
+        #features .gw-card {
           grid-column: span 6;
         }
       }
       @media (max-width: 640px) {
-        #features .features__container {
+        #features .gw-featuresGrid,
+        .gw-gridWrap {
           gap: 12px;
         }
-        #features .feature__card {
+        #features .gw-card {
           grid-column: span 12;
           padding: 16px;
         }
-        .mode-head {
+        .gw-modeSwitch {
           justify-content: flex-start;
           padding: 0 1rem;
         }
-      }
-
-      /* =========================================================
-         CAR ADS
-      ========================================================= */
-      .car-ads__grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2.5rem;
-      }
-
-      /* CTA spans BOTH columns */
-      .car-ads__cta {
-        grid-column: 1 / -1;
-        display: flex;
-        justify-content: center;
-        margin-top: 1.5rem;
-      }
-
-      /* Button sizing */
-      .car-ads__cta .btn {
-        width: fit-content;
-        padding-inline: 1.25rem;
-        white-space: nowrap;
-      }
-
-      /* Mobile */
-      @media (max-width: 768px) {
-        .car-ads__grid {
-          grid-template-columns: 1fr;
+        .gw-modeTabs {
+          width: 100%;
+          justify-content: space-between;
         }
-        .car-ads__cta {
-          margin-top: 1rem;
-        }
-      }
-
-      #car-ads .about__container {
-        grid-template-columns: 1.15fr 1.35fr;
-        align-items: center;
-        gap: 2.5rem;
-      }
-      #car-ads .gallery-card {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        background: none;
-        border: none;
-        box-shadow: none;
-      }
-      #car-ads .gallery-stage {
-        width: 100%;
-        display: block;
-      }
-      #car-ads .gallery-stage img {
-        width: 100%;
-        max-width: 1900px;
-        height: auto;
-        object-fit: contain;
-        display: block;
-      }
-      @media (max-width: 768px) {
-        #car-ads .about__container {
-          grid-template-columns: 1fr;
-        }
-        #car-ads .gallery-stage img {
-          max-width: 100%;
+        .gw-modeBtn {
+          flex: 1;
+          justify-content: center;
         }
       }
 
       /* =========================================================
-         BEAUTIFUL FAQ (ACCORDION, THEME-SAFE, PREMIUM)
+         FAQ (ACCORDION, THEME-SAFE)
       ========================================================= */
-
       #faq .section-title {
         margin-bottom: 0.75rem;
       }
@@ -376,8 +312,7 @@
         backdrop-filter: blur(10px);
         box-shadow: var(--shadow-sm);
         overflow: hidden;
-        transition: transform 160ms ease, box-shadow 160ms ease,
-          border-color 160ms ease;
+        transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
       }
 
       .faq__item:hover {
@@ -481,7 +416,6 @@
         margin: 12px 0 0;
       }
 
-      /* OPEN STATE */
       .faq__item.is-open .faq__panel {
         grid-template-rows: 1fr;
       }
@@ -489,14 +423,12 @@
         transform: rotate(180deg);
       }
 
-      /* Focus */
       .faq__button:focus-visible {
         outline: 2px solid var(--third-color);
         outline-offset: 4px;
         border-radius: 16px;
       }
 
-      /* Responsive */
       @media (max-width: 980px) {
         .faq__item {
           grid-column: span 12;
@@ -544,9 +476,13 @@
           </h1>
 
           <p class="home__description">
-            Gigways is a <strong>driver-first toolkit</strong> with a <strong>rider side</strong> built in.
-            Drivers track miles, expenses, hours, and earnings, manage private trips, and can earn extra with optional car ads.
-            Riders can request <strong>private trips with drivers they know and trust</strong> — no public matching, no strangers.
+            Gigways is a <strong>driver-first toolkit</strong> with <strong>PAL Mode</strong> built in.
+            Drivers track miles, expenses, hours, and earnings, manage private trips, and can earn extra
+            with optional car ads.
+            <br /><br />
+            <strong>PAL Mode</strong> is invite-only: users add drivers they trust to coordinate
+            <strong>private rides, mobile pick-ups, and parcel drop-offs</strong> — no public matching, no strangers.
+            Cost-sharing is optional between users, and <strong>Gigways does not process payments</strong>.
           </p>
 
           <div class="home__cta">
@@ -592,76 +528,119 @@
       <section class="features section" id="features">
         <h2 class="section-title">Key Features</h2>
         <p class="section-subtitle">
-          Two modes, one app: a driver-first toolkit for tracking and earnings — plus a rider mode for private trips with drivers you already know and trust.
+          Two modes, one app: a driver-first toolkit for tracking and earnings — plus <strong>PAL Mode</strong> for invite-only private trip coordination with people you trust.
         </p>
 
-        <div class="features__container">
-          <div class="mode-block" style="grid-column: 1 / -1">
-            <div class="mode-head">
-              <span class="mode-pill"><i class="bx bx-car"></i> Driver Mode</span>
+        <!-- ✅ TOGGLE -->
+        <div class="gw-modeSwitch" role="tablist" aria-label="Gigways Feature Mode Switch">
+          <div class="gw-modeTabs">
+            <button
+              class="gw-modeBtn is-active"
+              type="button"
+              role="tab"
+              id="gwTabDriver"
+              aria-selected="true"
+              aria-controls="gwPanelDriver"
+              data-gw-target="driver"
+            >
+              <i class="bx bx-car"></i> DRIVER MODE
+            </button>
+
+            <button
+              class="gw-modeBtn"
+              type="button"
+              role="tab"
+              id="gwTabPal"
+              aria-selected="false"
+              aria-controls="gwPanelPal"
+              data-gw-target="pal"
+            >
+              <i class="bx bx-user"></i> PAL MODE
+            </button>
+          </div>
+        </div>
+
+        <div class="gw-featuresGrid">
+          <!-- ✅ DRIVER PANEL -->
+          <div class="gw-panel is-active" id="gwPanelDriver" role="tabpanel" aria-labelledby="gwTabDriver">
+            <div class="gw-gridWrap">
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-line-chart"></i></div>
+                <h3 class="gw-title">All-in-One Tracking</h3>
+                <p class="gw-desc">Track miles, expenses, earnings, and work hours in one simple dashboard — built for real-world driving.</p>
+              </div>
+
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-wallet"></i></div>
+                <h3 class="gw-title">Real Profit Insights</h3>
+                <p class="gw-desc">Understand what you truly make after time, miles, and expenses — so you can drive smarter.</p>
+              </div>
+
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-map"></i></div>
+                <h3 class="gw-title">Driver Density Map</h3>
+                <p class="gw-desc">See aggregated hotspot activity to plan better areas and reduce wasted time.</p>
+              </div>
+
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-calendar-check"></i></div>
+                <h3 class="gw-title">Smart Scheduling</h3>
+                <p class="gw-desc">Set reminders for breaks and meals to stay consistent and help prevent burnout.</p>
+              </div>
+
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-car"></i></div>
+                <h3 class="gw-title">Private Trips (Driver Side)</h3>
+                <p class="gw-desc">Manage requests from users you know, coordinate details, and keep everything organized.</p>
+              </div>
+
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-badge-check"></i></div>
+                <h3 class="gw-title">Optional Car Ads</h3>
+                <p class="gw-desc">Earn extra with approved car advertising — fully opt-in and flexible.</p>
+              </div>
             </div>
           </div>
 
-          <div class="feature__card">
-            <div class="feature__icon"><i class="bx bx-line-chart"></i></div>
-            <h3 class="feature__title">All-in-One Tracking</h3>
-            <p class="feature__description">Track miles, expenses, earnings, and work hours in one simple dashboard — built for real-world driving.</p>
-          </div>
+          <!-- ✅ PAL MODE PANEL -->
+          <div class="gw-panel" id="gwPanelPal" role="tabpanel" aria-labelledby="gwTabPal">
+            <div class="gw-gridWrap">
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-user-plus"></i></div>
+                <h3 class="gw-title">Add Trusted Drivers</h3>
+                <p class="gw-desc">PAL Mode is invite-only — users add drivers they already know and trust. No public matching, no strangers.</p>
+              </div>
 
-          <div class="feature__card">
-            <div class="feature__icon"><i class="bx bx-wallet"></i></div>
-            <h3 class="feature__title">Real Profit Insights</h3>
-            <p class="feature__description">Understand what you truly make after time, miles, and expenses — so you can drive smarter.</p>
-          </div>
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-navigation"></i></div>
+                <h3 class="gw-title">Private Ride Coordination</h3>
+                <p class="gw-desc">Coordinate private rides with trusted connections — simple request flow and clear pickup details.</p>
+              </div>
 
-          <div class="feature__card">
-            <div class="feature__icon"><i class="bx bx-map"></i></div>
-            <h3 class="feature__title">Driver Density Map</h3>
-            <p class="feature__description">See aggregated hotspot activity to plan better areas and reduce wasted time.</p>
-          </div>
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-package"></i></div>
+                <h3 class="gw-title">Mobile Pick-Up & Parcel Drop-Off</h3>
+                <p class="gw-desc">Request mobile pickup or parcel drop-off with trusted drivers you’ve added — private and organized.</p>
+              </div>
 
-          <div class="feature__card">
-            <div class="feature__icon"><i class="bx bx-calendar-check"></i></div>
-            <h3 class="feature__title">Smart Scheduling</h3>
-            <p class="feature__description">Set reminders for breaks and meals to stay consistent and help prevent burnout.</p>
-          </div>
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-chat"></i></div>
+                <h3 class="gw-title">Simple Coordination</h3>
+                <p class="gw-desc">Message and coordinate the basics fast — pickup time, location, and trip notes — all in one place.</p>
+              </div>
 
-          <div class="feature__card">
-            <div class="feature__icon"><i class="bx bx-car"></i></div>
-            <h3 class="feature__title">Private Trips (Driver Side)</h3>
-            <p class="feature__description">Manage requests from riders you already know, coordinate details, and keep everything organized.</p>
-          </div>
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-receipt"></i></div>
+                <h3 class="gw-title">Optional Trip Contribution</h3>
+                <p class="gw-desc">Users may optionally contribute toward trip costs, but the agreement is between users — Gigways does not process payments.</p>
+              </div>
 
-          <div class="feature__card">
-            <div class="feature__icon"><i class="bx bx-badge-check"></i></div>
-            <h3 class="feature__title">Optional Car Ads</h3>
-            <p class="feature__description">Earn extra with approved car advertising — fully opt-in and flexible.</p>
-          </div>
-
-          <div class="mode-divider"></div>
-
-          <div class="mode-block" style="grid-column: 1 / -1">
-            <div class="mode-head">
-              <span class="mode-pill"><i class="bx bx-user"></i> Rider Mode</span>
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-lock-alt"></i></div>
+                <h3 class="gw-title">Private by Design</h3>
+                <p class="gw-desc">Trips stay private between connected users. Gigways is a coordination toolkit — not a transportation or delivery provider.</p>
+              </div>
             </div>
-          </div>
-
-          <div class="feature__card">
-            <div class="feature__icon"><i class="bx bx-group"></i></div>
-            <h3 class="feature__title">Private Trips (Known & Trusted)</h3>
-            <p class="feature__description">Request rides with drivers you’ve added and trust — no public matching and no strangers.</p>
-          </div>
-
-          <div class="feature__card">
-            <div class="feature__icon"><i class="bx bx-chat"></i></div>
-            <h3 class="feature__title">Simple Coordination</h3>
-            <p class="feature__description">Send trip requests and coordinate pickup details in a clean, straightforward flow.</p>
-          </div>
-
-          <div class="feature__card">
-            <div class="feature__icon"><i class="bx bx-shield-quarter"></i></div>
-            <h3 class="feature__title">Trust-Based Connections</h3>
-            <p class="feature__description">Riders connect first. Drivers accept. Trips stay private between people who already know each other.</p>
           </div>
         </div>
       </section>
@@ -671,7 +650,7 @@
         <h2 class="section-title">About Us</h2>
         <div class="about__container bd-grid">
           <div class="about__img">
-            <img src="assets/img/screenshots/welcome.png" alt="Gigways App Preview" loading="lazy" />
+            <img src="assets/img/about.png" alt="Gigways App Preview" loading="lazy" />
           </div>
 
           <div class="about__content">
@@ -690,12 +669,10 @@
         </div>
       </section>
 
-      <!-- FAQ (BEAUTIFUL ACCORDION) -->
+      <!-- FAQ -->
       <section class="features section" id="faq">
         <h2 class="section-title">FAQ</h2>
-        <p class="section-subtitle">
-          Quick answers about Driver Mode, Rider Mode, privacy, and how Gigways works.
-        </p>
+        <p class="section-subtitle">Quick answers about Driver Mode, PAL Mode, privacy, and how Gigways works.</p>
 
         <div class="faq__container" id="faqList">
           <!-- ITEM 1 -->
@@ -713,8 +690,8 @@
             <div class="faq__panel" id="faqA1" role="region" aria-label="Answer">
               <div class="faq__panelInner">
                 <p class="faq__answer">
-                  No. Gigways does not operate transportation or delivery services. Drivers remain independent, and Rider Mode is for
-                  private trips with drivers you already know and trust — no public marketplace, no strangers.
+                  No. Gigways does not operate transportation or delivery services. Drivers remain independent, and PAL Mode is for
+                  private coordination with drivers you already know and trust — no public marketplace, no strangers. Gigways does not process payments.
                 </p>
               </div>
             </div>
@@ -745,10 +722,10 @@
           <div class="faq__item">
             <button class="faq__button" type="button" aria-expanded="false" aria-controls="faqA3">
               <span class="faq__left">
-                <span class="faq__badge" aria-hidden="true"><i class="bx bx-group"></i></span>
+                <span class="faq__badge" aria-hidden="true"><i class="bx bx-user"></i></span>
                 <span class="faq__qwrap">
-                  <p class="faq__question">What are Private Trips?</p>
-                  <p class="faq__hint">Invite-only rides & drop-offs.</p>
+                  <p class="faq__question">What is PAL Mode?</p>
+                  <p class="faq__hint">Invite-only private coordination.</p>
                 </span>
               </span>
               <span class="faq__chev" aria-hidden="true"><i class="bx bx-chevron-down"></i></span>
@@ -756,8 +733,9 @@
             <div class="faq__panel" id="faqA3" role="region" aria-label="Answer">
               <div class="faq__panelInner">
                 <p class="faq__answer">
-                  Private Trips let riders coordinate rides or drop-offs with drivers they already know and trust — no public matching,
-                  no strangers. Riders connect first, and drivers choose what they accept.
+                  PAL Mode is for coordinating private rides, mobile pick-ups, and parcel drop-offs with drivers you’ve added and trust.
+                  There’s no public matching and no strangers. Users may optionally contribute toward trip costs, but Gigways does not set prices,
+                  collect money, or process payments.
                 </p>
               </div>
             </div>
@@ -831,7 +809,7 @@
       </section>
     </main>
 
-    <!--===== FOOTER =====-->
+    <!-- FOOTER -->
     <footer class="footer">
       <div class="footer__container">
         <div class="footer__content">
@@ -844,9 +822,8 @@
           <ul class="footer__links">
             <li><a href="#home" class="footer__link">Home</a></li>
             <li><a href="#features" class="footer__link">Features</a></li>
-
-            <li><a href="driverbenefits.html" class="footer__link">Driver Benefits</a></li>
             <li><a href="carads.html#forms" class="footer__link">Car Advertising</a></li>
+            <li><a href="driverbenefits.html" class="footer__link">Driver Benefits</a></li>
             <li><a href="careers.html" class="footer__link">Careers</a></li>
             <li><a href="privacy-policy.html" class="footer__link">Privacy Policy</a></li>
             <li><a href="faq.html" class="footer__link">FAQ Support</a></li>
@@ -877,7 +854,7 @@
       </div>
     </footer>
 
-    <!--===== SCROLL REVEAL =====-->
+    <!-- SCROLL REVEAL -->
     <script
       src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js"
       integrity="sha256-YHdamLXLIBEicRscu4gge3gdzJSWGvvWggYMiCYwCg0="
@@ -911,11 +888,47 @@
         });
       }
 
-      /* =========================================================
-         FAQ Accordion Logic
-         - One open at a time (clean & premium)
-         - Accessible aria-expanded
-      ========================================================= */
+      /* ✅ PAL MODE TOGGLE LOGIC (UNIQUE SELECTORS) */
+      (function () {
+        const tabs = Array.from(document.querySelectorAll(".gw-modeBtn"));
+        const panels = {
+          driver: document.getElementById("gwPanelDriver"),
+          pal: document.getElementById("gwPanelPal"),
+        };
+
+        function setActive(mode) {
+          tabs.forEach((t) => {
+            const isActive = t.dataset.gwTarget === mode;
+            t.classList.toggle("is-active", isActive);
+            t.setAttribute("aria-selected", String(isActive));
+            t.tabIndex = 0;
+          });
+
+          Object.entries(panels).forEach(([key, el]) => {
+            if (!el) return;
+            el.classList.toggle("is-active", key === mode);
+          });
+        }
+
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", () => setActive(tab.dataset.gwTarget));
+          tab.addEventListener("keydown", (e) => {
+            if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+            e.preventDefault();
+            const i = tabs.indexOf(tab);
+            const next =
+              e.key === "ArrowRight"
+                ? tabs[(i + 1) % tabs.length]
+                : tabs[(i - 1 + tabs.length) % tabs.length];
+            next.focus();
+            setActive(next.dataset.gwTarget);
+          });
+        });
+
+        setActive("driver");
+      })();
+
+      /* FAQ Accordion Logic */
       (function () {
         const items = Array.from(document.querySelectorAll(".faq__item"));
         if (!items.length) return;
@@ -945,6 +958,7 @@
     </script>
   </body>
 </html>
+
 
 
 
