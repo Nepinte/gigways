@@ -4,32 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ✅ SEO -->
-  <title>Gigways Marketplace | Insurance, Taxes & Driver Benefits</title>
+  <!-- ✅ PRIMARY SEO (Benefits + Partner Offers, not “Marketplace”) -->
+  <title>Gigways Driver Benefits & Partner Offers | Insurance, Taxes & Tools</title>
   <meta
     name="description"
-    content="A gig-driver marketplace for car insurance, life insurance, tax filing, and driver tools—powered by trusted partners and affiliate offers."
+    content="Driver benefits and partner offers for gig workers, rideshare, and delivery drivers—insurance, tax filing, car expenses, and tools from trusted affiliates."
+  />
+  <meta
+    name="keywords"
+    content="gig driver benefits, rideshare driver benefits, delivery driver benefits, gig worker insurance, rideshare insurance, delivery driver insurance, 1099 taxes, gig worker taxes, mileage tracking, driver tools, roadside assistance, tire deals, auto loans, partner offers"
   />
   <meta name="author" content="Gigways Team" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="canonical" href="https://gigways.com/market" />
-  <meta
-    name="keywords"
-    content="gig driver insurance, rideshare insurance, delivery driver insurance, car insurance quotes, life insurance, 1099 tax filing, gig worker taxes, mileage tracking, gig driver benefits, roadside assistance, tires, NTB, Mavis"
-  />
+
+  <!-- ✅ IMPORTANT: match your actual file path -->
+  <link rel="canonical" href="https://gigways.com/driverbenefits.html" />
 
   <!-- ✅ Social Sharing -->
-  <meta property="og:title" content="Gigways Marketplace | Insurance, Taxes & Driver Benefits" />
-  <meta property="og:description" content="Compare insurance, file taxes, and access benefits for gig workers through trusted partners." />
+  <meta property="og:title" content="Gigways Driver Benefits & Partner Offers" />
+  <meta property="og:description" content="Benefits and partner offers for gig workers—insurance, taxes, car expenses, and tools for rideshare and delivery drivers." />
   <meta property="og:image" content="https://gigways.com/assets/img/App.png" />
-  <meta property="og:url" content="https://gigways.com/market" />
+  <meta property="og:url" content="https://gigways.com/driverbenefits.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Gigways" />
+  <meta property="og:image:alt" content="Gigways driver benefits and partner offers" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Gigways Marketplace | Insurance, Taxes & Driver Benefits" />
-  <meta name="twitter:description" content="Compare insurance, file taxes, and access benefits for gig workers through trusted partners." />
+  <meta name="twitter:title" content="Gigways Driver Benefits & Partner Offers" />
+  <meta name="twitter:description" content="Benefits and partner offers for gig workers—insurance, taxes, car expenses, and driver tools." />
   <meta name="twitter:image" content="https://gigways.com/assets/img/App.png" />
+  <meta name="twitter:image:alt" content="Gigways driver benefits and partner offers" />
 
   <link rel="icon" href="assets/img/App.png" />
 
@@ -39,32 +43,60 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
-  <!-- ✅ Structured Data (Services) -->
+  <!-- ✅ Structured Data (WebPage + Breadcrumb + OfferCatalog of partner services) -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Gigways Marketplace",
-    "url": "https://gigways.com/market",
-    "description": "Insurance, tax filing, and benefits marketplace for gig drivers via partners and affiliates.",
-    "breadcrumb": {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://gigways.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Marketplace", "item": "https://gigways.com/market" }
-      ]
-    },
-    "mainEntity": {
-      "@type": "ItemList",
-      "name": "Gig Driver Services",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "item": { "@type": "Service", "name": "Tax Filing (1099)" } },
-        { "@type": "ListItem", "position": 2, "item": { "@type": "Service", "name": "Tire Deals (Guaranteed Lowest Prices)" } },
-        { "@type": "ListItem", "position": 3, "item": { "@type": "Service", "name": "Car Insurance (Gig/Rideshare)" } },
-        { "@type": "ListItem", "position": 4, "item": { "@type": "Service", "name": "Legal Help" } },
-        { "@type": "ListItem", "position": 5, "item": { "@type": "Service", "name": "Driver Tools" } }
-      ]
-    }
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"Organization",
+        "name":"Gigways",
+        "url":"https://gigways.com",
+        "logo":"https://gigways.com/assets/img/App.png",
+        "sameAs":[
+          "https://www.facebook.com/profile.php?id=61574801146211",
+          "https://x.com/gigways",
+          "https://www.instagram.com/gigways/"
+        ]
+      },
+      {
+        "@type":"WebPage",
+        "@id":"https://gigways.com/driverbenefits.html",
+        "url":"https://gigways.com/driverbenefits.html",
+        "name":"Gigways Driver Benefits & Partner Offers",
+        "description":"Driver benefits and partner offers for gig workers, rideshare, and delivery drivers—insurance, tax filing, car expenses, and tools from trusted affiliates.",
+        "isPartOf":{
+          "@type":"WebSite",
+          "name":"Gigways",
+          "url":"https://gigways.com"
+        }
+      },
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          { "@type":"ListItem", "position": 1, "name":"Home", "item":"https://gigways.com/" },
+          { "@type":"ListItem", "position": 2, "name":"Driver Benefits", "item":"https://gigways.com/driverbenefits.html" }
+        ]
+      },
+      {
+        "@type":"OfferCatalog",
+        "name":"Driver Benefits & Partner Offers",
+        "url":"https://gigways.com/driverbenefits.html",
+        "description":"A curated list of partner offers and benefits for gig workers, rideshare, and delivery drivers.",
+        "provider":{
+          "@type":"Organization",
+          "name":"Gigways",
+          "url":"https://gigways.com"
+        },
+        "itemListElement":[
+          { "@type":"Offer", "name":"Tax Filing (1099)", "category":"Taxes", "availability":"https://schema.org/InStock" },
+          { "@type":"Offer", "name":"Tire Deals", "category":"Car Expenses", "availability":"https://schema.org/InStock" },
+          { "@type":"Offer", "name":"Car Insurance", "category":"Insurance", "availability":"https://schema.org/InStock" },
+          { "@type":"Offer", "name":"Auto Loans", "category":"Financing", "availability":"https://schema.org/InStock" },
+          { "@type":"Offer", "name":"Driver Tools", "category":"Tools", "availability":"https://schema.org/InStock" }
+        ]
+      }
+    ]
   }
   </script>
 
@@ -116,7 +148,7 @@
       z-index: 1;
     }
 
-    /* ====== HERO (unchanged) ====== */
+    /* ====== HERO ====== */
     .mk-hero {
       border-radius: 24px;
       border: 1px solid var(--glass-bd);
@@ -163,7 +195,7 @@
     .mk-sub {
       margin: 0;
       color: var(--text-color-light);
-      max-width: 60ch;
+      max-width: 70ch;
       line-height: 1.6;
       font-size: 1.05rem;
     }
@@ -224,7 +256,7 @@
     .mk-stat b { display: block; color: var(--second-color); font-size: 1.05rem; margin-bottom: 0.25rem; }
     .mk-stat span { display: block; color: var(--text-color-light); font-size: 0.95rem; line-height: 1.4; }
 
-    /* ====== NEW LISTINGS GRID (Airbnb-like) ====== */
+    /* ====== LISTINGS GRID ====== */
     .mk-grid{
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -238,7 +270,6 @@
       .mk-grid{ grid-template-columns: 1fr; }
     }
 
-    /* Card */
     .mk-card{
       border-radius: 22px;
       overflow: hidden;
@@ -260,9 +291,6 @@
       border-color: var(--chip-bd);
     }
 
-    /* =========================
-       IMAGE IMPROVEMENTS
-       ========================= */
     .mk-media{
       position: relative;
       aspect-ratio: 4 / 3;
@@ -624,17 +652,17 @@
           <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
           <li class="nav__item"><a href="index.html#about" class="nav__link">About</a></li>
           <li class="nav__item"><a href="carads.html" class="nav__link">Car Advertising</a></li>
-          <li class="nav__item"><a href="market.html" class="nav__link active" aria-current="page">Marketplace</a></li>
+          <li class="nav__item"><a href="driverbenefits.html" class="nav__link active" aria-current="page">Driver Benefits</a></li>
           <li class="nav__item"><a href="careers.html" class="nav__link">Careers</a></li>
         </ul>
       </div>
 
-        <div class="theme">
-          <img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" />
-        </div>
+      <div class="theme">
+        <img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" />
+      </div>
 
-        <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
-      </nav>
+      <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
+    </nav>
   </header>
 
   <!-- MAIN -->
@@ -646,96 +674,101 @@
         <div class="mk-hero">
           <div class="mk-head">
             <div>
-              <span class="mk-kicker"><i class="bx bx-store"></i> Driver-First Marketplace</span>
-              <h1 class="mk-title">Services Built for Gig Workers</h1>
-              <p class="mk-sub">Insurance, taxes, benefits, and tools designed around the realities of gig driving.</p>
+              <span class="mk-kicker"><i class="bx bx-gift"></i> Benefits & Partner Offers</span>
+              <h1 class="mk-title">Driver Benefits for Gig, Rideshare & Delivery</h1>
+              <p class="mk-sub">
+                Save time and money with curated offers for drivers—tax filing, insurance, car expenses, and tools.
+                Built to support the realities of gig work.
+              </p>
             </div>
           </div>
 
           <div class="mk-disclosure">
             <strong>Partner & Affiliate Disclosure:</strong>
-            Some links on this page are partner or affiliate links. If you choose a service through them, Gigways may earn a commission at no extra cost to you.
+            Some links on this page are partner or affiliate links. If you choose a service through them, Gigways may earn a commission
+            at no extra cost to you. We aim to list offers that are useful for gig workers and drivers.
           </div>
 
-          <div class="mk-stats" aria-label="Marketplace highlights">
+          <div class="mk-stats" aria-label="Benefits highlights">
             <div class="mk-stat">
               <i class="bx bx-check-shield" aria-hidden="true"></i>
-              <div><b>Driver-First Picks</b><span>Focused on gig work realities</span></div>
+              <div><b>Driver-First Picks</b><span>Curated for rideshare & delivery</span></div>
             </div>
             <div class="mk-stat">
-              <i class="bx bx-timer" aria-hidden="true"></i>
-              <div><b>Fast Comparisons</b><span>Get started in minutes</span></div>
+              <i class="bx bx-money-withdraw" aria-hidden="true"></i>
+              <div><b>Save on Expenses</b><span>Taxes, tires, coverage, and more</span></div>
             </div>
             <div class="mk-stat">
               <i class="bx bx-link-external" aria-hidden="true"></i>
-              <div><b>Trusted Partners</b><span>Offers via affiliates & partners</span></div>
+              <div><b>Trusted Partners</b><span>Offers via partners & affiliates</span></div>
             </div>
           </div>
         </div>
 
-        <!-- ✅ LISTINGS GRID -->
-        <div class="mk-grid" id="serviceGrid" aria-label="Marketplace listings"></div>
+        <!-- LISTINGS GRID -->
+        <div class="mk-grid" id="serviceGrid" aria-label="Driver benefits and partner offers"></div>
 
       </div>
     </section>
   </main>
 
   <!-- MODAL -->
-  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Service details">
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Offer details">
     <div class="modal__dialog" role="document">
       <button class="modal__close" type="button" aria-label="Close">×</button>
       <div class="modal__content" id="modalContent"></div>
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer__container">
-      <div class="footer__content">
-        <h2 class="footer__title">Gigways LLC</h2>
-        <p class="footer__description">Making work easier, safer, and more organized for gig workers</p>
-      </div>
+   <!--===== FOOTER =====-->
+    <footer class="footer">
+      <div class="footer__container">
+        <div class="footer__content">
+          <h2 class="footer__title">Gigways LLC</h2>
+          <p class="footer__description">Making work easier, safer, and more organized for gig workers</p>
+        </div>
 
-      <div class="footer__content">
-        <h3 class="footer__subtitle">Quick Links</h3>
-        <ul class="footer__links">
-          <li><a href="index.html" class="footer__link">Home</a></li>
-          <li><a href="index.html#features" class="footer__link">Features</a></li>
-          <li><a href="market.html" class="footer__link">Marketplace</a></li>
-          <li><a href="carads.html#forms" class="footer__link">Car Advertising</a></li>
-          <li><a href="careers.html" class="footer__link">Careers</a></li>
-          <li><a href="privacy-policy.html" class="footer__link">Privacy Policy</a></li>
-          <li><a href="faq.html" class="footer__link">FAQ Support</a></li>
-        </ul>
-      </div>
+        <div class="footer__content">
+          <h3 class="footer__subtitle">Quick Links</h3>
+          <ul class="footer__links">
+            <li><a href="#home" class="footer__link">Home</a></li>
+            <li><a href="#features" class="footer__link">Features</a></li>
+            <li><a href="carads.html#forms" class="footer__link">Car Advertising</a></li>
+            <li><a href="driverbenefits.html" class="footer__link">Driver Benefits</a></li>
+            <li><a href="careers.html" class="footer__link">Careers</a></li>
+            <li><a href="privacy-policy.html" class="footer__link">Privacy Policy</a></li>
+            <li><a href="faq.html" class="footer__link">FAQ Support</a></li>
+          </ul>
+        </div>
 
-      <div class="footer__content">
-        <h3 class="footer__subtitle">Connect With Us</h3>
-        <div class="footer__social">
-          <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon" aria-label="Gigways on Facebook">
-            <i class="bx bxl-facebook"></i>
-          </a>
-          <a href="https://x.com/gigways" class="footer__icon" aria-label="Gigways on X">
-            <i class="bx bxl-twitter"></i>
-          </a>
-          <a href="https://www.instagram.com/gigways/" class="footer__icon" aria-label="Gigways on Instagram">
-            <i class="bx bxl-instagram"></i>
-          </a>
-          <a href="mailto:Support@gigways.com" class="footer__icon" aria-label="Email support">
-            <i class="bx bxs-envelope"></i>
-          </a>
+        <div class="footer__content">
+          <h3 class="footer__subtitle">Connect With Us</h3>
+          <div class="footer__social">
+            <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon" aria-label="Gigways on Facebook">
+              <i class="bx bxl-facebook"></i>
+            </a>
+            <a href="https://x.com/gigways" class="footer__icon" aria-label="Gigways on X">
+              <i class="bx bxl-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/gigways/" class="footer__icon" aria-label="Gigways on Instagram">
+              <i class="bx bxl-instagram"></i>
+            </a>
+            <a href="mailto:Support@gigways.com" class="footer__icon" aria-label="Email support">
+              <i class="bx bxs-envelope"></i>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="footer__bottom">
-      <p class="footer__copy">© Gigways LLC <span id="year"></span>. All rights reserved.</p>
-    </div>
-  </footer>
+      <div class="footer__bottom">
+        <p class="footer__copy">© Gigways LLC <span id="year"></span>. All rights reserved.</p>
+      </div>
+    </footer>
+
 
   <script>
     // =========================
-    // Keep your theme preload
+    // Theme preload
     // =========================
     (function () {
       const root = document.documentElement;
@@ -782,27 +815,27 @@
     }
 
     // =========================
-    // LISTINGS DATA
+    // LISTINGS DATA (Benefits + Affiliates)
     // =========================
     const LISTINGS = [
       {
         id: "tax-efile",
         category: "taxes",
         title: "Tax Filing (1099) — Save 20%",
-        meta: "Gig Worker Taxes • Deductions",
+        meta: "Taxes • Deductions • Filing Help",
         price: 32.99,
         priceUnit: "starting",
         reviews: 1820,
-        badge: "Top Offer",
+        badge: "Popular",
         badgeIcon: "bx-purchase-tag",
         partnerName: "E-file.com",
         partnerSub: "Guided 1099 filing",
         partnerLogo: "assets/img/e-file.png",
         pills: ["1099 Support", "Mileage + Expenses", "Guided Filing"],
-        desc: "Gig drivers often have deductions like mileage and expenses. Use a guided filing flow and save with coupon code SAVE24 when available.",
+        desc: "Gig drivers often have deductions like mileage and expenses. Use a guided filing flow and apply any available promo code shown by the partner at checkout.",
         linkPrimary: "https://www.dpbolvw.net/click-101499113-11917173",
         linkSecondary: "https://www.dpbolvw.net/click-101499113-11917143",
-        secondaryLabel: "State filing • $10 off",
+        secondaryLabel: "State filing offer",
         pixels: [
           "https://www.ftjcfx.com/image-101499113-11917173",
           "https://www.ftjcfx.com/image-101499113-11917143"
@@ -814,9 +847,9 @@
       },
       {
         id: "tires-mavis",
-        category: "tires",
-        title: "Tire Deals (Guaranteed Lowest Prices)",
-        meta: "Mavis / NTB • Shop Online",
+        category: "car-expenses",
+        title: "Tire Deals — Compare Prices",
+        meta: "Car Expenses • Tires • Install Options",
         price: 73.99,
         priceUnit: "from",
         reviews: 945,
@@ -826,7 +859,7 @@
         partnerSub: "Compare deals & brands",
         partnerLogo: "assets/img/mavis.png",
         pills: ["Brand-name tires", "Compare prices", "Install options"],
-        desc: "Tires are one of the biggest driver expenses. Compare deals and shop quickly to stay safe and keep earning.",
+        desc: "Tires are a major driver expense. Compare options to stay safe and keep earning. Availability and pricing depend on your location and vehicle.",
         linkPrimary: "https://www.dpbolvw.net/click-101499113-15767014",
         pixels: ["https://www.tqlkg.com/image-101499113-15767014"],
         images: [
@@ -835,12 +868,12 @@
         ]
       },
 
-      /* ✅ NEW: MyAutoLoan Affiliate Listing */
+      /* Auto Loans */
       {
         id: "auto-loan-myautoloan",
-        category: "auto-loans",
+        category: "financing",
         title: "Auto Loans — Compare Offers",
-        meta: "MyAutoLoan • Multiple lenders",
+        meta: "Financing • Compare Lenders",
         price: 0,
         priceUnit: "free",
         reviews: 520,
@@ -848,26 +881,22 @@
         badgeIcon: "bx-car",
         partnerName: "MyAutoLoan",
         partnerSub: "Compare loan offers online",
-        partnerLogo: "assets/img/auto.png",   // <-- you will add image
+        partnerLogo: "assets/img/auto.png",
         pills: ["Fast quotes", "Multiple lenders", "Compare APRs"],
-        desc: "Compare auto loan offers from multiple lenders in one place. Great for buying or refinancing a vehicle.",
+        desc: "Compare auto loan offers from multiple lenders in one place. Helpful for buying or refinancing a vehicle. Terms depend on credit and lender approval.",
         linkPrimary: "https://www.dpbolvw.net/click-101499113-10608154",
-        // If you later get CJ tracking image/pixel URL(s), add them here:
         pixels: ["https://www.tqlkg.com/image-101499113-10608154"],
         images: [
-          "assets/img/auto.png",              // <-- you will add image
-          "assets/img/auto1.png"              // <-- optional second slide if you want
+          "assets/img/auto.png",
+          "assets/img/auto1.png"
         ]
       }
     ];
 
     // =========================
-    // STATE (favorites removed)
+    // STATE
     // =========================
-    const state = {
-      slideIndexById: {}
-    };
-
+    const state = { slideIndexById: {} };
     const grid = document.getElementById("serviceGrid");
 
     // =========================
@@ -951,7 +980,7 @@
 
               <div class="mk-actions">
                 <a class="mk-cta" href="${escapeHtml(item.linkPrimary)}" target="_top" rel="nofollow sponsored">
-                  <i class="bx bx-link-external"></i> Get offer
+                  <i class="bx bx-link-external"></i> View offer
                 </a>
 
                 <button class="mk-infoBtn quick-view" type="button" data-modal="${escapeHtml(item.id)}" aria-label="Details">
@@ -1060,7 +1089,7 @@
         </div>
 
         <p style="margin-top:1rem;">
-          <strong>Tip:</strong> Always review details and confirm what’s included before purchasing.
+          <strong>Note:</strong> Always review partner terms and confirm what’s included before purchasing.
         </p>
       `;
 
@@ -1123,6 +1152,7 @@
   </script>
 </body>
 </html>
+
 
 
 
