@@ -986,9 +986,9 @@
                   </div>
 
                   <div class="tier-row" role="list" aria-label="Duration pricing tiers">
-                    <div class="tier" role="listitem"><span>1 month</span><b>$500</b></div>
-                    <div class="tier" role="listitem"><span>2 months</span><b>$900</b></div>
-                    <div class="tier" role="listitem"><span>3 months</span><b>$1,200</b></div>
+                    <div class="tier" role="listitem"><span>1 month</span><b>$550</b></div>
+                    <div class="tier" role="listitem"><span>2 months</span><b>$1000</b></div>
+                    <div class="tier" role="listitem"><span>3 months</span><b>$1,400</b></div>
                     <div class="tier" role="listitem"><span>4+ months</span><b>Negotiable</b></div>
                   </div>
 
@@ -1002,8 +1002,8 @@
                   </div>
 
                   <div class="tier-row" role="list" aria-label="Fleet discount tiers">
-                    <div class="tier" role="listitem"><span>1–5 cars</span><b>0%</b></div>
-                    <div class="tier" role="listitem"><span>6–10 cars</span><b>5%</b></div>
+                    <div class="tier" role="listitem"><span>1–4 cars</span><b>0%</b></div>
+                    <div class="tier" role="listitem"><span>5–10 cars</span><b>5%</b></div>
                     <div class="tier" role="listitem"><span>11–15 cars</span><b>7%</b></div>
                     <div class="tier" role="listitem"><span>16+ cars</span><b>Negotiable</b></div>
                   </div>
@@ -1434,9 +1434,9 @@
         const m = parseInt(months, 10);
         if (!isFinite(m) || m < 1) return { price: 0, negotiable: false, valid: false };
         if (m > 3) return { price: 0, negotiable: true, valid: true };
-        if (m === 1) return { price: 500, negotiable: false, valid: true };
-        if (m === 2) return { price: 900, negotiable: false, valid: true };
-        return { price: 1200, negotiable: false, valid: true }; // m === 3
+        if (m === 1) return { price: 550, negotiable: false, valid: true };
+        if (m === 2) return { price: 1000, negotiable: false, valid: true };
+        return { price: 1400, negotiable: false, valid: true }; // m === 3
       }
 
       /* ✅ Fleet discounts */
@@ -1446,7 +1446,7 @@
 
         if (n >= 16) return { pct: 0, negotiable: true, valid: true };
         if (n >= 11) return { pct: 0.07, negotiable: false, valid: true };
-        if (n >= 6)  return { pct: 0.05, negotiable: false, valid: true };
+        if (n >= 5)  return { pct: 0.05, negotiable: false, valid: true };
         return { pct: 0, negotiable: false, valid: true }; // 1–5
       }
 
@@ -1952,4 +1952,5 @@
   </script>
 </body>
 </html>
+
 
