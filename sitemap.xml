@@ -2,28 +2,44 @@
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://gigways.com/</loc>
+    <lastmod>2026-01-22</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
   </url>
+
   <url>
     <loc>https://gigways.com/features</loc>
+    <lastmod>2026-01-22</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
+
   <url>
-    <loc>https://gigways.com/app-preview</loc>
+    <loc>https://gigways.com/carads.html</loc>
+    <lastmod>2026-01-22</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://gigways.com/driverbenefits</loc>
+    <lastmod>2026-01-22</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
+
   <url>
-    <loc>https://gigways.com/about</loc>
-    <priority>0.8</priority>
+    <loc>https://gigways.com/careers</loc>
+    <lastmod>2026-01-22</lastmod>
+    <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
+
   <url>
-    <loc>https://gigways.com/privacy-policy</loc>
-    <priority>0.5</priority>
-    <changefreq>yearly</changefreq>
+    <loc>https://gigways.com/faq.html</loc>
+    <lastmod>2026-01-22</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
   </url>
 </urlset>
 
