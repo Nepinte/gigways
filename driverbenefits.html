@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ✅ PRIMARY SEO (Benefits + Partner Offers, not “Marketplace”) -->
   <title>Gigways Driver Benefits & Partner Offers | Insurance, Taxes & Tools</title>
   <meta
     name="description"
@@ -17,10 +16,8 @@
   <meta name="author" content="Gigways Team" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
 
-  <!-- ✅ IMPORTANT: match your actual file path -->
   <link rel="canonical" href="https://gigways.com/driverbenefits.html" />
 
-  <!-- ✅ Social Sharing -->
   <meta property="og:title" content="Gigways Driver Benefits & Partner Offers" />
   <meta property="og:description" content="Benefits and partner offers for gig workers—insurance, taxes, car expenses, and tools for rideshare and delivery drivers." />
   <meta property="og:image" content="https://gigways.com/assets/img/App.png" />
@@ -43,7 +40,6 @@
   <link rel="stylesheet" href="assets/css/styles.css" />
   <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
-  <!-- ✅ Structured Data (WebPage + Breadcrumb + OfferCatalog of partner services) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -89,11 +85,14 @@
           "url":"https://gigways.com"
         },
         "itemListElement":[
+          { "@type":"Offer", "name":"Verizon Deals", "category":"Phone & Internet", "availability":"https://schema.org/InStock" },
           { "@type":"Offer", "name":"Tax Filing (1099)", "category":"Taxes", "availability":"https://schema.org/InStock" },
           { "@type":"Offer", "name":"Tire Deals", "category":"Car Expenses", "availability":"https://schema.org/InStock" },
           { "@type":"Offer", "name":"Car Insurance", "category":"Insurance", "availability":"https://schema.org/InStock" },
           { "@type":"Offer", "name":"Auto Loans", "category":"Financing", "availability":"https://schema.org/InStock" },
-          { "@type":"Offer", "name":"Driver Tools", "category":"Tools", "availability":"https://schema.org/InStock" }
+          { "@type":"Offer", "name":"Driver Tools", "category":"Tools", "availability":"https://schema.org/InStock" },
+
+          { "@type":"Offer", "name":"Talkpal - AI Language Teacher", "category":"Tools", "availability":"https://schema.org/InStock" }
         ]
       }
     ]
@@ -101,10 +100,7 @@
   </script>
 
   <style>
-    /* Keep scrollbar to prevent layout shift */
     html { overflow-y: scroll; }
-
-    /* ====== Page background wrapper (keep your existing look) ====== */
     .market.section {
       max-width: 100%;
       padding-top: calc(var(--header-height) + 2rem);
@@ -113,11 +109,9 @@
       overflow: visible;
       background: linear-gradient(to bottom, rgba(191, 168, 137, 0.03) 0%, transparent 50%);
     }
-
     .dark-theme .market.section {
       background: linear-gradient(to bottom, rgba(191, 168, 137, 0.08) 0%, transparent 50%);
     }
-
     .market.section::before {
       content: "";
       position: absolute;
@@ -128,7 +122,6 @@
       background: radial-gradient(circle, rgba(191, 168, 137, 0.15) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .market.section::after {
       content: "";
       position: absolute;
@@ -139,7 +132,6 @@
       background: radial-gradient(circle, rgba(143, 122, 91, 0.12) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .mk-container {
       width: min(1200px, 100%);
       margin-inline: auto;
@@ -147,8 +139,6 @@
       position: relative;
       z-index: 1;
     }
-
-    /* ====== HERO ====== */
     .mk-hero {
       border-radius: 24px;
       border: 1px solid var(--glass-bd);
@@ -161,7 +151,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .mk-hero::before {
       content: "";
       position: absolute;
@@ -172,9 +161,7 @@
       background: radial-gradient(circle, rgba(191, 168, 137, 0.12) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .mk-hero > * { position: relative; z-index: 1; }
-
     .mk-head {
       display: flex;
       align-items: flex-start;
@@ -182,7 +169,6 @@
       gap: 1.5rem;
       flex-wrap: wrap;
     }
-
     .mk-title {
       margin: 0.5rem 0 0.75rem;
       font-size: clamp(1.85rem, 3vw, 2.65rem);
@@ -191,7 +177,6 @@
       color: var(--second-color);
       font-weight: 900;
     }
-
     .mk-sub {
       margin: 0;
       color: var(--text-color-light);
@@ -199,7 +184,6 @@
       line-height: 1.6;
       font-size: 1.05rem;
     }
-
     .mk-kicker {
       display: inline-flex;
       gap: 0.5rem;
@@ -213,9 +197,7 @@
       white-space: nowrap;
       box-shadow: 0 4px 12px rgba(143, 122, 91, 0.3);
     }
-
     .mk-kicker i { font-size: 1.1rem; }
-
     .mk-disclosure {
       margin-top: 1.5rem;
       border-radius: 16px;
@@ -226,16 +208,13 @@
       line-height: 1.6;
       font-size: 0.95rem;
     }
-
     .mk-disclosure strong { color: var(--second-color); }
-
     .mk-stats {
       margin-top: 1.5rem;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1rem;
     }
-
     .mk-stat {
       border-radius: 16px;
       border: 1px solid var(--glass-bd);
@@ -247,16 +226,12 @@
       box-shadow: var(--shadow-sm);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
     .dark-theme .mk-stat { background: rgba(255, 255, 255, 0.06); }
-
     .mk-stat:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-
     .mk-stat i { font-size: 1.5rem; color: var(--third-color); margin-top: 0.1rem; }
     .mk-stat b { display: block; color: var(--second-color); font-size: 1.05rem; margin-bottom: 0.25rem; }
     .mk-stat span { display: block; color: var(--text-color-light); font-size: 0.95rem; line-height: 1.4; }
 
-    /* ====== LISTINGS GRID ====== */
     .mk-grid{
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -639,10 +614,8 @@
 <body>
   <div class="bubble-container"></div>
 
-  <!-- Toast -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <!-- HEADER -->
   <header class="l-header">
     <nav class="nav bd-grid">
       <div><a href="index.html" class="nav__logo">Gigways</a></div>
@@ -665,12 +638,10 @@
     </nav>
   </header>
 
-  <!-- MAIN -->
   <main class="l-main">
     <section class="market section" id="market">
       <div class="mk-container">
 
-        <!-- HERO -->
         <div class="mk-hero">
           <div class="mk-head">
             <div>
@@ -705,14 +676,12 @@
           </div>
         </div>
 
-        <!-- LISTINGS GRID -->
         <div class="mk-grid" id="serviceGrid" aria-label="Driver benefits and partner offers"></div>
 
       </div>
     </section>
   </main>
 
-  <!-- MODAL -->
   <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Offer details">
     <div class="modal__dialog" role="document">
       <button class="modal__close" type="button" aria-label="Close">×</button>
@@ -720,56 +689,51 @@
     </div>
   </div>
 
-   <!--===== FOOTER =====-->
-    <footer class="footer">
-      <div class="footer__container">
-        <div class="footer__content">
-          <h2 class="footer__title">Gigways LLC</h2>
-          <p class="footer__description">Real benefits and resources built to support drivers — on the road and off the clock.</p>
-        </div>
-
-        <div class="footer__content">
-          <h3 class="footer__subtitle">Quick Links</h3>
-          <ul class="footer__links">
-            <li><a href="#home" class="footer__link">Home</a></li>
-            <li><a href="#features" class="footer__link">Features</a></li>
-            <li><a href="carads.html#forms" class="footer__link">Car Advertising</a></li>
-            <li><a href="driverbenefits.html" class="footer__link">Driver Benefits</a></li>
-            <li><a href="careers.html" class="footer__link">Careers</a></li>
-            <li><a href="privacy-policy.html" class="footer__link">Privacy Policy</a></li>
-            <li><a href="faq.html" class="footer__link">FAQ Support</a></li>
-          </ul>
-        </div>
-
-        <div class="footer__content">
-          <h3 class="footer__subtitle">Connect With Us</h3>
-          <div class="footer__social">
-            <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon" aria-label="Gigways on Facebook">
-              <i class="bx bxl-facebook"></i>
-            </a>
-            <a href="https://x.com/gigways" class="footer__icon" aria-label="Gigways on X">
-              <i class="bx bxl-twitter"></i>
-            </a>
-            <a href="https://www.instagram.com/gigways/" class="footer__icon" aria-label="Gigways on Instagram">
-              <i class="bx bxl-instagram"></i>
-            </a>
-            <a href="mailto:Support@gigways.com" class="footer__icon" aria-label="Email support">
-              <i class="bx bxs-envelope"></i>
-            </a>
-          </div>
-        </div>
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__content">
+        <h2 class="footer__title">Gigways LLC</h2>
+        <p class="footer__description">Real benefits and resources built to support drivers — on the road and off the clock.</p>
       </div>
 
-      <div class="footer__bottom">
-        <p class="footer__copy">© Gigways LLC <span id="year"></span>. All rights reserved.</p>
+      <div class="footer__content">
+        <h3 class="footer__subtitle">Quick Links</h3>
+        <ul class="footer__links">
+          <li><a href="#home" class="footer__link">Home</a></li>
+          <li><a href="#features" class="footer__link">Features</a></li>
+          <li><a href="carads.html#forms" class="footer__link">Car Advertising</a></li>
+          <li><a href="driverbenefits.html" class="footer__link">Driver Benefits</a></li>
+          <li><a href="careers.html" class="footer__link">Careers</a></li>
+          <li><a href="privacy-policy.html" class="footer__link">Privacy Policy</a></li>
+          <li><a href="faq.html" class="footer__link">FAQ Support</a></li>
+        </ul>
       </div>
-    </footer>
 
+      <div class="footer__content">
+        <h3 class="footer__subtitle">Connect With Us</h3>
+        <div class="footer__social">
+          <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon" aria-label="Gigways on Facebook">
+            <i class="bx bxl-facebook"></i>
+          </a>
+          <a href="https://www.youtube.com/@Gigways" class="footer__icon" aria-label="Gigways on youtube">
+            <i class="bx bxl-youtube"></i>
+          </a>
+          <a href="https://www.instagram.com/gigways/" class="footer__icon" aria-label="Gigways on Instagram">
+            <i class="bx bxl-instagram"></i>
+          </a>
+          <a href="mailto:Support@gigways.com" class="footer__icon" aria-label="Email support">
+            <i class="bx bxs-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">© Gigways LLC <span id="year"></span>. All rights reserved.</p>
+    </div>
+  </footer>
 
   <script>
-    // =========================
-    // Theme preload
-    // =========================
     (function () {
       const root = document.documentElement;
       root.classList.add("preload");
@@ -778,11 +742,9 @@
       window.addEventListener("load", () => root.classList.remove("preload"));
     })();
 
-    // Footer year
     const yearEl = document.getElementById("year");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // Mobile nav toggle
     const navMenu = document.getElementById("nav-menu");
     const navToggle = document.getElementById("nav-toggle");
     if (navToggle && navMenu) navToggle.addEventListener("click", () => navMenu.classList.toggle("show"));
@@ -790,7 +752,6 @@
       a.addEventListener("click", () => navMenu && navMenu.classList.remove("show"))
     );
 
-    // Theme toggle
     const themeButton = document.getElementById("iconMS");
     const root = document.documentElement;
 
@@ -815,9 +776,10 @@
     }
 
     // =========================
-    // LISTINGS DATA (Benefits + Affiliates)
+    // LISTINGS DATA
     // =========================
     const LISTINGS = [
+      // Existing listings
       {
         id: "tax-efile",
         category: "taxes",
@@ -867,8 +829,6 @@
           "assets/img/mavis1.png"
         ]
       },
-
-      /* Auto Loans */
       {
         id: "auto-loan-myautoloan",
         category: "financing",
@@ -889,6 +849,54 @@
         images: [
           "assets/img/auto.png",
           "assets/img/auto1.png"
+        ]
+      },
+
+      // Verizon Deals / Offers
+      {
+        id: "verizon-deals",
+        category: "phone-internet",
+        title: "Verizon Deals & Offers — Phones + Plans",
+        meta: "Phone & Internet • Deals • New Lines",
+        price: 0,
+        priceUnit: "free",
+        reviews: 1200,
+        badge: "Top Pick",
+        badgeIcon: "bx-badge-check",
+        partnerName: "Verizon",
+        partnerSub: "Official offers & deals",
+        partnerLogo: "assets/img/verizon.png",
+        pills: ["Phone deals", "Plan offers", "Online specials"],
+        desc: "Browse Verizon’s latest deals on phones and plans. Offers vary by device, plan, and eligibility—review terms on Verizon before checkout.",
+        linkPrimary: "https://www.tkqlhce.com/click-101499113-11187187",
+        pixels: ["https://www.tqlkg.com/image-101499113-11187187"],
+        images: [
+          "assets/img/verizon.png",
+          "assets/img/verizon1.png"
+        ]
+      },
+
+      // ✅ NEW (LAST): Talkpal - AI Language Teacher
+      {
+        id: "talkpal-ai-language-teacher",
+        category: "tools",
+        title: "Talkpal — AI Language Teacher",
+        meta: "Tools • Learning • Communication",
+        price: 0,
+        priceUnit: "free",
+        reviews: 0,
+        badge: "High Payout",
+        badgeIcon: "bx-dollar-circle",
+        partnerName: "Talkpal",
+        partnerSub: "AI language practice",
+        partnerLogo: "assets/img/talkpalai.png",
+        pills: ["Speaking practice", "AI tutor", "Multiple languages"],
+        desc: "Practice speaking with an AI language tutor. Great for building confidence and communication—useful if you interact with customers in different languages.",
+        linkPrimary: "https://www.tkqlhce.com/click-101499113-17139023",
+        pixels: ["https://www.tqlkg.com/image-101499113-17139023"],
+        images: [
+          "assets/img/talkpalai.png",
+          "assets/img/talkpalai1.png"
         ]
       }
     ];
@@ -1008,7 +1016,6 @@
         grid.appendChild(card);
       });
 
-      // wire carousel
       grid.querySelectorAll("[data-prev]").forEach(btn => {
         btn.addEventListener("click", (e) => {
           e.stopPropagation();
@@ -1022,12 +1029,10 @@
         });
       });
 
-      // open modal
       grid.querySelectorAll(".quick-view").forEach(btn => {
         btn.addEventListener("click", () => openModal(btn.getAttribute("data-modal")));
       });
 
-      // click image area opens modal
       grid.querySelectorAll(".mk-media").forEach(m => {
         m.addEventListener("click", (e) => {
           const id = m.dataset.id;
@@ -1147,7 +1152,6 @@
         .replaceAll("'","&#039;");
     }
 
-    // Initial render
     renderListings();
   </script>
 </body>
