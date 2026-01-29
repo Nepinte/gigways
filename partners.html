@@ -986,9 +986,9 @@
                   </div>
 
                   <div class="tier-row" role="list" aria-label="Duration pricing tiers">
-                    <div class="tier" role="listitem"><span>1 month</span><b>$550</b></div>
-                    <div class="tier" role="listitem"><span>2 months</span><b>$1000</b></div>
-                    <div class="tier" role="listitem"><span>3 months</span><b>$1,400</b></div>
+                    <div class="tier" role="listitem"><span>1 month</span><b>$600</b></div>
+                    <div class="tier" role="listitem"><span>2 months</span><b>$1100</b></div>
+                    <div class="tier" role="listitem"><span>3 months</span><b>$1,500</b></div>
                     <div class="tier" role="listitem"><span>4+ months</span><b>Negotiable</b></div>
                   </div>
 
@@ -1434,9 +1434,9 @@
         const m = parseInt(months, 10);
         if (!isFinite(m) || m < 1) return { price: 0, negotiable: false, valid: false };
         if (m > 3) return { price: 0, negotiable: true, valid: true };
-        if (m === 1) return { price: 550, negotiable: false, valid: true };
-        if (m === 2) return { price: 1000, negotiable: false, valid: true };
-        return { price: 1400, negotiable: false, valid: true }; // m === 3
+        if (m === 1) return { price: 600, negotiable: false, valid: true };
+        if (m === 2) return { price: 1100, negotiable: false, valid: true };
+        return { price: 1500, negotiable: false, valid: true }; // m === 3
       }
 
       /* ✅ Fleet discounts */
