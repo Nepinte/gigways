@@ -17,19 +17,16 @@
     </script>
 
     <!-- Primary Meta Tags -->
-    <title>Gigways - Driver Tools & Private Trip App | Track Miles, Earnings & Expenses</title>
+    <title>Gigways — Driver Tools + PAL Mode + Community</title>
 
-    <meta
-      name="title"
-      content="Gigways - Driver Tools & Private Trip App | Track Miles, Earnings & Expenses"
-    />
+    <meta name="title" content="Gigways — Driver Tools + PAL Mode + Community" />
     <meta
       name="description"
-      content="All-in-one toolkit for rideshare and delivery drivers. Track mileage, expenses, hours, earnings, and manage private trips. Earn extra with optional car advertising. Free for iOS and Android."
+      content="Driver-first toolkit to track miles, earnings, expenses, and hours — plus invite-only PAL Mode and a community feed for 24-hour posts."
     />
     <meta
       name="keywords"
-      content="driver tools, mileage tracker, rideshare driver app, delivery driver tools, gig worker app, private trips, car advertising, earnings tracker, expense tracker, driver scheduling"
+      content="driver tools, mileage tracker, rideshare driver app, delivery driver tools, gig worker app, private trips, pal mode, community, earnings tracker, expense tracker"
     />
     <meta name="author" content="Gigways LLC" />
     <meta name="robots" content="index, follow" />
@@ -38,21 +35,21 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.gigways.com/" />
-    <meta property="og:title" content="Gigways - Driver Tools & Private Trip App" />
+    <meta property="og:title" content="Gigways — Driver Tools + PAL Mode + Community" />
     <meta
       property="og:description"
-      content="All-in-one toolkit for rideshare and delivery drivers. Track mileage, expenses, earnings, and manage private trips with drivers you trust."
+      content="Track miles, earnings, expenses, and hours — plus invite-only PAL Mode and a community feed for 24-hour posts."
     />
-<meta property="og:image" content="https://www.gigways.com/assets/img/logo.png" />
+    <meta property="og:image" content="https://www.gigways.com/assets/img/logo.png" />
     <meta property="og:site_name" content="Gigways" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://www.gigways.com/" />
-    <meta name="twitter:title" content="Gigways - Driver Tools & Private Trip App" />
+    <meta name="twitter:title" content="Gigways — Driver Tools + PAL Mode + Community" />
     <meta
       name="twitter:description"
-      content="All-in-one toolkit for rideshare and delivery drivers. Track mileage, expenses, earnings, and manage private trips."
+      content="Driver-first toolkit to track miles, earnings, expenses, and hours — plus PAL Mode and a 24-hour community feed."
     />
     <meta name="twitter:image" content="https://www.gigways.com/assets/img/twitter-image.png" />
     <meta name="twitter:site" content="@gigways" />
@@ -70,12 +67,9 @@
     <link rel="apple-touch-icon" href="/assets/img/App.png" />
 
     <!-- ✅ cache-bust so updates always show -->
-    <link rel="stylesheet" href="assets/css/styles.css?v=20260118-pal" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20260129-home-community" />
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
 
     <!-- Preconnect to external domains for performance -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
@@ -139,6 +133,8 @@
         box-shadow: var(--shadow-sm);
         position: relative;
         z-index: 3;
+        flex-wrap: wrap;
+        justify-content: center;
       }
 
       .gw-modeBtn {
@@ -471,18 +467,13 @@
       <section class="home bd-grid" id="home">
         <div class="home__data">
           <h1 class="home__title">
-            Drive smarter and <span class="home__title-color">earn more,</span><br />
-            Track everything with Gigways
+            Drive smarter and <span class="home__title-color">earn more</span><br />
+            with Gigways
           </h1>
 
           <p class="home__description">
-            Gigways is a <strong>driver-first toolkit</strong> with <strong>PAL Mode</strong> built in.
-            Drivers track miles, expenses, hours, and earnings, manage private trips, and can earn extra
-            with optional car ads.
-            <br /><br />
-            <strong>PAL Mode</strong> is invite-only: users add drivers they trust to coordinate
-            <strong>private rides, mobile pick-ups, and parcel drop-offs</strong> — no public matching, no strangers.
-            Cost-sharing is optional between users, and <strong>Gigways does not process payments</strong>.
+            A <strong>driver-first toolkit</strong> to track miles, earnings, expenses, and hours — plus
+            <strong>PAL Mode</strong> for invite-only private trips and a <strong>Community</strong> feed with 24-hour posts.
           </p>
 
           <div class="home__cta">
@@ -528,7 +519,7 @@
       <section class="features section" id="features">
         <h2 class="section-title">Key Features</h2>
         <p class="section-subtitle">
-          Two modes, one app: a driver-first toolkit for tracking and earnings — plus <strong>PAL Mode</strong> for invite-only private trip coordination with people you trust.
+          Three experiences in one app: Driver Mode, PAL Mode, and a Community feed designed for quick updates.
         </p>
 
         <!-- ✅ TOGGLE -->
@@ -557,6 +548,18 @@
             >
               <i class="bx bx-user"></i> PAL MODE
             </button>
+
+            <button
+              class="gw-modeBtn"
+              type="button"
+              role="tab"
+              id="gwTabCommunity"
+              aria-selected="false"
+              aria-controls="gwPanelCommunity"
+              data-gw-target="community"
+            >
+              <i class="bx bx-group"></i> COMMUNITY
+            </button>
           </div>
         </div>
 
@@ -567,13 +570,13 @@
               <div class="gw-card">
                 <div class="gw-icon"><i class="bx bx-line-chart"></i></div>
                 <h3 class="gw-title">All-in-One Tracking</h3>
-                <p class="gw-desc">Track miles, expenses, earnings, and work hours in one simple dashboard — built for real-world driving.</p>
+                <p class="gw-desc">Track miles, expenses, earnings, and work hours in one simple dashboard.</p>
               </div>
 
               <div class="gw-card">
                 <div class="gw-icon"><i class="bx bx-wallet"></i></div>
                 <h3 class="gw-title">Real Profit Insights</h3>
-                <p class="gw-desc">Understand what you truly make after time, miles, and expenses — so you can drive smarter.</p>
+                <p class="gw-desc">Understand what you truly make after time, miles, and expenses.</p>
               </div>
 
               <div class="gw-card">
@@ -585,19 +588,19 @@
               <div class="gw-card">
                 <div class="gw-icon"><i class="bx bx-calendar-check"></i></div>
                 <h3 class="gw-title">Smart Scheduling</h3>
-                <p class="gw-desc">Set reminders for breaks and meals to stay consistent and help prevent burnout.</p>
+                <p class="gw-desc">Set reminders for breaks and meals to help prevent burnout.</p>
               </div>
 
               <div class="gw-card">
                 <div class="gw-icon"><i class="bx bx-car"></i></div>
                 <h3 class="gw-title">Private Trips (Driver Side)</h3>
-                <p class="gw-desc">Manage requests from users you know, coordinate details, and keep everything organized.</p>
+                <p class="gw-desc">Manage requests from people you know and keep trip details organized.</p>
               </div>
 
               <div class="gw-card">
                 <div class="gw-icon"><i class="bx bx-badge-check"></i></div>
                 <h3 class="gw-title">Optional Car Ads</h3>
-                <p class="gw-desc">Earn extra with approved car advertising — fully opt-in and flexible.</p>
+                <p class="gw-desc">Earn extra with approved car advertising — opt-in and flexible.</p>
               </div>
             </div>
           </div>
@@ -608,37 +611,78 @@
               <div class="gw-card">
                 <div class="gw-icon"><i class="bx bx-user-plus"></i></div>
                 <h3 class="gw-title">Add Trusted Drivers</h3>
-                <p class="gw-desc">PAL Mode is invite-only — users add drivers they already know and trust. No public matching, no strangers.</p>
+                <p class="gw-desc">Invite-only: add drivers you know. No public matching, no strangers.</p>
               </div>
 
               <div class="gw-card">
                 <div class="gw-icon"><i class="bx bx-navigation"></i></div>
                 <h3 class="gw-title">Private Ride Coordination</h3>
-                <p class="gw-desc">Coordinate private rides with trusted connections — simple request flow and clear pickup details.</p>
+                <p class="gw-desc">Coordinate private rides with trusted connections — clear pickup details.</p>
               </div>
 
               <div class="gw-card">
                 <div class="gw-icon"><i class="bx bx-package"></i></div>
                 <h3 class="gw-title">Mobile Pick-Up & Parcel Drop-Off</h3>
-                <p class="gw-desc">Request mobile pickup or parcel drop-off with trusted drivers you’ve added — private and organized.</p>
+                <p class="gw-desc">Request pickup or drop-off with drivers you’ve added — private and organized.</p>
               </div>
 
               <div class="gw-card">
                 <div class="gw-icon"><i class="bx bx-chat"></i></div>
                 <h3 class="gw-title">Simple Coordination</h3>
-                <p class="gw-desc">Message and coordinate the basics fast — pickup time, location, and trip notes — all in one place.</p>
+                <p class="gw-desc">Coordinate time, location, and notes — all in one place.</p>
               </div>
 
               <div class="gw-card">
                 <div class="gw-icon"><i class="bx bx-receipt"></i></div>
-                <h3 class="gw-title">Optional Trip Contribution</h3>
-                <p class="gw-desc">Users may optionally contribute toward trip costs, but the agreement is between users — Gigways does not process payments.</p>
+                <h3 class="gw-title">Optional Contribution</h3>
+                <p class="gw-desc">Users may contribute, but Gigways does not process payments.</p>
               </div>
 
               <div class="gw-card">
                 <div class="gw-icon"><i class="bx bx-lock-alt"></i></div>
                 <h3 class="gw-title">Private by Design</h3>
-                <p class="gw-desc">Trips stay private between connected users. Gigways is a coordination toolkit — not a transportation or delivery provider.</p>
+                <p class="gw-desc">Gigways is a coordination toolkit — not a transportation or delivery provider.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ✅ COMMUNITY PANEL (NEW) -->
+          <div class="gw-panel" id="gwPanelCommunity" role="tabpanel" aria-labelledby="gwTabCommunity">
+            <div class="gw-gridWrap">
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-bolt-circle"></i></div>
+                <h3 class="gw-title">24-Hour Posts</h3>
+                <p class="gw-desc">Share quick updates, tips, and local info — posts automatically disappear after 24 hours.</p>
+              </div>
+
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-like"></i></div>
+                <h3 class="gw-title">Likes & Comments</h3>
+                <p class="gw-desc">React and reply to keep it helpful — from strategy to safety to route tips.</p>
+              </div>
+
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-flag"></i></div>
+                <h3 class="gw-title">Report Spam</h3>
+                <p class="gw-desc">See something suspicious? Report posts or comments for review to help keep the feed clean.</p>
+              </div>
+
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-shield"></i></div>
+                <h3 class="gw-title">Anti-Bullying Policy</h3>
+                <p class="gw-desc">We’re against harassment and bullying. Abusive content can be removed and accounts may be restricted.</p>
+              </div>
+
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-user-check"></i></div>
+                <h3 class="gw-title">Built for Drivers & Pals</h3>
+                <p class="gw-desc">A shared space for drivers and PAL users to ask questions, share updates, and support each other.</p>
+              </div>
+
+              <div class="gw-card">
+                <div class="gw-icon"><i class="bx bx-lock-alt"></i></div>
+                <h3 class="gw-title">Privacy-First Sharing</h3>
+                <p class="gw-desc">Share what you want. Avoid posting personal details. Community is meant for general help and updates.</p>
               </div>
             </div>
           </div>
@@ -650,21 +694,34 @@
         <h2 class="section-title">About Us</h2>
         <div class="about__container bd-grid">
           <div class="about__img">
-            <!-- ✅ ONLY FIX: absolute path -->
             <img src="assets/img/about.png" alt="Gigways App Preview" loading="lazy" />
           </div>
 
           <div class="about__content">
             <h2 class="about__subtitle">Created for Drivers</h2>
+
             <p class="about__text">
-              Gigways is built to support independent gig workers — rideshare drivers, delivery drivers, and couriers.
-              Our mission is simple: help you stay organized, reduce stress, and make smarter decisions while you earn.
+              Gigways is built for independent gig workers — rideshare drivers, delivery drivers, and couriers.
+              Track miles, earnings, hours, and expenses in one place so you can understand your real profit and stay organized.
             </p>
+
             <p class="about__text">
-              Track miles, hours, expenses, and earnings in one place so you can see your work clearly and stay in control of your time.
+              <strong>Driver Mode</strong> focuses on tracking, planning, and insights. The Driver Density Map uses aggregated trends to help you plan smarter.
+              You stay in control of permissions and privacy settings.
             </p>
+
             <p class="about__text">
-              Smart Scheduling helps you plan breaks and meals. The Driver Density Map provides aggregated, anonymized insights to help you plan smarter.
+              <strong>PAL Mode</strong> is invite-only coordination with people you trust — private rides, mobile pick-ups, and parcel drop-offs.
+              There’s no public matching and no strangers, and Gigways does not process payments.
+            </p>
+
+            <p class="about__text">
+              <strong>Community</strong> lets drivers and PAL users share quick tips and updates. Posts last <strong>24 hours</strong>,
+              and you can like, comment, or report spam and harassment to help keep the space respectful.
+            </p>
+
+            <p class="about__text">
+              We also offer <strong>Driver Benefits</strong> with optional partner and affiliate deals that may help drivers get better discounts on tools and services.
             </p>
           </div>
         </div>
@@ -673,7 +730,7 @@
       <!-- FAQ -->
       <section class="features section" id="faq">
         <h2 class="section-title">FAQ</h2>
-        <p class="section-subtitle">Quick answers about Driver Mode, PAL Mode, privacy, and how Gigways works.</p>
+        <p class="section-subtitle">Quick answers about Driver Mode, PAL Mode, Community, and privacy.</p>
 
         <div class="faq__container" id="faqList">
           <!-- ITEM 1 -->
@@ -691,8 +748,8 @@
             <div class="faq__panel" id="faqA1" role="region" aria-label="Answer">
               <div class="faq__panelInner">
                 <p class="faq__answer">
-                  No. Gigways does not operate transportation or delivery services. Drivers remain independent, and PAL Mode is for
-                  private coordination with drivers you already know and trust — no public marketplace, no strangers. Gigways does not process payments.
+                  No. Gigways is a toolkit. We don’t operate transportation or delivery services and we don’t match users publicly.
+                  PAL Mode is private coordination with drivers you already know and trust — no marketplace, no strangers. Gigways does not process payments.
                 </p>
               </div>
             </div>
@@ -713,7 +770,7 @@
             <div class="faq__panel" id="faqA2" role="region" aria-label="Answer">
               <div class="faq__panelInner">
                 <p class="faq__answer">
-                  Mileage, expenses, hours, and earnings — so you can understand your real profit and build better driving routines.
+                  Mileage, expenses, hours, and earnings — so you can stay organized and understand your real profit.
                 </p>
               </div>
             </div>
@@ -735,8 +792,7 @@
               <div class="faq__panelInner">
                 <p class="faq__answer">
                   PAL Mode is for coordinating private rides, mobile pick-ups, and parcel drop-offs with drivers you’ve added and trust.
-                  There’s no public matching and no strangers. Users may optionally contribute toward trip costs, but Gigways does not set prices,
-                  collect money, or process payments.
+                  There’s no public matching and no strangers. Users may optionally contribute, but Gigways does not process payments.
                 </p>
               </div>
             </div>
@@ -746,10 +802,10 @@
           <div class="faq__item">
             <button class="faq__button" type="button" aria-expanded="false" aria-controls="faqA4">
               <span class="faq__left">
-                <span class="faq__badge" aria-hidden="true"><i class="bx bx-map-pin"></i></span>
+                <span class="faq__badge" aria-hidden="true"><i class="bx bx-group"></i></span>
                 <span class="faq__qwrap">
-                  <p class="faq__question">What is the Driver Density Map?</p>
-                  <p class="faq__hint">Smarter planning, less wasted time.</p>
+                  <p class="faq__question">How does Community work?</p>
+                  <p class="faq__hint">24-hour posts + respectful space.</p>
                 </span>
               </span>
               <span class="faq__chev" aria-hidden="true"><i class="bx bx-chevron-down"></i></span>
@@ -757,8 +813,8 @@
             <div class="faq__panel" id="faqA4" role="region" aria-label="Answer">
               <div class="faq__panelInner">
                 <p class="faq__answer">
-                  It shows aggregated, anonymized activity trends to help drivers identify hotspots and plan better areas — without exposing
-                  personal routes or individual driver data.
+                  Community is a shared feed where drivers and PAL users can post tips and updates. Posts last 24 hours.
+                  You can like and comment, and you can report spam or harassment so we can review it.
                 </p>
               </div>
             </div>
@@ -779,7 +835,7 @@
             <div class="faq__panel" id="faqA5" role="region" aria-label="Answer">
               <div class="faq__panelInner">
                 <p class="faq__answer">
-                  No. Privacy and independence are core to Gigways. We’re building tools for drivers — not a system that trades personal data.
+                  No. We don’t sell personal data. You control permissions and privacy settings.
                 </p>
               </div>
             </div>
@@ -800,8 +856,7 @@
             <div class="faq__panel" id="faqA6" role="region" aria-label="Answer">
               <div class="faq__panelInner">
                 <p class="faq__answer">
-                  Businesses run local campaigns, and drivers can opt in to display approved ads to earn extra income. Participation is optional,
-                  flexible, and campaign-based.
+                  Businesses run local campaigns, and drivers can opt in to display approved ads to earn extra income. Participation is optional and flexible.
                 </p>
               </div>
             </div>
@@ -815,7 +870,9 @@
       <div class="footer__container">
         <div class="footer__content">
           <h2 class="footer__title">Gigways LLC</h2>
-          <p class="footer__description">Driver-first tools for tracking earnings — plus PAL Mode for private trip coordination with people you trust.</p>
+          <p class="footer__description">
+            Driver-first tools for tracking — PAL Mode for private trips — and Community for 24-hour updates.
+          </p>
         </div>
 
         <div class="footer__content">
@@ -889,12 +946,13 @@
         });
       }
 
-      /* ✅ PAL MODE TOGGLE LOGIC (UNIQUE SELECTORS) */
+      /* ✅ MODE TOGGLE LOGIC (DRIVER / PAL / COMMUNITY) */
       (function () {
         const tabs = Array.from(document.querySelectorAll(".gw-modeBtn"));
         const panels = {
           driver: document.getElementById("gwPanelDriver"),
           pal: document.getElementById("gwPanelPal"),
+          community: document.getElementById("gwPanelCommunity"),
         };
 
         function setActive(mode) {
@@ -959,3 +1017,4 @@
     </script>
   </body>
 </html>
+
