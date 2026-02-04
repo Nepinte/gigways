@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- NO-FLASH / NO-FLICKER PATCH (DEFAULT: DARK) -->
+  <!-- ✅ NO-FLASH / NO-FLICKER PATCH (DEFAULT: DARK) + ✅ ICON SYNC BEFORE PAINT -->
   <script>
     (function () {
       const root = document.documentElement;
@@ -12,7 +12,22 @@
 
       // Default to DARK unless user explicitly saved "light"
       const t = localStorage.getItem("selected-theme");
-      if (t !== "light") root.classList.add("dark-theme");
+      const isDark = (t !== "light");
+      if (isDark) root.classList.add("dark-theme");
+
+      // ✅ Set theme ICON class BEFORE paint (prevents wrong icon flash)
+      // If dark mode is ON, show SUN icon (meaning: click to switch to light)
+      // If light mode is ON, show MOON icon (meaning: click to switch to dark)
+      const setIconEarly = () => {
+        const icon = document.getElementById("themeIcon");
+        if (!icon) return;
+        icon.classList.toggle("bx-sun", isDark);
+        icon.classList.toggle("bx-moon", !isDark);
+      };
+
+      // Try immediately + again on DOM ready (safe)
+      setIconEarly();
+      document.addEventListener("DOMContentLoaded", setIconEarly);
     })();
   </script>
 
@@ -111,6 +126,34 @@
   </script>
 
   <style>
+    /* ✅ no-flash: disable transitions/animations until load */
+    .preload *, .preload *::before, .preload *::after{
+      transition: none !important;
+      animation: none !important;
+    }
+
+    /* ✅ Theme toggle ICON button styling (replaces img only) */
+    .theme-btn{
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+    }
+    html:not(.dark-theme) .theme-btn{
+      border-color: rgba(0,0,0,.14);
+      background: rgba(0,0,0,.04);
+    }
+    .theme-btn i{
+      font-size: 1.35rem;
+      color: var(--second-color);
+    }
+
     html { overflow-y: scroll; }
     .market.section {
       max-width: 100%;
@@ -641,8 +684,11 @@
         </ul>
       </div>
 
+      <!-- ✅ THEME TOGGLE CHANGED FROM IMG -> ICON (everything else same) -->
       <div class="theme">
-        <img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" />
+        <button class="theme-btn" id="themeToggle" type="button" aria-label="Toggle theme">
+          <i class="bx bx-sun" id="themeIcon" aria-hidden="true"></i>
+        </button>
       </div>
 
       <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
@@ -745,12 +791,16 @@
   </footer>
 
   <script>
-    // Remove preload after load (matches your index page behavior)
-    window.addEventListener("load", () => document.documentElement.classList.remove("preload"));
+    // ✅ Remove preload AFTER everything loads (prevents transition flash)
+    window.addEventListener("load", () => {
+      document.documentElement.classList.remove("preload");
+    });
 
+    // Footer year
     const yearEl = document.getElementById("year");
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
+    // Menu toggle
     const navMenu = document.getElementById("nav-menu");
     const navToggle = document.getElementById("nav-toggle");
     if (navToggle && navMenu) navToggle.addEventListener("click", () => navMenu.classList.toggle("show"));
@@ -758,32 +808,38 @@
       a.addEventListener("click", () => navMenu && navMenu.classList.remove("show"))
     );
 
-    const themeButton = document.getElementById("iconMS");
+    // ✅ Theme toggle + ✅ Icon swap (IMG -> ICON)
+    const themeToggle = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
     const root = document.documentElement;
 
-    function setTheme(mode) {
-      if (mode === "dark") root.classList.add("dark-theme");
-      else root.classList.remove("dark-theme");
-      localStorage.setItem("selected-theme", mode);
-    }
-
-    function syncThemeIcon() {
-      if (!themeButton) return;
+    function syncThemeIcon(){
+      if (!themeIcon) return;
       const isDark = root.classList.contains("dark-theme");
-      themeButton.src = isDark ? "assets/img/sun.png" : "assets/img/moon.png";
+      // dark ON -> show SUN, light ON -> show MOON
+      themeIcon.classList.toggle("bx-sun", isDark);
+      themeIcon.classList.toggle("bx-moon", !isDark);
     }
 
-    if (themeButton) {
-      // Make sure icon matches the DEFAULT DARK logic on first paint
+    function setTheme(mode) {
+      const isDark = (mode === "dark");
+      root.classList.toggle("dark-theme", isDark);
+      localStorage.setItem("selected-theme", mode);
       syncThemeIcon();
-
-      themeButton.addEventListener("click", () => {
-        const isDark = root.classList.contains("dark-theme");
-        setTheme(isDark ? "light" : "dark");
-        syncThemeIcon();
-        renderListings();
-      });
     }
+
+    // Sync on load (default dark)
+    (function initTheme(){
+      const t = localStorage.getItem("selected-theme");
+      if (t === "light") setTheme("light");
+      else setTheme("dark");
+    })();
+
+    themeToggle?.addEventListener("click", () => {
+      const isDark = root.classList.contains("dark-theme");
+      setTheme(isDark ? "light" : "dark");
+      renderListings();
+    });
 
     // =========================
     // LISTINGS DATA
@@ -882,8 +938,6 @@
           "assets/img/verizon1.png"
         ]
       },
-
-      // ✅ LAST: Talkpal - AI Language Teacher (your link)
       {
         id: "talkpal-ai-language-teacher",
         category: "tools",
@@ -1161,20 +1215,7 @@
 
     renderListings();
   </script>
+
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
