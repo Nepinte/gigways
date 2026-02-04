@@ -4,15 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- NO-FLASH / NO-FLICKER PATCH (DEFAULT: DARK) -->
+    <!-- ✅ NO-FLASH / NO-FLICKER PATCH (DEFAULT: DARK) + ✅ APPLY THEME TO HTML + BODY -->
     <script>
       (function () {
         const root = document.documentElement;
         root.classList.add("preload");
 
         // Default to DARK unless user explicitly saved "light"
-        const t = localStorage.getItem("selected-theme");
-        if (t !== "light") root.classList.add("dark-theme");
+        const saved = localStorage.getItem("selected-theme");
+        const isDark = saved !== "light";
+
+        // ✅ Apply to <html> immediately (before paint)
+        root.classList.toggle("dark-theme", isDark);
+
+        // ✅ Also apply to <body> once it exists (some CSS targets body.dark-theme)
+        function syncBodyTheme() {
+          if (!document.body) return;
+          document.body.classList.toggle("dark-theme", isDark);
+        }
+        document.addEventListener("DOMContentLoaded", syncBodyTheme);
+
+        // ✅ Set theme icon BEFORE paint when possible (and again when DOM is ready)
+        function setIconEarly() {
+          const icon = document.getElementById("iconMS");
+          if (!icon) return;
+          icon.classList.toggle("bx-sun", isDark);   // dark ON -> sun icon
+          icon.classList.toggle("bx-moon", !isDark); // light ON -> moon icon
+        }
+
+        setIconEarly();
+        document.addEventListener("DOMContentLoaded", setIconEarly);
       })();
     </script>
 
@@ -76,6 +97,14 @@
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 
     <style>
+      /* ✅ no-flash: disable transitions/animations until load */
+      .preload *,
+      .preload *::before,
+      .preload *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+
       /* Toast */
       .toast {
         position: fixed;
@@ -97,6 +126,62 @@
       }
 
       /* =========================================================
+         ✅ CLICK FIXES FOR THEME BUTTON
+      ========================================================= */
+      .bubble-container {
+        pointer-events: none !important;
+      }
+
+      .l-header,
+      .nav {
+        position: relative;
+        z-index: 2000;
+      }
+
+      .theme-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.06);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+
+        position: relative;
+        pointer-events: auto;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+      }
+      html:not(.dark-theme) .theme-btn {
+        border-color: rgba(0, 0, 0, 0.14);
+        background: rgba(0, 0, 0, 0.04);
+      }
+      .theme-btn i {
+        font-size: 1.35rem;
+        color: var(--second-color);
+        pointer-events: none;
+      }
+
+      .theme-btn::before {
+        content: "";
+        position: absolute;
+        inset: -10px;
+        border-radius: 20px;
+      }
+
+      .theme {
+        position: relative;
+        z-index: 9999;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        pointer-events: auto;
+      }
+
+      /* =========================================================
          FEATURES SECTION (UNIQUE NAMES - NO CONFLICTS)
       ========================================================= */
       #features .section-title {
@@ -113,7 +198,6 @@
         padding: 0 1rem;
       }
 
-      /* ✅ NEW UNIQUE TOGGLE CLASSES */
       .gw-modeSwitch {
         max-width: var(--page-max);
         margin: 0 auto 1rem;
@@ -174,7 +258,6 @@
         color: #fff;
       }
 
-      /* ✅ NEW UNIQUE PANEL CLASSES */
       .gw-panel {
         display: none;
         grid-column: 1 / -1;
@@ -192,7 +275,6 @@
         align-items: stretch;
       }
 
-      /* Container grid */
       #features .gw-featuresGrid {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
@@ -203,7 +285,6 @@
         padding: 0 1rem;
       }
 
-      /* ✅ NEW UNIQUE CARD CLASSES */
       #features .gw-card {
         grid-column: span 4;
         padding: 18px 18px 16px;
@@ -454,8 +535,11 @@
           </ul>
         </div>
 
+        <!-- ✅ Theme toggle (icon button) -->
         <div class="theme">
-          <img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" />
+          <button class="theme-btn" id="themeToggle" aria-label="Toggle theme" type="button">
+            <i id="iconMS" class="bx" aria-hidden="true"></i>
+          </button>
         </div>
 
         <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
@@ -502,7 +586,11 @@
           </div>
 
           <div class="home__social">
-            <a href="https://www.facebook.com/profile.php?id=61574801146211" class="home__social-icon" aria-label="Gigways on Facebook">
+            <a
+              href="https://www.facebook.com/profile.php?id=61574801146211"
+              class="home__social-icon"
+              aria-label="Gigways on Facebook"
+            >
               <i class="bx bxl-facebook"></i>
             </a>
             <a href="https://www.youtube.com/@Gigways" class="home__social-icon" aria-label="Gigways on youtube">
@@ -564,7 +652,7 @@
         </div>
 
         <div class="gw-featuresGrid">
-          <!-- ✅ DRIVER PANEL -->
+          <!-- DRIVER PANEL -->
           <div class="gw-panel is-active" id="gwPanelDriver" role="tabpanel" aria-labelledby="gwTabDriver">
             <div class="gw-gridWrap">
               <div class="gw-card">
@@ -605,7 +693,7 @@
             </div>
           </div>
 
-          <!-- ✅ PAL MODE PANEL -->
+          <!-- PAL MODE PANEL -->
           <div class="gw-panel" id="gwPanelPal" role="tabpanel" aria-labelledby="gwTabPal">
             <div class="gw-gridWrap">
               <div class="gw-card">
@@ -646,7 +734,7 @@
             </div>
           </div>
 
-          <!-- ✅ COMMUNITY PANEL (NEW) -->
+          <!-- COMMUNITY PANEL -->
           <div class="gw-panel" id="gwPanelCommunity" role="tabpanel" aria-labelledby="gwTabCommunity">
             <div class="gw-gridWrap">
               <div class="gw-card">
@@ -924,6 +1012,7 @@
 
     <!-- Page helpers -->
     <script>
+      // remove preload after load
       window.addEventListener("load", () => document.documentElement.classList.remove("preload"));
 
       const yearEl = document.getElementById("year");
@@ -946,7 +1035,7 @@
         });
       }
 
-      /* ✅ MODE TOGGLE LOGIC (DRIVER / PAL / COMMUNITY) */
+      /* MODE TOGGLE LOGIC (DRIVER / PAL / COMMUNITY) */
       (function () {
         const tabs = Array.from(document.querySelectorAll(".gw-modeBtn"));
         const panels = {
@@ -1012,6 +1101,37 @@
             item.classList.toggle("is-open", !isOpen);
             btn.setAttribute("aria-expanded", String(!isOpen));
           });
+        });
+      })();
+
+      /* ✅ THEME TOGGLE (FIXED): apply to BOTH <html> and <body> so it works immediately on index.html */
+      (function () {
+        const root = document.documentElement;
+        const toggleBtn = document.getElementById("themeToggle");
+        const icon = document.getElementById("iconMS");
+        if (!toggleBtn || !icon) return;
+
+        function applyTheme(mode) {
+          const dark = mode === "dark";
+          root.classList.toggle("dark-theme", dark);
+          if (document.body) document.body.classList.toggle("dark-theme", dark);
+          localStorage.setItem("selected-theme", dark ? "dark" : "light");
+
+          // Dark ON -> SUN icon, Light ON -> MOON icon
+          icon.classList.toggle("bx-sun", dark);
+          icon.classList.toggle("bx-moon", !dark);
+        }
+
+        // Ensure body has correct class on first paint after DOM
+        document.addEventListener("DOMContentLoaded", () => {
+          const saved = localStorage.getItem("selected-theme");
+          const mode = saved === "light" ? "light" : "dark";
+          applyTheme(mode);
+        });
+
+        toggleBtn.addEventListener("click", () => {
+          const isDarkNow = root.classList.contains("dark-theme") || (document.body && document.body.classList.contains("dark-theme"));
+          applyTheme(isDarkNow ? "light" : "dark");
         });
       })();
     </script>
