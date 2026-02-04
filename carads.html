@@ -4,1350 +4,1765 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- ✅ NO-FLASH: theme class before first paint -->
-  <script>
-    (function () {
-      const root = document.documentElement;
-      root.classList.add("preload");
-      const t = localStorage.getItem("selected-theme"); // "dark" | "light"
-      if (t === "dark") root.classList.add("dark-theme");
-    })();
-  </script>
+    <!-- ✅ NO-FLASH + ✅ THEME SYNC (html + body) before first paint -->
+    <script>
+      (function () {
+        const root = document.documentElement;
+        root.classList.add("preload");
 
-  <!-- ✅ PRIMARY SEO -->
-  <title>Affordable Car Advertising for Businesses | Gigways</title>
+        const saved = localStorage.getItem("selected-theme"); // "dark" | "light" | null
+        const prefersDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  <meta
-    name="description"
-    content="Affordable car advertising campaigns powered by opt-in drivers. Free install, scalable fleets, and city-by-city launches. Get a quote from Gigways."
-  />
+        const theme = saved === "dark" || saved === "light" ? saved : prefersDark ? "dark" : "light";
 
-  <meta
-    name="keywords"
-    content="affordable car advertising, car advertising, vehicle advertising, fleet advertising, mobile advertising, local advertising, out of home advertising, OOH advertising"
-  />
+        // IMPORTANT: apply to both html and body (body may not exist yet; we handle below too)
+        if (theme === "dark") root.classList.add("dark-theme");
 
-  <meta name="author" content="Gigways Team" />
-  <meta name="robots" content="index, follow, max-image-preview:large" />
+        // If body already exists (rare in head, but safe), sync it too
+        if (document.body) {
+          document.body.classList.toggle("dark-theme", theme === "dark");
+        }
+      })();
+    </script>
 
-  <!-- ✅ CANONICAL -->
-  <link rel="canonical" href="https://gigways.com/carads.html" />
+    <!-- ✅ PRIMARY SEO -->
+    <title>Affordable Car Advertising for Businesses | Gigways</title>
 
-  <!-- ✅ FAVICON -->
-  <link rel="icon" href="https://gigways.com/assets/img/App.png" />
+    <meta
+      name="description"
+      content="Affordable car advertising campaigns powered by opt-in drivers. Free install, scalable fleets, and city-by-city launches. Get a quote from Gigways."
+    />
 
-  <!-- ✅ STYLES -->
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <link
-    href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
-    rel="stylesheet"
-  />
+    <meta
+      name="keywords"
+      content="affordable car advertising, car advertising, vehicle advertising, fleet advertising, mobile advertising, local advertising, out of home advertising, OOH advertising"
+    />
 
-  <!-- ✅ PERFORMANCE HINTS -->
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+    <meta name="author" content="Gigways Team" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
-  <!-- ✅ THEME COLOR -->
-  <meta name="theme-color" content="#121212" />
+    <!-- ✅ CANONICAL -->
+    <link rel="canonical" href="https://gigways.com/carads.html" />
 
-  <!-- ✅ OPEN GRAPH / FACEBOOK -->
-  <meta property="og:title" content="Affordable Car Advertising for Businesses | Gigways" />
-  <meta
-    property="og:description"
-    content="Affordable vehicle advertising campaigns with opt-in drivers, free install, and scalable fleets."
-  />
-  <meta property="og:url" content="https://gigways.com/carads.html" />
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Gigways" />
+    <!-- ✅ FAVICON -->
+    <link rel="icon" href="https://gigways.com/assets/img/App.png" />
 
-  <!-- ✅ Social preview image (car ads image) -->
-  <meta property="og:image" content="https://gigways.com/assets/img/about.png" />
-  <meta property="og:image:secure_url" content="https://gigways.com/assets/img/about.png" />
-  <meta property="og:image:alt" content="Affordable car advertising example on a vehicle" />
+    <!-- ✅ STYLES -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- ✅ TWITTER -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Affordable Car Advertising for Businesses | Gigways" />
-  <meta
-    name="twitter:description"
-    content="Affordable car advertising campaigns powered by opt-in drivers. Free install and scalable fleet launches."
-  />
-  <meta name="twitter:image" content="https://gigways.com/assets/img/about.png" />
-  <meta name="twitter:image:alt" content="Affordable car advertising example on a vehicle" />
+    <!-- ✅ PERFORMANCE HINTS -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 
-  <!-- ✅ STRUCTURED DATA (Organization + WebPage + Service + Image) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@graph":[
+    <!-- ✅ THEME COLOR -->
+    <meta name="theme-color" content="#121212" />
+
+    <!-- ✅ OPEN GRAPH / FACEBOOK -->
+    <meta property="og:title" content="Affordable Car Advertising for Businesses | Gigways" />
+    <meta
+      property="og:description"
+      content="Affordable vehicle advertising campaigns with opt-in drivers, free install, and scalable fleets."
+    />
+    <meta property="og:url" content="https://gigways.com/carads.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Gigways" />
+
+    <!-- ✅ Social preview image (car ads image) -->
+    <meta property="og:image" content="https://gigways.com/assets/img/about.png" />
+    <meta property="og:image:secure_url" content="https://gigways.com/assets/img/about.png" />
+    <meta property="og:image:alt" content="Affordable car advertising example on a vehicle" />
+
+    <!-- ✅ TWITTER -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Affordable Car Advertising for Businesses | Gigways" />
+    <meta
+      name="twitter:description"
+      content="Affordable car advertising campaigns powered by opt-in drivers. Free install and scalable fleet launches."
+    />
+    <meta name="twitter:image" content="https://gigways.com/assets/img/about.png" />
+    <meta name="twitter:image:alt" content="Affordable car advertising example on a vehicle" />
+
+    <!-- ✅ STRUCTURED DATA (Organization + WebPage + Service + Image) -->
+    <script type="application/ld+json">
       {
-        "@type":"Organization",
-        "name":"Gigways",
-        "url":"https://gigways.com",
-        "logo":"https://gigways.com/assets/img/App.png",
-        "sameAs":[
-          "https://www.facebook.com/profile.php?id=61574801146211"
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "Gigways",
+            "url": "https://gigways.com",
+            "logo": "https://gigways.com/assets/img/App.png",
+            "sameAs": [
+              "https://www.facebook.com/profile.php?id=61574801146211"
+            ]
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://gigways.com/carads.html",
+            "url": "https://gigways.com/carads.html",
+            "name": "Affordable Car Advertising for Businesses | Gigways",
+            "description": "Affordable car advertising campaigns powered by opt-in drivers. Free install, scalable fleets, and city-by-city launches.",
+            "primaryImageOfPage": {
+              "@type": "ImageObject",
+              "contentUrl": "https://gigways.com/assets/img/about.png"
+            }
+          },
+          {
+            "@type": "Service",
+            "name": "Car Advertising Campaigns",
+            "provider": { "@type": "Organization", "name": "Gigways" },
+            "serviceType": "Vehicle advertising campaigns",
+            "areaServed": "US",
+            "description": "Car advertising campaigns powered by opt-in drivers. We support campaign setup, design, installation, and scalable fleet rollouts.",
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "category": "Advertising",
+              "description": "Per-car campaign pricing: 1 month $500/car, 2 months $900/car, 3 months $1,200/car. Fleet discounts: 1–5 cars 0%, 6–10 cars 5%, 11–15 cars 7%. 16+ cars and 4+ months are negotiable."
+            }
+          },
+          {
+            "@type": "ImageObject",
+            "name": "Car advertising preview image",
+            "contentUrl": "https://gigways.com/assets/img/about.png",
+            "url": "https://gigways.com/assets/img/about.png"
+          }
         ]
-      },
-      {
-        "@type":"WebPage",
-        "@id":"https://gigways.com/carads.html",
-        "url":"https://gigways.com/carads.html",
-        "name":"Affordable Car Advertising for Businesses | Gigways",
-        "description":"Affordable car advertising campaigns powered by opt-in drivers. Free install, scalable fleets, and city-by-city launches.",
-        "primaryImageOfPage":{
-          "@type":"ImageObject",
-          "contentUrl":"https://gigways.com/assets/img/about.png"
-        }
-      },
-      {
-        "@type":"Service",
-        "name":"Car Advertising Campaigns",
-        "provider": { "@type":"Organization", "name":"Gigways" },
-        "serviceType":"Vehicle advertising campaigns",
-        "areaServed":"US",
-        "description":"Car advertising campaigns powered by opt-in drivers. We support campaign setup, design, installation, and scalable fleet rollouts.",
-        "offers":{
-          "@type":"Offer",
-          "priceCurrency":"USD",
-          "availability":"https://schema.org/InStock",
-          "category":"Advertising",
-          "description":"Per-car campaign pricing: 1 month $500/car, 2 months $900/car, 3 months $1,200/car. Fleet discounts: 1–5 cars 0%, 6–10 cars 5%, 11–15 cars 7%. 16+ cars and 4+ months are negotiable."
-        }
-      },
-      {
-        "@type":"ImageObject",
-        "name":"Car advertising preview image",
-        "contentUrl":"https://gigways.com/assets/img/about.png",
-        "url":"https://gigways.com/assets/img/about.png"
       }
-    ]
-  }
-  </script>
+    </script>
 
-  <!-- ✅ FAQ SCHEMA -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    <!-- ✅ FAQ SCHEMA -->
+    <script type="application/ld+json">
       {
-        "@type": "Question",
-        "name": "How does pricing work?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Pricing is based on campaign duration, number of vehicles, market coverage, and rollout logistics. Estimates are preliminary. Final pricing is confirmed after your campaign brief is reviewed."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How do you ensure driver reliability and brand safety?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Drivers are opt-in and managed through our system. Drivers follow placement guidelines, complete required tasks, and submit proof throughout the campaign. Non-compliant drivers are removed."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you provide proof or reporting?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Drivers can submit installation photos and weekly photo check-ins throughout the campaign depending on market logistics and rollout requirements."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What kind of tracking is included?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We track driver participation and completion of campaign tasks. For advertiser performance, we recommend QR codes, landing pages, promo codes, or call tracking."
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How does pricing work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pricing is based on campaign duration, number of vehicles, market coverage, and rollout logistics. Estimates are preliminary. Final pricing is confirmed after your campaign brief is reviewed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you ensure driver reliability and brand safety?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Drivers are opt-in and managed through our system. Drivers follow placement guidelines, complete required tasks, and submit proof throughout the campaign. Non-compliant drivers are removed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you provide proof or reporting?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Drivers can submit installation photos and weekly photo check-ins throughout the campaign depending on market logistics and rollout requirements."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What kind of tracking is included?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We track driver participation and completion of campaign tasks. For advertiser performance, we recommend QR codes, landing pages, promo codes, or call tracking."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <style>
+      /* =========================================================
+         Clean / Professional polish layer for carads page
+         ========================================================= */
+
+      /* No flash / no animation during first paint */
+      .preload *,
+      .preload *::before,
+      .preload *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      /* =========================================================
+         ✅ CLICK FIXES FOR THEME BUTTON
+         ========================================================= */
+      .bubble-container {
+        pointer-events: none !important;
+      }
+
+      .l-header,
+      .nav {
+        position: relative;
+        z-index: 2000;
+      }
+
+      .theme-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.06);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        padding: 0;
+        line-height: 1;
+
+        position: relative;
+        pointer-events: auto;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      html:not(.dark-theme) .theme-btn {
+        border-color: rgba(0, 0, 0, 0.14);
+        background: rgba(0, 0, 0, 0.04);
+      }
+
+      .theme-btn i {
+        font-size: 1.35rem;
+        color: var(--second-color);
+        pointer-events: none;
+      }
+
+      .theme-btn::before {
+        content: "";
+        position: absolute;
+        inset: -10px;
+        border-radius: 20px;
+      }
+
+      .theme {
+        position: relative;
+        z-index: 9999;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        pointer-events: auto;
+      }
+
+      /* Theme tokens */
+      :root {
+        --gw-radius: 18px;
+
+        --gw-text: rgba(255, 255, 255, 0.92);
+        --gw-sub: rgba(255, 255, 255, 0.78);
+
+        --gw-card: rgba(255, 255, 255, 0.06);
+        --gw-border: rgba(255, 255, 255, 0.12);
+        --gw-panel: rgba(0, 0, 0, 0.10);
+
+        --gw-accent: rgba(216, 198, 175, 0.95);
+        --gw-accentText: #121212;
+
+        --gw-shadow: rgba(0, 0, 0, 0.18);
+
+        --page-text: var(--gw-text);
+        --page-sub: var(--gw-sub);
+
+        /* FAQ */
+        --faq-bg: rgba(255, 255, 255, 0.05);
+        --faq-border: rgba(255, 255, 255, 0.12);
+        --faq-panel: rgba(0, 0, 0, 0.10);
+        --faq-chip: rgba(255, 255, 255, 0.04);
+        --faq-shadow: rgba(0, 0, 0, 0.12);
+        --faq-text: var(--gw-text);
+        --faq-sub: var(--gw-sub);
+      }
+
+      html:not(.dark-theme) {
+        --gw-text: #121212;
+        --gw-sub: rgba(18, 18, 18, 0.78);
+
+        --gw-card: rgba(0, 0, 0, 0.03);
+        --gw-border: rgba(0, 0, 0, 0.12);
+        --gw-panel: rgba(0, 0, 0, 0.03);
+
+        --page-text: var(--gw-text);
+        --page-sub: var(--gw-sub);
+
+        --faq-bg: rgba(0, 0, 0, 0.03);
+        --faq-border: rgba(0, 0, 0, 0.12);
+        --faq-panel: rgba(0, 0, 0, 0.03);
+        --faq-chip: rgba(255, 255, 255, 0.85);
+        --faq-shadow: rgba(0, 0, 0, 0.10);
+        --faq-text: #121212;
+        --faq-sub: rgba(18, 18, 18, 0.78);
+      }
+
+      /* Layout helpers */
+      .container {
+        max-width: 1120px;
+      }
+      body,
+      main,
+      .section,
+      .container {
+        color: var(--page-text);
+      }
+      .section-title {
+        color: var(--page-text) !important;
+      }
+      .section-subtitle,
+      .small-note,
+      .hint {
+        color: var(--page-sub) !important;
+      }
+
+      /* Focus */
+      a:focus-visible,
+      button:focus-visible,
+      summary:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid rgba(216, 198, 175, 0.65);
+        outline-offset: 2px;
+        border-radius: 12px;
+      }
+
+      /* =========================================================
+         HERO
+         ========================================================= */
+      .hero-card {
+        border-radius: var(--gw-radius);
+        border: 1px solid var(--gw-border);
+        background: var(--gw-card);
+        padding: 1.1rem;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 12px 34px var(--gw-shadow);
+      }
+      .hero-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .hero-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.65rem;
+        border-radius: 999px;
+        border: 1px solid rgba(216, 198, 175, 0.55);
+        background: rgba(216, 198, 175, 0.16);
+        font-weight: 900;
+        font-size: 0.86rem;
+        white-space: nowrap;
+        color: var(--gw-text);
+      }
+      .hero-lead {
+        font-size: 1.05rem;
+        line-height: 1.55;
+        color: var(--gw-text);
+        margin: 0.65rem 0 0;
+      }
+
+      /* Trust strip */
+      .trust-strip {
+        margin-top: 0.9rem;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.6rem;
+      }
+      @media (max-width: 980px) {
+        .trust-strip {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
       }
-    ]
-  }
-  </script>
+      .trust-chip {
+        border-radius: 14px;
+        border: 1px solid var(--gw-border);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 0.75rem 0.8rem;
+        display: flex;
+        gap: 0.65rem;
+        align-items: flex-start;
+        color: var(--gw-text);
+      }
+      .trust-chip i {
+        font-size: 1.2rem;
+        margin-top: 0.05rem;
+        opacity: 0.95;
+      }
+      .trust-chip b {
+        display: block;
+        font-size: 0.95rem;
+        color: var(--gw-text);
+      }
+      .trust-chip span {
+        display: block;
+        font-size: 0.88rem;
+        color: var(--gw-sub);
+        line-height: 1.3;
+        margin-top: 0.15rem;
+      }
 
-  <style>
-    /* =========================================================
-       Clean / Professional polish layer for carads page
-       ========================================================= */
+      /* CTAs */
+      .cta-row {
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.7rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .btn-solid,
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        border-radius: 14px;
+        padding: 0.85rem 1rem;
+        font-weight: 950;
+        text-decoration: none;
+        transition: transform 0.08s ease, opacity 0.15s ease;
+        will-change: transform;
+      }
+      .btn-solid {
+        border: 1px solid rgba(216, 198, 175, 0.75);
+        background: var(--gw-accent);
+        color: var(--gw-accentText);
+      }
+      .btn-ghost {
+        border: 1px solid var(--gw-border);
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--gw-text);
+        font-weight: 900;
+      }
+      .btn-solid:hover,
+      .btn-ghost:hover {
+        transform: translateY(-1px);
+        opacity: 0.95;
+      }
+      .btn-solid,
+      .btn-solid:hover,
+      .btn-solid:focus,
+      .btn-solid:active {
+        color: var(--gw-accentText) !important;
+        text-decoration: none !important;
+      }
+      .btn-ghost,
+      .btn-ghost:hover,
+      .btn-ghost:focus,
+      .btn-ghost:active {
+        color: var(--gw-text) !important;
+        text-decoration: none !important;
+      }
 
-    /* No flash / no animation during first paint */
-    .preload *, .preload *::before, .preload *::after {
-      transition: none !important;
-      animation: none !important;
-    }
+      /* Bullets */
+      .hero-bullets {
+        margin-top: 1rem;
+        display: grid;
+        gap: 0.65rem;
+      }
+      .hero-pill {
+        border-radius: 16px;
+        border: 1px solid var(--gw-border);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 0.85rem 0.9rem;
+        color: var(--gw-text);
+        display: flex;
+        gap: 0.7rem;
+        align-items: flex-start;
+      }
+      .hero-pill h3 {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--gw-text);
+      }
+      .hero-pill p {
+        margin: 0.25rem 0 0;
+        color: var(--gw-sub);
+        line-height: 1.45;
+      }
+      .hero-pill i {
+        font-size: 1.35rem;
+        margin-top: 0.05rem;
+        opacity: 0.95;
+      }
 
-    /* Theme tokens */
-    :root{
-      --gw-radius: 18px;
+      /* =========================================================
+         CAR ADS (NEW SECTION)
+         ========================================================= */
+      #car-ads .section-title {
+        margin-bottom: 0.35rem;
+      }
+      .car-ads__grid {
+        align-items: center;
+        gap: 1.1rem;
+      }
+      #car-ads .about__content {
+        border-radius: var(--gw-radius);
+        border: 1px solid var(--gw-border);
+        background: var(--gw-card);
+        box-shadow: 0 12px 34px var(--gw-shadow);
+        padding: 1.1rem;
+        backdrop-filter: blur(8px);
+      }
+      #car-ads .about__subtitle {
+        margin-top: 0;
+        color: var(--page-text);
+        letter-spacing: 0.2px;
+      }
+      #car-ads .about__text {
+        color: var(--page-sub);
+        line-height: 1.65;
+        margin: 0.65rem 0 0;
+      }
 
-      --gw-text: rgba(255,255,255,.92);
-      --gw-sub: rgba(255,255,255,.78);
+      .gallery-card {
+        border-radius: var(--gw-radius);
+        border: 1px solid var(--gw-border);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.045)
+        );
+        box-shadow: 0 18px 46px var(--gw-shadow);
+        overflow: hidden;
+        position: relative;
+      }
+      .gallery-card::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        background: radial-gradient(
+            600px 220px at 20% 20%,
+            rgba(216, 198, 175, 0.2),
+            transparent 60%
+          ),
+          radial-gradient(
+            520px 240px at 80% 30%,
+            rgba(255, 255, 255, 0.08),
+            transparent 60%
+          );
+        pointer-events: none;
+        opacity: 0.9;
+      }
+      .gallery-stage {
+        position: relative;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.08);
+      }
+      html:not(.dark-theme) .gallery-stage {
+        background: rgba(0, 0, 0, 0.03);
+      }
+      .gallery-stage img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 14px;
+        border: 1px solid var(--gw-border);
+        background: rgba(0, 0, 0, 0.10);
+        box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+      }
+      .gallery-cap {
+        position: absolute;
+        left: 1rem;
+        bottom: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        border-radius: 999px;
+        padding: 0.35rem 0.6rem;
+        border: 1px solid rgba(216, 198, 175, 0.35);
+        background: rgba(216, 198, 175, 0.12);
+        color: var(--gw-text);
+        font-weight: 900;
+        font-size: 0.82rem;
+        backdrop-filter: blur(8px);
+      }
 
-      --gw-card: rgba(255,255,255,.06);
-      --gw-border: rgba(255,255,255,.12);
-      --gw-panel: rgba(0,0,0,.10);
+      /* =========================================================
+         Pricing Aside / Estimate
+         ========================================================= */
+      .pricing-aside {
+        position: sticky;
+        top: 92px;
+        align-self: start;
+      }
+      @media (max-width: 980px) {
+        .pricing-aside {
+          position: static;
+          top: auto;
+        }
+      }
 
-      --gw-accent: rgba(216,198,175,.95);
-      --gw-accentText: #121212;
+      .pricing-aside__card {
+        border-radius: 20px;
+        border: 1px solid var(--gw-border);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.045)
+        );
+        padding: 1.05rem;
+        box-shadow: 0 18px 46px var(--gw-shadow);
+        color: var(--gw-text);
+      }
+      .pricing-aside__title {
+        color: var(--gw-text);
+        margin: 0;
+        font-size: 1.05rem;
+        letter-spacing: 0.2px;
+      }
+      .pricing-aside__sub {
+        opacity: 0.9;
+        color: var(--gw-sub);
+        margin: 0.35rem 0 0;
+        font-size: 0.92rem;
+        line-height: 1.45;
+      }
 
-      --gw-shadow: rgba(0,0,0,.18);
+      .estimate-price {
+        display: block !important;
+        font-size: 1.55rem;
+        font-weight: 1000;
+        color: var(--third-color);
+        letter-spacing: 0.2px;
+      }
+      #stickySummary .estimate-price {
+        display: inline-block !important;
+        font-weight: 1000;
+        color: var(--third-color);
+      }
 
-      --page-text: var(--gw-text);
-      --page-sub: var(--gw-sub);
+      /* Custom months */
+      .custom-plan {
+        margin-top: 0.9rem;
+        border-radius: 18px;
+        border: 1px solid var(--gw-border);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 0.95rem;
+      }
+      .cp-title {
+        font-weight: 1000;
+        color: var(--gw-text);
+        font-size: 1rem;
+        margin: 0;
+      }
+      .cp-sub {
+        margin-top: 0.2rem;
+        color: var(--gw-sub);
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      .cp-row {
+        margin-top: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.75rem 0.8rem;
+        border-radius: 16px;
+        border: 1px solid var(--gw-border);
+        background: rgba(0, 0, 0, 0.08);
+      }
+      html:not(.dark-theme) .cp-row {
+        background: rgba(0, 0, 0, 0.03);
+      }
+      .cp-row span {
+        font-weight: 950;
+        color: var(--gw-sub);
+        font-size: 0.9rem;
+      }
+      .cp-input {
+        width: 110px;
+        border-radius: 12px;
+        border: 1px solid var(--gw-border);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--gw-text);
+        padding: 0.5rem 0.6rem;
+        font-weight: 1000;
+      }
+      html:not(.dark-theme) .cp-input {
+        background: rgba(255, 255, 255, 0.85);
+        color: #121212;
+        border-color: rgba(0, 0, 0, 0.18);
+      }
 
-      /* FAQ */
-      --faq-bg: rgba(255,255,255,.05);
-      --faq-border: rgba(255,255,255,.12);
-      --faq-panel: rgba(0,0,0,.10);
-      --faq-chip: rgba(255,255,255,.04);
-      --faq-shadow: rgba(0,0,0,.12);
-      --faq-text: var(--gw-text);
-      --faq-sub: var(--gw-sub);
-    }
+      /* Pricing block */
+      .pricing-block {
+        margin-top: 0.75rem;
+        border-radius: 18px;
+        border: 1px solid var(--gw-border);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 0.95rem;
+      }
+      .pb-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.8rem;
+        margin-bottom: 0.85rem;
+      }
+      .pb-title {
+        display: flex;
+        gap: 0.7rem;
+        align-items: flex-start;
+      }
+      .pb-title i {
+        font-size: 1.15rem;
+        opacity: 0.95;
+        margin-top: 0.1rem;
+      }
+      .pb-title b {
+        display: block;
+        font-size: 0.98rem;
+        color: var(--gw-text);
+      }
+      .pb-sub {
+        font-size: 0.88rem;
+        color: var(--gw-sub);
+        margin-top: 0.18rem;
+        line-height: 1.35;
+      }
+      .pb-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        border-radius: 999px;
+        padding: 0.35rem 0.6rem;
+        border: 1px solid rgba(216, 198, 175, 0.35);
+        background: rgba(216, 198, 175, 0.12);
+        color: var(--gw-text);
+        font-weight: 900;
+        font-size: 0.82rem;
+        white-space: nowrap;
+      }
+      .pb-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.65rem;
+      }
+      .pb-card {
+        border-radius: 16px;
+        border: 1px solid var(--gw-border);
+        background: rgba(255, 255, 255, 0.04);
+        padding: 0.8rem 0.85rem;
+      }
+      .pb-card-top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .pb-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-weight: 950;
+        font-size: 0.86rem;
+        color: var(--gw-text);
+        opacity: 0.95;
+      }
+      .pb-value {
+        font-weight: 1000;
+        font-size: 1.05rem;
+        color: var(--gw-text);
+        letter-spacing: 0.2px;
+      }
+      .pb-unit {
+        font-size: 0.85rem;
+        font-weight: 900;
+        color: var(--gw-sub);
+        margin-left: 0.15rem;
+      }
+      .pb-muted {
+        margin-top: 0.35rem;
+        font-size: 0.88rem;
+        color: var(--gw-sub);
+        line-height: 1.4;
+      }
+      .tier-row {
+        margin-top: 0.65rem;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.55rem;
+      }
+      .tier {
+        border-radius: 14px;
+        border: 1px solid var(--gw-border);
+        background: rgba(0, 0, 0, 0.08);
+        padding: 0.6rem 0.65rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.6rem;
+      }
+      html:not(.dark-theme) .tier {
+        background: rgba(0, 0, 0, 0.03);
+      }
+      .tier span {
+        font-size: 0.88rem;
+        font-weight: 900;
+        color: var(--gw-sub);
+      }
+      .tier b {
+        font-size: 0.95rem;
+        font-weight: 1000;
+        color: var(--gw-text);
+        letter-spacing: 0.2px;
+      }
 
-    html:not(.dark-theme){
-      --gw-text: #121212;
-      --gw-sub: rgba(18,18,18,.78);
+      /* Estimate banner */
+      .estimate-banner {
+        border-radius: 18px;
+        border: 1px solid var(--gw-border);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.05),
+          rgba(255, 255, 255, 0.035)
+        );
+        padding: 0.95rem;
+        color: var(--gw-text);
+        margin-top: 0.9rem;
+      }
+      .est-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        margin-bottom: 0.65rem;
+      }
+      .est-title {
+        font-weight: 1000;
+        letter-spacing: 0.2px;
+        color: var(--gw-text);
+        font-size: 0.95rem;
+      }
+      .est-sub {
+        margin-top: 0.18rem;
+        color: var(--gw-sub);
+        font-size: 0.88rem;
+        line-height: 1.35;
+      }
+      .est-total {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.35rem;
+      }
+      .est-pill {
+        border-radius: 999px;
+        padding: 0.28rem 0.55rem;
+        font-size: 0.78rem;
+        font-weight: 950;
+        border: 1px solid var(--gw-border);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--gw-sub);
+        white-space: nowrap;
+      }
+      .est-body {
+        border-radius: 16px;
+        border: 1px solid var(--gw-border);
+        background: rgba(0, 0, 0, 0.08);
+        padding: 0.75rem 0.8rem;
+        color: var(--gw-sub);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+      html:not(.dark-theme) .est-body {
+        background: rgba(0, 0, 0, 0.03);
+      }
 
-      --gw-card: rgba(0,0,0,.03);
-      --gw-border: rgba(0,0,0,.12);
-      --gw-panel: rgba(0,0,0,.03);
+      /* =========================================================
+         Modal
+         ========================================================= */
+      .gw-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.62);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1.1rem;
+        z-index: 9999;
+      }
+      .gw-modal.open {
+        display: flex;
+      }
+      .gw-modal__dialog {
+        width: min(920px, 100%);
+        border-radius: 18px;
+        border: 1px solid var(--gw-border);
+        background: rgba(20, 20, 20, 0.72);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+      }
+      html:not(.dark-theme) .gw-modal__dialog {
+        background: rgba(255, 255, 255, 0.92);
+      }
+      .gw-modal__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.8rem 0.9rem;
+        border-bottom: 1px solid var(--gw-border);
+      }
+      .gw-modal__title {
+        font-weight: 1000;
+        color: var(--gw-text);
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+      }
+      html:not(.dark-theme) .gw-modal__title {
+        color: #121212;
+      }
+      .gw-modal__close {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        border: 1px solid var(--gw-border);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--gw-text);
+        font-size: 1.4rem;
+        line-height: 1;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      html:not(.dark-theme) .gw-modal__close {
+        background: rgba(0, 0, 0, 0.04);
+        color: #121212;
+      }
+      .gw-modal__body {
+        padding: 0.9rem;
+        background: rgba(0, 0, 0, 0.10);
+      }
+      html:not(.dark-theme) .gw-modal__body {
+        background: rgba(0, 0, 0, 0.03);
+      }
+      .gw-modal__img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 14px;
+        border: 1px solid var(--gw-border);
+        background: rgba(0, 0, 0, 0.12);
+        max-height: 70vh;
+        object-fit: contain;
+      }
+      .gw-modal__cap {
+        margin-top: 0.7rem;
+        color: var(--gw-sub);
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      html:not(.dark-theme) .gw-modal__cap {
+        color: rgba(18, 18, 18, 0.78);
+      }
 
-      --page-text: var(--gw-text);
-      --page-sub: var(--gw-sub);
+      /* =========================================================
+         FAQ
+         ========================================================= */
+      .faq-wrap {
+        margin-top: 0.9rem;
+        border-radius: var(--gw-radius);
+        border: 1px solid var(--faq-border);
+        background: var(--faq-bg);
+        overflow: hidden;
+        box-shadow: 0 12px 34px var(--faq-shadow);
+      }
+      .faq-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 0;
+      }
+      @media (max-width: 980px) {
+        .faq-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .faq-left {
+        padding: 1rem;
+        border-right: 1px solid var(--faq-border);
+      }
+      @media (max-width: 980px) {
+        .faq-left {
+          border-right: none;
+          border-bottom: 1px solid var(--faq-border);
+        }
+      }
+      .faq-right {
+        padding: 1rem;
+        background: var(--faq-panel);
+      }
 
-      --faq-bg: rgba(0,0,0,.03);
-      --faq-border: rgba(0,0,0,.12);
-      --faq-panel: rgba(0,0,0,.03);
-      --faq-chip: rgba(255,255,255,.85);
-      --faq-shadow: rgba(0,0,0,.10);
-      --faq-text: #121212;
-      --faq-sub: rgba(18,18,18,.78);
-    }
+      .faq-item {
+        border-radius: 16px;
+        border: 1px solid var(--faq-border);
+        background: var(--faq-chip);
+        overflow: hidden;
+        margin-bottom: 0.65rem;
+      }
+      .faq-item:last-child {
+        margin-bottom: 0;
+      }
+      .faq-item summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 0.85rem 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.8rem;
+        font-weight: 950;
+        color: var(--faq-text);
+        user-select: none;
+      }
+      .faq-item summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq-q {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.65rem;
+        line-height: 1.2;
+      }
+      .faq-q i {
+        font-size: 1.15rem;
+        margin-top: 0.05rem;
+        opacity: 0.95;
+      }
+      .faq-chevron {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        border: 1px solid var(--faq-border);
+        background: var(--faq-chip);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        transition: transform 0.15s ease;
+        color: var(--faq-text);
+      }
+      details[open] .faq-chevron {
+        transform: rotate(180deg);
+      }
+      .faq-a {
+        padding: 0 0.9rem 0.9rem;
+        color: var(--faq-sub);
+        line-height: 1.6;
+      }
+      .faq-a p {
+        margin: 0;
+      }
 
-    /* Layout helpers */
-    .container{ max-width: 1120px; }
-    body, main, .section, .container{ color: var(--page-text); }
-    .section-title{ color: var(--page-text) !important; }
-    .section-subtitle, .small-note, .hint { color: var(--page-sub) !important; }
+      .faq-sidecard {
+        border-radius: 16px;
+        border: 1px solid var(--faq-border);
+        background: var(--faq-chip);
+        padding: 0.9rem;
+        color: var(--faq-text);
+      }
+      .faq-sidecard h3 {
+        margin: 0;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--faq-text);
+      }
+      .faq-sidecard p {
+        margin: 0.45rem 0 0;
+        color: var(--faq-sub);
+        line-height: 1.5;
+      }
+      .faq-sidecard .mini {
+        margin-top: 0.75rem;
+        display: grid;
+        gap: 0.55rem;
+      }
+      .faq-mini {
+        border-radius: 14px;
+        border: 1px solid var(--faq-border);
+        background: var(--faq-panel);
+        padding: 0.75rem 0.8rem;
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+        color: var(--faq-text);
+      }
+      .faq-mini i {
+        font-size: 1.1rem;
+        margin-top: 0.05rem;
+        opacity: 0.95;
+      }
+      .faq-mini b {
+        display: block;
+        font-size: 0.92rem;
+        color: var(--faq-text);
+      }
+      .faq-mini span {
+        display: block;
+        margin-top: 0.15rem;
+        font-size: 0.88rem;
+        color: var(--faq-sub);
+        line-height: 1.3;
+      }
+    </style>
+  </head>
 
-    /* Focus */
-    a:focus-visible, button:focus-visible, summary:focus-visible,
-    input:focus-visible, textarea:focus-visible{
-      outline: 3px solid rgba(216,198,175,.65);
-      outline-offset: 2px;
-      border-radius: 12px;
-    }
+  <body>
+    <div class="bubble-container"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    /* =========================================================
-       HERO
-       ========================================================= */
-    .hero-card{
-      border-radius: var(--gw-radius);
-      border: 1px solid var(--gw-border);
-      background: var(--gw-card);
-      padding: 1.1rem;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 12px 34px var(--gw-shadow);
-    }
-    .hero-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:1rem;
-      flex-wrap:wrap;
-    }
-    .hero-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:.5rem;
-      padding:.4rem .65rem;
-      border-radius: 999px;
-      border: 1px solid rgba(216,198,175,.55);
-      background: rgba(216,198,175,.16);
-      font-weight: 900;
-      font-size:.86rem;
-      white-space: nowrap;
-      color: var(--gw-text);
-    }
-    .hero-lead{
-      font-size: 1.05rem;
-      line-height: 1.55;
-      color: var(--gw-text);
-      margin: .65rem 0 0;
-    }
+    <!-- HEADER -->
+    <header class="l-header">
+      <nav class="nav bd-grid">
+        <div><a href="index.html" class="nav__logo">Gigways</a></div>
 
-    /* Trust strip */
-    .trust-strip{
-      margin-top: .9rem;
-      display:grid;
-      grid-template-columns: repeat(4, minmax(0,1fr));
-      gap: .6rem;
-    }
-    @media (max-width: 980px){
-      .trust-strip{ grid-template-columns: repeat(2, minmax(0,1fr)); }
-    }
-    .trust-chip{
-      border-radius: 14px;
-      border: 1px solid var(--gw-border);
-      background: rgba(255,255,255,.04);
-      padding: .75rem .8rem;
-      display:flex;
-      gap:.65rem;
-      align-items:flex-start;
-      color: var(--gw-text);
-    }
-    .trust-chip i{ font-size: 1.2rem; margin-top:.05rem; opacity:.95; }
-    .trust-chip b{ display:block; font-size:.95rem; color: var(--gw-text); }
-    .trust-chip span{
-      display:block;
-      font-size:.88rem;
-      color: var(--gw-sub);
-      line-height:1.3;
-      margin-top:.15rem;
-    }
-
-    /* CTAs */
-    .cta-row{
-      margin-top: 1rem;
-      display:flex;
-      gap:.7rem;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-    .btn-solid, .btn-ghost{
-      display:inline-flex;
-      align-items:center;
-      gap:.55rem;
-      border-radius: 14px;
-      padding: .85rem 1rem;
-      font-weight: 950;
-      text-decoration:none;
-      transition: transform .08s ease, opacity .15s ease;
-      will-change: transform;
-    }
-    .btn-solid{
-      border: 1px solid rgba(216,198,175,.75);
-      background: var(--gw-accent);
-      color: var(--gw-accentText);
-    }
-    .btn-ghost{
-      border: 1px solid var(--gw-border);
-      background: rgba(255,255,255,.05);
-      color: var(--gw-text);
-      font-weight: 900;
-    }
-    .btn-solid:hover, .btn-ghost:hover{ transform: translateY(-1px); opacity:.95; }
-    .btn-solid, .btn-solid:hover, .btn-solid:focus, .btn-solid:active{
-      color: var(--gw-accentText) !important;
-      text-decoration: none !important;
-    }
-    .btn-ghost, .btn-ghost:hover, .btn-ghost:focus, .btn-ghost:active{
-      color: var(--gw-text) !important;
-      text-decoration: none !important;
-    }
-
-    /* Bullets */
-    .hero-bullets{ margin-top: 1rem; display:grid; gap:.65rem; }
-    .hero-pill{
-      border-radius: 16px;
-      border: 1px solid var(--gw-border);
-      background: rgba(255,255,255,.04);
-      padding: .85rem .9rem;
-      color: var(--gw-text);
-      display:flex;
-      gap:.7rem;
-      align-items:flex-start;
-    }
-    .hero-pill h3{ margin:0; font-size: 1rem; color: var(--gw-text); }
-    .hero-pill p{ margin:.25rem 0 0; color: var(--gw-sub); line-height:1.45; }
-    .hero-pill i{ font-size:1.35rem; margin-top:.05rem; opacity:.95; }
-
-    /* =========================================================
-       CAR ADS (NEW SECTION)
-       ========================================================= */
-    #car-ads .section-title{ margin-bottom: .35rem; }
-    .car-ads__grid{ align-items: center; gap: 1.1rem; }
-    #car-ads .about__content{
-      border-radius: var(--gw-radius);
-      border: 1px solid var(--gw-border);
-      background: var(--gw-card);
-      box-shadow: 0 12px 34px var(--gw-shadow);
-      padding: 1.1rem;
-      backdrop-filter: blur(8px);
-    }
-    #car-ads .about__subtitle{ margin-top: 0; color: var(--page-text); letter-spacing: .2px; }
-    #car-ads .about__text{ color: var(--page-sub); line-height: 1.65; margin: .65rem 0 0; }
-
-    .gallery-card{
-      border-radius: var(--gw-radius);
-      border: 1px solid var(--gw-border);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.045));
-      box-shadow: 0 18px 46px var(--gw-shadow);
-      overflow: hidden;
-      position: relative;
-    }
-    .gallery-card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(600px 220px at 20% 20%, rgba(216,198,175,.20), transparent 60%),
-                  radial-gradient(520px 240px at 80% 30%, rgba(255,255,255,.08), transparent 60%);
-      pointer-events:none;
-      opacity:.9;
-    }
-    .gallery-stage{
-      position: relative;
-      padding: 1rem;
-      background: rgba(0,0,0,.08);
-    }
-    html:not(.dark-theme) .gallery-stage{ background: rgba(0,0,0,.03); }
-    .gallery-stage img{
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 14px;
-      border: 1px solid var(--gw-border);
-      background: rgba(0,0,0,.10);
-      box-shadow: 0 18px 46px rgba(0,0,0,.22);
-    }
-    .gallery-cap{
-      position: absolute;
-      left: 1rem;
-      bottom: 1rem;
-      display:inline-flex;
-      align-items:center;
-      gap:.45rem;
-      border-radius: 999px;
-      padding: .35rem .6rem;
-      border: 1px solid rgba(216,198,175,.35);
-      background: rgba(216,198,175,.12);
-      color: var(--gw-text);
-      font-weight: 900;
-      font-size: .82rem;
-      backdrop-filter: blur(8px);
-    }
-
-    /* =========================================================
-       Pricing Aside / Estimate
-       ========================================================= */
-    .pricing-aside{ position: sticky; top: 92px; align-self: start; }
-    @media (max-width: 980px){ .pricing-aside{ position: static; top:auto; } }
-
-    .pricing-aside__card{
-      border-radius: 20px;
-      border: 1px solid var(--gw-border);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.045));
-      padding: 1.05rem;
-      box-shadow: 0 18px 46px var(--gw-shadow);
-      color: var(--gw-text);
-    }
-    .pricing-aside__title{ color: var(--gw-text); margin:0; font-size: 1.05rem; letter-spacing:.2px; }
-    .pricing-aside__sub{ opacity:.9; color: var(--gw-sub); margin:.35rem 0 0; font-size:.92rem; line-height:1.45; }
-
-    .estimate-price{
-      display:block !important;
-      font-size:1.55rem;
-      font-weight:1000;
-      color:var(--third-color);
-      letter-spacing:.2px;
-    }
-    #stickySummary .estimate-price{
-      display:inline-block !important;
-      font-weight:1000;
-      color:var(--third-color);
-    }
-
-    /* Custom months */
-    .custom-plan{
-      margin-top: .9rem;
-      border-radius: 18px;
-      border: 1px solid var(--gw-border);
-      background: rgba(255,255,255,.04);
-      padding: .95rem;
-    }
-    .cp-title{
-      font-weight:1000;
-      color: var(--gw-text);
-      font-size: 1rem;
-      margin:0;
-    }
-    .cp-sub{
-      margin-top:.2rem;
-      color: var(--gw-sub);
-      font-size:.9rem;
-      line-height:1.4;
-    }
-    .cp-row{
-      margin-top: .75rem;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:.75rem;
-      padding: .75rem .8rem;
-      border-radius: 16px;
-      border: 1px solid var(--gw-border);
-      background: rgba(0,0,0,.08);
-    }
-    html:not(.dark-theme) .cp-row{ background: rgba(0,0,0,.03); }
-    .cp-row span{
-      font-weight: 950;
-      color: var(--gw-sub);
-      font-size: .9rem;
-    }
-    .cp-input{
-      width: 110px;
-      border-radius: 12px;
-      border: 1px solid var(--gw-border);
-      background: rgba(255,255,255,.06);
-      color: var(--gw-text);
-      padding: .5rem .6rem;
-      font-weight: 1000;
-    }
-    html:not(.dark-theme) .cp-input{
-      background: rgba(255,255,255,.85);
-      color: #121212;
-      border-color: rgba(0,0,0,.18);
-    }
-
-    /* Pricing block */
-    .pricing-block{
-      margin-top: .75rem;
-      border-radius: 18px;
-      border: 1px solid var(--gw-border);
-      background: rgba(255,255,255,.04);
-      padding: .95rem;
-    }
-    .pb-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:.8rem;
-      margin-bottom: .85rem;
-    }
-    .pb-title{ display:flex; gap:.7rem; align-items:flex-start; }
-    .pb-title i{ font-size: 1.15rem; opacity:.95; margin-top:.1rem; }
-    .pb-title b{ display:block; font-size: .98rem; color: var(--gw-text); }
-    .pb-sub{ font-size: .88rem; color: var(--gw-sub); margin-top:.18rem; line-height: 1.35; }
-    .pb-badge{
-      display:inline-flex;
-      align-items:center;
-      gap:.45rem;
-      border-radius: 999px;
-      padding: .35rem .6rem;
-      border: 1px solid rgba(216,198,175,.35);
-      background: rgba(216,198,175,.12);
-      color: var(--gw-text);
-      font-weight: 900;
-      font-size: .82rem;
-      white-space: nowrap;
-    }
-    .pb-grid{ display:grid; grid-template-columns: 1fr; gap: .65rem; }
-    .pb-card{
-      border-radius: 16px;
-      border: 1px solid var(--gw-border);
-      background: rgba(255,255,255,.04);
-      padding: .8rem .85rem;
-    }
-    .pb-card-top{
-      display:flex;
-      align-items:baseline;
-      justify-content:space-between;
-      gap:.75rem;
-      flex-wrap:wrap;
-    }
-    .pb-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:.4rem;
-      font-weight: 950;
-      font-size: .86rem;
-      color: var(--gw-text);
-      opacity:.95;
-    }
-    .pb-value{
-      font-weight: 1000;
-      font-size: 1.05rem;
-      color: var(--gw-text);
-      letter-spacing:.2px;
-    }
-    .pb-unit{
-      font-size: .85rem;
-      font-weight: 900;
-      color: var(--gw-sub);
-      margin-left: .15rem;
-    }
-    .pb-muted{
-      margin-top: .35rem;
-      font-size: .88rem;
-      color: var(--gw-sub);
-      line-height: 1.4;
-    }
-    .tier-row{
-      margin-top: .65rem;
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: .55rem;
-    }
-    .tier{
-      border-radius: 14px;
-      border: 1px solid var(--gw-border);
-      background: rgba(0,0,0,.08);
-      padding: .6rem .65rem;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:.6rem;
-    }
-    html:not(.dark-theme) .tier{ background: rgba(0,0,0,.03); }
-    .tier span{ font-size: .88rem; font-weight: 900; color: var(--gw-sub); }
-    .tier b{ font-size: .95rem; font-weight: 1000; color: var(--gw-text); letter-spacing:.2px; }
-
-    /* Estimate banner */
-    .estimate-banner{
-      border-radius: 18px;
-      border: 1px solid var(--gw-border);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.035));
-      padding: .95rem;
-      color: var(--gw-text);
-      margin-top: .9rem;
-    }
-    .est-top{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:.8rem;
-      flex-wrap:wrap;
-      margin-bottom: .65rem;
-    }
-    .est-title{ font-weight: 1000; letter-spacing:.2px; color: var(--gw-text); font-size: .95rem; }
-    .est-sub{ margin-top: .18rem; color: var(--gw-sub); font-size:.88rem; line-height: 1.35; }
-    .est-total{ display:flex; flex-direction:column; align-items:flex-end; gap:.35rem; }
-    .est-pill{
-      border-radius: 999px;
-      padding: .28rem .55rem;
-      font-size: .78rem;
-      font-weight: 950;
-      border: 1px solid var(--gw-border);
-      background: rgba(255,255,255,.04);
-      color: var(--gw-sub);
-      white-space: nowrap;
-    }
-    .est-body{
-      border-radius: 16px;
-      border: 1px solid var(--gw-border);
-      background: rgba(0,0,0,.08);
-      padding: .75rem .8rem;
-      color: var(--gw-sub);
-      font-size: .9rem;
-      line-height: 1.5;
-    }
-    html:not(.dark-theme) .est-body{ background: rgba(0,0,0,.03); }
-
-    /* =========================================================
-       Modal
-       ========================================================= */
-    .gw-modal{
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,.62);
-      display:none; align-items:center; justify-content:center;
-      padding:1.1rem; z-index:9999;
-    }
-    .gw-modal.open{ display:flex; }
-    .gw-modal__dialog{
-      width:min(920px,100%);
-      border-radius:18px;
-      border:1px solid var(--gw-border);
-      background: rgba(20,20,20,.72);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 22px 70px rgba(0,0,0,.35);
-      overflow:hidden;
-    }
-    html:not(.dark-theme) .gw-modal__dialog{ background: rgba(255,255,255,.92); }
-    .gw-modal__top{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:.75rem; padding:.8rem .9rem;
-      border-bottom:1px solid var(--gw-border);
-    }
-    .gw-modal__title{
-      font-weight:1000;
-      color:var(--gw-text);
-      display:flex; align-items:center; gap:.55rem;
-    }
-    html:not(.dark-theme) .gw-modal__title{ color:#121212; }
-    .gw-modal__close{
-      width:42px; height:42px; border-radius:14px;
-      border:1px solid var(--gw-border);
-      background: rgba(255,255,255,.06);
-      color: var(--gw-text);
-      font-size:1.4rem; line-height:1; cursor:pointer;
-      display:flex; align-items:center; justify-content:center;
-    }
-    html:not(.dark-theme) .gw-modal__close{
-      background: rgba(0,0,0,.04); color:#121212;
-    }
-    .gw-modal__body{ padding:.9rem; background: rgba(0,0,0,.10); }
-    html:not(.dark-theme) .gw-modal__body{ background: rgba(0,0,0,.03); }
-    .gw-modal__img{
-      width:100%; height:auto; display:block;
-      border-radius:14px; border:1px solid var(--gw-border);
-      background: rgba(0,0,0,.12);
-      max-height:70vh; object-fit: contain;
-    }
-    .gw-modal__cap{ margin-top:.7rem; color: var(--gw-sub); font-size:.9rem; line-height:1.4; }
-    html:not(.dark-theme) .gw-modal__cap{ color: rgba(18,18,18,.78); }
-
-    /* =========================================================
-       FAQ
-       ========================================================= */
-    .faq-wrap{
-      margin-top: .9rem;
-      border-radius: var(--gw-radius);
-      border: 1px solid var(--faq-border);
-      background: var(--faq-bg);
-      overflow: hidden;
-      box-shadow: 0 12px 34px var(--faq-shadow);
-    }
-    .faq-grid{ display:grid; grid-template-columns: 1.15fr .85fr; gap: 0; }
-    @media (max-width: 980px){ .faq-grid{ grid-template-columns: 1fr; } }
-    .faq-left{ padding: 1rem; border-right: 1px solid var(--faq-border); }
-    @media (max-width: 980px){
-      .faq-left{ border-right: none; border-bottom: 1px solid var(--faq-border); }
-    }
-    .faq-right{ padding: 1rem; background: var(--faq-panel); }
-
-    .faq-item{
-      border-radius: 16px;
-      border: 1px solid var(--faq-border);
-      background: var(--faq-chip);
-      overflow: hidden;
-      margin-bottom: .65rem;
-    }
-    .faq-item:last-child{ margin-bottom: 0; }
-    .faq-item summary{
-      list-style: none;
-      cursor: pointer;
-      padding: .85rem .9rem;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: .8rem;
-      font-weight: 950;
-      color: var(--faq-text);
-      user-select: none;
-    }
-    .faq-item summary::-webkit-details-marker{ display:none; }
-    .faq-q{ display:flex; align-items:flex-start; gap:.65rem; line-height:1.2; }
-    .faq-q i{ font-size: 1.15rem; margin-top:.05rem; opacity:.95; }
-    .faq-chevron{
-      width: 34px; height: 34px; border-radius: 12px;
-      border: 1px solid var(--faq-border);
-      background: var(--faq-chip);
-      display:flex; align-items:center; justify-content:center;
-      flex: 0 0 auto; transition: transform .15s ease;
-      color: var(--faq-text);
-    }
-    details[open] .faq-chevron{ transform: rotate(180deg); }
-    .faq-a{ padding: 0 .9rem .9rem; color: var(--faq-sub); line-height: 1.6; }
-    .faq-a p{ margin: 0; }
-
-    .faq-sidecard{
-      border-radius: 16px;
-      border: 1px solid var(--faq-border);
-      background: var(--faq-chip);
-      padding: .9rem;
-      color: var(--faq-text);
-    }
-    .faq-sidecard h3{
-      margin: 0;
-      font-size: 1rem;
-      display:flex;
-      align-items:center;
-      gap:.5rem;
-      color: var(--faq-text);
-    }
-    .faq-sidecard p{ margin: .45rem 0 0; color: var(--faq-sub); line-height: 1.5; }
-    .faq-sidecard .mini{ margin-top: .75rem; display:grid; gap:.55rem; }
-    .faq-mini{
-      border-radius: 14px;
-      border: 1px solid var(--faq-border);
-      background: var(--faq-panel);
-      padding: .75rem .8rem;
-      display:flex;
-      gap:.6rem;
-      align-items:flex-start;
-      color: var(--faq-text);
-    }
-    .faq-mini i{ font-size: 1.1rem; margin-top:.05rem; opacity:.95; }
-    .faq-mini b{ display:block; font-size:.92rem; color: var(--faq-text); }
-    .faq-mini span{ display:block; margin-top:.15rem; font-size:.88rem; color: var(--faq-sub); line-height:1.3; }
-  </style>
-</head>
-
-<body>
-  <div class="bubble-container"></div>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-  <!-- HEADER -->
-  <header class="l-header">
-    <nav class="nav bd-grid">
-      <div><a href="index.html" class="nav__logo">Gigways</a></div>
-
-      <div class="nav__menu" id="nav-menu">
-        <ul class="nav__list">
-          <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
-          <li class="nav__item"><a href="index.html#about" class="nav__link">About</a></li>
-          <li class="nav__item"><a href="carads.html" class="nav__link active">Car Advertising</a></li>
-          <li class="nav__item"><a href="driverbenefits.html" class="nav__link" aria-current="page">Driver Benefits</a></li>
-          <li class="nav__item"><a href="careers.html" class="nav__link">Careers</a></li>
-        </ul>
-      </div>
-
-      <div class="theme">
-        <img src="assets/img/moon.png" id="iconMS" alt="Toggle theme" />
-      </div>
-
-      <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
-    </nav>
-  </header>
-
-  <!-- HERO -->
-  <section class="partners-hero section" id="partners">
-    <div class="container">
-      <h1 class="section-title">Car Advertising for Businesses</h1>
-
-      <div class="hero-card">
-        <div class="hero-head">
-          <div>
-            <span class="hero-kicker"><i class="bx bx-briefcase-alt-2"></i> Built for advertisers</span>
-            <p class="hero-lead">
-              Put your brand in motion with <strong>opt-in vehicle advertising</strong> powered by active Gigways drivers.
-              Start small, launch fast, and scale city-by-city — with a <strong>proof-first creative workflow</strong> and rollout support.
-            </p>
-          </div>
-
-          <div class="cta-row">
-            <a class="btn-solid" href="#forms"><i class="bx bx-send"></i> Send a Brief</a>
-            <a class="btn-ghost" href="#pricingWrap"><i class="bx bx-dollar-circle"></i> See Estimate</a>
-          </div>
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+            <li class="nav__item"><a href="index.html#about" class="nav__link">About</a></li>
+            <li class="nav__item"><a href="carads.html" class="nav__link active">Car Advertising</a></li>
+            <li class="nav__item">
+              <a href="driverbenefits.html" class="nav__link">Driver Benefits</a>
+            </li>
+            <li class="nav__item"><a href="careers.html" class="nav__link">Careers</a></li>
+          </ul>
         </div>
 
-        <div class="trust-strip" aria-label="Trust highlights">
-          <div class="trust-chip">
-            <i class="bx bx-user-check"></i>
-            <div><b>Opt-in drivers</b><span>Brand-safe participation</span></div>
-          </div>
-          <div class="trust-chip">
-            <i class="bx bx-paint"></i>
-            <div><b>Proof-first creative</b><span>Review before production</span></div>
-          </div>
-          <div class="trust-chip">
-            <i class="bx bx-map"></i>
-            <div><b>Launch by city</b><span>Pilots → regional scale</span></div>
-          </div>
-          <div class="trust-chip">
-            <i class="bx bx-check-shield"></i>
-            <div><b>Reliable rollout</b><span>Planned coordination</span></div>
-          </div>
+        <!-- ✅ THEME ICON -->
+        <div class="theme">
+          <button class="theme-btn" id="themeToggle" aria-label="Toggle theme" type="button">
+            <i id="iconMS" class="bx" aria-hidden="true"></i>
+          </button>
         </div>
 
-        <div class="hero-bullets" role="list">
-          <div class="hero-pill" role="listitem">
-            <i class="bx bx-tachometer"></i>
+        <div class="nav__toggle" id="nav-toggle"><i class="bx bx-menu"></i></div>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="partners-hero section" id="partners">
+      <div class="container">
+        <h1 class="section-title">Car Advertising for Businesses</h1>
+
+        <div class="hero-card">
+          <div class="hero-head">
             <div>
-              <h3>Real visibility on real routes</h3>
-              <p>Street-level exposure across neighborhoods, business districts, and everyday traffic.</p>
+              <span class="hero-kicker"
+                ><i class="bx bx-briefcase-alt-2"></i> Built for advertisers</span
+              >
+              <p class="hero-lead">
+                Put your brand in motion with <strong>opt-in vehicle advertising</strong> powered by
+                active Gigways drivers. Start small, launch fast, and scale city-by-city — with a
+                <strong>proof-first creative workflow</strong> and rollout support.
+              </p>
+            </div>
+
+            <div class="cta-row">
+              <a class="btn-solid" href="#forms"><i class="bx bx-send"></i> Send a Brief</a>
+              <a class="btn-ghost" href="#pricingWrap"><i class="bx bx-dollar-circle"></i> See Estimate</a>
             </div>
           </div>
 
-          <div class="hero-pill" role="listitem">
-            <i class="bx bx-layer"></i>
-            <div>
-              <h3>Simple pilots → easy scaling</h3>
-              <p>One workflow from 5 cars to 500+ cars — grow when your results look strong.</p>
+          <div class="trust-strip" aria-label="Trust highlights">
+            <div class="trust-chip">
+              <i class="bx bx-user-check"></i>
+              <div><b>Opt-in drivers</b><span>Brand-safe participation</span></div>
+            </div>
+            <div class="trust-chip">
+              <i class="bx bx-paint"></i>
+              <div><b>Proof-first creative</b><span>Review before production</span></div>
+            </div>
+            <div class="trust-chip">
+              <i class="bx bx-map"></i>
+              <div><b>Launch by city</b><span>Pilots → regional scale</span></div>
+            </div>
+            <div class="trust-chip">
+              <i class="bx bx-check-shield"></i>
+              <div><b>Reliable rollout</b><span>Planned coordination</span></div>
             </div>
           </div>
 
-          <div class="hero-pill" role="listitem">
-            <i class="bx bx-camera"></i>
-            <div>
-              <h3>Proof & confirmation (where available)</h3>
-              <p>Rollout confirmation depends on market logistics — include your requirements in the brief.</p>
-            </div>
-          </div>
-        </div>
-
-        <p class="hero-lead" style="margin-top:.9rem; opacity:.82; font-size:.95rem;">
-          Available now: <strong>Premium Magnet Vinyl</strong>. Coming soon: rooftop formats.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CAR ADS (ADDED) -->
-  <section class="about section" id="car-ads">
-    <div class="container">
-      <h2 class="section-title">Car Advertising (Optional for Drivers)</h2>
-
-      <div class="about__container bd-grid car-ads__grid">
-        <!-- LEFT -->
-        <div class="about__content">
-          <h2 class="about__subtitle">Local Campaigns That Support Drivers</h2>
-
-          <p class="about__text">
-            Businesses can promote their brand with real-world visibility through driver car ads.
-            Create a campaign, choose your area, and reach people where they live, commute, and shop.
-          </p>
-
-          <p class="about__text">
-            For drivers, it’s a flexible way to earn extra — completely optional and opt-in.
-          </p>
-        </div>
-
-        <!-- RIGHT -->
-        <div class="gallery-card" aria-label="Car advertising preview">
-          <div class="gallery-stage">
-            <img src="assets/img/about.png" alt="Car advertising wrap preview" loading="lazy" />
-            <div class="gallery-cap"><i class="bx bx-image"></i> Preview</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <main class="section" id="forms">
-    <div class="container">
-      <h2 class="section-title">Send a Campaign Brief</h2>
-      <p class="section-subtitle small-note">
-        Share your market, number of cars, dates, and goals. Upload your <strong>logo/images</strong> if available — we’ll follow up with next steps.
-      </p>
-
-      <div class="brief-layout">
-        <!-- Pricing Aside -->
-        <aside class="pricing-aside" aria-label="Pricing & estimate">
-          <div class="pricing-aside__card" id="pricingWrap" aria-label="Choose a pricing plan">
-            <div class="pricing-aside__head" style="display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;flex-wrap:wrap;">
+          <div class="hero-bullets" role="list">
+            <div class="hero-pill" role="listitem">
+              <i class="bx bx-tachometer"></i>
               <div>
-                <h3 class="pricing-aside__title"><i class="bx bx-dollar-circle"></i> Pricing estimate</h3>
-                <p class="pricing-aside__sub">Enter months + cars (dates auto-match your months).</p>
+                <h3>Real visibility on real routes</h3>
+                <p>Street-level exposure across neighborhoods, business districts, and everyday traffic.</p>
               </div>
             </div>
 
-            <!-- ✅ Custom months (1–3 priced, 4+ negotiable) -->
-            <div class="custom-plan" aria-label="Custom duration">
-              <div class="top">
-                <div>
-                  <h4 class="cp-title"><i class="bx bx-slider-alt"></i> Custom duration</h4>
-                  <div class="cp-sub">Months <strong>1–3</strong> priced normally. Months <strong>4+</strong> are <strong>negotiable</strong>.</div>
-                </div>
-                <span class="cp-badge"><i class="bx bx-time-five"></i> Flexible</span>
-              </div>
-
-              <div class="cp-row">
-                <span>Months</span>
-                <input id="custom_months" class="cp-input" type="number" min="1" value="1" inputmode="numeric" />
+            <div class="hero-pill" role="listitem">
+              <i class="bx bx-layer"></i>
+              <div>
+                <h3>Simple pilots → easy scaling</h3>
+                <p>One workflow from 5 cars to 500+ cars — grow when your results look strong.</p>
               </div>
             </div>
 
-            <!-- ✅ Pricing details -->
-            <div class="pricing-block" id="fleetNote" aria-live="polite">
-              <div class="pb-head">
-                <div class="pb-title">
-                  <i class="bx bx-car"></i>
-                  <div>
-                    <b>Premium Magnet Vinyl</b>
-                    <div class="pb-sub">
-                      Pricing is based on <strong>months</strong> + <strong>fleet size</strong>. Install is included at no cost.
-                      Months <strong>4+</strong> and fleets <strong>16+</strong> are <strong>negotiable</strong>.
-                    </div>
-                  </div>
-                </div>
-
-                <div class="pb-badge">
-                  <i class="bx bx-badge-check"></i>
-                  <span>Tiers</span>
-                </div>
-              </div>
-
-              <div class="pb-grid">
-                <div class="pb-card">
-                  <div class="pb-card-top">
-                    <span class="pb-kicker"><i class="bx bx-wrench"></i> Install</span>
-                    <span class="pb-value">Free <span class="pb-unit">install</span></span>
-                  </div>
-                  <div class="pb-muted">Install is included at no cost.</div>
-                </div>
-
-                <div class="pb-card">
-                  <div class="pb-card-top">
-                    <span class="pb-kicker"><i class="bx bx-calendar"></i> Duration pricing</span>
-                    <span class="pb-value">Per car <span class="pb-unit">/ campaign</span></span>
-                  </div>
-
-                  <div class="tier-row" role="list" aria-label="Duration pricing tiers">
-                    <div class="tier" role="listitem"><span>1 month</span><b>$600</b></div>
-                    <div class="tier" role="listitem"><span>2 months</span><b>$1100</b></div>
-                    <div class="tier" role="listitem"><span>3 months</span><b>$1,500</b></div>
-                    <div class="tier" role="listitem"><span>4+ months</span><b>Negotiable</b></div>
-                  </div>
-
-                  <div class="pb-muted">These are per-car totals for the full campaign duration.</div>
-                </div>
-
-                <div class="pb-card">
-                  <div class="pb-card-top">
-                    <span class="pb-kicker"><i class="bx bx-group"></i> Fleet discounts</span>
-                    <span class="pb-value">Up to <span class="pb-unit">7% off</span></span>
-                  </div>
-
-                  <div class="tier-row" role="list" aria-label="Fleet discount tiers">
-                    <div class="tier" role="listitem"><span>1–4 cars</span><b>0%</b></div>
-                    <div class="tier" role="listitem"><span>5–10 cars</span><b>5%</b></div>
-                    <div class="tier" role="listitem"><span>11–15 cars</span><b>7%</b></div>
-                    <div class="tier" role="listitem"><span>16+ cars</span><b>Negotiable</b></div>
-                  </div>
-
-                  <div class="pb-muted">Discounts apply to the campaign total (install remains free).</div>
-                </div>
+            <div class="hero-pill" role="listitem">
+              <i class="bx bx-camera"></i>
+              <div>
+                <h3>Proof & confirmation (where available)</h3>
+                <p>Rollout confirmation depends on market logistics — include your requirements in the brief.</p>
               </div>
             </div>
+          </div>
 
-            <!-- ✅ Estimate banner -->
-            <div class="estimate-banner aside-estimate" aria-live="polite" style="margin-top:.9rem;">
-              <div class="est-top">
-                <div>
-                  <div class="est-title">Estimated total</div>
-                  <div class="est-sub" id="estimateMeta">Final pricing confirmed after review.</div>
-                </div>
-                <div class="est-total">
-                  <div class="estimate-price" id="estimatePrice">$0</div>
-                  <div class="est-pill" id="estimatePill">Non-binding</div>
-                </div>
-              </div>
+          <p class="hero-lead" style="margin-top: 0.9rem; opacity: 0.82; font-size: 0.95rem">
+            Available now: <strong>Premium Magnet Vinyl</strong>. Coming soon: rooftop formats.
+          </p>
+        </div>
+      </div>
+    </section>
 
-              <div class="est-body" id="estimateText">Enter months + number of cars to preview pricing.</div>
+    <!-- CAR ADS -->
+    <section class="about section" id="car-ads">
+      <div class="container">
+        <h2 class="section-title">Car Advertising (Optional for Drivers)</h2>
 
-              <input type="hidden" id="campaign_months" name="campaign_months" value="1">
-              <input type="hidden" id="campaign_rate" name="ratePerCarCampaignTotal" value="">
-              <input type="hidden" id="campaign_est_total" name="campaignTotal" value="">
-              <input type="hidden" id="campaign_fleet_discount" name="fleetDiscountApplied" value="false">
-              <input type="hidden" id="campaign_fleet_discount_rate" name="fleetDiscountRate" value="0">
-              <input type="hidden" id="campaign_install_fee_total" name="installFeeTotal" value="">
-              <input type="hidden" id="campaign_install_fee_per_car" name="installFeePerCar" value="0">
-            </div>
+        <div class="about__container bd-grid car-ads__grid">
+          <div class="about__content">
+            <h2 class="about__subtitle">Local Campaigns That Support Drivers</h2>
 
-            <p class="hero-lead" style="margin-top:.85rem; opacity:.85; font-size:.95rem;">
-              Pricing varies by geography and rollout logistics. We’ll confirm final numbers after your brief.
+            <p class="about__text">
+              Businesses can promote their brand with real-world visibility through driver car ads. Create a
+              campaign, choose your area, and reach people where they live, commute, and shop.
+            </p>
+
+            <p class="about__text">
+              For drivers, it’s a flexible way to earn extra — completely optional and opt-in.
             </p>
           </div>
-        </aside>
 
-        <!-- Form -->
-        <div class="card" id="partner-card">
-          <form id="my-form" action="https://formspree.io/f/mzboyvbe" method="POST" enctype="multipart/form-data" aria-describedby="my-form-status">
-            <input type="hidden" name="_subject" value="Gigways Vehicle Advertising Brief">
-            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-            <input type="hidden" name="partner_type" value="vehicle_ads">
-            <input type="hidden" id="design_type" name="designType" value="arch_design">
-            <input type="hidden" id="ad_type" name="packageType" value="premium_magnet_vinyl">
-
-            <div class="form-block">
-              <div class="form-block__head">
-                <h3 class="form-block__title"><i class="bx bx-user"></i> Contact</h3>
-                <p class="form-block__sub">Who should we reach out to?</p>
-              </div>
-
-              <div class="form__grid">
-                <div class="form__group">
-                  <label class="label" for="name">Your Name *</label>
-                  <div class="field">
-                    <i class="bx bx-user icon"></i>
-                    <input class="input" id="name" name="name" type="text" placeholder="Full name" required autocomplete="name">
-                  </div>
-                </div>
-
-                <div class="form__group">
-                  <label class="label" for="email">Email *</label>
-                  <div class="field">
-                    <i class="bx bx-at icon"></i>
-                    <input class="input" id="email" name="email" type="email" placeholder="you@company.com" required autocomplete="email" inputmode="email">
-                  </div>
-                </div>
-
-                <div class="form__group">
-                  <label class="label" for="company">Company / Brand *</label>
-                  <div class="field">
-                    <i class="bx bx-buildings icon"></i>
-                    <input class="input" id="company" name="company" type="text" placeholder="Company / brand name" required autocomplete="organization">
-                  </div>
-                </div>
-
-                <div class="form__group">
-                  <label class="label" for="website">Website</label>
-                  <div class="field">
-                    <i class="bx bx-globe icon"></i>
-                    <input class="input" id="website" name="website" type="url" placeholder="https://example.com" inputmode="url" autocomplete="url">
-                  </div>
-                </div>
-              </div>
+          <div class="gallery-card" aria-label="Car advertising preview">
+            <div class="gallery-stage">
+              <img src="assets/img/about.png" alt="Car advertising wrap preview" loading="lazy" />
+              <div class="gallery-cap"><i class="bx bx-image"></i> Preview</div>
             </div>
-
-            <fieldset id="fs-carads" class="fieldset fieldset--modern">
-              <legend><span class="legend-pill"><i class="bx bx-car"></i> Campaign Details</span></legend>
-
-              <div class="form__grid" style="margin-top:.75rem;">
-                <div class="form__group">
-                  <label class="label" for="car_geo">Cities / State *</label>
-                  <div class="field">
-                    <i class="bx bx-map icon"></i>
-                    <input class="input" id="car_geo" name="car_geo" type="text" placeholder="e.g., Atlanta • GA" required>
-                  </div>
-                </div>
-
-                <div class="form__group">
-                  <label class="label" for="car_count">Number of cars *</label>
-                  <div class="field">
-                    <i class="bx bx-car icon"></i>
-                    <input class="input" id="car_count" name="numberOfCars" type="number" min="1" placeholder="e.g., 25" required>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form__grid" style="margin-top:.75rem;">
-                <div class="form__group">
-                  <label class="label" for="start_date">Start date *</label>
-                  <div class="field">
-                    <i class="bx bx-calendar icon"></i>
-                    <input class="input" id="start_date" name="start_date" type="date" required>
-                  </div>
-                </div>
-
-                <div class="form__group">
-                  <label class="label" for="end_date">End date *</label>
-                  <div class="field">
-                    <i class="bx bx-calendar-check icon"></i>
-                    <input class="input" id="end_date" name="end_date" type="date" required>
-                  </div>
-                </div>
-              </div>
-
-              <div class="upload-box">
-                <div class="upload-box__top">
-                  <div class="upload-box__title">
-                    <i class="bx bx-images"></i>
-                    <div>
-                      <b>Upload logo / images</b>
-                      <span>Optional — you can submit without files</span>
-                    </div>
-                  </div>
-
-                  <label class="upload-btn" for="car_images">
-                    <i class="bx bx-upload"></i> Choose files
-                  </label>
-                </div>
-
-                <input class="file file-hidden" id="car_images" name="car_images" type="file" accept="image/*" multiple>
-
-                <div class="upload-box__meta">
-                  <span class="hint">Up to 5 images • max 8MB each • PNG/JPG/WEBP</span>
-                  <span class="error" id="car_img_err"></span>
-                </div>
-
-                <div id="car_img_preview" class="thumbs"></div>
-              </div>
-            </fieldset>
-
-            <div class="form-block form-block--brief">
-              <div class="form-block__head">
-                <h3 class="form-block__title"><i class="bx bx-edit-alt"></i> Campaign brief *</h3>
-                <p class="form-block__sub">What are you promoting — and what does success look like?</p>
-              </div>
-
-              <div class="form__group">
-                <label class="label" for="message">Brief *</label>
-                <div class="field">
-                  <i class="bx bx-file icon"></i>
-                  <textarea class="textarea" id="message" name="message" required maxlength="1200"
-                    placeholder="Example: We’re promoting our new location. Target: Atlanta. Goal: drive visits using a QR code + promo code. Ideal start date: Jan 10."></textarea>
-                </div>
-
-                <div class="hint hint-row" style="display:flex;justify-content:space-between;gap:1rem;">
-                  <span id="msg_counter" class="counter">0 / 1200</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-footer">
-              <label class="label consent-row">
-                <input type="checkbox" name="consent" required style="width:18px;height:18px">
-                <span>I agree to be contacted and accept the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
-              </label>
-
-              <button type="submit" id="my-form-button" class="btn-primary">
-                <i class="bx bx-send"></i>
-                <span id="btn-text">Send brief</span>
-                <span id="btn-spin" class="spinner" style="display:none"></span>
-              </button>
-
-              <p id="my-form-status" class="status" role="status" aria-live="polite"></p>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <!-- FAQ -->
-      <section class="section" id="faq" aria-label="Car advertising FAQs">
-        <h2 class="section-title">FAQs</h2>
-
-        <div class="faq-wrap">
-          <div class="faq-grid">
-            <div class="faq-left">
-
-              <details class="faq-item" open>
-                <summary>
-                  <span class="faq-q"><i class="bx bx-dollar-circle"></i>How does pricing work?</span>
-                  <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
-                </summary>
-                <div class="faq-a">
-                  <p>
-                    Pricing is based on <strong>campaign duration, number of vehicles, market coverage,</strong>
-                    and the ad format you choose.
-                    Estimates shown are <strong>preliminary</strong>. Final pricing is confirmed after your campaign brief
-                    and rollout details are reviewed.
-                  </p>
-                </div>
-              </details>
-
-              <details class="faq-item">
-                <summary>
-                  <span class="faq-q"><i class="bx bx-check-shield"></i>How do you ensure driver reliability and brand safety?</span>
-                  <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
-                </summary>
-                <div class="faq-a">
-                  <p>
-                    All drivers are <strong>opt-in</strong> and managed through our app-based system.
-                    Drivers must complete required tasks, follow placement guidelines, and submit proof
-                    throughout the campaign. Non-compliant drivers are removed.
-                  </p>
-                </div>
-              </details>
-
-              <details class="faq-item">
-                <summary>
-                  <span class="faq-q"><i class="bx bx-camera"></i>Do you provide proof or reporting?</span>
-                  <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
-                </summary>
-                <div class="faq-a">
-                  <p>
-                    Yes. Drivers use our app to submit <strong>installation photos, weekly photo check-ins,</strong>
-                    and basic activity confirmations until the campaign ends.
-                    Mileage and task completion are tracked to ensure active exposure.
-                  </p>
-                </div>
-              </details>
-
-              <details class="faq-item">
-                <summary>
-                  <span class="faq-q"><i class="bx bx-line-chart"></i>What kind of tracking is included?</span>
-                  <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
-                </summary>
-                <div class="faq-a">
-                  <p>
-                    Our system tracks <strong>driver participation, mileage ranges, and weekly task completion</strong>.
-                    For advertiser performance, we recommend adding your own tracking such as
-                    a QR code, custom landing page, promo code, or call tracking number.
-                  </p>
-                </div>
-              </details>
-
-            </div>
-
-            <div class="faq-right">
-              <div class="faq-sidecard">
-                <h3><i class="bx bx-rocket"></i> Quick launch checklist</h3>
-                <p>Include these details to launch faster and avoid revisions.</p>
-
-                <div class="mini">
-                  <div class="faq-mini">
-                    <i class="bx bx-map"></i>
-                    <div>
-                      <b>Target locations</b>
-                      <span>Cities, routes, or neighborhoods you want covered.</span>
-                    </div>
-                  </div>
-
-                  <div class="faq-mini">
-                    <i class="bx bx-image"></i>
-                    <div>
-                      <b>Creative assets</b>
-                      <span>Logo, colors, messaging, and any brand rules.</span>
-                    </div>
-                  </div>
-
-                  <div class="faq-mini">
-                    <i class="bx bx-check-square"></i>
-                    <div>
-                      <b>Tracking method</b>
-                      <span>QR code, URL, promo code, or call tracking (optional).</span>
-                    </div>
-                  </div>
-
-                  <div class="faq-mini">
-                    <i class="bx bx-calendar"></i>
-                    <div>
-                      <b>Campaign timeline</b>
-                      <span>Start date and length (months 1–3 priced, 4+ negotiable).</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
-      </section>
-
-    </div>
-  </main>
-
-  <!-- ✅ POPUP MODAL HTML -->
-  <div class="gw-modal" id="designModal" role="dialog" aria-modal="true" aria-labelledby="designModalTitle">
-    <div class="gw-modal__dialog" role="document">
-      <div class="gw-modal__top">
-        <div class="gw-modal__title" id="designModalTitle"><i class="bx bx-image"></i><span>Preview</span></div>
-        <button class="gw-modal__close" type="button" id="designModalClose" aria-label="Close preview">×</button>
       </div>
-      <div class="gw-modal__body">
-        <img id="designModalImg" class="gw-modal__img" alt="Design preview" src="" />
-        <div id="designModalCap" class="gw-modal__cap"></div>
+    </section>
+
+    <main class="section" id="forms">
+      <div class="container">
+        <h2 class="section-title">Send a Campaign Brief</h2>
+        <p class="section-subtitle small-note">
+          Share your market, number of cars, dates, and goals. Upload your <strong>logo/images</strong> if
+          available — we’ll follow up with next steps.
+        </p>
+
+        <div class="brief-layout">
+          <!-- Pricing Aside -->
+          <aside class="pricing-aside" aria-label="Pricing & estimate">
+            <div class="pricing-aside__card" id="pricingWrap" aria-label="Choose a pricing plan">
+              <div
+                class="pricing-aside__head"
+                style="
+                  display: flex;
+                  align-items: flex-start;
+                  justify-content: space-between;
+                  gap: 0.75rem;
+                  flex-wrap: wrap;
+                "
+              >
+                <div>
+                  <h3 class="pricing-aside__title"><i class="bx bx-dollar-circle"></i> Pricing estimate</h3>
+                  <p class="pricing-aside__sub">Enter months + cars (dates auto-match your months).</p>
+                </div>
+              </div>
+
+              <div class="custom-plan" aria-label="Custom duration">
+                <div class="top">
+                  <div>
+                    <h4 class="cp-title"><i class="bx bx-slider-alt"></i> Custom duration</h4>
+                    <div class="cp-sub">
+                      Months <strong>1–3</strong> priced normally. Months <strong>4+</strong> are
+                      <strong>negotiable</strong>.
+                    </div>
+                  </div>
+                  <span class="cp-badge"><i class="bx bx-time-five"></i> Flexible</span>
+                </div>
+
+                <div class="cp-row">
+                  <span>Months</span>
+                  <input id="custom_months" class="cp-input" type="number" min="1" value="1" inputmode="numeric" />
+                </div>
+              </div>
+
+              <div class="pricing-block" id="fleetNote" aria-live="polite">
+                <div class="pb-head">
+                  <div class="pb-title">
+                    <i class="bx bx-car"></i>
+                    <div>
+                      <b>Premium Magnet Vinyl</b>
+                      <div class="pb-sub">
+                        Pricing is based on <strong>months</strong> + <strong>fleet size</strong>. Install is
+                        included at no cost. Months <strong>4+</strong> and fleets <strong>16+</strong> are
+                        <strong>negotiable</strong>.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="pb-badge">
+                    <i class="bx bx-badge-check"></i>
+                    <span>Tiers</span>
+                  </div>
+                </div>
+
+                <div class="pb-grid">
+                  <div class="pb-card">
+                    <div class="pb-card-top">
+                      <span class="pb-kicker"><i class="bx bx-wrench"></i> Install</span>
+                      <span class="pb-value">Free <span class="pb-unit">install</span></span>
+                    </div>
+                    <div class="pb-muted">Install is included at no cost.</div>
+                  </div>
+
+                  <div class="pb-card">
+                    <div class="pb-card-top">
+                      <span class="pb-kicker"><i class="bx bx-calendar"></i> Duration pricing</span>
+                      <span class="pb-value">Per car <span class="pb-unit">/ campaign</span></span>
+                    </div>
+
+                    <div class="tier-row" role="list" aria-label="Duration pricing tiers">
+                      <div class="tier" role="listitem"><span>1 month</span><b>$450</b></div>
+                      <div class="tier" role="listitem"><span>2 months</span><b>$800</b></div>
+                      <div class="tier" role="listitem"><span>3 months</span><b>$1,150</b></div>
+                      <div class="tier" role="listitem"><span>4+ months</span><b>Negotiable</b></div>
+                    </div>
+
+                    <div class="pb-muted">These are per-car totals for the full campaign duration.</div>
+                  </div>
+
+                  <div class="pb-card">
+                    <div class="pb-card-top">
+                      <span class="pb-kicker"><i class="bx bx-group"></i> Fleet discounts</span>
+                      <span class="pb-value">Up to <span class="pb-unit">7% off</span></span>
+                    </div>
+
+                    <div class="tier-row" role="list" aria-label="Fleet discount tiers">
+                      <div class="tier" role="listitem"><span>1–4 cars</span><b>0%</b></div>
+                      <div class="tier" role="listitem"><span>5–10 cars</span><b>5%</b></div>
+                      <div class="tier" role="listitem"><span>11–15 cars</span><b>7%</b></div>
+                      <div class="tier" role="listitem"><span>16+ cars</span><b>Negotiable</b></div>
+                    </div>
+
+                    <div class="pb-muted">Discounts apply to the campaign total (install remains free).</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="estimate-banner aside-estimate" aria-live="polite" style="margin-top: 0.9rem">
+                <div class="est-top">
+                  <div>
+                    <div class="est-title">Estimated total</div>
+                    <div class="est-sub" id="estimateMeta">Final pricing confirmed after review.</div>
+                  </div>
+                  <div class="est-total">
+                    <div class="estimate-price" id="estimatePrice">$0</div>
+                    <div class="est-pill" id="estimatePill">Non-binding</div>
+                  </div>
+                </div>
+
+                <div class="est-body" id="estimateText">Enter months + number of cars to preview pricing.</div>
+
+                <input type="hidden" id="campaign_months" name="campaign_months" value="1" />
+                <input type="hidden" id="campaign_rate" name="ratePerCarCampaignTotal" value="" />
+                <input type="hidden" id="campaign_est_total" name="campaignTotal" value="" />
+                <input type="hidden" id="campaign_fleet_discount" name="fleetDiscountApplied" value="false" />
+                <input type="hidden" id="campaign_fleet_discount_rate" name="fleetDiscountRate" value="0" />
+                <input type="hidden" id="campaign_install_fee_total" name="installFeeTotal" value="" />
+                <input type="hidden" id="campaign_install_fee_per_car" name="installFeePerCar" value="0" />
+              </div>
+
+              <p class="hero-lead" style="margin-top: 0.85rem; opacity: 0.85; font-size: 0.95rem">
+                Pricing varies by geography and rollout logistics. We’ll confirm final numbers after your
+                brief.
+              </p>
+            </div>
+          </aside>
+
+          <!-- Form -->
+          <div class="card" id="partner-card">
+            <form
+              id="my-form"
+              action="https://formspree.io/f/mzboyvbe"
+              method="POST"
+              enctype="multipart/form-data"
+              aria-describedby="my-form-status"
+            >
+              <input type="hidden" name="_subject" value="Gigways Vehicle Advertising Brief" />
+              <input type="text" name="_gotcha" style="display: none" tabindex="-1" autocomplete="off" />
+              <input type="hidden" name="partner_type" value="vehicle_ads" />
+              <input type="hidden" id="design_type" name="designType" value="arch_design" />
+              <input type="hidden" id="ad_type" name="packageType" value="premium_magnet_vinyl" />
+
+              <div class="form-block">
+                <div class="form-block__head">
+                  <h3 class="form-block__title"><i class="bx bx-user"></i> Contact</h3>
+                  <p class="form-block__sub">Who should we reach out to?</p>
+                </div>
+
+                <div class="form__grid">
+                  <div class="form__group">
+                    <label class="label" for="name">Your Name *</label>
+                    <div class="field">
+                      <i class="bx bx-user icon"></i>
+                      <input
+                        class="input"
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Full name"
+                        required
+                        autocomplete="name"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form__group">
+                    <label class="label" for="email">Email *</label>
+                    <div class="field">
+                      <i class="bx bx-at icon"></i>
+                      <input
+                        class="input"
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="you@company.com"
+                        required
+                        autocomplete="email"
+                        inputmode="email"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form__group">
+                    <label class="label" for="company">Company / Brand *</label>
+                    <div class="field">
+                      <i class="bx bx-buildings icon"></i>
+                      <input
+                        class="input"
+                        id="company"
+                        name="company"
+                        type="text"
+                        placeholder="Company / brand name"
+                        required
+                        autocomplete="organization"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form__group">
+                    <label class="label" for="website">Website</label>
+                    <div class="field">
+                      <i class="bx bx-globe icon"></i>
+                      <input
+                        class="input"
+                        id="website"
+                        name="website"
+                        type="url"
+                        placeholder="https://example.com"
+                        inputmode="url"
+                        autocomplete="url"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <fieldset id="fs-carads" class="fieldset fieldset--modern">
+                <legend><span class="legend-pill"><i class="bx bx-car"></i> Campaign Details</span></legend>
+
+                <div class="form__grid" style="margin-top: 0.75rem">
+                  <div class="form__group">
+                    <label class="label" for="car_geo">Cities / State *</label>
+                    <div class="field">
+                      <i class="bx bx-map icon"></i>
+                      <input
+                        class="input"
+                        id="car_geo"
+                        name="car_geo"
+                        type="text"
+                        placeholder="e.g., Atlanta • GA"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form__group">
+                    <label class="label" for="car_count">Number of cars *</label>
+                    <div class="field">
+                      <i class="bx bx-car icon"></i>
+                      <input
+                        class="input"
+                        id="car_count"
+                        name="numberOfCars"
+                        type="number"
+                        min="1"
+                        placeholder="e.g., 25"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form__grid" style="margin-top: 0.75rem">
+                  <div class="form__group">
+                    <label class="label" for="start_date">Start date *</label>
+                    <div class="field">
+                      <i class="bx bx-calendar icon"></i>
+                      <input class="input" id="start_date" name="start_date" type="date" required />
+                    </div>
+                  </div>
+
+                  <div class="form__group">
+                    <label class="label" for="end_date">End date *</label>
+                    <div class="field">
+                      <i class="bx bx-calendar-check icon"></i>
+                      <input class="input" id="end_date" name="end_date" type="date" required />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="upload-box">
+                  <div class="upload-box__top">
+                    <div class="upload-box__title">
+                      <i class="bx bx-images"></i>
+                      <div>
+                        <b>Upload logo / images</b>
+                        <span>Optional — you can submit without files</span>
+                      </div>
+                    </div>
+
+                    <label class="upload-btn" for="car_images"> <i class="bx bx-upload"></i> Choose files </label>
+                  </div>
+
+                  <input class="file file-hidden" id="car_images" name="car_images" type="file" accept="image/*" multiple />
+
+                  <div class="upload-box__meta">
+                    <span class="hint">Up to 5 images • max 8MB each • PNG/JPG/WEBP</span>
+                    <span class="error" id="car_img_err"></span>
+                  </div>
+
+                  <div id="car_img_preview" class="thumbs"></div>
+                </div>
+              </fieldset>
+
+              <div class="form-block form-block--brief">
+                <div class="form-block__head">
+                  <h3 class="form-block__title"><i class="bx bx-edit-alt"></i> Campaign brief *</h3>
+                  <p class="form-block__sub">What are you promoting — and what does success look like?</p>
+                </div>
+
+                <div class="form__group">
+                  <label class="label" for="message">Brief *</label>
+                  <div class="field">
+                    <i class="bx bx-file icon"></i>
+                    <textarea
+                      class="textarea"
+                      id="message"
+                      name="message"
+                      required
+                      maxlength="1200"
+                      placeholder="Example: We’re promoting our new location. Target: Atlanta. Goal: drive visits using a QR code + promo code. Ideal start date: Jan 10."
+                    ></textarea>
+                  </div>
+
+                  <div class="hint hint-row" style="display: flex; justify-content: space-between; gap: 1rem">
+                    <span id="msg_counter" class="counter">0 / 1200</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-footer">
+                <label class="label consent-row">
+                  <input type="checkbox" name="consent" required style="width: 18px; height: 18px" />
+                  <span
+                    >I agree to be contacted and accept the
+                    <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span
+                  >
+                </label>
+
+                <button type="submit" id="my-form-button" class="btn-primary">
+                  <i class="bx bx-send"></i>
+                  <span id="btn-text">Send brief</span>
+                  <span id="btn-spin" class="spinner" style="display: none"></span>
+                </button>
+
+                <p id="my-form-status" class="status" role="status" aria-live="polite"></p>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- FAQ -->
+        <section class="section" id="faq" aria-label="Car advertising FAQs">
+          <h2 class="section-title">FAQs</h2>
+
+          <div class="faq-wrap">
+            <div class="faq-grid">
+              <div class="faq-left">
+                <details class="faq-item" open>
+                  <summary>
+                    <span class="faq-q"><i class="bx bx-dollar-circle"></i>How does pricing work?</span>
+                    <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
+                  </summary>
+                  <div class="faq-a">
+                    <p>
+                      Pricing is based on <strong>campaign duration, number of vehicles, market coverage,</strong> and
+                      the ad format you choose. Estimates shown are <strong>preliminary</strong>. Final pricing is
+                      confirmed after your campaign brief and rollout details are reviewed.
+                    </p>
+                  </div>
+                </details>
+
+                <details class="faq-item">
+                  <summary>
+                    <span class="faq-q"
+                      ><i class="bx bx-check-shield"></i>How do you ensure driver reliability and brand safety?</span
+                    >
+                    <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
+                  </summary>
+                  <div class="faq-a">
+                    <p>
+                      All drivers are <strong>opt-in</strong> and managed through our app-based system. Drivers must
+                      complete required tasks, follow placement guidelines, and submit proof throughout the campaign.
+                      Non-compliant drivers are removed.
+                    </p>
+                  </div>
+                </details>
+
+                <details class="faq-item">
+                  <summary>
+                    <span class="faq-q"><i class="bx bx-camera"></i>Do you provide proof or reporting?</span>
+                    <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
+                  </summary>
+                  <div class="faq-a">
+                    <p>
+                      Yes. Drivers use our app to submit <strong>installation photos, weekly photo check-ins,</strong> and
+                      basic activity confirmations until the campaign ends. Mileage and task completion are tracked to
+                      ensure active exposure.
+                    </p>
+                  </div>
+                </details>
+
+                <details class="faq-item">
+                  <summary>
+                    <span class="faq-q"><i class="bx bx-line-chart"></i>What kind of tracking is included?</span>
+                    <span class="faq-chevron"><i class="bx bx-chevron-down"></i></span>
+                  </summary>
+                  <div class="faq-a">
+                    <p>
+                      Our system tracks <strong>driver participation, mileage ranges, and weekly task completion</strong>.
+                      For advertiser performance, we recommend adding your own tracking such as a QR code, custom landing
+                      page, promo code, or call tracking number.
+                    </p>
+                  </div>
+                </details>
+              </div>
+
+              <div class="faq-right">
+                <div class="faq-sidecard">
+                  <h3><i class="bx bx-rocket"></i> Quick launch checklist</h3>
+                  <p>Include these details to launch faster and avoid revisions.</p>
+
+                  <div class="mini">
+                    <div class="faq-mini">
+                      <i class="bx bx-map"></i>
+                      <div>
+                        <b>Target locations</b>
+                        <span>Cities, routes, or neighborhoods you want covered.</span>
+                      </div>
+                    </div>
+
+                    <div class="faq-mini">
+                      <i class="bx bx-image"></i>
+                      <div>
+                        <b>Creative assets</b>
+                        <span>Logo, colors, messaging, and any brand rules.</span>
+                      </div>
+                    </div>
+
+                    <div class="faq-mini">
+                      <i class="bx bx-check-square"></i>
+                      <div>
+                        <b>Tracking method</b>
+                        <span>QR code, URL, promo code, or call tracking (optional).</span>
+                      </div>
+                    </div>
+
+                    <div class="faq-mini">
+                      <i class="bx bx-calendar"></i>
+                      <div>
+                        <b>Campaign timeline</b>
+                        <span>Start date and length (months 1–3 priced, 4+ negotiable).</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- ✅ POPUP MODAL HTML -->
+    <div class="gw-modal" id="designModal" role="dialog" aria-modal="true" aria-labelledby="designModalTitle">
+      <div class="gw-modal__dialog" role="document">
+        <div class="gw-modal__top">
+          <div class="gw-modal__title" id="designModalTitle"><i class="bx bx-image"></i><span>Preview</span></div>
+          <button class="gw-modal__close" type="button" id="designModalClose" aria-label="Close preview">×</button>
+        </div>
+        <div class="gw-modal__body">
+          <img id="designModalImg" class="gw-modal__img" alt="Design preview" src="" />
+          <div id="designModalCap" class="gw-modal__cap"></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Sticky Summary -->
-  <aside id="stickySummary" class="sticky-summary hidden" aria-live="polite">
-    <div class="top">
-      <div class="title"><i class="bx bx-receipt"></i><span>Campaign Estimate</span></div>
-      <button class="close" type="button" id="stickyClose" aria-label="Close estimate">×</button>
-    </div>
-    <div class="row">
-      <span id="stickyLine">Choose months + cars</span>
-      <span class="estimate-price" id="stickyPrice">$0</span>
-    </div>
-    <div class="meta" id="stickyMeta">Non-binding estimate. Final pricing confirmed after review.</div>
-    <div class="actions">
-      <a class="primary" href="#forms"><i class="bx bx-send"></i>Brief</a>
-      <a href="#pricingWrap"><i class="bx bx-dollar"></i>Plans</a>
-    </div>
-  </aside>
+    <!-- Sticky Summary -->
+    <aside id="stickySummary" class="sticky-summary hidden" aria-live="polite">
+      <div class="top">
+        <div class="title"><i class="bx bx-receipt"></i><span>Campaign Estimate</span></div>
+        <button class="close" type="button" id="stickyClose" aria-label="Close estimate">×</button>
+      </div>
+      <div class="row">
+        <span id="stickyLine">Choose months + cars</span>
+        <span class="estimate-price" id="stickyPrice">$0</span>
+      </div>
+      <div class="meta" id="stickyMeta">Non-binding estimate. Final pricing confirmed after review.</div>
+      <div class="actions">
+        <a class="primary" href="#forms"><i class="bx bx-send"></i>Brief</a>
+        <a href="#pricingWrap"><i class="bx bx-dollar"></i>Plans</a>
+      </div>
+    </aside>
 
-   <!--===== FOOTER =====-->
+    <!--===== FOOTER =====-->
     <footer class="footer">
       <div class="footer__container">
         <div class="footer__content">
           <h2 class="footer__title">Gigways LLC</h2>
-          <p class="footer__description">Local car ad campaigns that help businesses get seen — and drivers earn extra on the road.</p>
+          <p class="footer__description">
+            Local car ad campaigns that help businesses get seen — and drivers earn extra on the road.
+          </p>
         </div>
 
         <div class="footer__content">
@@ -1366,7 +1781,11 @@
         <div class="footer__content">
           <h3 class="footer__subtitle">Connect With Us</h3>
           <div class="footer__social">
-            <a href="https://www.facebook.com/profile.php?id=61574801146211" class="footer__icon" aria-label="Gigways on Facebook">
+            <a
+              href="https://www.facebook.com/profile.php?id=61574801146211"
+              class="footer__icon"
+              aria-label="Gigways on Facebook"
+            >
               <i class="bx bxl-facebook"></i>
             </a>
             <a href="https://www.youtube.com/@Gigways" class="footer__icon" aria-label="Gigways on youtube">
@@ -1387,568 +1806,607 @@
       </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js" crossorigin="anonymous"></script>
+    <!-- ✅ Page JS (pricing + form + POPUP modal) -->
+    <script>
+      (function () {
+        const $ = (s) => document.querySelector(s);
+        const $$ = (s) => Array.from(document.querySelectorAll(s));
 
-  <!-- ✅ Page JS (pricing + form + POPUP modal) -->
-  <script>
-    (function(){
-      const $ = s => document.querySelector(s);
-      const $$ = s => Array.from(document.querySelectorAll(s));
+        function formatMoney(n) {
+          const num = Number(n);
+          if (!isFinite(num)) return "$0";
+          return `$${num.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+        }
 
-      function formatMoney(n){
-        const num = Number(n);
-        if (!isFinite(num)) return '$0';
-        return `$${num.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
-      }
+        function parseDate(d) {
+          const dt = new Date(d);
+          return isNaN(dt.getTime()) ? null : dt;
+        }
 
-      function parseDate(d){
-        const dt = new Date(d);
-        return isNaN(dt.getTime()) ? null : dt;
-      }
+        function toYMD(dt) {
+          const y = dt.getFullYear();
+          const m = String(dt.getMonth() + 1).padStart(2, "0");
+          const d = String(dt.getDate()).padStart(2, "0");
+          return `${y}-${m}-${d}`;
+        }
 
-      // Local YYYY-MM-DD (no timezone surprises)
-      function toYMD(dt){
-        const y = dt.getFullYear();
-        const m = String(dt.getMonth() + 1).padStart(2, '0');
-        const d = String(dt.getDate()).padStart(2, '0');
-        return `${y}-${m}-${d}`;
-      }
+        function monthLabel(months) {
+          return `${months} month${months > 1 ? "s" : ""}`;
+        }
 
-      function monthLabel(months){ return `${months} month${months > 1 ? 's' : ''}`; }
+        function addMonthsLocal(date, months) {
+          const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+          const targetMonth = d.getMonth() + months;
+          const y = d.getFullYear() + Math.floor(targetMonth / 12);
+          const m = ((targetMonth % 12) + 12) % 12;
 
-      // Add months in local time, keep day as close as possible
-      function addMonthsLocal(date, months){
-        const d = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        const targetMonth = d.getMonth() + months;
-        const y = d.getFullYear() + Math.floor(targetMonth / 12);
-        const m = ((targetMonth % 12) + 12) % 12;
+          const lastDay = new Date(y, m + 1, 0).getDate();
+          const day = Math.min(d.getDate(), lastDay);
+          return new Date(y, m, day);
+        }
 
-        const lastDay = new Date(y, m + 1, 0).getDate();
-        const day = Math.min(d.getDate(), lastDay);
-        return new Date(y, m, day);
-      }
+        function durationPricePerCar(months) {
+          const m = parseInt(months, 10);
+          if (!isFinite(m) || m < 1) return { price: 0, negotiable: false, valid: false };
+          if (m > 3) return { price: 0, negotiable: true, valid: true };
+          if (m === 1) return { price: 450, negotiable: false, valid: true };
+          if (m === 2) return { price: 800, negotiable: false, valid: true };
+          return { price: 1150, negotiable: false, valid: true };
+        }
 
-      /* ✅ Duration pricing (per car, per campaign) */
-      function durationPricePerCar(months){
-        const m = parseInt(months, 10);
-        if (!isFinite(m) || m < 1) return { price: 0, negotiable: false, valid: false };
-        if (m > 3) return { price: 0, negotiable: true, valid: true };
-        if (m === 1) return { price: 600, negotiable: false, valid: true };
-        if (m === 2) return { price: 1100, negotiable: false, valid: true };
-        return { price: 1500, negotiable: false, valid: true }; // m === 3
-      }
+        function fleetDiscountPct(cars) {
+          const n = parseInt(cars, 10);
+          if (!isFinite(n) || n < 1) return { pct: 0, negotiable: false, valid: false };
 
-      /* ✅ Fleet discounts */
-      function fleetDiscountPct(cars){
-        const n = parseInt(cars, 10);
-        if (!isFinite(n) || n < 1) return { pct: 0, negotiable: false, valid: false };
+          if (n >= 16) return { pct: 0, negotiable: true, valid: true };
+          if (n >= 11) return { pct: 0.07, negotiable: false, valid: true };
+          if (n >= 5) return { pct: 0.05, negotiable: false, valid: true };
+          return { pct: 0, negotiable: false, valid: true };
+        }
 
-        if (n >= 16) return { pct: 0, negotiable: true, valid: true };
-        if (n >= 11) return { pct: 0.07, negotiable: false, valid: true };
-        if (n >= 5)  return { pct: 0.05, negotiable: false, valid: true };
-        return { pct: 0, negotiable: false, valid: true }; // 1–5
-      }
+        const BASE_INSTALL_FEE_PER_CAR = 0;
 
-      /* ✅ FREE INSTALL */
-      const BASE_INSTALL_FEE_PER_CAR = 0;
+        const form = $("#my-form");
+        const status = $("#my-form-status");
+        const btn = $("#my-form-button");
+        const spin = $("#btn-spin");
+        const btnText = $("#btn-text");
 
-      const form    = $('#my-form');
-      const status  = $('#my-form-status');
-      const btn     = $('#my-form-button');
-      const spin    = $('#btn-spin');
-      const btnText = $('#btn-text');
+        const carsEl = $("#car_count");
+        const startEl = $("#start_date");
+        const endEl = $("#end_date");
+        const monthsEl = $("#custom_months");
 
-      const carsEl  = $('#car_count');
-      const startEl = $('#start_date');
-      const endEl   = $('#end_date');
+        const estimateText = $("#estimateText");
+        const estimatePrice = $("#estimatePrice");
+        const estimateMeta = $("#estimateMeta");
+        const estimatePill = $("#estimatePill");
 
-      const monthsEl = $('#custom_months');
+        const monthsHidden = $("#campaign_months");
+        const rateHidden = $("#campaign_rate");
+        const totalHidden = $("#campaign_est_total");
+        const fleetHidden = $("#campaign_fleet_discount");
+        const fleetRateHidden = $("#campaign_fleet_discount_rate");
+        const installTotalHidden = $("#campaign_install_fee_total");
+        const installPerCarHidden = $("#campaign_install_fee_per_car");
 
-      const estimateText  = $('#estimateText');
-      const estimatePrice = $('#estimatePrice');
-      const estimateMeta  = $('#estimateMeta');
-      const estimatePill  = $('#estimatePill');
+        const sticky = $("#stickySummary");
+        const stickyClose = $("#stickyClose");
+        const stickyLine = $("#stickyLine");
+        const stickyPrice = $("#stickyPrice");
+        const stickyMeta = $("#stickyMeta");
+        let stickyDismissed = false;
 
-      const monthsHidden = $('#campaign_months');
-      const rateHidden   = $('#campaign_rate');
-      const totalHidden  = $('#campaign_est_total');
-      const fleetHidden  = $('#campaign_fleet_discount');
-      const fleetRateHidden = $('#campaign_fleet_discount_rate');
-      const installTotalHidden = $('#campaign_install_fee_total');
-      const installPerCarHidden = $('#campaign_install_fee_per_car');
+        if (stickyClose) {
+          stickyClose.addEventListener("click", () => {
+            stickyDismissed = true;
+            sticky.classList.add("hidden");
+          });
+        }
 
-      const sticky = $('#stickySummary');
-      const stickyClose = $('#stickyClose');
-      const stickyLine = $('#stickyLine');
-      const stickyPrice = $('#stickyPrice');
-      const stickyMeta = $('#stickyMeta');
-      let stickyDismissed = false;
+        const msg = $("#message");
+        const counter = $("#msg_counter");
+        if (msg && counter) {
+          const updateCount = () => (counter.textContent = `${msg.value.length} / 1200`);
+          msg.addEventListener("input", updateCount);
+          updateCount();
+        }
 
-      if (stickyClose){
-        stickyClose.addEventListener('click', ()=>{
-          stickyDismissed = true;
-          sticky.classList.add('hidden');
-        });
-      }
-
-      // Message counter
-      const msg = $('#message');
-      const counter = $('#msg_counter');
-      if (msg && counter){
-        const updateCount = () => counter.textContent = `${msg.value.length} / 1200`;
-        msg.addEventListener('input', updateCount);
-        updateCount();
-      }
-
-      // Ad type buttons (kept, even if not shown)
-      const adTypeHidden = $('#ad_type');
-      const adBtns = $$('.adtype-btn:not(.disabled)');
-      adBtns.forEach(b=>{
-        b.addEventListener('click', ()=>{
-          adBtns.forEach(x=>x.classList.remove('selected'));
-          b.classList.add('selected');
-          const pkg = b.getAttribute('data-package') || 'premium_magnet_vinyl';
-          if (adTypeHidden) adTypeHidden.value = pkg;
-          updatePricing();
-        });
-      });
-
-      // Design type buttons (hidden input)
-      const designHidden = $('#design_type');
-      const designBtns = $$('.design-btn');
-      designBtns.forEach(b=>{
-        b.addEventListener('click', ()=>{
-          designBtns.forEach(x=>x.classList.remove('selected'));
-          b.classList.add('selected');
-          const val = b.getAttribute('data-design') || 'arch_design';
-          if (designHidden) designHidden.value = val;
-        });
-      });
-
-      /* POPUP MODAL logic */
-      const modal = $('#designModal');
-      const modalClose = $('#designModalClose');
-      const modalTitle = $('#designModalTitle span');
-      const modalImg = $('#designModalImg');
-      const modalCap = $('#designModalCap');
-
-      function openModal({ title, img, cap }){
-        if (!modal) return;
-        modalTitle.textContent = title || 'Preview';
-        modalImg.src = img || '';
-        modalCap.textContent = cap || '';
-        modal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        modalClose?.focus();
-      }
-      function closeModal(){
-        if (!modal) return;
-        modal.classList.remove('open');
-        document.body.style.overflow = '';
-        modalImg.src = '';
-      }
-
-      $$('.design-view').forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          openModal({
-            title: btn.getAttribute('data-modal-title'),
-            img: btn.getAttribute('data-modal-img'),
-            cap: btn.getAttribute('data-modal-cap')
+        const adTypeHidden = $("#ad_type");
+        const adBtns = $$(".adtype-btn:not(.disabled)");
+        adBtns.forEach((b) => {
+          b.addEventListener("click", () => {
+            adBtns.forEach((x) => x.classList.remove("selected"));
+            b.classList.add("selected");
+            const pkg = b.getAttribute("data-package") || "premium_magnet_vinyl";
+            if (adTypeHidden) adTypeHidden.value = pkg;
+            updatePricing();
           });
         });
-      });
 
-      modalClose?.addEventListener('click', closeModal);
-      modal?.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
-      window.addEventListener('keydown', (e)=>{ if (e.key === 'Escape' && modal?.classList.contains('open')) closeModal(); });
+        const designHidden = $("#design_type");
+        const designBtns = $$(".design-btn");
+        designBtns.forEach((b) => {
+          b.addEventListener("click", () => {
+            designBtns.forEach((x) => x.classList.remove("selected"));
+            b.classList.add("selected");
+            const val = b.getAttribute("data-design") || "arch_design";
+            if (designHidden) designHidden.value = val;
+          });
+        });
 
-      function validateTimeline(){
-        const sd = parseDate(startEl?.value);
-        const ed = parseDate(endEl?.value);
-        if (sd && ed && ed < sd){
-          endEl.setCustomValidity('End date must be after the start date.');
-        } else {
-          endEl.setCustomValidity('');
+        const modal = $("#designModal");
+        const modalClose = $("#designModalClose");
+        const modalTitle = $("#designModalTitle span");
+        const modalImg = $("#designModalImg");
+        const modalCap = $("#designModalCap");
+
+        function openModal({ title, img, cap }) {
+          if (!modal) return;
+          modalTitle.textContent = title || "Preview";
+          modalImg.src = img || "";
+          modalCap.textContent = cap || "";
+          modal.classList.add("open");
+          document.body.style.overflow = "hidden";
+          modalClose?.focus();
         }
-      }
+        function closeModal() {
+          if (!modal) return;
+          modal.classList.remove("open");
+          document.body.style.overflow = "";
+          modalImg.src = "";
+        }
 
-      let syncing = false;
+        $$(".design-view").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            openModal({
+              title: btn.getAttribute("data-modal-title"),
+              img: btn.getAttribute("data-modal-img"),
+              cap: btn.getAttribute("data-modal-cap"),
+            });
+          });
+        });
 
-      // ✅ allow empty while typing
-      function clampMonthsToMin(raw){
-        if (raw === '' || raw == null) return null; // allow empty
-        const m = parseInt(raw, 10);
-        if (!isFinite(m)) return null;
-        return Math.max(1, m);
-      }
+        modalClose?.addEventListener("click", closeModal);
+        modal?.addEventListener("click", (e) => {
+          if (e.target === modal) closeModal();
+        });
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && modal?.classList.contains("open")) closeModal();
+        });
 
-      // ✅ Commit months on blur/change/Enter
-      function commitMonths(){
-        const clamped = clampMonthsToMin(monthsEl?.value);
-        const finalVal = (clamped == null) ? 1 : clamped;
-        if (monthsEl) monthsEl.value = String(finalVal);
-        return finalVal;
-      }
+        function validateTimeline() {
+          const sd = parseDate(startEl?.value);
+          const ed = parseDate(endEl?.value);
+          if (sd && ed && ed < sd) {
+            endEl.setCustomValidity("End date must be after the start date.");
+          } else {
+            endEl.setCustomValidity("");
+          }
+        }
 
-      function syncEndFromStartMonths(){
-        if (syncing) return;
+        let syncing = false;
 
-        const sd = parseDate(startEl?.value);
-        if (!sd) return;
+        function clampMonthsToMin(raw) {
+          if (raw === "" || raw == null) return null;
+          const m = parseInt(raw, 10);
+          if (!isFinite(m)) return null;
+          return Math.max(1, m);
+        }
 
-        const clamped = clampMonthsToMin(monthsEl?.value);
+        function commitMonths() {
+          const clamped = clampMonthsToMin(monthsEl?.value);
+          const finalVal = clamped == null ? 1 : clamped;
+          if (monthsEl) monthsEl.value = String(finalVal);
+          return finalVal;
+        }
 
-        // If user is still typing (empty), don't force anything
-        if (clamped == null) return;
+        function syncEndFromStartMonths() {
+          if (syncing) return;
 
-        syncing = true;
-        const endCandidate = addMonthsLocal(sd, clamped);
-        endCandidate.setDate(endCandidate.getDate() - 1);
-        endEl.value = toYMD(endCandidate);
-        syncing = false;
-      }
+          const sd = parseDate(startEl?.value);
+          if (!sd) return;
 
-      function syncMonthsFromDates(){
-        if (syncing) return;
+          const clamped = clampMonthsToMin(monthsEl?.value);
+          if (clamped == null) return;
 
-        const sd = parseDate(startEl?.value);
-        const ed = parseDate(endEl?.value);
-        if (!sd || !ed) return;
+          syncing = true;
+          const endCandidate = addMonthsLocal(sd, clamped);
+          endCandidate.setDate(endCandidate.getDate() - 1);
+          endEl.value = toYMD(endCandidate);
+          syncing = false;
+        }
 
-        syncing = true;
+        function syncMonthsFromDates() {
+          if (syncing) return;
 
-        const endPlus = new Date(ed.getFullYear(), ed.getMonth(), ed.getDate());
-        endPlus.setDate(endPlus.getDate() + 1);
+          const sd = parseDate(startEl?.value);
+          const ed = parseDate(endEl?.value);
+          if (!sd || !ed) return;
 
-        let months = (endPlus.getFullYear() - sd.getFullYear()) * 12 + (endPlus.getMonth() - sd.getMonth());
-        if (endPlus.getDate() < sd.getDate()) months -= 1;
+          syncing = true;
 
-        months = Math.max(1, months || 1);
-        if (monthsEl) monthsEl.value = String(months);
+          const endPlus = new Date(ed.getFullYear(), ed.getMonth(), ed.getDate());
+          endPlus.setDate(endPlus.getDate() + 1);
 
-        syncing = false;
-      }
+          let months =
+            (endPlus.getFullYear() - sd.getFullYear()) * 12 + (endPlus.getMonth() - sd.getMonth());
+          if (endPlus.getDate() < sd.getDate()) months -= 1;
 
-      startEl?.addEventListener('change', ()=>{
-        validateTimeline();
-        if (monthsEl && monthsEl.value === '') monthsEl.value = '1';
-        syncEndFromStartMonths();
-        updatePricing();
-      });
+          months = Math.max(1, months || 1);
+          if (monthsEl) monthsEl.value = String(months);
 
-      monthsEl?.addEventListener('input', ()=>{
-        updatePricing();
-      });
+          syncing = false;
+        }
 
-      monthsEl?.addEventListener('blur', ()=>{
-        commitMonths();
-        syncEndFromStartMonths();
-        updatePricing();
-      });
-      monthsEl?.addEventListener('change', ()=>{
-        commitMonths();
-        syncEndFromStartMonths();
-        updatePricing();
-      });
-      monthsEl?.addEventListener('keydown', (e)=>{
-        if (e.key === 'Enter'){
-          e.preventDefault();
+        startEl?.addEventListener("change", () => {
+          validateTimeline();
+          if (monthsEl && monthsEl.value === "") monthsEl.value = "1";
+          syncEndFromStartMonths();
+          updatePricing();
+        });
+
+        monthsEl?.addEventListener("input", () => {
+          updatePricing();
+        });
+
+        monthsEl?.addEventListener("blur", () => {
           commitMonths();
           syncEndFromStartMonths();
           updatePricing();
-          monthsEl.blur();
-        }
-      });
+        });
+        monthsEl?.addEventListener("change", () => {
+          commitMonths();
+          syncEndFromStartMonths();
+          updatePricing();
+        });
+        monthsEl?.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            commitMonths();
+            syncEndFromStartMonths();
+            updatePricing();
+            monthsEl.blur();
+          }
+        });
 
-      endEl?.addEventListener('change', ()=>{
-        validateTimeline();
-        syncMonthsFromDates();
-        updatePricing();
-      });
+        endEl?.addEventListener("change", () => {
+          validateTimeline();
+          syncMonthsFromDates();
+          updatePricing();
+        });
 
-      carsEl?.addEventListener('input', updatePricing);
+        carsEl?.addEventListener("input", updatePricing);
 
-      function computePricing({ months, numberOfCars }){
-        const m = parseInt(months, 10);
-        const cars = parseInt(numberOfCars, 10);
+        function computePricing({ months, numberOfCars }) {
+          const m = parseInt(months, 10);
+          const cars = parseInt(numberOfCars, 10);
 
-        const isValidMonths = isFinite(m) && m >= 1;
-        const isValidCars = isFinite(cars) && cars >= 1;
+          const isValidMonths = isFinite(m) && m >= 1;
+          const isValidCars = isFinite(cars) && cars >= 1;
 
-        if (!isValidMonths || !isValidCars){
-          return { error: !isValidMonths ? 'Enter a valid duration (1+ months).' : 'Enter a valid number of cars (1+).' };
-        }
+          if (!isValidMonths || !isValidCars) {
+            return { error: !isValidMonths ? "Enter a valid duration (1+ months)." : "Enter a valid number of cars (1+)." };
+          }
 
-        const dur = durationPricePerCar(m);
-        const fleet = fleetDiscountPct(cars);
+          const dur = durationPricePerCar(m);
+          const fleet = fleetDiscountPct(cars);
 
-        // Negotiable rules:
-        // months > 3 => negotiable (no estimate)
-        // cars >= 16 => negotiable (no estimate)
-        if (dur.negotiable || fleet.negotiable){
+          if (dur.negotiable || fleet.negotiable) {
+            return {
+              negotiable: true,
+              months: m,
+              numberOfCars: cars,
+              negotiableMonths: dur.negotiable,
+              negotiableFleet: fleet.negotiable,
+              error: "",
+            };
+          }
+
+          const perCarCampaign = dur.price;
+          const installFeePerCar = BASE_INSTALL_FEE_PER_CAR;
+          const installTotal = installFeePerCar * cars;
+
+          const subtotal = perCarCampaign * cars;
+          const discPct = fleet.pct;
+          const discountAmount = subtotal * discPct;
+          const total = subtotal - discountAmount + installTotal;
+
           return {
-            negotiable: true,
             months: m,
             numberOfCars: cars,
-            negotiableMonths: dur.negotiable,
-            negotiableFleet: fleet.negotiable,
-            error: ''
+            perCarCampaignTotal: perCarCampaign,
+            subtotal,
+            fleetDiscountPct: discPct,
+            fleetDiscountAmount: discountAmount,
+            installFeePerCar,
+            installTotal,
+            campaignTotal: total,
+            fleetApplied: discPct > 0,
+            error: "",
           };
         }
 
-        const perCarCampaign = dur.price; // per car for full campaign
-        const installFeePerCar = BASE_INSTALL_FEE_PER_CAR;
-        const installTotal = installFeePerCar * cars;
+        function updatePricing() {
+          const rawMonths = monthsEl ? monthsEl.value : "1";
+          const clamped = clampMonthsToMin(rawMonths);
 
-        const subtotal = perCarCampaign * cars;
-        const discPct = fleet.pct;
-        const discountAmount = subtotal * discPct;
-        const total = (subtotal - discountAmount) + installTotal;
+          if (clamped == null) {
+            if (monthsHidden) monthsHidden.value = "";
+            estimatePrice.textContent = "$0";
+            estimateText.textContent = "Enter months (1+) and number of cars to preview pricing.";
+            estimateMeta.textContent = "Final pricing confirmed after review.";
+            if (estimatePill) estimatePill.textContent = "Non-binding";
 
-        return {
-          months: m,
-          numberOfCars: cars,
-          perCarCampaignTotal: perCarCampaign,
+            if (sticky && !stickyDismissed) sticky.classList.add("hidden");
+            return;
+          }
 
-          subtotal,
-          fleetDiscountPct: discPct,
-          fleetDiscountAmount: discountAmount,
+          const months = clamped;
+          const cars = parseInt(carsEl?.value || 0, 10);
 
-          installFeePerCar,
-          installTotal,
-          campaignTotal: total,
+          if (monthsHidden) monthsHidden.value = String(months);
 
-          fleetApplied: discPct > 0,
-          error: ''
-        };
-      }
+          const result = computePricing({ months, numberOfCars: cars });
 
-      function updatePricing(){
-        const rawMonths = monthsEl ? monthsEl.value : '1';
-        const clamped = clampMonthsToMin(rawMonths);
+          if (result && result.negotiable) {
+            estimatePrice.textContent = "Negotiable";
 
-        // if empty/invalid while typing, don’t force to 1
-        if (clamped == null){
-          if (monthsHidden) monthsHidden.value = '';
-          estimatePrice.textContent = '$0';
-          estimateText.textContent = 'Enter months (1+) and number of cars to preview pricing.';
-          estimateMeta.textContent = 'Final pricing confirmed after review.';
-          if (estimatePill) estimatePill.textContent = 'Non-binding';
+            const reasons = [];
+            if (result.negotiableMonths) reasons.push("months 4+");
+            if (result.negotiableFleet) reasons.push("16+ cars");
 
-          if (sticky && !stickyDismissed) sticky.classList.add('hidden');
-          return;
-        }
+            estimateText.innerHTML =
+              `<strong>Premium Magnet Vinyl</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(
+                result.months
+              )}</strong><br>` +
+              `Pricing is <strong>custom / negotiable</strong> for <strong>${reasons.join(
+                " and "
+              )}</strong>.<br>` +
+              `Send your brief and we’ll confirm a quote for your campaign.`;
 
-        const months = clamped;
-        const cars = parseInt(carsEl?.value || 0, 10);
+            estimateMeta.textContent = "Final pricing confirmed after review.";
+            if (estimatePill) estimatePill.textContent = "Contact us";
 
-        if (monthsHidden) monthsHidden.value = String(months);
+            if (rateHidden) rateHidden.value = "";
+            if (totalHidden) totalHidden.value = "";
+            if (installTotalHidden) installTotalHidden.value = "";
+            if (installPerCarHidden) installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
+            if (fleetHidden) fleetHidden.value = "false";
+            if (fleetRateHidden) fleetRateHidden.value = "0";
 
-        const result = computePricing({ months, numberOfCars: cars });
+            if (sticky && !stickyDismissed) {
+              sticky.classList.remove("hidden");
+              stickyLine.textContent = `Premium Magnet Vinyl • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
+              stickyPrice.textContent = "Negotiable";
+              stickyMeta.textContent = `Custom pricing required for ${reasons.join(
+                " and "
+              )}. Submit brief for quote.`;
+            }
+            return;
+          }
 
-        if (result && result.negotiable){
-          estimatePrice.textContent = 'Negotiable';
+          if (result.error) {
+            estimatePrice.textContent = "$0";
+            estimateText.textContent = result.error;
+            estimateMeta.textContent = "Final pricing confirmed after review.";
+            if (estimatePill) estimatePill.textContent = "Non-binding";
 
-          const reasons = [];
-          if (result.negotiableMonths) reasons.push('months 4+');
-          if (result.negotiableFleet) reasons.push('16+ cars');
+            if (rateHidden) rateHidden.value = "";
+            if (totalHidden) totalHidden.value = "";
+            if (installTotalHidden) installTotalHidden.value = "";
+            if (installPerCarHidden) installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
+            if (fleetHidden) fleetHidden.value = "false";
+            if (fleetRateHidden) fleetRateHidden.value = "0";
+
+            if (sticky && !stickyDismissed) sticky.classList.add("hidden");
+            return;
+          }
+
+          if (rateHidden) rateHidden.value = String(result.perCarCampaignTotal);
+          if (totalHidden) totalHidden.value = String(result.campaignTotal);
+          if (installTotalHidden) installTotalHidden.value = String(result.installTotal);
+          if (installPerCarHidden) installPerCarHidden.value = String(result.installFeePerCar);
+          if (fleetHidden) fleetHidden.value = String(!!result.fleetApplied);
+          if (fleetRateHidden) fleetRateHidden.value = String((result.fleetDiscountPct * 100).toFixed(0));
+
+          estimatePrice.textContent = formatMoney(result.campaignTotal);
+          if (estimatePill) estimatePill.textContent = "Non-binding";
+
+          const fleetLine =
+            result.fleetDiscountPct > 0
+              ? `Fleet discount: <strong>${(result.fleetDiscountPct * 100).toFixed(0)}% off</strong> (${formatMoney(
+                  result.fleetDiscountAmount
+                )})`
+              : `Fleet discount: <strong>None</strong>`;
 
           estimateText.innerHTML =
-            `<strong>Premium Magnet Vinyl</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(result.months)}</strong><br>` +
-            `Pricing is <strong>custom / negotiable</strong> for <strong>${reasons.join(' and ')}</strong>.<br>` +
-            `Send your brief and we’ll confirm a quote for your campaign.`;
+            `<strong>Premium Magnet Vinyl</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(
+              result.months
+            )}</strong><br>` +
+            `Base price: <strong>${formatMoney(result.perCarCampaignTotal)}</strong> per car (campaign total)<br>` +
+            `Subtotal: <strong>${formatMoney(result.subtotal)}</strong><br>` +
+            `${fleetLine}<br>` +
+            `Install (one-time): <strong>Free</strong><br>` +
+            `Estimated campaign total: <strong>${formatMoney(result.campaignTotal)}</strong>`;
 
-          estimateMeta.textContent = 'Final pricing confirmed after review.';
-          if (estimatePill) estimatePill.textContent = 'Contact us';
+          const sd = parseDate(startEl?.value);
+          const ed = parseDate(endEl?.value);
+          estimateMeta.textContent = sd && ed ? `Timeline: ${sd.toLocaleDateString()} → ${ed.toLocaleDateString()}` : "Final pricing confirmed after review.";
 
-          if (rateHidden) rateHidden.value = '';
-          if (totalHidden) totalHidden.value = '';
-          if (installTotalHidden) installTotalHidden.value = '';
-          if (installPerCarHidden) installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
-          if (fleetHidden) fleetHidden.value = 'false';
-          if (fleetRateHidden) fleetRateHidden.value = '0';
-
-          if (sticky && !stickyDismissed){
-            sticky.classList.remove('hidden');
+          if (sticky && !stickyDismissed) {
+            sticky.classList.remove("hidden");
             stickyLine.textContent = `Premium Magnet Vinyl • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
-            stickyPrice.textContent = 'Negotiable';
-            stickyMeta.textContent = `Custom pricing required for ${reasons.join(' and ')}. Submit brief for quote.`;
+            stickyPrice.textContent = formatMoney(result.campaignTotal);
+
+            const discTag = result.fleetDiscountPct > 0 ? ` • fleet: ${(result.fleetDiscountPct * 100).toFixed(0)}% off` : "";
+            stickyMeta.textContent = `Base: ${formatMoney(result.perCarCampaignTotal)} per car (campaign total) • install: Free${discTag}.`;
           }
-          return;
         }
 
-        if (result.error){
-          estimatePrice.textContent = '$0';
-          estimateText.textContent = result.error;
-          estimateMeta.textContent = 'Final pricing confirmed after review.';
-          if (estimatePill) estimatePill.textContent = 'Non-binding';
+        const carImgInput = $("#car_images");
+        const carImgPrev = $("#car_img_preview");
+        const carImgErr = $("#car_img_err");
 
-          if (rateHidden) rateHidden.value = '';
-          if (totalHidden) totalHidden.value = '';
-          if (installTotalHidden) installTotalHidden.value = '';
-          if (installPerCarHidden) installPerCarHidden.value = String(BASE_INSTALL_FEE_PER_CAR);
-          if (fleetHidden) fleetHidden.value = 'false';
-          if (fleetRateHidden) fleetRateHidden.value = '0';
+        if (carImgInput) {
+          carImgInput.addEventListener("change", () => {
+            carImgErr.textContent = "";
+            carImgPrev.innerHTML = "";
+            const files = Array.from(carImgInput.files || []);
+            const MAX_FILES = 5,
+              MAX_SIZE = 8 * 1024 * 1024;
 
-          if (sticky && !stickyDismissed) sticky.classList.add('hidden');
-          return;
-        }
+            if (files.length > MAX_FILES) {
+              carImgErr.textContent = `Please select up to ${MAX_FILES} images.`;
+              carImgInput.value = "";
+              return;
+            }
+            if (files.some((f) => f.size > MAX_SIZE)) {
+              carImgErr.textContent = "Each image must be under 8MB.";
+              carImgInput.value = "";
+              return;
+            }
 
-        // Hidden fields
-        if (rateHidden) rateHidden.value = String(result.perCarCampaignTotal);
-        if (totalHidden) totalHidden.value = String(result.campaignTotal);
-        if (installTotalHidden) installTotalHidden.value = String(result.installTotal);
-        if (installPerCarHidden) installPerCarHidden.value = String(result.installFeePerCar);
-        if (fleetHidden) fleetHidden.value = String(!!result.fleetApplied);
-        if (fleetRateHidden) fleetRateHidden.value = String((result.fleetDiscountPct * 100).toFixed(0));
-
-        // UI text
-        estimatePrice.textContent = formatMoney(result.campaignTotal);
-        if (estimatePill) estimatePill.textContent = 'Non-binding';
-
-        const fleetLine = result.fleetDiscountPct > 0
-          ? `Fleet discount: <strong>${(result.fleetDiscountPct*100).toFixed(0)}% off</strong> (${formatMoney(result.fleetDiscountAmount)})`
-          : `Fleet discount: <strong>None</strong>`;
-
-        estimateText.innerHTML =
-          `<strong>Premium Magnet Vinyl</strong> • <strong>${result.numberOfCars} cars</strong> • <strong>${monthLabel(result.months)}</strong><br>` +
-          `Base price: <strong>${formatMoney(result.perCarCampaignTotal)}</strong> per car (campaign total)<br>` +
-          `Subtotal: <strong>${formatMoney(result.subtotal)}</strong><br>` +
-          `${fleetLine}<br>` +
-          `Install (one-time): <strong>Free</strong><br>` +
-          `Estimated campaign total: <strong>${formatMoney(result.campaignTotal)}</strong>`;
-
-        const sd = parseDate(startEl?.value);
-        const ed = parseDate(endEl?.value);
-        estimateMeta.textContent = (sd && ed)
-          ? `Timeline: ${sd.toLocaleDateString()} → ${ed.toLocaleDateString()}`
-          : 'Final pricing confirmed after review.';
-
-        if (sticky && !stickyDismissed){
-          sticky.classList.remove('hidden');
-          stickyLine.textContent = `Premium Magnet Vinyl • ${result.numberOfCars} cars • ${monthLabel(result.months)}`;
-          stickyPrice.textContent = formatMoney(result.campaignTotal);
-
-          const discTag = result.fleetDiscountPct > 0 ? ` • fleet: ${(result.fleetDiscountPct*100).toFixed(0)}% off` : '';
-          stickyMeta.textContent = `Base: ${formatMoney(result.perCarCampaignTotal)} per car (campaign total) • install: Free${discTag}.`;
-        }
-      }
-
-      // Images preview
-      const carImgInput = $('#car_images');
-      const carImgPrev  = $('#car_img_preview');
-      const carImgErr   = $('#car_img_err');
-
-      if (carImgInput){
-        carImgInput.addEventListener('change', ()=>{
-          carImgErr.textContent=''; carImgPrev.innerHTML='';
-          const files = Array.from(carImgInput.files||[]);
-          const MAX_FILES = 5, MAX_SIZE = 8*1024*1024;
-
-          if (files.length > MAX_FILES){
-            carImgErr.textContent = `Please select up to ${MAX_FILES} images.`;
-            carImgInput.value = '';
-            return;
-          }
-          if (files.some(f=>f.size>MAX_SIZE)){
-            carImgErr.textContent = 'Each image must be under 8MB.';
-            carImgInput.value = '';
-            return;
-          }
-
-          files.forEach(f=>{
-            const img = new Image();
-            img.alt = f.name;
-            const url = URL.createObjectURL(f);
-            img.onload = () => URL.revokeObjectURL(url);
-            img.src = url;
-            carImgPrev.appendChild(img);
+            files.forEach((f) => {
+              const img = new Image();
+              img.alt = f.name;
+              const url = URL.createObjectURL(f);
+              img.onload = () => URL.revokeObjectURL(url);
+              img.src = url;
+              carImgPrev.appendChild(img);
+            });
           });
+        }
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          status.className = "status";
+          status.textContent = "";
+
+          validateTimeline();
+          updatePricing();
+
+          if (!form.checkValidity()) {
+            status.className = "status err";
+            status.textContent = "Please complete the required fields.";
+            form.reportValidity();
+            return;
+          }
+
+          btn.disabled = true;
+          spin.style.display = "inline-block";
+          btnText.textContent = "Sending…";
+          try {
+            const res = await fetch(form.action, {
+              method: "POST",
+              body: new FormData(form),
+              headers: { Accept: "application/json" },
+            });
+
+            if (res.ok) {
+              form.reset();
+              if (monthsEl) monthsEl.value = "1";
+
+              syncEndFromStartMonths();
+              updatePricing();
+
+              if (carImgPrev) carImgPrev.innerHTML = "";
+              if (counter) counter.textContent = "0 / 1200";
+
+              status.className = "status ok";
+              status.textContent = "Thanks! We’ll follow up shortly.";
+              window.scrollTo({ top: document.getElementById("partner-card").offsetTop - 20, behavior: "smooth" });
+            } else {
+              status.className = "status err";
+              status.textContent = "Something went wrong. Please try again.";
+            }
+          } catch {
+            status.className = "status err";
+            status.textContent = "Network error. Please retry.";
+          } finally {
+            btn.disabled = false;
+            spin.style.display = "none";
+            btnText.textContent = "Send brief";
+          }
         });
-      }
 
-      form.addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        status.className='status'; status.textContent='';
+        if (window.ScrollReveal) {
+          ScrollReveal().reveal(".hero-card", { distance: "18px", duration: 650, origin: "bottom", easing: "ease-out", opacity: 0 });
+          ScrollReveal().reveal("#partner-card", { distance: "20px", duration: 650, origin: "bottom", easing: "ease-out", opacity: 0 });
+          ScrollReveal().reveal(".faq-wrap", { distance: "18px", duration: 650, origin: "bottom", easing: "ease-out", opacity: 0 });
+        }
 
-        validateTimeline();
         updatePricing();
+      })();
+    </script>
 
-        if (!form.checkValidity()){
-          status.className='status err';
-          status.textContent='Please complete the required fields.';
-          form.reportValidity();
-          return;
+    <script src="assets/js/main.js"></script>
+
+    <!-- ✅ FINAL THEME TOGGLE FIX (overrides any page mismatch) -->
+    <script>
+      (function () {
+        const root = document.documentElement;
+        const body = document.body;
+
+        const btn = document.getElementById("themeToggle");
+        const icon = document.getElementById("iconMS");
+
+        if (!btn || !icon) return;
+
+        function setIcon(isDark) {
+          icon.classList.remove("bx-moon", "bx-sun");
+          // Dark mode active -> show sun (meaning "switch to light")
+          icon.classList.add(isDark ? "bx-sun" : "bx-moon");
         }
 
-        btn.disabled=true; spin.style.display='inline-block'; btnText.textContent='Sending…';
-        try{
-          const res = await fetch(form.action,{
-            method:'POST',
-            body:new FormData(form),
-            headers:{Accept:'application/json'}
-          });
+        function applyTheme(theme) {
+          const isDark = theme === "dark";
 
-          if(res.ok){
-            form.reset();
+          // ✅ MUST MATCH your CSS: html.dark-theme = dark
+          root.classList.toggle("dark-theme", isDark);
 
-            if (monthsEl) monthsEl.value = '1';
+          // ✅ ALSO set body for any legacy styles in styles.css/main.js
+          body.classList.toggle("dark-theme", isDark);
 
-            const premiumBtn = document.querySelector('.adtype-btn[data-package="premium_magnet_vinyl"]');
-            if (premiumBtn){
-              adBtns.forEach(x=>x.classList.remove('selected'));
-              premiumBtn.classList.add('selected');
-            }
-            if (adTypeHidden) adTypeHidden.value = 'premium_magnet_vinyl';
-
-            const archBtn = document.querySelector('.design-btn[data-design="arch_design"]');
-            if (archBtn){
-              designBtns.forEach(x=>x.classList.remove('selected'));
-              archBtn.classList.add('selected');
-            }
-            if (designHidden) designHidden.value = 'arch_design';
-
-            // Only sync dates if start date exists
-            syncEndFromStartMonths();
-            updatePricing();
-
-            if (carImgPrev) carImgPrev.innerHTML='';
-            if (counter) counter.textContent = '0 / 1200';
-
-            status.className='status ok';
-            status.textContent='Thanks! We’ll follow up shortly.';
-            window.scrollTo({ top: document.getElementById('partner-card').offsetTop - 20, behavior:'smooth' });
-          }else{
-            status.className='status err';
-            status.textContent='Something went wrong. Please try again.';
-          }
-        }catch{
-          status.className='status err';
-          status.textContent='Network error. Please retry.';
-        }finally{
-          btn.disabled=false; spin.style.display='none'; btnText.textContent='Send brief';
+          localStorage.setItem("selected-theme", isDark ? "dark" : "light");
+          setIcon(isDark);
         }
+
+        function getTheme() {
+          const saved = localStorage.getItem("selected-theme");
+          if (saved === "dark" || saved === "light") return saved;
+          const prefersDark =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches;
+          return prefersDark ? "dark" : "light";
+        }
+
+        // Initial sync (fixes your “dim wrong” state)
+        applyTheme(getTheme());
+
+        // Click handler (guaranteed)
+        btn.addEventListener(
+          "click",
+          (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const isDarkNow = root.classList.contains("dark-theme") || body.classList.contains("dark-theme");
+            applyTheme(isDarkNow ? "light" : "dark");
+          },
+          { passive: false }
+        );
+      })();
+    </script>
+
+    <!-- ✅ Remove preload AFTER everything loads -->
+    <script>
+      window.addEventListener("load", () => {
+        document.documentElement.classList.remove("preload");
       });
-
-      if (window.ScrollReveal){
-        ScrollReveal().reveal('.hero-card',{ distance:'18px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
-        ScrollReveal().reveal('#partner-card',{ distance:'20px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
-        ScrollReveal().reveal('.faq-wrap',{ distance:'18px', duration:650, origin:'bottom', easing:'ease-out', opacity:0 });
-      }
-
-      // Initial
-      updatePricing();
-    })();
-  </script>
-
-  <script src="assets/js/main.js"></script>
-
-  <!-- ✅ Remove preload AFTER everything loads (prevents transition flash) -->
-  <script>
-    window.addEventListener("load", () => {
-      document.documentElement.classList.remove("preload");
-    });
-  </script>
-</body>
+    </script>
+  </body>
 </html>
+
