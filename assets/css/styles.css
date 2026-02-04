@@ -799,7 +799,7 @@ button {
     display: none;
   }
   .home {
-    padding: 10rem 0 2rem;
+    padding: 6rem 0 2rem;
   }
   .home__data {
     text-align: left;
@@ -2557,4 +2557,3 @@ button {
 #open-roles{ color:inherit; }
 #open-roles :is(h1,h2,h3,h4,p,li,span,.job__title,.job__meta,.job__card p,.job__body li,.badge,.bx){ color:inherit !important; }
 #open-roles a:not(.btn){ color:inherit !important; }
-
