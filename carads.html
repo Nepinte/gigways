@@ -1341,8 +1341,8 @@
 
                     <div class="tier-row" role="list" aria-label="Duration pricing tiers">
                       <div class="tier" role="listitem"><span>1 month</span><b>$450</b></div>
-                      <div class="tier" role="listitem"><span>2 months</span><b>$800</b></div>
-                      <div class="tier" role="listitem"><span>3 months</span><b>$1,150</b></div>
+                      <div class="tier" role="listitem"><span>2 months</span><b>$850</b></div>
+                      <div class="tier" role="listitem"><span>3 months</span><b>$1,200</b></div>
                       <div class="tier" role="listitem"><span>4+ months</span><b>Negotiable</b></div>
                     </div>
 
@@ -1352,14 +1352,14 @@
                   <div class="pb-card">
                     <div class="pb-card-top">
                       <span class="pb-kicker"><i class="bx bx-group"></i> Fleet discounts</span>
-                      <span class="pb-value">Up to <span class="pb-unit">7% off</span></span>
+                      <span class="pb-value">Up to <span class="pb-unit">10% off</span></span>
                     </div>
 
                     <div class="tier-row" role="list" aria-label="Fleet discount tiers">
-                      <div class="tier" role="listitem"><span>1–4 cars</span><b>0%</b></div>
-                      <div class="tier" role="listitem"><span>5–10 cars</span><b>5%</b></div>
-                      <div class="tier" role="listitem"><span>11–15 cars</span><b>7%</b></div>
-                      <div class="tier" role="listitem"><span>16+ cars</span><b>Negotiable</b></div>
+                      <div class="tier" role="listitem"><span>2–5 cars</span><b>5%</b></div>
+                      <div class="tier" role="listitem"><span>6–10 cars</span><b>7.5%</b></div>
+                      <div class="tier" role="listitem"><span>11–20 cars</span><b>10%</b></div>
+                      <div class="tier" role="listitem"><span>21+ cars</span><b>Negotiable</b></div>
                     </div>
 
                     <div class="pb-muted">Discounts apply to the campaign total (install remains free).</div>
@@ -1852,17 +1852,18 @@
           if (!isFinite(m) || m < 1) return { price: 0, negotiable: false, valid: false };
           if (m > 3) return { price: 0, negotiable: true, valid: true };
           if (m === 1) return { price: 450, negotiable: false, valid: true };
-          if (m === 2) return { price: 800, negotiable: false, valid: true };
-          return { price: 1150, negotiable: false, valid: true };
+          if (m === 2) return { price: 850, negotiable: false, valid: true };
+          return { price: 1200, negotiable: false, valid: true };
         }
 
         function fleetDiscountPct(cars) {
           const n = parseInt(cars, 10);
           if (!isFinite(n) || n < 1) return { pct: 0, negotiable: false, valid: false };
 
-          if (n >= 16) return { pct: 0, negotiable: true, valid: true };
-          if (n >= 11) return { pct: 0.07, negotiable: false, valid: true };
-          if (n >= 5) return { pct: 0.05, negotiable: false, valid: true };
+          if (n >= 21) return { pct: 0, negotiable: true, valid: true };
+          if (n >= 11) return { pct: 0.1, negotiable: false, valid: true };
+          if (n >= 6) return { pct: 0.07, negotiable: false, valid: true };
+          if (n >= 2) return { pct: 0.05, negotiable: false, valid: true };
           return { pct: 0, negotiable: false, valid: true };
         }
 
@@ -2409,4 +2410,5 @@
     </script>
   </body>
 </html>
+
 
