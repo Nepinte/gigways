@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Terms of Use | Gigways</title>
+  <meta
+    name="description"
+    content="Gigways Terms of Use - Professional legal terms governing access to and use of the Gigways app, website, and related services."
+  />
+  <link rel="canonical" href="https://gigways.com/terms-of-use" />
+
+  <link rel="icon" href="assets/img/App.png" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Global site styles -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       POLISH PACK for Terms of Use page (matches Privacy Policy page)
+       ========================================================= */
+
+    :root {
+      --pp-bg: var(--first-color, #0f0f12);
+      --pp-fg: var(--second-color, #f2f2f2);
+      --pp-muted: var(--text-color-light, rgba(255,255,255,.72));
+
+      --pp-glass: var(--glass, rgba(255, 255, 255, 0.07));
+      --pp-glass-bd: var(--glass-bd, rgba(255, 255, 255, 0.12));
+      --pp-chip-bg: var(--chip-bg, rgba(255,255,255,0.06));
+      --pp-chip-bd: var(--chip-bd, rgba(255,255,255,0.10));
+
+      --pp-accent: var(--third-color, #bfa889);
+      --pp-accent2: rgba(143, 122, 91, 1);
+
+      --pp-radius-xl: 28px;
+      --pp-radius-lg: 20px;
+      --pp-radius-md: 14px;
+
+      --pp-shadow-xl: 0 24px 70px rgba(0, 0, 0, 0.22);
+      --pp-shadow-lg: 0 14px 40px rgba(0, 0, 0, 0.20);
+      --pp-shadow-md: 0 10px 24px rgba(0, 0, 0, 0.18);
+
+      --pp-ring: 0 0 0 4px rgba(191, 168, 137, 0.28);
+
+      --pp-maxw: 1200px;
+      --pp-font: var(--body-font, "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif);
+      --pp-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    html { overflow-y: scroll; scroll-behavior: smooth; }
+    body {
+      font-family: var(--pp-font);
+      background: var(--pp-bg);
+      color: var(--pp-fg);
+      overflow-x: hidden;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; animation: none !important; }
+    }
+
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(191,168,137,.12), transparent 45%),
+        radial-gradient(circle at 80% 90%, rgba(143,122,91,.10), transparent 45%),
+        linear-gradient(to bottom, rgba(255,255,255,.03), transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bubble-container { position: relative; z-index: 0; }
+
+    .policy.section {
+      max-width: 100%;
+      padding-top: calc(var(--header-height, 72px) + 2.25rem);
+      padding-bottom: 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .policy.section::before {
+      content: "";
+      position: absolute;
+      top: -220px;
+      left: -220px;
+      width: 720px;
+      height: 720px;
+      background: radial-gradient(circle, rgba(191, 168, 137, 0.18) 0%, transparent 70%);
+      filter: blur(2px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .policy.section::after {
+      content: "";
+      position: absolute;
+      bottom: -260px;
+      right: -260px;
+      width: 760px;
+      height: 760px;
+      background: radial-gradient(circle, rgba(143, 122, 91, 0.16) 0%, transparent 70%);
+      filter: blur(2px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .pl-container {
+      width: min(var(--pp-maxw), 100%);
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .pl-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 1.25rem;
+      align-items: start;
+    }
+    @media (max-width: 980px) { .pl-grid { grid-template-columns: 1fr; } }
+
+    .pl-hero {
+      border-radius: var(--pp-radius-xl);
+      border: 1px solid var(--pp-glass-bd);
+      background: var(--pp-glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--pp-shadow-xl);
+      padding: 2.1rem;
+      margin-bottom: 1.15rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pl-hero::before {
+      content: "";
+      position: absolute;
+      top: -160px;
+      left: -140px;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(191, 168, 137, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pl-hero::after {
+      content: "";
+      position: absolute;
+      bottom: -180px;
+      right: -160px;
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, rgba(143, 122, 91, 0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .pl-hero > * { position: relative; z-index: 1; }
+
+    .pl-kicker {
+      display: inline-flex;
+      gap: 0.55rem;
+      align-items: center;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      background: var(--button-grad, linear-gradient(135deg, #bfa889, #8f7a5b));
+      font-weight: 900;
+      font-size: 0.9rem;
+      color: white;
+      letter-spacing: .02em;
+      box-shadow: 0 10px 26px rgba(143, 122, 91, 0.28);
+    }
+    .pl-kicker i { font-size: 1.15rem; }
+
+    .pl-title {
+      margin: 0.85rem 0 0.65rem;
+      font-size: clamp(2.05rem, 3.6vw, 3.05rem);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--pp-fg);
+      font-weight: 950;
+    }
+
+    .pl-meta {
+      margin: 0;
+      color: var(--pp-muted);
+      line-height: 1.7;
+      font-size: 0.98rem;
+      max-width: 80ch;
+    }
+
+    .pl-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.25rem;
+    }
+
+    .pl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.7rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid var(--pp-chip-bd);
+      background: var(--pp-chip-bg);
+      color: var(--pp-fg);
+      font-weight: 800;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      user-select: none;
+      text-decoration: none;
+    }
+    .pl-btn i { font-size: 1.05rem; color: var(--pp-accent); }
+    .pl-btn:hover { transform: translateY(-1px); box-shadow: var(--pp-shadow-md); border-color: rgba(191,168,137,.35); }
+    .pl-btn:active { transform: translateY(0px); }
+    .pl-btn:focus-visible { outline: none; box-shadow: var(--pp-ring); }
+
+    .pl-note {
+      margin-top: 1.25rem;
+      border-radius: var(--pp-radius-lg);
+      border: 1px solid var(--pp-chip-bd);
+      background: var(--pp-chip-bg);
+      padding: 1rem 1.15rem;
+      color: var(--pp-muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+    .pl-note strong { color: var(--pp-fg); }
+
+    .pl-toc {
+      position: sticky;
+      top: calc(var(--header-height, 72px) + 1rem);
+      border-radius: var(--pp-radius-xl);
+      border: 1px solid var(--pp-glass-bd);
+      background: var(--pp-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--pp-shadow-lg);
+      padding: 1.1rem;
+      overflow: hidden;
+    }
+    @media (max-width: 980px) { .pl-toc { position: relative; top: auto; } }
+
+    .pl-toc__head{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: .75rem;
+      padding: .65rem .75rem .8rem;
+      border-radius: 16px;
+      border: 1px solid var(--pp-chip-bd);
+      background: rgba(0,0,0,0.06);
+    }
+    .pl-toc__title{
+      display:flex;
+      align-items:center;
+      gap:.55rem;
+      font-weight: 950;
+      letter-spacing: -0.01em;
+      color: var(--pp-fg);
+    }
+    .pl-toc__title i{ color: var(--pp-accent); font-size: 1.15rem; }
+    .pl-toc__small{
+      font-size: .85rem;
+      color: var(--pp-muted);
+      font-family: var(--pp-mono);
+    }
+
+    .pl-toc__list{
+      margin: .9rem 0 0;
+      padding: 0.25rem 0.25rem 0.2rem;
+      list-style: none;
+      max-height: 62vh;
+      overflow: auto;
+      scrollbar-width: thin;
+    }
+    .pl-toc__list::-webkit-scrollbar { width: 10px; }
+    .pl-toc__list::-webkit-scrollbar-thumb {
+      background: rgba(191,168,137,.25);
+      border-radius: 999px;
+      border: 3px solid transparent;
+      background-clip: content-box;
+    }
+
+    .pl-toc__list a{
+      display:flex;
+      gap:.6rem;
+      align-items:flex-start;
+      padding: .65rem .7rem;
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--pp-muted);
+      border: 1px solid transparent;
+      transition: background .15s ease, border-color .15s ease, transform .15s ease;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .pl-toc__list a:hover{
+      background: rgba(191,168,137,.10);
+      border-color: rgba(191,168,137,.20);
+      color: var(--pp-fg);
+      transform: translateY(-1px);
+    }
+    .pl-toc__dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(191,168,137,.35);
+      margin-top: .2rem;
+      flex: 0 0 auto;
+      box-shadow: 0 0 0 3px rgba(191,168,137,.12);
+    }
+
+    .pl-card {
+      border-radius: var(--pp-radius-xl);
+      border: 1px solid var(--pp-glass-bd);
+      background: var(--pp-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--pp-shadow-lg);
+      padding: 2.25rem;
+    }
+
+    @media (max-width: 768px) {
+      .pl-container { padding-inline: 1rem; }
+      .pl-hero { padding: 1.55rem; }
+      .pl-card { padding: 1.55rem; }
+      .pl-title { font-size: 2.05rem; }
+    }
+
+    .pl-card a { color: var(--pp-accent); font-weight: 900; text-decoration: none; }
+    .pl-card a:hover { text-decoration: underline; }
+
+    .pl-card h2 {
+      margin: 2.25rem 0 0.85rem;
+      font-size: 1.38rem;
+      font-weight: 950;
+      color: var(--pp-accent);
+      letter-spacing: -0.01em;
+      scroll-margin-top: calc(var(--header-height, 72px) + 1.25rem);
+    }
+    .pl-card h2:first-of-type { margin-top: 0; }
+
+    .pl-card h3 {
+      margin: 1.25rem 0 0.55rem;
+      font-size: 1.05rem;
+      font-weight: 950;
+      color: var(--pp-fg);
+    }
+
+    .pl-card p {
+      margin: 0 0 1rem;
+      color: var(--pp-muted);
+      line-height: 1.85;
+      font-size: 0.985rem;
+    }
+
+    .pl-card ul { margin: 0.35rem 0 1.35rem 1.2rem; padding: 0; }
+    .pl-card li { margin: 0.6rem 0; color: var(--pp-muted); line-height: 1.75; font-size: 0.985rem; }
+
+    .section { padding: 0; margin: 0 0 1.25rem; }
+
+    .pl-callout {
+      margin: 1.15rem 0 1.35rem;
+      padding: 1rem 1.1rem;
+      border-radius: var(--pp-radius-lg);
+      border: 1px solid rgba(191,168,137,.22);
+      background: linear-gradient(180deg, rgba(191,168,137,.10), rgba(191,168,137,.06));
+      box-shadow: 0 10px 28px rgba(0,0,0,.12);
+      color: var(--pp-muted);
+    }
+    .pl-callout strong { color: var(--pp-fg); }
+
+    .pl-divider {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(to right, transparent, rgba(191,168,137,.35), transparent);
+      margin: 1.75rem 0 0.25rem;
+      border: 0;
+    }
+
+    .pl-top {
+      position: fixed;
+      right: 1.15rem;
+      bottom: 1.15rem;
+      z-index: 50;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .pl-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .pl-top button{
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid rgba(191,168,137,.35);
+      background: rgba(0,0,0,.18);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: var(--pp-shadow-md);
+      cursor: pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--pp-fg);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .pl-top button:hover{ transform: translateY(-1px); box-shadow: var(--pp-shadow-lg); }
+    .pl-top button:focus-visible{ outline:none; box-shadow: var(--pp-ring); }
+    .pl-top i{ font-size: 1.25rem; color: var(--pp-accent); }
+
+    @media print {
+      body::before, .bubble-container, .pl-top, .pl-toc { display: none !important; }
+      body { background: white !important; color: #111 !important; }
+      .pl-hero, .pl-card { background: white !important; border: 1px solid #ddd !important; box-shadow: none !important; }
+      .pl-card p, .pl-card li, .pl-meta { color: #333 !important; }
+      .pl-card a { color: #111 !important; text-decoration: underline !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bubble-container"></div>
+
+  <!-- HEADER -->
+  <header class="l-header">
+    <nav class="nav bd-grid">
+      <div><a href="index.html" class="nav__logo">Gigways</a></div>
+      <!-- Keep your normal nav/menu here if you want -->
+    </nav>
+  </header>
+
+  <main class="l-main">
+    <section class="policy section">
+      <div class="pl-container">
+
+        <!-- HERO -->
+        <div class="pl-hero" id="top">
+          <span class="pl-kicker"><i class="bx bx-file"></i> Terms & Conditions</span>
+          <h1 class="pl-title">Terms of Use – Gigways</h1>
+          <p class="pl-meta">
+            Effective Date: March 11, 2025 | Version: 1.0 | Last Revised: December 26, 2025
+            <br />
+            These Terms of Use are a legally binding agreement between you and Gigways LLC. Please read them carefully.
+          </p>
+
+          <div class="pl-actions">
+            <button class="pl-btn" type="button" id="ppPrint">
+              <i class="bx bx-printer"></i> Print
+            </button>
+            <button class="pl-btn" type="button" id="ppCopyLink">
+              <i class="bx bx-link"></i> Copy Page Link
+            </button>
+            <a class="pl-btn" href="privacy-policy.html">
+              <i class="bx bx-shield-quarter"></i> Privacy Policy
+            </a>
+            <a class="pl-btn" href="mailto:support@gigways.com">
+              <i class="bx bx-envelope"></i> Contact Support
+            </a>
+          </div>
+
+          <div class="pl-note">
+            <strong>Notice:</strong> By accessing, installing, registering for, previewing, or using the Gigways Services, you acknowledge that you
+            have read, understood, and agree to be bound by these Terms. If you do not agree, you must not use the Services.
+          </div>
+        </div>
+
+        <div class="pl-grid">
+          <!-- TOC -->
+          <aside class="pl-toc" aria-label="Terms of Use Table of Contents">
+            <div class="pl-toc__head">
+              <div class="pl-toc__title"><i class="bx bx-list-ul"></i> Contents</div>
+              <div class="pl-toc__small">v1.0</div>
+            </div>
+
+            <ul class="pl-toc__list">
+              <li><a href="#summary"><span class="pl-toc__dot"></span> Summary at a Glance</a></li>
+              <li><a href="#s1"><span class="pl-toc__dot"></span> 1. Definitions</a></li>
+              <li><a href="#s2"><span class="pl-toc__dot"></span> 2. Acceptance; Binding Agreement</a></li>
+              <li><a href="#s3"><span class="pl-toc__dot"></span> 3. Eligibility; Age Requirements</a></li>
+              <li><a href="#s4"><span class="pl-toc__dot"></span> 4. Scope of Services; No Professional Advice</a></li>
+              <li><a href="#s5"><span class="pl-toc__dot"></span> 5. Accounts; Security; User Responsibilities</a></li>
+              <li><a href="#s6"><span class="pl-toc__dot"></span> 6. Licenses; App Use; Restrictions</a></li>
+              <li><a href="#s7"><span class="pl-toc__dot"></span> 7. Community Features; User Content; Moderation</a></li>
+              <li><a href="#s8"><span class="pl-toc__dot"></span> 8. Safety; Driving; Device Use</a></li>
+              <li><a href="#s9"><span class="pl-toc__dot"></span> 9. Private Trips: Coordination Only; No Transportation/Delivery Services</a></li>
+              <li><a href="#s10"><span class="pl-toc__dot"></span> 10. Driver Density Map; Aggregation; Opt-In</a></li>
+              <li><a href="#s11"><span class="pl-toc__dot"></span> 11. Drivers Benefits; Third-Party Links; Affiliate Disclosures</a></li>
+              <li><a href="#s12"><span class="pl-toc__dot"></span> 12. Car Ads / Vehicle Advertising (If Offered)</a></li>
+              <li><a href="#s13"><span class="pl-toc__dot"></span> 13. Subscriptions; Apple In-App Purchases; Billing; Refunds</a></li>
+              <li><a href="#s14"><span class="pl-toc__dot"></span> 14. Intellectual Property; Trademarks</a></li>
+              <li><a href="#s15"><span class="pl-toc__dot"></span> 15. Prohibited Conduct</a></li>
+              <li><a href="#s16"><span class="pl-toc__dot"></span> 16. Disclaimers; “As Is” Services</a></li>
+              <li><a href="#s17"><span class="pl-toc__dot"></span> 17. Limitation of Liability</a></li>
+              <li><a href="#s18"><span class="pl-toc__dot"></span> 18. Indemnification</a></li>
+              <li><a href="#s19"><span class="pl-toc__dot"></span> 19. Termination; Suspension; Enforcement</a></li>
+              <li><a href="#s20"><span class="pl-toc__dot"></span> 20. Changes to Services and Terms</a></li>
+              <li><a href="#s21"><span class="pl-toc__dot"></span> 21. Governing Law; Jurisdiction; Venue</a></li>
+              <li><a href="#s22"><span class="pl-toc__dot"></span> 22. Miscellaneous; Severability; Assignment</a></li>
+              <li><a href="#s23"><span class="pl-toc__dot"></span> 23. Contact Information</a></li>
+            </ul>
+          </aside>
+
+          <!-- CONTENT -->
+          <article class="pl-card">
+
+            <div class="section" id="summary">
+              <h2>Summary at a Glance</h2>
+              <p>
+                The following summary is provided for convenience only and does not replace the full Terms below. In plain language:
+              </p>
+              <ul>
+                <li><strong>Binding agreement:</strong> By using Gigways, you agree to these Terms and our <a href="privacy-policy.html">Privacy Policy</a>.</li>
+                <li><strong>You’re responsible:</strong> You control your account, your device, your safety, and your compliance with laws.</li>
+                <li><strong>Optional features:</strong> Community Features, Private Trips, Driver Density Map, Drivers Benefits, and Car Ads (if offered) are optional.</li>
+                <li><strong>No transportation/delivery services:</strong> Gigways is a software tool and coordination platform, not a transportation, courier, or delivery provider.</li>
+                <li><strong>Payments:</strong> Premium subscriptions (if available) are handled by Apple In-App Purchases; Gigways does not store card details.</li>
+                <li><strong>Enforcement:</strong> We may moderate content and suspend or terminate accounts for safety, fraud, abuse, or violations.</li>
+              </ul>
+
+              <div class="pl-callout">
+                <strong>Safety First:</strong> Do not use the Services in a manner that distracts you while driving or operating a vehicle.
+                You assume all risks associated with your actions and decisions.
+              </div>
+
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s1">
+              <h2>1. Definitions</h2>
+              <p>
+                For purposes of these Terms: “<strong>Gigways</strong>,” “<strong>we</strong>,” “<strong>our</strong>,” or “<strong>us</strong>”
+                refers to Gigways LLC. “<strong>You</strong>” or “<strong>User</strong>” means any person or entity who accesses or uses the Services.
+                “<strong>Services</strong>” means the Gigways mobile application, website, and any related tools, content, features, and services we make
+                available, including features available prior to login. “<strong>User Content</strong>” means any content you submit, post, upload, or
+                otherwise make available through the Services (including posts, comments, likes, images, reports, or other materials).
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s2">
+              <h2>2. Acceptance; Binding Agreement</h2>
+              <p>
+                These Terms constitute a legally binding agreement between you and Gigways. By clicking <strong>“Accept,” “I Agree,” “Agree,” “Continue,”
+                “Get Started,” “Sign Up,”</strong> or <strong>“Log In,”</strong> or by otherwise accessing, installing, registering for, previewing, or
+                using the Services (including any features available before login), you acknowledge that you have read, understood, and agree to be
+                bound by these Terms and our <a href="privacy-policy.html">Privacy Policy</a>.
+              </p>
+              <p>
+                If you do not agree, you must not access or use the Services.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s3">
+              <h2>3. Eligibility; Age Requirements</h2>
+              <p>
+                You must be at least 13 years old (or the minimum age required by your jurisdiction) to use the Services. If you are under the age of
+                majority where you live, you represent that you have permission from a parent or legal guardian to use the Services and that your parent
+                or guardian agrees to these Terms on your behalf.
+              </p>
+              <p>
+                You may not use the Services where prohibited by applicable law, and you represent and warrant that your use of the Services complies with
+                all laws, rules, and regulations applicable to you.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s4">
+              <h2>4. Scope of Services; No Professional Advice</h2>
+              <p>
+                The Services are intended to provide organizational tools and optional community and coordination features tailored to the gig economy.
+                The Services may present information, reminders, summaries, or calculations based on data you enter or permissions you enable.
+                <strong>The Services do not provide legal, tax, financial, insurance, medical, or professional advice.</strong> You are solely responsible
+                for verifying any information and for consulting qualified professionals regarding your specific circumstances.
+              </p>
+              <p>
+                Gigways does not guarantee earnings, work availability, business outcomes, tax treatment, deductions, or compliance readiness.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s5">
+              <h2>5. Accounts; Security; User Responsibilities</h2>
+              <p>
+                Certain portions of the Services may require you to create an account. You agree to provide accurate information, keep it up to date, and
+                maintain the confidentiality of your login credentials. You are responsible for all activities that occur under your account.
+              </p>
+              <ul>
+                <li><strong>Security incidents:</strong> You must notify us promptly if you suspect unauthorized access or a security incident.</li>
+                <li><strong>Your equipment:</strong> You are responsible for your device, operating system, data plan, and network access required to use the Services.</li>
+                <li><strong>Data accuracy:</strong> You are responsible for the completeness and correctness of data you input or upload.</li>
+              </ul>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s6">
+              <h2>6. Licenses; App Use; Restrictions</h2>
+              <p>
+                Subject to your compliance with these Terms, Gigways grants you a limited, non-exclusive, non-transferable, revocable license to access
+                and use the Services for your personal, lawful purposes. You agree not to copy, modify, distribute, sell, lease, reverse engineer, or
+                attempt to extract the source code of the Services except as permitted by law.
+              </p>
+              <p>
+                We reserve all rights not expressly granted to you.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s7">
+              <h2>7. Community Features; User Content; Moderation</h2>
+              <p>
+                The Services may include optional “Community Features” (such as posts, likes, comments, and reporting tools). Community Features are
+                voluntary and may be disabled, limited, or removed at our discretion.
+              </p>
+              <h3>7.1 User Content License</h3>
+              <p>
+                You retain ownership of your User Content. However, by submitting User Content, you grant Gigways a worldwide, non-exclusive, royalty-free
+                license to host, store, reproduce, display, and process your User Content solely for the purpose of operating, improving, securing, and
+                enforcing the Services and these Terms.
+              </p>
+              <h3>7.2 Moderation and Enforcement</h3>
+              <p>
+                We may, but are not obligated to, monitor, review, remove, or restrict User Content and accounts. We may take enforcement actions,
+                including warnings, content removal, feature restrictions, or suspension/termination where we believe it is necessary to protect users,
+                prevent fraud, comply with law, or enforce these Terms.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s8">
+              <h2>8. Safety; Driving; Device Use</h2>
+              <p>
+                You agree to use the Services responsibly and safely. Do not use the Services in a manner that distracts you while driving, operating a
+                vehicle, or performing any activity requiring attention. You are solely responsible for complying with traffic laws, safety rules, and
+                any platform policies applicable to your gig work.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s9">
+              <h2>9. Private Trips: Coordination Only; No Transportation/Delivery Services</h2>
+              <p>
+                “Private Trips” is an optional coordination feature intended to help users coordinate <strong>friends rides, food pickup, and parcel drop</strong>
+                with individuals they personally know and trust (typically via mutually added contacts). Private Trips is not an on-demand marketplace and
+                is not intended to connect strangers.
+              </p>
+              <h3>9.1 No Transportation, Delivery, Logistics, or Dispatch Services</h3>
+              <p>
+                Gigways is not a Transportation Network Company (TNC), ride-hailing service, taxi, courier, dispatcher, commercial transportation provider,
+                food delivery provider, or logistics platform. Gigways does not operate vehicles, does not screen or supervise users, and does not direct
+                or control any activity arranged through Private Trips.
+              </p>
+              <h3>9.2 Payments Outside of Gigways</h3>
+              <p>
+                Any contribution, reimbursement, or payment between users is optional and occurs outside of Gigways. Gigways does not process, track, or
+                manage payments for Private Trips.
+              </p>
+              <h3>9.3 Assumption of Risk</h3>
+              <p>
+                Private Trips are private arrangements between users. You assume all risks associated with rides, food pickup, parcel drop, and any
+                interactions with other users, including risks of accidents, injury, theft, disputes, or misconduct.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s10">
+              <h2>10. Driver Density Map; Aggregation; Opt-In</h2>
+              <p>
+                If offered, the Driver Density Map displays aggregated, anonymized information derived from users who opt in. We do not display individual
+                users’ precise locations. Participation is voluntary, and you may disable sharing at any time through settings and device permissions.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s11">
+              <h2>11. Drivers Benefits; Third-Party Links; Affiliate Disclosures</h2>
+              <p>
+                We may offer optional “Drivers Benefits” such as partner offers, discounts, and affiliate links. Third-party sites and services are not
+                controlled by Gigways, and your interactions with them are governed by their own terms and privacy policies.
+              </p>
+              <ul>
+                <li><strong>External links:</strong> Clicking a partner link may take you to a third-party service.</li>
+                <li><strong>Affiliate relationships:</strong> Where applicable, Gigways may receive a commission from affiliate links at no extra cost to you.</li>
+                <li><strong>No endorsement:</strong> Unless expressly stated, we do not guarantee third-party offerings, pricing, or availability.</li>
+              </ul>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s12">
+              <h2>12. Car Ads / Vehicle Advertising (If Offered)</h2>
+              <p>
+                Gigways may offer optional Car Ads / vehicle advertising programs that connect drivers who display advertisements on vehicles with advertisers
+                running campaigns. Participation is voluntary for both drivers and advertisers. Additional eligibility requirements, verification steps, and
+                program rules may apply and may be presented separately within the Services.
+              </p>
+              <p>
+                Drivers acknowledge that vehicles displaying advertisements may be visible in public and may be photographed or recorded by members of the public.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s13">
+              <h2>13. Subscriptions; Apple In-App Purchases; Billing; Refunds</h2>
+              <p>
+                Gigways may offer premium features through Apple In-App Purchases (IAP). Apple controls payment processing, billing, renewals, cancellations,
+                and refund decisions. Gigways does not store your payment card details.
+              </p>
+              <ul>
+                <li><strong>Manage subscriptions:</strong> Settings → Your Name → Subscriptions</li>
+                <li><strong>Refunds:</strong> Refunds must be requested from Apple.</li>
+              </ul>
+              <p>
+                Apple “Report a Problem”: <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener noreferrer">reportaproblem.apple.com</a>
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s14">
+              <h2>14. Intellectual Property; Trademarks</h2>
+              <p>
+                The Services, including all software, designs, text, graphics, logos, trademarks, and other content (excluding User Content) are owned by
+                Gigways or its licensors and are protected by intellectual property laws. You may not use our trademarks without prior written permission.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s15">
+              <h2>15. Prohibited Conduct</h2>
+              <p>You agree not to, and not to assist others to:</p>
+              <ul>
+                <li>Use the Services for unlawful, harmful, abusive, deceptive, or fraudulent purposes.</li>
+                <li>Attempt to interfere with, disrupt, compromise, or circumvent security features or access controls.</li>
+                <li>Reverse engineer, decompile, or attempt to extract the source code except where permitted by law.</li>
+                <li>Scrape or harvest information without authorization.</li>
+                <li>Post spam, impersonate others, or publish private information without permission.</li>
+              </ul>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s16">
+              <h2>16. Disclaimers; “As Is” Services</h2>
+              <p>
+                The Services are provided on an “as is” and “as available” basis. To the maximum extent permitted by law, Gigways disclaims all warranties,
+                express or implied, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
+              </p>
+              <p>
+                We do not warrant that the Services will be uninterrupted, error-free, secure, or free of harmful components, or that any defects will be
+                corrected.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s17">
+              <h2>17. Limitation of Liability</h2>
+              <p>
+                To the fullest extent permitted by law, Gigways shall not be liable for any indirect, incidental, special, consequential, exemplary, or
+                punitive damages, or any loss of profits, revenue, data, goodwill, or other intangible losses arising out of or related to your access to,
+                use of, or inability to use the Services.
+              </p>
+              <p>
+                In no event shall Gigways’ total liability for any claim exceed the amount you paid to Gigways (if any) for the Services in the twelve (12)
+                months preceding the event giving rise to the claim, or one hundred dollars ($100), whichever is greater, unless prohibited by law.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s18">
+              <h2>18. Indemnification</h2>
+              <p>
+                You agree to indemnify, defend, and hold harmless Gigways LLC and its affiliates, officers, directors, employees, contractors, and agents
+                from and against any claims, liabilities, damages, losses, and expenses (including reasonable attorneys’ fees) arising out of or related to:
+                (a) your use of the Services; (b) your User Content; (c) your violation of these Terms; or (d) your violation of any law or the rights of any
+                third party.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s19">
+              <h2>19. Termination; Suspension; Enforcement</h2>
+              <p>
+                We may suspend, restrict, or terminate your access to the Services at any time, with or without notice, if we believe (in our reasonable
+                discretion) that you violated these Terms, created risk or legal exposure, engaged in fraud or abuse, or harmed other users or the platform.
+              </p>
+              <p>
+                You may stop using the Services at any time. Sections that by their nature should survive termination will survive, including Intellectual
+                Property, Disclaimers, Limitation of Liability, and Indemnification.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s20">
+              <h2>20. Changes to Services and Terms</h2>
+              <p>
+                We may modify, suspend, or discontinue any part of the Services at any time. We may also update these Terms to reflect changes in our
+                Services, legal requirements, or business practices. We will update the “Last Revised” date and provide notice of material changes where
+                required by law. Your continued use of the Services after an update constitutes acceptance of the updated Terms, where permitted.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s21">
+              <h2>21. Governing Law; Jurisdiction; Venue</h2>
+              <p>
+                These Terms shall be governed by and construed in accordance with the laws of the State where Gigways LLC is organized and/or principally
+                operates, without regard to conflict-of-law rules. Any dispute arising from or relating to these Terms shall be resolved exclusively in the
+                state or federal courts located in that jurisdiction, unless otherwise required by applicable law.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s22">
+              <h2>22. Miscellaneous; Severability; Assignment</h2>
+              <p>
+                If any provision of these Terms is held to be unlawful, void, or unenforceable, that provision shall be severed and the remaining provisions
+                shall remain in full force and effect. You may not assign or transfer these Terms or your rights under them without our prior written consent.
+                We may assign these Terms in connection with a merger, acquisition, restructuring, or sale of assets.
+              </p>
+              <hr class="pl-divider" />
+            </div>
+
+            <div class="section" id="s23">
+              <h2>23. Contact Information</h2>
+              <p>
+                If you have questions, concerns, or requests related to these Terms, you may contact us at:
+              </p>
+              <p>
+                Email: <a href="mailto:support@gigways.com"><strong>Support@gigways.com</strong></a>
+              </p>
+            </div>
+
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Back to top -->
+  <div class="pl-top" id="ppTop">
+    <button type="button" aria-label="Back to top">
+      <i class="bx bx-up-arrow-alt"></i>
+    </button>
+  </div>
+
+  <script>
+    // no-flicker theme sync (same key + class as your other pages)
+    (function () {
+      const root = document.documentElement;
+      root.classList.add("preload");
+      const t = localStorage.getItem("selected-theme");
+      if (t === "dark") root.classList.add("dark-theme");
+      window.addEventListener("load", () => root.classList.remove("preload"));
+    })();
+
+    // footer year (safe if element not present)
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Print button
+    const ppPrint = document.getElementById("ppPrint");
+    if (ppPrint) ppPrint.addEventListener("click", () => window.print());
+
+    // Copy page link
+    const ppCopyLink = document.getElementById("ppCopyLink");
+    if (ppCopyLink) {
+      ppCopyLink.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          ppCopyLink.innerHTML = '<i class="bx bx-check"></i> Copied!';
+          setTimeout(() => (ppCopyLink.innerHTML = '<i class="bx bx-link"></i> Copy Page Link'), 1200);
+        } catch (e) {
+          const tmp = document.createElement("textarea");
+          tmp.value = window.location.href;
+          tmp.setAttribute("readonly", "");
+          tmp.style.position = "fixed";
+          tmp.style.top = "-1000px";
+          document.body.appendChild(tmp);
+          tmp.select();
+          document.execCommand("copy");
+          tmp.remove();
+          ppCopyLink.innerHTML = '<i class="bx bx-check"></i> Copied!';
+          setTimeout(() => (ppCopyLink.innerHTML = '<i class="bx bx-link"></i> Copy Page Link'), 1200);
+        }
+      });
+    }
+
+    // Back to top
+    const ppTop = document.getElementById("ppTop");
+    if (ppTop) {
+      const btn = ppTop.querySelector("button");
+      const onScroll = () => {
+        if (window.scrollY > 600) ppTop.classList.add("show");
+        else ppTop.classList.remove("show");
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+      if (btn) btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    }
+
+    // Mobile nav (safe)
+    const navMenu = document.getElementById("nav-menu");
+    const navToggle = document.getElementById("nav-toggle");
+    if (navToggle && navMenu) navToggle.addEventListener("click", () => navMenu.classList.toggle("show"));
+    document.querySelectorAll(".nav__link").forEach((a) =>
+      a.addEventListener("click", () => navMenu && navMenu.classList.remove("show"))
+    );
+
+    // Theme toggle (safe)
+    const themeButton = document.getElementById("iconPP");
+    const root = document.documentElement;
+
+    function setTheme(mode) {
+      if (mode === "dark") root.classList.add("dark-theme");
+      else root.classList.remove("dark-theme");
+      localStorage.setItem("selected-theme", mode);
+    }
+
+    function syncThemeIcon() {
+      if (!themeButton) return;
+      const isDark = root.classList.contains("dark-theme");
+      themeButton.src = isDark ? "assets/img/sun.png" : "assets/img/moon.png";
+    }
+
+    if (themeButton) {
+      syncThemeIcon();
+      themeButton.addEventListener("click", () => {
+        const isDark = root.classList.contains("dark-theme");
+        setTheme(isDark ? "light" : "dark");
+        syncThemeIcon();
+      });
+    }
+  </script>
+</body>
+</html>
